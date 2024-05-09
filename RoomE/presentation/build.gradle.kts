@@ -79,4 +79,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.activity:activity-ktx:1.9.0")
     implementation("androidx.fragment:fragment-ktx:1.7.0")
+
+    implementation("com.kakao.sdk:v2-user:2.20.1")
 }
