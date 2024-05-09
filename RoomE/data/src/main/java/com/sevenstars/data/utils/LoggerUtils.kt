@@ -1,8 +1,7 @@
-package com.sevenstars.roome.utils
+package com.sevenstars.data.utils
 
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
-
 
 /* -------------------------------------------------------------------------------------------
     val logger = LoggerUtils().getInstance()
