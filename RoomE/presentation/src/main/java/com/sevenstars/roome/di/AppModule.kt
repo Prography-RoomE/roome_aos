@@ -2,6 +2,7 @@ package com.sevenstars.roome.di
 
 import com.google.gson.GsonBuilder
 import com.sevenstars.roome.BuildConfig
+import com.sevenstars.roome.utils.PrettyJsonLogger
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,11 +20,13 @@ object AppModule {
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
-        val httpLoggingInterceptor = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
-        return OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
+        val builder = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG) {
+            val httpLoggingInterceptor = HttpLoggingInterceptor(PrettyJsonLogger())
+                .setLevel(HttpLoggingInterceptor.Level.BODY)
+            builder.addInterceptor(httpLoggingInterceptor)
+        }
+        return builder.build()
     }
 
     @Singleton

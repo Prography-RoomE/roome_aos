@@ -50,6 +50,8 @@ android {
     }
     buildFeatures {
         buildConfig = true
+        viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -75,8 +77,11 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
     implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation("com.github.orhanobut:logger:master-SNAPSHOT")
 
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.activity:activity-ktx:1.9.0")
     implementation("androidx.fragment:fragment-ktx:1.7.0")
+
+    implementation("com.kakao.sdk:v2-user:2.20.1")
 }
