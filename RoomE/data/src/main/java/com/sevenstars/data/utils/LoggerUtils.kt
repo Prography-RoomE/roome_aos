@@ -11,33 +11,27 @@ import com.orhanobut.logger.Logger
     }
 ------------------------------------------------------------------------------------------- */
 
-class LoggerUtils {
-    fun getInstance(): LoggerUtils {
+object LoggerUtils {
+
+    init {
         Logger.addLogAdapter(AndroidLogAdapter())
-        return this
     }
 
-    fun debug(s: String): LoggerUtils {
-        Logger.t(TAG).d(s)
-        return this
+    private const val TAG = "LOGGER"
+
+    fun debug(message: String) {
+        Logger.t(TAG).d(message)
     }
 
-    fun info(s: String): LoggerUtils {
-        Logger.t(TAG).i(s)
-        return this
+    fun info(message: String) {
+        Logger.t(TAG).i(message)
     }
 
-    fun warning(s: String): LoggerUtils {
-        Logger.t(TAG).w(s)
-        return this
+    fun warning(message: String) {
+        Logger.t(TAG).w(message)
     }
 
-    fun error(s: String): LoggerUtils {
-        Logger.t(TAG).e(s)
-        return this
-    }
-
-    companion object {
-        const val TAG = "LOGGER"
+    fun error(message: String) {
+        Logger.t(TAG).e(message)
     }
 }
