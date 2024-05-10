@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RoomE</string>
+
+
+    <!-- ============================================= SignIn ============================================= -->
+    <string name="btn_kakao_login">카카오톡으로 계속하기</string>
+    <string name="btn_google_login">구글로 계속하기</string>
 </resources>

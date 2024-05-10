@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
@@ -29,8 +30,35 @@
         app:layout_constraintVertical_chainStyle="packed"
         android:layout_marginBottom="12dp"
         app:layout_constraintVertical_bias="0.6"
+        android:stateListAnimator="@null"/>
 
-        android:text="카카오톡으로 계속하기"/>
+    <ImageView
+        android:id="@+id/iv_kakao_logo"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_kakao"
+        android:translationZ="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_kakao_login"
+        app:layout_constraintEnd_toStartOf="@id/tv_kakao_login"
+        app:layout_constraintStart_toStartOf="@+id/btn_kakao_login"
+        app:layout_constraintTop_toTopOf="@id/tv_kakao_login"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_kakao_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/btn_kakao_login"
+        app:layout_constraintBottom_toBottomOf="@id/btn_kakao_login"
+        app:layout_constraintStart_toEndOf="@id/iv_kakao_logo"
+        app:layout_constraintEnd_toEndOf="@id/btn_kakao_login"
+
+        android:text="@string/btn_kakao_login"
+        style="@style/title2_bold"
+        android:textColor="#191600"
+        android:translationZ="3dp"/>
 
     <Button
         android:id="@+id/btn_google_login"
@@ -40,7 +68,37 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_kakao_login"/>
+        app:layout_constraintTop_toBottomOf="@+id/btn_kakao_login"
+        android:stateListAnimator="@null"/>
+
+    <ImageView
+        android:id="@+id/iv_google_logo"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_google"
+        android:translationZ="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_google_login"
+        app:layout_constraintTop_toTopOf="@id/tv_google_login"
+        app:layout_constraintEnd_toStartOf="@id/tv_google_login"
+        app:layout_constraintStart_toStartOf="@+id/btn_google_login"
+        app:layout_constraintHorizontal_chainStyle="packed"
+
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_google_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/btn_google_login"
+        app:layout_constraintBottom_toBottomOf="@id/btn_google_login"
+        app:layout_constraintStart_toEndOf="@id/iv_google_logo"
+        app:layout_constraintEnd_toEndOf="@id/btn_google_login"
+
+        android:text="@string/btn_google_login"
+        style="@style/title2_bold"
+        android:textColor="#191600"
+        android:translationZ="3dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
