@@ -3,11 +3,15 @@ package com.sevenstars.roome.view.signIn
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.common.api.ApiException
 import com.sevenstars.data.service.auth.KakaoAuthService
 import com.sevenstars.roome.databinding.ActivitySignInBinding
-import com.sevenstars.roome.base.RoomeApplication.Companion.logger
+import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +25,21 @@ class SignInActivity: AppCompatActivity() {
     @Inject
     lateinit var kakaoAuthService: KakaoAuthService
 
+    @Inject
+    lateinit var googleSignInClient: GoogleSignInClient
+
+    private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result ->
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+
+        try {
+            val account = task.getResult(ApiException::class.java)
+            LoggerUtils.debug("구글 ID 토큰 ${account.idToken}")
+            viewModel.signIn("google", null, account.idToken)
+        } catch (e: ApiException){
+            LoggerUtils.error(e.stackTraceToString())
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
@@ -31,6 +50,11 @@ class SignInActivity: AppCompatActivity() {
         binding.btnKakaoLogin.setOnClickListener {
             kakaoAuthService.signInKakao(viewModel::signIn)
         }
+
+        binding.btnGoogleLogin.setOnClickListener {
+            val signInIntent = googleSignInClient.signInIntent
+            googleAuthLauncher.launch(signInIntent)
+        }
     }
 
     private fun observer() {
@@ -38,7 +62,7 @@ class SignInActivity: AppCompatActivity() {
             when(it){
                 is UiState.Failure -> {
                     Toast.makeText(this, it.error ?: "로그인 실패", Toast.LENGTH_SHORT).show()
-                    logger.debug(it.error ?: "로그인 실패")
+                    LoggerUtils.debug(it.error ?: "로그인 실패")
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> moveToMain()

@@ -12,7 +12,6 @@ class KakaoAuthService @Inject constructor(
     @ActivityContext private val context: Context,
     private val client: UserApiClient,
 ) {
-    private val logger = LoggerUtils().getInstance()
 
     private val isKakaoTalkLoginAvailable: Boolean
         get() = client.isKakaoTalkLoginAvailable(context)
@@ -35,18 +34,18 @@ class KakaoAuthService @Inject constructor(
 
     private fun signInError(throwable: Throwable) {
         val kakaoType = if (isKakaoTalkLoginAvailable) KAKAO_TALK else KAKAO_ACCOUNT
-        logger.error("{$kakaoType}으로 로그인 실패 ${throwable.message}")
+        LoggerUtils.error("{$kakaoType}으로 로그인 실패 ${throwable.message}")
     }
 
     private fun signInSuccess(
         oAuthToken: OAuthToken,
         signInListener: KFunction3<String, String?, String?, Unit>
     ) {
-        logger.debug("$KAKAO_ID_TOKEN ${oAuthToken.idToken}")
+        LoggerUtils.debug("$KAKAO_ID_TOKEN ${oAuthToken.idToken}")
         client.me { _, error ->
             signInListener("kakao", null, oAuthToken.idToken)
             if (error != null) {
-                logger.error("사용자 정보 요청 실패 $error")
+                LoggerUtils.error("사용자 정보 요청 실패 $error")
             }
         }
     }

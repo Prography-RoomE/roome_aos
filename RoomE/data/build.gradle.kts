@@ -54,4 +54,5 @@ dependencies {
     implementation("com.github.orhanobut:logger:master-SNAPSHOT")
 
     implementation("com.kakao.sdk:v2-user:2.20.1")
+    implementation("com.google.android.gms:play-services-auth:21.1.1")
 }
