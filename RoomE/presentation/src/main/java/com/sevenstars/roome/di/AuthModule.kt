@@ -25,6 +25,7 @@ object AuthModule {
         val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(BuildConfig.GOOGLE_CLIENT_ID)
             .requestServerAuthCode(BuildConfig.GOOGLE_CLIENT_ID)
+            .requestEmail()
             .build()
 
         return GoogleSignIn.getClient(app, googleSignInOption)
