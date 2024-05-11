@@ -10,7 +10,7 @@
         android:id="@+id/tv_logo"
         android:layout_width="200dp"
         android:layout_height="80dp"
-        android:src="@drawable/roome_rogo"
+        android:src="@drawable/illus_roome_logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
