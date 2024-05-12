@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.sevenstars.data.repository.auth.UserPreferencesRepositoryImpl
+import com.sevenstars.data.repository.UserPreferencesRepositoryImpl
 import com.sevenstars.domain.repository.auth.UserPreferencesRepository
 import dagger.Binds
 import dagger.Module

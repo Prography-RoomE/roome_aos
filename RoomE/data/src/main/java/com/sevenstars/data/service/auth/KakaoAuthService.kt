@@ -4,6 +4,7 @@ import android.content.Context
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
 import com.sevenstars.data.utils.LoggerUtils
+import com.sevenstars.domain.enums.Provider
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 import kotlin.reflect.KFunction3
@@ -13,11 +14,17 @@ class KakaoAuthService @Inject constructor(
     private val client: UserApiClient,
 ) {
 
+    companion object {
+        const val KAKAO_TALK = "카카오톡"
+        const val KAKAO_ACCOUNT = "카카오계정"
+        const val KAKAO_ID_TOKEN = "카카오 ID 토큰"
+    }
+
     private val isKakaoTalkLoginAvailable: Boolean
         get() = client.isKakaoTalkLoginAvailable(context)
 
     fun signInKakao(
-        signInListener: KFunction3<String, String?, String?, Unit>
+        signInListener: KFunction3<Provider, String?, String?, Unit>
     ) {
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
@@ -39,20 +46,14 @@ class KakaoAuthService @Inject constructor(
 
     private fun signInSuccess(
         oAuthToken: OAuthToken,
-        signInListener: KFunction3<String, String?, String?, Unit>
+        signInListener: KFunction3<Provider, String?, String?, Unit>
     ) {
         LoggerUtils.debug("$KAKAO_ID_TOKEN ${oAuthToken.idToken}")
         client.me { _, error ->
-            signInListener("kakao", null, oAuthToken.idToken)
+            signInListener(Provider.KAKAO, null, oAuthToken.idToken)
             if (error != null) {
                 LoggerUtils.error("사용자 정보 요청 실패 $error")
             }
         }
-    }
-
-    companion object {
-        const val KAKAO_TALK = "카카오톡"
-        const val KAKAO_ACCOUNT = "카카오계정"
-        const val KAKAO_ID_TOKEN = "카카오 ID 토큰"
     }
 }

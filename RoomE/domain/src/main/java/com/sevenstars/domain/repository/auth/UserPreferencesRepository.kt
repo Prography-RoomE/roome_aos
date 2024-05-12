@@ -1,6 +1,6 @@
 package com.sevenstars.domain.repository.auth
 
-import com.sevenstars.domain.model.auth.Provider
+import com.sevenstars.domain.enums.Provider
 
 interface UserPreferencesRepository {
     suspend fun setAccessToken(

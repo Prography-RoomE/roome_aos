@@ -1,10 +1,10 @@
-package com.sevenstars.data.repository.auth
+package com.sevenstars.data.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.sevenstars.domain.model.auth.Provider
+import com.sevenstars.domain.enums.Provider
 import com.sevenstars.domain.repository.auth.UserPreferencesRepository
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
