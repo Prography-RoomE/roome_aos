@@ -1,8 +1,10 @@
-package com.sevenstars.domain.usecase
+package com.sevenstars.domain.usecase.auth
 
+import com.sevenstars.domain.enums.Provider
 import com.sevenstars.domain.model.auth.RequestSignInEntity
 import com.sevenstars.domain.model.auth.ResponseSignInEntity
 import com.sevenstars.domain.repository.auth.AuthRepository
+import com.sevenstars.domain.utils.RoomeResult
 
 /*
 [UseCase 사용 이유]
@@ -20,7 +22,7 @@ import com.sevenstars.domain.repository.auth.AuthRepository
  */
 
 class SignInUseCase(private val repository: AuthRepository) {
-    suspend operator fun invoke(body: RequestSignInEntity): Result<ResponseSignInEntity>{
-        return repository.signIn(body)
+    suspend operator fun invoke(provider: Provider, code: String?, idToken: String): RoomeResult<ResponseSignInEntity> {
+        return repository.signIn(RequestSignInEntity(provider = provider.provider, code = code, idToken = idToken))
     }
 }

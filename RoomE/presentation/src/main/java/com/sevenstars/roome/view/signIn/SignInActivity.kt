@@ -12,8 +12,9 @@ import com.google.android.gms.common.api.ApiException
 import com.sevenstars.data.service.auth.KakaoAuthService
 import com.sevenstars.roome.databinding.ActivitySignInBinding
 import com.sevenstars.data.utils.LoggerUtils
+import com.sevenstars.domain.enums.Provider
 import com.sevenstars.roome.utils.UiState
-import com.sevenstars.roome.view.MainActivity
+import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -34,7 +35,7 @@ class SignInActivity: AppCompatActivity() {
         try {
             val account = task.getResult(ApiException::class.java)
             LoggerUtils.debug("구글 ID 토큰 ${account.idToken}")
-            viewModel.signIn("google", null, account.idToken)
+            viewModel.signIn(Provider.GOOGLE, null, account.idToken)
         } catch (e: ApiException){
             LoggerUtils.error(e.stackTraceToString())
         }
@@ -61,17 +62,20 @@ class SignInActivity: AppCompatActivity() {
         viewModel.loginState.observe(this){
             when(it){
                 is UiState.Failure -> {
-                    Toast.makeText(this, it.error ?: "로그인 실패", Toast.LENGTH_SHORT).show()
-                    LoggerUtils.debug(it.error ?: "로그인 실패")
+                    Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+                    LoggerUtils.error("로그인 실패: ${it.message}")
                 }
                 is UiState.Loading -> {}
-                is UiState.Success -> moveToMain()
+                is UiState.Success -> {
+                    moveToStart()
+                }
             }
         }
     }
 
-    private fun moveToMain(){
-        val intent = Intent(this, MainActivity::class.java)
+    private fun moveToStart(){
+        val intent = Intent(this, StartActivity::class.java)
         startActivity(intent)
+        finish()
     }
 }
