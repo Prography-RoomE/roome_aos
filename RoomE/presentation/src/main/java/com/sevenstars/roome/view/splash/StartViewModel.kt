@@ -4,17 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sevenstars.domain.repository.auth.UserPreferencesRepository
 import com.sevenstars.domain.usecase.user.GetUserInfoUseCase
+import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
 class StartViewModel @Inject constructor(
-    private val getUserInfoUseCase: GetUserInfoUseCase,
-    private val userPreferencesRepository: UserPreferencesRepository
+    private val getUserInfoUseCase: GetUserInfoUseCase
 ): ViewModel() {
 
     private val _loginState = MutableLiveData<UiState<Unit>>(UiState.Loading)
@@ -24,12 +25,13 @@ class StartViewModel @Inject constructor(
         _loginState.value = UiState.Loading
 
         viewModelScope.launch {
-            val accessToken = userPreferencesRepository.getAccessToken().getOrNull().orEmpty()
+            val accessToken = runBlocking { app.userPreferences.getAccessToken().getOrNull().orEmpty() }
 
             getUserInfoUseCase(accessToken)
                 .onSuccess {
                     _loginState.value = UiState.Success(Unit)
                 }.onFailure { code, message ->
+                    runBlocking(Dispatchers.IO){ app.userPreferences.clearData() }
                     _loginState.value = UiState.Failure(code, message)
                 }
         }
