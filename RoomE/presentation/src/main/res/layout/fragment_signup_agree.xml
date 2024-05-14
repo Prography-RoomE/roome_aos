@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/surface">
+
+        <Toolbar
+            android:id="@+id/tb_signup"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_arrow_back"
+                tools:ignore="ContentDescription" />
+
+        </Toolbar>
+
+        <TextView
+            android:id="@+id/tv_signup_tos_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/tb_signup"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+
+            android:text="@string/signup_tos_title"
+            style="@style/headline2_bold"
+            android:textColor="@color/black"/>
+
+        <CheckBox
+            android:id="@+id/cb_agree_all"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+
+            app:layout_constraintTop_toBottomOf="@id/tv_signup_tos_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="24dp"
+
+            android:button="@null"
+            android:background="@drawable/selector_circle_check_box"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="@id/cb_agree_all"
+            app:layout_constraintBottom_toBottomOf="@id/cb_agree_all"
+            app:layout_constraintStart_toEndOf="@id/cb_agree_all"
+            android:layout_marginStart="8dp"
+
+            android:text="@string/signup_tos_all"
+            style="@style/body2_regular"
+            android:textColor="@color/on_surface"/>
+
+        <CheckBox
+            android:id="@+id/cb_agree_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cb_agree_all"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="24dp"
+
+            android:button="@null"
+            android:background="@drawable/selector_check_box"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="@id/cb_agree_age"
+            app:layout_constraintBottom_toBottomOf="@id/cb_agree_age"
+            app:layout_constraintStart_toEndOf="@id/cb_agree_age"
+            android:layout_marginStart="8dp"
+
+            android:text="@string/signup_tos_age"
+            style="@style/body2_regular"
+            android:textColor="@color/on_surface"/>
+
+        <CheckBox
+            android:id="@+id/cb_agree_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cb_agree_age"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="24dp"
+
+            android:button="@null"
+            android:background="@drawable/selector_check_box"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="@id/cb_agree_service"
+            app:layout_constraintBottom_toBottomOf="@id/cb_agree_service"
+            app:layout_constraintStart_toEndOf="@id/cb_agree_service"
+            android:layout_marginStart="8dp"
+
+            android:text="@string/signup_tos_service"
+            style="@style/body2_regular"
+            android:textColor="@color/on_surface"/>
+
+        <ImageButton
+            android:id="@+id/ib_open_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/cb_agree_service"
+            app:layout_constraintBottom_toBottomOf="@id/cb_agree_service"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="24dp"
+
+            android:src="@drawable/ic_arrow_next"
+            android:background="@color/transparent"
+            tools:ignore="ContentDescription" />
+
+        <CheckBox
+            android:id="@+id/cb_agree_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cb_agree_service"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="24dp"
+
+            android:button="@null"
+            android:background="@drawable/selector_check_box" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="@id/cb_agree_privacy"
+            app:layout_constraintBottom_toBottomOf="@id/cb_agree_privacy"
+            app:layout_constraintStart_toEndOf="@id/cb_agree_privacy"
+            android:layout_marginStart="8dp"
+
+            android:text="@string/signup_tos_privacy"
+            style="@style/body2_regular"
+            android:textColor="@color/on_surface"/>
+
+        <ImageButton
+            android:id="@+id/ib_open_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/cb_agree_privacy"
+            app:layout_constraintBottom_toBottomOf="@id/cb_agree_privacy"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="24dp"
+
+            android:src="@drawable/ic_arrow_next"
+            android:background="@color/transparent"
+            tools:ignore="ContentDescription" />
+
+        <CheckBox
+            android:id="@+id/cb_agree_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/cb_agree_privacy"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="24dp"
+
+            android:button="@null"
+            android:background="@drawable/selector_check_box"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toTopOf="@id/cb_agree_ad"
+            app:layout_constraintBottom_toBottomOf="@id/cb_agree_ad"
+            app:layout_constraintStart_toEndOf="@id/cb_agree_ad"
+            android:layout_marginStart="8dp"
+
+            android:text="@string/signup_tos_ad"
+            style="@style/body2_regular"
+            android:textColor="@color/on_surface"/>
+
+        <ImageButton
+            android:id="@+id/ib_open_ad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/cb_agree_ad"
+            app:layout_constraintBottom_toBottomOf="@id/cb_agree_ad"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="24dp"
+
+            android:src="@drawable/ic_arrow_next"
+            android:background="@color/transparent"
+            tools:ignore="ContentDescription" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="24dp"
+
+            android:background="@drawable/shape_radius_12"
+            android:backgroundTint="#1F19191A"
+
+
+            android:text="@string/btn_next"
+            android:textColor="@color/on_surface_variant"
+            style="@style/title2_bold"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
