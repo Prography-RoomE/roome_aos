@@ -30,6 +30,10 @@
 
         <activity android:name=".view.signIn.SignInActivity"/>
 
+        <activity
+            android:name=".view.signup.SignUpActivity"
+            android:windowSoftInputMode="adjustResize" />
+
         <activity android:name=".view.MainActivity"/>
 
         <activity
