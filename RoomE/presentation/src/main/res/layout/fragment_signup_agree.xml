@@ -42,7 +42,7 @@
             style="@style/headline2_bold"
             android:textColor="@color/black"/>
 
-        <CheckBox
+        <com.sevenstars.roome.custom.MultiLevelCheckBox
             android:id="@+id/cb_agree_all"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -68,7 +68,7 @@
             style="@style/body2_regular"
             android:textColor="@color/on_surface"/>
 
-        <CheckBox
+        <com.sevenstars.roome.custom.MultiLevelCheckBox
             android:id="@+id/cb_agree_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,7 +78,8 @@
             android:layout_marginStart="24dp"
 
             android:button="@null"
-            android:background="@drawable/selector_check_box"/>
+            android:background="@drawable/selector_check_box"
+            app:parentCheckBox="@id/cb_agree_all"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,7 +94,7 @@
             style="@style/body2_regular"
             android:textColor="@color/on_surface"/>
 
-        <CheckBox
+        <com.sevenstars.roome.custom.MultiLevelCheckBox
             android:id="@+id/cb_agree_service"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,7 +104,8 @@
             android:layout_marginStart="24dp"
 
             android:button="@null"
-            android:background="@drawable/selector_check_box"/>
+            android:background="@drawable/selector_check_box"
+            app:parentCheckBox="@id/cb_agree_all"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -131,7 +133,7 @@
             android:background="@color/transparent"
             tools:ignore="ContentDescription" />
 
-        <CheckBox
+        <com.sevenstars.roome.custom.MultiLevelCheckBox
             android:id="@+id/cb_agree_privacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -141,7 +143,8 @@
             android:layout_marginStart="24dp"
 
             android:button="@null"
-            android:background="@drawable/selector_check_box" />
+            android:background="@drawable/selector_check_box"
+            app:parentCheckBox="@id/cb_agree_all"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -169,7 +172,7 @@
             android:background="@color/transparent"
             tools:ignore="ContentDescription" />
 
-        <CheckBox
+        <com.sevenstars.roome.custom.MultiLevelCheckBox
             android:id="@+id/cb_agree_ad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -180,7 +183,7 @@
 
             android:button="@null"
             android:background="@drawable/selector_check_box"
-            />
+            app:parentCheckBox="@id/cb_agree_all" />
 
         <TextView
             android:layout_width="wrap_content"
