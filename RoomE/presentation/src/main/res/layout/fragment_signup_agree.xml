@@ -212,6 +212,7 @@
             tools:ignore="ContentDescription" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
             android:layout_width="0dp"
             android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -220,8 +221,7 @@
             android:layout_margin="24dp"
 
             android:background="@drawable/shape_radius_12"
-            android:backgroundTint="#1F19191A"
-
+            android:backgroundTint="@color/on_surface_a12"
 
             android:text="@string/btn_next"
             android:textColor="@color/on_surface_variant"
