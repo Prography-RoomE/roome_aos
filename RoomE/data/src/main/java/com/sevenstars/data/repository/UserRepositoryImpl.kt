@@ -2,6 +2,7 @@ package com.sevenstars.data.repository
 
 import com.sevenstars.data.datasource.remote.UserRemoteDataSource
 import com.sevenstars.data.mapper.user.UserInfoMapper
+import com.sevenstars.domain.model.BaseEntity
 import com.sevenstars.domain.model.user.ResponseUserInfoEntity
 import com.sevenstars.domain.repository.UserRepository
 import com.sevenstars.domain.utils.RoomeResult
@@ -17,6 +18,39 @@ class UserRepositoryImpl @Inject constructor(
         val res = userRemoteDataSource.getUserInfo(accessToken)
         return if(res.code == 200){
             RoomeResult.Success(UserInfoMapper.mapperToResponseEntity(res.data!!))
+        } else {
+            RoomeResult.Failure(res.code, res.message)
+        }
+    }
+
+    override suspend fun validationNick(
+        accessToken: String,
+        nickname: String
+    ): RoomeResult<BaseEntity> {
+        val res = userRemoteDataSource.getUserInfo(accessToken)
+        return if(res.code == 200){
+            RoomeResult.Success(BaseEntity(res.code, res.message))
+        } else {
+            RoomeResult.Failure(res.code, res.message)
+        }
+    }
+
+    override suspend fun saveNick(accessToken: String, nickname: String): RoomeResult<BaseEntity> {
+        val res = userRemoteDataSource.getUserInfo(accessToken)
+        return if(res.code == 200){
+            RoomeResult.Success(BaseEntity(res.code, res.message))
+        } else {
+            RoomeResult.Failure(res.code, res.message)
+        }
+    }
+
+    override suspend fun saveTermsAgreement(
+        accessToken: String,
+        options: Map<String, String>
+    ): RoomeResult<BaseEntity> {
+        val res = userRemoteDataSource.getUserInfo(accessToken)
+        return if(res.code == 200){
+            RoomeResult.Success(BaseEntity(res.code, res.message))
         } else {
             RoomeResult.Failure(res.code, res.message)
         }

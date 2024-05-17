@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 
 data class BaseResponse<T>(
-//    val response: Response<RoomeResponse<T>>
     @SerializedName("code")
     val code: Int,
     @SerializedName("message")
