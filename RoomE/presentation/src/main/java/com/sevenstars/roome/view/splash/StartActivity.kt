@@ -16,6 +16,7 @@ import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.MainActivity
 import com.sevenstars.roome.view.signIn.SignInActivity
+import com.sevenstars.roome.view.signup.SignUpActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -41,7 +42,14 @@ class StartActivity: AppCompatActivity() {
     }
 
     private fun moveActivity(p: Boolean){
-        val intent = Intent(this, if(p) MainActivity::class.java else SignInActivity::class.java)
+        val destination = if(p) {
+            if(viewModel.isRegister) { MainActivity::class.java }
+            else { SignUpActivity::class.java }
+        } else {
+            SignInActivity::class.java
+        }
+
+        val intent = Intent(this, destination)
         startActivity(intent)
         finish()
     }

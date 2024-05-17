@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sevenstars.domain.enums.UserState
 import com.sevenstars.domain.usecase.user.GetUserInfoUseCase
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
@@ -21,6 +22,8 @@ class StartViewModel @Inject constructor(
     private val _loginState = MutableLiveData<UiState<Unit>>(UiState.Loading)
     val loginState: LiveData<UiState<Unit>> get() = _loginState
 
+    var isRegister = false
+
     fun doValidation(){
         _loginState.value = UiState.Loading
 
@@ -29,6 +32,7 @@ class StartViewModel @Inject constructor(
 
             getUserInfoUseCase(accessToken)
                 .onSuccess {
+                    isRegister = (it.state == UserState.REGISTRATION_COMPLETED)
                     _loginState.value = UiState.Success(Unit)
                 }.onFailure { code, message ->
                     runBlocking(Dispatchers.IO){ app.userPreferences.clearData() }

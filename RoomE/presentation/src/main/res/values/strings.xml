@@ -1,8 +1,25 @@
 <resources>
     <string name="app_name">RoomE</string>
 
+    <!-- ============================================= Common ============================================= -->
+    <string name="btn_next">다음</string>
 
     <!-- ============================================= SignIn ============================================= -->
     <string name="btn_kakao_login">카카오톡으로 계속하기</string>
     <string name="btn_google_login">구글로 계속하기</string>
+
+    <!-- ============================================= SignUp ============================================= -->
+    <string name="signup_comment">반가워요!\n닉네임을 입력해주세요</string>
+    <string name="signup_nickname_comment">가입 완료 후에는 수정할 수 없으니\n신중하게 입력해주세요</string>
+    <string name="signup_nickname">닉네임</string>
+    <string name="signup_nickname_check">중복 체크</string>
+    <string name="signup_nickname_default">2–8자리 한글, 영문, 숫자</string>
+    <string name="signup_nickname_duplication">중복된 닉네임이에요</string>
+
+    <string name="signup_tos_title">서비스 이용약관</string>
+    <string name="signup_tos_all">모두 동의 (선택 정보 포함)</string>
+    <string name="signup_tos_age">만 14세 이상입니다. (필수)</string>
+    <string name="signup_tos_service">서비스 이용약관에 동의 (필수)</string>
+    <string name="signup_tos_privacy">개인정보 수집 및 이용에 동의 (필수)</string>
+    <string name="signup_tos_ad">광고 및 마케팅 수신에 동의 (선택)</string>
 </resources>

@@ -5,6 +5,7 @@ import com.sevenstars.data.model.BaseResponse
 import com.sevenstars.data.model.user.ResponseUserInfoDTO
 import com.sevenstars.data.service.UserService
 import com.sevenstars.data.utils.LoggerUtils
+import okhttp3.ResponseBody
 import org.json.JSONObject
 import javax.inject.Inject
 
@@ -15,6 +16,66 @@ class UserRemoteDataSourceImpl @Inject constructor(
     override suspend fun getUserInfo(token: String): BaseResponse<ResponseUserInfoDTO> {
         return try {
             val res = userService.getUserInfo(token)
+
+            if(res.isSuccessful){
+                val body = res.body()!!
+                BaseResponse(code = body.code, message = body.message, data = body.data)
+            } else {
+                val errorBody = JSONObject(res.errorBody()?.string()!!)
+                BaseResponse(code = errorBody.getString("code").toInt(), message = errorBody.getString("message"), null)
+            }
+        } catch (e: Exception){
+            LoggerUtils.error(e.stackTraceToString())
+            BaseResponse(code = 0, message = e.message.toString(), null)
+        }
+    }
+
+    override suspend fun validationNick(
+        accessToken: String,
+        nickname: String
+    ): BaseResponse<ResponseBody> {
+        return try {
+            val res = userService.validationNick(accessToken, nickname)
+
+            if(res.isSuccessful){
+                val body = res.body()!!
+                BaseResponse(code = body.code, message = body.message, data = body.data)
+            } else {
+                val errorBody = JSONObject(res.errorBody()?.string()!!)
+                BaseResponse(code = errorBody.getString("code").toInt(), message = errorBody.getString("message"), null)
+            }
+        } catch (e: Exception){
+            LoggerUtils.error(e.stackTraceToString())
+            BaseResponse(code = 0, message = e.message.toString(), null)
+        }
+    }
+
+    override suspend fun saveNick(
+        accessToken: String,
+        nickname: String
+    ): BaseResponse<ResponseBody> {
+        return try {
+            val res = userService.saveNick(accessToken, nickname)
+
+            if(res.isSuccessful){
+                val body = res.body()!!
+                BaseResponse(code = body.code, message = body.message, data = body.data)
+            } else {
+                val errorBody = JSONObject(res.errorBody()?.string()!!)
+                BaseResponse(code = errorBody.getString("code").toInt(), message = errorBody.getString("message"), null)
+            }
+        } catch (e: Exception){
+            LoggerUtils.error(e.stackTraceToString())
+            BaseResponse(code = 0, message = e.message.toString(), null)
+        }
+    }
+
+    override suspend fun saveTermsAgreement(
+        accessToken: String,
+        options: Map<String, Boolean>
+    ): BaseResponse<ResponseBody> {
+        return try {
+            val res = userService.saveTermsAgreement(accessToken, options)
 
             if(res.isSuccessful){
                 val body = res.body()!!
