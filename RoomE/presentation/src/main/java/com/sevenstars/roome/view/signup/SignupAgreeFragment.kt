@@ -5,11 +5,9 @@ import android.net.Uri
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentSignupAgreeBinding
-import com.sevenstars.roome.utils.UiState
 
 class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fragment_signup_agree) {
     private val viewModel: SignUpViewModel by activityViewModels()
@@ -22,11 +20,16 @@ class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fra
         super.initListener()
 
         binding.btnBack.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+            (requireActivity() as SignUpActivity).moveToSignIn()
         }
 
         binding.btnNext.setOnClickListener {
-            if(binding.cbAgreeAge.isChecked && binding.cbAgreeService.isChecked && binding.cbAgreePrivacy.isChecked) (requireActivity() as SignUpActivity).moveToMain()
+            if(binding.cbAgreeAge.isChecked && binding.cbAgreeService.isChecked && binding.cbAgreePrivacy.isChecked) {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fl_signup, SignupNickFragment())
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
 
         binding.apply {
@@ -56,23 +59,6 @@ class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fra
             cbAgreeService.setOnCheckedChangeListener(checkedChangeListener)
             cbAgreePrivacy.setOnCheckedChangeListener(checkedChangeListener)
             cbAgreeAd.setOnCheckedChangeListener(checkedChangeListener)
-        }
-    }
-
-    override fun observer() {
-        super.observer()
-
-        viewModel.uiState.observe(this){
-            when(it){
-                is UiState.Failure -> {
-                    showToast(it.message)
-                    LoggerUtils.error(it.message)
-                }
-                is UiState.Loading -> {}
-                is UiState.Success -> {
-
-                }
-            }
         }
     }
 

@@ -13,7 +13,7 @@ class SignUpActivity: BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign
 
     override fun initView() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_signup, SignupNickFragment())
+            .replace(R.id.fl_signup, SignupAgreeFragment())
             .commit()
     }
 

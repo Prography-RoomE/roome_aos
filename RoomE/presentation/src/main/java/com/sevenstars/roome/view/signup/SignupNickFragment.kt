@@ -25,15 +25,12 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
         super.initListener()
 
         binding.btnBack.setOnClickListener {
-            (requireActivity() as SignUpActivity).moveToSignIn()
+            requireActivity().supportFragmentManager.popBackStack()
         }
 
         binding.btnNext.setOnClickListener {
             if(it.alpha == 1f){
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fl_signup, SignupAgreeFragment())
-                    .addToBackStack(null)
-                    .commit()
+                // 약관 동의 및 닉네임 저장
             }
         }
 

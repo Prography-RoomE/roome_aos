@@ -21,4 +21,5 @@ class SignUpViewModel: ViewModel() {
     fun checkNick(){
         _checkState.value = UiState.Success(Unit)
     }
+
 }
