@@ -22,14 +22,18 @@ class SignUpViewModel @Inject constructor(
 
 
     // 회원가입 요청 상태
-    private val _uiState = MutableLiveData<UiState<Unit>>(UiState.Loading)
-    val uiState: LiveData<UiState<Unit>> get() = _uiState
+    private val _saveState = MutableLiveData<UiState<Unit>>(UiState.Loading)
+    val saveState: LiveData<UiState<Unit>> get() = _saveState
+
+    var isMarketingAgree = false
+    var validatedNick = ""
 
     // 닉네임 유효성 체크 상태
     private val _checkState = MutableLiveData<UiState<Unit>>(UiState.Loading)
     val checkState: LiveData<UiState<Unit>> get() = _checkState
 
     fun resetCheckNick() {
+        validatedNick = ""
         _checkState.value = UiState.Loading
     }
 
@@ -39,10 +43,41 @@ class SignUpViewModel @Inject constructor(
         viewModelScope.launch {
             validationNickUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty(), nickname)
                 .onSuccess {
+                    validatedNick = nickname
                     _checkState.value = UiState.Success(Unit)
                 }.onFailure { code, message ->
                     _checkState.value = UiState.Failure(code, message)
                 }
         }
+    }
+
+    fun saveTermsAgreement() {
+        _saveState.value = UiState.Loading
+
+        viewModelScope.launch {
+            saveTermsAgreementUseCase.invoke(
+                app.userPreferences.getAccessToken().getOrNull().orEmpty(),
+                ageOverFourteen = true,
+                serviceAgreement = true,
+                personalInfoAgreement = true,
+                marketingAgreement = isMarketingAgree
+            ).onSuccess {
+                saveNick()
+            }.onFailure { code, message ->
+                _saveState.value = UiState.Failure(code, message)
+            }
+        }
+    }
+
+    private fun saveNick(){
+        viewModelScope.launch {
+            saveNickUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty(), validatedNick)
+                .onSuccess {
+                    _checkState.value = UiState.Success(Unit)
+                }.onFailure { code, message ->
+                    _checkState.value = UiState.Failure(code, message)
+                }
+        }
+
     }
 }

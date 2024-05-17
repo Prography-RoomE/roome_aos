@@ -17,9 +17,7 @@ import java.util.regex.Pattern
 class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragment_signup_nick) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
-    override fun initView() {
-
-    }
+    override fun initView() {}
 
     override fun initListener() {
         super.initListener()
@@ -30,7 +28,7 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
 
         binding.btnNext.setOnClickListener {
             if(it.alpha == 1f){
-                // 약관 동의 및 닉네임 저장
+                viewModel.saveTermsAgreement()
             }
         }
 
@@ -106,6 +104,20 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
                         setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_primary))
                         alpha = 1f
                     }
+                }
+            }
+        }
+
+        viewModel.saveState.observe(viewLifecycleOwner){
+            when(it){
+                is UiState.Failure -> {
+                    LoggerUtils.error(it.message)
+                    showToast(it.message)
+                }
+                is UiState.Loading -> {}
+                is UiState.Success -> {
+                    LoggerUtils.debug("회원가입 성공")
+                    (requireActivity() as SignUpActivity).moveToMain()
                 }
             }
         }

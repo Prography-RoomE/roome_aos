@@ -12,9 +12,7 @@ import com.sevenstars.roome.databinding.FragmentSignupAgreeBinding
 class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fragment_signup_agree) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
-    override fun initView() {
-
-    }
+    override fun initView() {}
 
     override fun initListener() {
         super.initListener()
@@ -24,6 +22,8 @@ class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fra
         }
 
         binding.btnNext.setOnClickListener {
+            viewModel.isMarketingAgree = binding.cbAgreeAd.isChecked
+
             if(binding.cbAgreeAge.isChecked && binding.cbAgreeService.isChecked && binding.cbAgreePrivacy.isChecked) {
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fl_signup, SignupNickFragment())
