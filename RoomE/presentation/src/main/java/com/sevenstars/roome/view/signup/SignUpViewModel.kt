@@ -7,10 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.sevenstars.domain.usecase.user.SaveNickUseCase
 import com.sevenstars.domain.usecase.user.SaveTermsAgreementUseCase
 import com.sevenstars.domain.usecase.user.ValidationNickUseCase
+import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class SignUpViewModel @Inject constructor(
     private val validationNickUseCase: ValidationNickUseCase,
     private val saveTermsAgreementUseCase: SaveTermsAgreementUseCase,
@@ -30,13 +33,16 @@ class SignUpViewModel @Inject constructor(
         _checkState.value = UiState.Loading
     }
 
-    fun checkNick(){
+    fun checkNick(nickname: String){
+        _checkState.value = UiState.Loading
+
         viewModelScope.launch {
-
+            validationNickUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty(), nickname)
+                .onSuccess {
+                    _checkState.value = UiState.Success(Unit)
+                }.onFailure { code, message ->
+                    _checkState.value = UiState.Failure(code, message)
+                }
         }
-
-
-        _checkState.value = UiState.Success(Unit)
     }
-
 }

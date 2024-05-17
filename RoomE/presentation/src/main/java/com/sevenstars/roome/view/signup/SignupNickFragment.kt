@@ -47,6 +47,14 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
 
                     binding.btnClear.visibility = if(length != 0) View.VISIBLE else View.GONE
                     viewModel.resetCheckNick()
+
+                    binding.btnNicknameCheck.alpha = if(binding.etNickname.text.length >= 2) 1f else 0.6f
+                    binding.tvNickname.setTextColor(requireContext().getColor(R.color.on_surface))
+                    binding.btnClear.setImageResource(R.drawable.ic_clear)
+                    binding.tvNicknameFeedback.apply {
+                        text = getText(R.string.signup_nickname_default)
+                        setTextColor(requireContext().getColor(R.color.on_surface))
+                    }
                 }
             })
 
@@ -58,7 +66,7 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
         }
 
         binding.btnNicknameCheck.setOnClickListener {
-            viewModel.checkNick()
+            if(it.alpha == 1f) viewModel.checkNick(binding.etNickname.text.toString())
         }
     }
 
@@ -68,8 +76,14 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
         viewModel.checkState.observe(viewLifecycleOwner){
             when(it){
                 is UiState.Failure -> {
-                    showToast(it.message)
                     LoggerUtils.error(it.message)
+
+                    binding.tvNickname.setTextColor(requireContext().getColor(R.color.error))
+                    binding.btnClear.setImageResource(R.drawable.ic_error)
+                    binding.tvNicknameFeedback.apply {
+                        text = it.message
+                        setTextColor(requireContext().getColor(R.color.error))
+                    }
 
                     binding.btnNext.apply {
                         setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.neutral10))
@@ -83,6 +97,11 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
                     }
                 }
                 is UiState.Success -> {
+                    binding.tvNicknameFeedback.apply {
+                        text = "사용 가능한 닉네임입니다."
+                        setTextColor(requireContext().getColor(R.color.success))
+                    }
+
                     binding.btnNext.apply {
                         setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_primary))
                         alpha = 1f

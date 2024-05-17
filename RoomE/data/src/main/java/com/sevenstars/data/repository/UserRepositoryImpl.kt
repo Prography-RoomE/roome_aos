@@ -27,7 +27,7 @@ class UserRepositoryImpl @Inject constructor(
         accessToken: String,
         nickname: String
     ): RoomeResult<BaseEntity> {
-        val res = userRemoteDataSource.getUserInfo(accessToken)
+        val res = userRemoteDataSource.validationNick(accessToken, nickname)
         return if(res.code == 200){
             RoomeResult.Success(BaseEntity(res.code, res.message))
         } else {
@@ -36,7 +36,7 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun saveNick(accessToken: String, nickname: String): RoomeResult<BaseEntity> {
-        val res = userRemoteDataSource.getUserInfo(accessToken)
+        val res = userRemoteDataSource.saveNick(accessToken, nickname)
         return if(res.code == 200){
             RoomeResult.Success(BaseEntity(res.code, res.message))
         } else {
@@ -48,7 +48,7 @@ class UserRepositoryImpl @Inject constructor(
         accessToken: String,
         options: Map<String, Boolean>
     ): RoomeResult<BaseEntity> {
-        val res = userRemoteDataSource.getUserInfo(accessToken)
+        val res = userRemoteDataSource.saveTermsAgreement(accessToken, options)
         return if(res.code == 200){
             RoomeResult.Success(BaseEntity(res.code, res.message))
         } else {

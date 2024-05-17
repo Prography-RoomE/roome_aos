@@ -7,6 +7,9 @@
     <color name="kakao_yellow">#FEE500</color>
     <color name="google_white">#F5F5FA</color>
 
+    <color name="error">#FF5449</color>
+    <color name="success">#1DBC36</color>
+
     <color name="primary_primary">#FF3344</color>
 
     <color name="surface">#FFFFFF</color>
