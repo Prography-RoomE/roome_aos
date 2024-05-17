@@ -46,7 +46,7 @@ class UserRepositoryImpl @Inject constructor(
 
     override suspend fun saveTermsAgreement(
         accessToken: String,
-        options: Map<String, String>
+        options: Map<String, Boolean>
     ): RoomeResult<BaseEntity> {
         val res = userRemoteDataSource.getUserInfo(accessToken)
         return if(res.code == 200){

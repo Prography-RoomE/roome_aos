@@ -32,6 +32,6 @@ interface UserService {
     @PUT("/users/terms-agreement")
     suspend fun saveTermsAgreement(
         @Header("Authorization") accessToken: String,
-        @QueryMap options: Map<String, String>
+        @QueryMap options: Map<String, Boolean>
     ): Response<BaseResponse<ResponseBody>>
 }

@@ -72,7 +72,7 @@ class UserRemoteDataSourceImpl @Inject constructor(
 
     override suspend fun saveTermsAgreement(
         accessToken: String,
-        options: Map<String, String>
+        options: Map<String, Boolean>
     ): BaseResponse<ResponseBody> {
         return try {
             val res = userService.saveTermsAgreement(accessToken, options)

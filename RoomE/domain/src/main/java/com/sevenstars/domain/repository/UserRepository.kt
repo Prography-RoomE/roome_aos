@@ -14,6 +14,6 @@ interface UserRepository {
     suspend fun saveNick(accessToken: String, nickname: String
     ): RoomeResult<BaseEntity>
 
-    suspend fun saveTermsAgreement(accessToken: String, options: Map<String, String>
+    suspend fun saveTermsAgreement(accessToken: String, options: Map<String, Boolean>
     ): RoomeResult<BaseEntity>
 }

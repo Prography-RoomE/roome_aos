@@ -13,6 +13,6 @@ interface UserRemoteDataSource {
     suspend fun saveNick(accessToken: String, nickname: String
     ): BaseResponse<ResponseBody>
 
-    suspend fun saveTermsAgreement(accessToken: String, options: Map<String, String>
+    suspend fun saveTermsAgreement(accessToken: String, options: Map<String, Boolean>
     ): BaseResponse<ResponseBody>
 }
