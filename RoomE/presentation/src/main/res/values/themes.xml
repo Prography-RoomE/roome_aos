@@ -1,6 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.Theme.RoomE" parent="Theme.AppCompat.Light.NoActionBar">
 
+        <!-- 상태바 -->
+        <item name="android:statusBarColor">@color/surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+
         <!-- Splash Screen -->
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/primary_primary</item>
