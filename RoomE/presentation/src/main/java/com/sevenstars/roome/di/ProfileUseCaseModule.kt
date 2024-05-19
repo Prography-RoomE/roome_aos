@@ -1,7 +1,7 @@
 package com.sevenstars.roome.di
 
-import com.sevenstars.domain.repository.UserRepository
-import com.sevenstars.domain.usecase.user.GetUserInfoUseCase
+import com.sevenstars.domain.repository.ProfileRepository
+import com.sevenstars.domain.usecase.profile.GetProfileInfoUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,10 +14,10 @@ object ProfileUseCaseModule {
 
     @Provides
     @Singleton
-    fun provideGetUserInfoUseCase(
-        repository: UserRepository
-    ): GetUserInfoUseCase {
-        return GetUserInfoUseCase(repository = repository)
+    fun provideGetProfileInfoUseCase(
+        repository: ProfileRepository
+    ): GetProfileInfoUseCase {
+        return GetProfileInfoUseCase(repository = repository)
     }
 
 }
