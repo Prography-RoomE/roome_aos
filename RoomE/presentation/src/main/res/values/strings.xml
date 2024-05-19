@@ -22,4 +22,11 @@
     <string name="signup_tos_service">서비스 이용약관에 동의 (필수)</string>
     <string name="signup_tos_privacy">개인정보 수집 및 이용에 동의 (필수)</string>
     <string name="signup_tos_ad">광고 및 마케팅 수신에 동의 (선택)</string>
+
+    <!-- ============================================= Profile Create ============================================= -->
+    <string name="profile_welcome_title">{%s}님\n가입을 축하드려요!</string>
+    <string name="profile_welcome_comment">방탈출 취향을 가득 담은\n특별한 프로필을 만들어 볼까요?</string>
+    <string name="profile_welcome_btn_create">프로필 만들기</string>
+    <string name="profile_welcome_btn_skip">건너뛰기</string>
+
 </resources>
