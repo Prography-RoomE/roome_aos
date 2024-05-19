@@ -1,13 +1,20 @@
 package com.sevenstars.roome.view.profile
 
+import android.content.Intent
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseActivity
+import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.databinding.ActivityProfileBinding
 import com.sevenstars.roome.utils.UiState
+import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_profile) {
@@ -15,7 +22,7 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
 
     override fun initView() {
         observer()
-        viewModel.fetchData()
+        viewModel.fetchSaveData()
     }
 
     override fun initListener() {
@@ -30,6 +37,21 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
         viewModel.profileState.observe(this){
             when(it){
                 is UiState.Failure -> {}
+                is UiState.Loading -> {}
+                is UiState.Success -> {
+                    viewModel.fetchData(it.data)
+                }
+            }
+        }
+
+        viewModel.profileDataState.observe(this){
+            when(it){
+                is UiState.Failure -> {
+                    LoggerUtils.error("프로필 생성에 필요한 데이터 조회 실패\n${it.message}")
+                    Toast.makeText(app, "프로필 생성에 필요한 데이터 조회 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+
+                    moveStart()
+                }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
                     moveStep(it.data.name)
@@ -58,5 +80,15 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
 
     fun setStep(p: Int){
         binding.tbProfile.customStepper.setStep(p)
+    }
+
+    private fun moveStart(){
+        CoroutineScope(Dispatchers.IO).launch {
+            app.userPreferences.clearData()
+        }
+
+        val intent = Intent(this, StartActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

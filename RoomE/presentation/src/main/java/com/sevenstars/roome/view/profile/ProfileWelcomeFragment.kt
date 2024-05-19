@@ -16,6 +16,7 @@ class ProfileWelcomeFragment: BaseFragment<FragmentWelcomeBinding>(R.layout.frag
         binding.btnCreate.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.fl_profile, ProfileCountFragment())
+                .addToBackStack(null)
                 .commit()
         }
     }
