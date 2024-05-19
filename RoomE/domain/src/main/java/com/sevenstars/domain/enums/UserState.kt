@@ -1,7 +1,7 @@
 package com.sevenstars.domain.enums
 
-enum class UserState(state: String) {
-    TERMS_AGREEMENT("terms_agreement"),
+enum class UserState(val state: String) {
+    TERMS_AGREEMENT("termsAgreement"),
     NICKNAME("nickname"),
-    REGISTRATION_COMPLETED("registration_completed")
+    REGISTRATION_COMPLETED("registrationCompleted")
 }

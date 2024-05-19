@@ -8,7 +8,7 @@ object UserInfoMapper {
 
     fun mapperToResponseEntity(item: ResponseUserInfoDTO): ResponseUserInfoEntity {
         return item.run {
-            ResponseUserInfoEntity(state=UserState.valueOf(state.uppercase()), email=email, nickname=nickname)
+            ResponseUserInfoEntity(state=UserState.values().find { it.state == state }!!, email=email, nickname=nickname)
         }
     }
 }
