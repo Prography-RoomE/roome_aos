@@ -23,10 +23,15 @@
     <string name="signup_tos_privacy">개인정보 수집 및 이용에 동의 (필수)</string>
     <string name="signup_tos_ad">광고 및 마케팅 수신에 동의 (선택)</string>
 
-    <!-- ============================================= Profile Create ============================================= -->
+    <!-- ============================================= Profile Create: Welcome ============================================= -->
     <string name="profile_welcome_title">{%s}님\n가입을 축하드려요!</string>
     <string name="profile_welcome_comment">방탈출 취향을 가득 담은\n특별한 프로필을 만들어 볼까요?</string>
     <string name="profile_welcome_btn_create">프로필 만들기</string>
     <string name="profile_welcome_btn_skip">건너뛰기</string>
+
+    <!-- ============================================= Profile Create: Count ============================================= -->
+    <string name="profile_count_title">현재까지 경험한 방 수를\n알려주세요</string>
+    <string name="profile_count_comment">프로필 생성 후 마이페이지에서 수정할 수 있어요</string>
+    <string name="profile_count_hint">000번</string>
 
 </resources>

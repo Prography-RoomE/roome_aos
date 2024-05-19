@@ -16,15 +16,13 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
 
-            android:gravity="center"
-            tools:text="{Roome}님\n가입을 축하드려요!"
-            style="@style/headline3_bold"
+            android:text="@string/profile_count_title"
+            style="@style/headline2_bold"
             android:textColor="@color/on_surface" />
 
         <TextView
@@ -33,44 +31,46 @@
             android:layout_height="wrap_content"
 
             app:layout_constraintTop_toBottomOf="@id/tv_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
             android:layout_marginTop="12dp"
 
-            android:gravity="center"
-            android:text="@string/profile_welcome_comment"
-            style="@style/body1_regular"
-            android:textColor="@color/on_surface" />
+            android:text="@string/profile_count_comment"
+            style="@style/body2_regular"
+            android:textColor="@color/on_surface_variant" />
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        <EditText
+            android:id="@+id/et_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
             app:layout_constraintTop_toBottomOf="@id/tv_comment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
 
-            android:src="@drawable/png_profile_sample"
-            app:layout_constraintDimensionRatio="1:1"
-            tools:ignore="ContentDescription" />
+            tools:text="99999번"
+            style="@style/pretendard_bold"
+            android:textSize="48sp"
+            android:textColor="@color/on_surface"
+
+            android:hint="@string/profile_count_hint"
+            android:textColorHint="@color/on_surface_variant"
+
+            android:background="@null"
+            android:inputType="number"
+            tools:ignore="Autofill,LabelFor" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_create"
-            android:layout_width="0dp"
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="24dp"
 
-            android:background="@drawable/shape_radius_12"
-            android:backgroundTint="@color/primary_primary"
+            android:background="@color/primary_primary"
 
-            android:text="@string/profile_welcome_btn_create"
-            android:textColor="@color/surface"
-            style="@style/title2_bold" />
+            android:text="@string/btn_next"
+            style="@style/title2_bold"
+            android:textColor="@color/surface" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

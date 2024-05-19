@@ -16,6 +16,7 @@
     <color name="on_surface">#19191A</color>
     <color name="on_surface_a12">#1F19191A</color>
 
+    <color name="surface_container">#E1E1E6</color>
     <color name="surface_container_low">#F5F5FA</color>
     <color name="on_surface_variant">#646466</color>
 

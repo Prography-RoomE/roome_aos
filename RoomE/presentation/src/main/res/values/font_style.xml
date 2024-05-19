@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- default -->
+    <style name="pretendard_regular">
+        <item name="font">@font/pretendard_regular</item>
+    </style>
+    <style name="pretendard_medium">
+        <item name="font">@font/pretendard_medium</item>
+    </style>
+    <style name="pretendard_bold">
+        <item name="font">@font/pretendard_bold</item>
+    </style>
 
     <!-- Headline -->
     <style name="headline1_regular">
