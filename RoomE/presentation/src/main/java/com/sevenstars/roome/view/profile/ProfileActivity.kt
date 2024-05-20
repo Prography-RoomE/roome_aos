@@ -4,12 +4,14 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseActivity
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.databinding.ActivityProfileBinding
 import com.sevenstars.roome.utils.UiState
+import com.sevenstars.roome.view.profile.count.ProfileCountFragment
 import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -81,6 +83,14 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
     fun setStep(p: Int){
         binding.tbProfile.customStepper.setStep(p)
     }
+
+    fun replaceFragmentWithStack(p: Fragment){
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_profile, p)
+            .addToBackStack(null)
+            .commit()
+    }
+
 
     private fun moveStart(){
         CoroutineScope(Dispatchers.IO).launch {

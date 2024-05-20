@@ -3,6 +3,7 @@ package com.sevenstars.roome.view.profile
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentWelcomeBinding
+import com.sevenstars.roome.view.profile.count.ProfileCountFragment
 
 class ProfileWelcomeFragment: BaseFragment<FragmentWelcomeBinding>(R.layout.fragment_welcome) {
     override fun initView() {
@@ -14,10 +15,7 @@ class ProfileWelcomeFragment: BaseFragment<FragmentWelcomeBinding>(R.layout.frag
         super.initListener()
 
         binding.btnCreate.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fl_profile, ProfileCountFragment())
-                .addToBackStack(null)
-                .commit()
+            (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileCountFragment())
         }
     }
 }

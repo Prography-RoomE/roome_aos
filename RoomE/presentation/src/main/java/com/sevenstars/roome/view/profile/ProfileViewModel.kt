@@ -26,7 +26,7 @@ class ProfileViewModel@Inject constructor(
         _profileState.value = UiState.Success(ProfileState.ONE)
     }
 
-    private lateinit var profileData: ProfileInfoEntity
+    lateinit var profileData: ProfileInfoEntity
     private var _profileDataState = MutableLiveData<UiState<ProfileState>>(UiState.Loading)
     val profileDataState get() = _profileDataState
 

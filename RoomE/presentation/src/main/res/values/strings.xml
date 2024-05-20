@@ -34,4 +34,8 @@
     <string name="profile_count_comment">프로필 생성 후 마이페이지에서 수정할 수 있어요</string>
     <string name="profile_count_hint">000번</string>
 
+    <!-- ============================================= Profile Create: Genres ============================================= -->
+    <string name="profile_genres_title">선호하는 방탈출 장르를\n알려주세요</string>
+    <string name="profile_genres_comment">최대 2개까지 선택할 수 있어요</string>
+
 </resources>
