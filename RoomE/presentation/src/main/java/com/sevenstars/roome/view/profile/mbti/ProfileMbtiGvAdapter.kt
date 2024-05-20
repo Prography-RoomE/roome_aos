@@ -22,7 +22,7 @@ class ProfileMbtiGvAdapter : BaseAdapter() {
     )
 
     val checkedItems = mutableMapOf<Int, String>()
-    private var disabledState = false
+    var disabledState = false
 
     override fun getCount(): Int = items.size
     override fun getItem(position: Int): Any = items[position]

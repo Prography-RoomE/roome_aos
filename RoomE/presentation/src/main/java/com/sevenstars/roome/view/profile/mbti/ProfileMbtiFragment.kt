@@ -1,6 +1,7 @@
 package com.sevenstars.roome.view.profile.mbti
 
 import androidx.core.content.ContextCompat
+import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileMbtiBinding
@@ -17,10 +18,10 @@ class ProfileMbtiFragment: BaseFragment<FragmentProfileMbtiBinding>(R.layout.fra
             this.setItemClickListener(object : ProfileMbtiGvAdapter.OnItemClickListener{
                 override fun onClick() {
                     binding.btnNext.apply {
-                        if(mbtiAdatper.checkedItems.size == 4){
+                        if(checkedItems.size == 4){
                             backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.primary_primary)
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
-                        } else {
+                        } else if (!disabledState){
                             backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.btn_disabled)
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant))
                         }
@@ -41,10 +42,21 @@ class ProfileMbtiFragment: BaseFragment<FragmentProfileMbtiBinding>(R.layout.fra
         }
 
         binding.cbOption.setOnCheckedChangeListener { _, b ->
+            LoggerUtils.debug(b.toString())
             if(b){
                 mbtiAdatper.mbtiDisabled()
+
+                binding.btnNext.apply {
+                    backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.primary_primary)
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
+                }
             } else {
                 mbtiAdatper.mbtiActivate()
+
+                binding.btnNext.apply {
+                    backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.btn_disabled)
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant))
+                }
             }
         }
     }
