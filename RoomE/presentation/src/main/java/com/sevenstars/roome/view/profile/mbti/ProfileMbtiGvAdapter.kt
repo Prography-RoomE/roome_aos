@@ -22,6 +22,7 @@ class ProfileMbtiGvAdapter : BaseAdapter() {
     )
 
     val checkedItems = mutableMapOf<Int, String>()
+    private var disabledState = false
 
     override fun getCount(): Int = items.size
     override fun getItem(position: Int): Any = items[position]
@@ -50,6 +51,8 @@ class ProfileMbtiGvAdapter : BaseAdapter() {
             textOff = null
             isChecked = checkedItems[data.type] == data.name
 
+            isEnabled = !disabledState
+
             setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
                     checkedItems[data.type] = data.name
@@ -61,6 +64,23 @@ class ProfileMbtiGvAdapter : BaseAdapter() {
                 itemClickListener.onClick()
             }
         }
+
+
+        val alphaValue = if (checkedItems.isEmpty() && disabledState) 0.38f else 1.0f
+        tvMbti.alpha = alphaValue
+        tvMbtiDesc.alpha = alphaValue
+
+    }
+
+    fun mbtiDisabled(){
+        disabledState = true
+        checkedItems.clear()
+        notifyDataSetChanged()
+    }
+
+    fun mbtiActivate(){
+        disabledState = false
+        notifyDataSetChanged()
     }
 
     interface OnItemClickListener{

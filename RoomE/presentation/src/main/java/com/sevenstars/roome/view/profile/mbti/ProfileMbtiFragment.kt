@@ -39,5 +39,13 @@ class ProfileMbtiFragment: BaseFragment<FragmentProfileMbtiBinding>(R.layout.fra
                 (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileWelcomeFragment())
             }
         }
+
+        binding.cbOption.setOnCheckedChangeListener { _, b ->
+            if(b){
+                mbtiAdatper.mbtiDisabled()
+            } else {
+                mbtiAdatper.mbtiActivate()
+            }
+        }
     }
 }
