@@ -38,4 +38,23 @@
     <string name="profile_genres_title">선호하는 방탈출 장르를\n알려주세요</string>
     <string name="profile_genres_comment">최대 2개까지 선택할 수 있어요</string>
 
+    <!-- ============================================= Profile Create: MBTI ============================================= -->
+    <string name="profile_mbti_title">MBTI를 알려주세요</string>
+    <string name="profile_mbti_not_add">프로필에 추가하지 않을래요</string>
+    <string name="profile_mbti_e">E</string>
+    <string name="profile_mbti_e_desc">외향형</string>
+    <string name="profile_mbti_i">I</string>
+    <string name="profile_mbti_i_desc">내향형</string>
+    <string name="profile_mbti_n">N</string>
+    <string name="profile_mbti_n_desc">직관형</string>
+    <string name="profile_mbti_s">S</string>
+    <string name="profile_mbti_s_desc">현실주의형</string>
+    <string name="profile_mbti_t">T</string>
+    <string name="profile_mbti_t_desc">사고형</string>
+    <string name="profile_mbti_f">F</string>
+    <string name="profile_mbti_f_desc">감정형</string>
+    <string name="profile_mbti_j">J</string>
+    <string name="profile_mbti_j_desc">계획형</string>
+    <string name="profile_mbti_p">P</string>
+    <string name="profile_mbti_p_desc">탐색형</string>
 </resources>

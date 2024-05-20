@@ -9,7 +9,7 @@ import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileGenresBinding
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
-import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
+import com.sevenstars.roome.view.profile.mbti.ProfileMbtiFragment
 
 class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout.fragment_profile_genres) {
     private val viewModel: ProfileViewModel by activityViewModels()
@@ -51,8 +51,10 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
         super.initListener()
 
         binding.btnNext.setOnClickListener {
-            (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileWelcomeFragment())
             LoggerUtils.info(genresAdapter.checked.joinToString(", "))
+            if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
+                (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileMbtiFragment())
+            }
         }
     }
 
