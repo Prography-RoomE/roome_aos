@@ -16,6 +16,8 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
     private lateinit var genresAdapter: ProfileGenresRvAdapter
 
     override fun initView() {
+        (requireActivity() as ProfileActivity).setStep(2)
+
         genresAdapter = ProfileGenresRvAdapter().apply {
             this.setItemClickListener(object : ProfileGenresRvAdapter.OnItemClickListener{
                 override fun onClick() {

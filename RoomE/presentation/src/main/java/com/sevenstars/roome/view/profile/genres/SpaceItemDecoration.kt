@@ -13,7 +13,7 @@ class SpaceItemDecoration(context: Context, spaceDp: Int) : RecyclerView.ItemDec
     init {
         val density = context.resources.displayMetrics.density
         spacePx = (spaceDp * density).toInt()
-        bottomMarginPx = (80 * density).toInt()
+        bottomMarginPx = (98 * density).toInt()
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
