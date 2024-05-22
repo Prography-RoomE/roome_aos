@@ -57,4 +57,9 @@
     <string name="profile_mbti_j_desc">계획형</string>
     <string name="profile_mbti_p">P</string>
     <string name="profile_mbti_p_desc">탐색형</string>
+
+    <!-- ============================================= Profile Create: Strength ============================================= -->
+    <string name="profile_strength_title">방탈출 할 때,\n본인의 강점이 무엇이라고\n생각하시나요?</string>
+    <string name="profile_strength_comment">최대 2개까지 선택할 수 있어요</string>
+
 </resources>

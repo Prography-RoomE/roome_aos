@@ -1,4 +1,4 @@
-package com.sevenstars.roome.view.profile.genres
+package com.sevenstars.roome.view.profile
 
 import android.content.Context
 import android.graphics.Rect

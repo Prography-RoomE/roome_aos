@@ -7,6 +7,7 @@ import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileMbtiBinding
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
+import com.sevenstars.roome.view.profile.strength.ProfileStrengthFragment
 
 class ProfileMbtiFragment: BaseFragment<FragmentProfileMbtiBinding>(R.layout.fragment_profile_mbti) {
     private lateinit var mbtiAdatper: ProfileMbtiGvAdapter
@@ -37,7 +38,7 @@ class ProfileMbtiFragment: BaseFragment<FragmentProfileMbtiBinding>(R.layout.fra
 
         binding.btnNext.setOnClickListener {
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
-                (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileWelcomeFragment())
+                (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileStrengthFragment())
             }
         }
 
