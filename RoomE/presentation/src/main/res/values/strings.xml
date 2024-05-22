@@ -72,4 +72,7 @@
     <!-- ============================================= Profile Create: Important Hint ============================================= -->
     <string name="profile_hint_title">힌트 사용에 대해\n어떻게 생각하시나요?</string>
 
+    <!-- ============================================= Profile Create: Device vs Lock ============================================= -->
+    <string name="profile_device_title">장치와 자물쇠 중\n어떤 것을 더 선호하시나요?</string>
+
 </resources>

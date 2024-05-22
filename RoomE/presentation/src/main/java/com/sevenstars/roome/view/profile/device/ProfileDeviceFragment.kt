@@ -1,4 +1,4 @@
-package com.sevenstars.roome.view.profile.hint
+package com.sevenstars.roome.view.profile.device
 
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
@@ -13,30 +13,28 @@ import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
 import com.sevenstars.roome.view.profile.VerticalSpaceItemDecoration
-import com.sevenstars.roome.view.profile.device.ProfileDeviceFragment
 
-class ProfileHintFragment: BaseFragment<FragmentProfileHintBinding>(R.layout.fragment_profile_hint) {
+class ProfileDeviceFragment: BaseFragment<FragmentProfileHintBinding>(R.layout.fragment_profile_hint) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
-    private lateinit var hintAdapter: ProfileHintRvAdapter
+    private lateinit var deviceAdapter: ProfileDeviceRvAdapter
 
     override fun initView() {
-        (requireActivity() as ProfileActivity).setStep(7)
+        (requireActivity() as ProfileActivity).setStep(8)
 
-        hintAdapter = ProfileHintRvAdapter().apply {
-            this.setItemClickListener(object : ProfileHintRvAdapter.OnItemClickListener{
+        deviceAdapter = ProfileDeviceRvAdapter().apply {
+            this.setItemClickListener(object : ProfileDeviceRvAdapter.OnItemClickListener{
                 override fun onClick(isChecked: Boolean) {
-                    if(isChecked) (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileDeviceFragment())
+                    if(isChecked) (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileWelcomeFragment())
                 }
             })
         }
 
         binding.rvHint.apply {
-            adapter = hintAdapter
+            adapter = deviceAdapter
             layoutManager = GridLayoutManager(requireContext(), 1)
-            addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12))
         }
 
-        hintAdapter.setData(profileViewModel.profileData.hintUsagePreferences)
+        deviceAdapter.setData(profileViewModel.profileData.deviceLockPreferences)
     }
 
     override fun initListener() {
