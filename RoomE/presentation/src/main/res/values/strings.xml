@@ -78,4 +78,8 @@
     <!-- ============================================= Profile Create: Activity ============================================= -->
     <string name="profile_activity_title">어느 정도의 활동성을\n선호하시나요?</string>
 
+    <!-- ============================================= Profile Create: Disliked Factors ============================================= -->
+    <string name="profile_dislike_title">방탈출 할 때,\n어떤 요소를\n싫어하시나요?</string>
+    <string name="profile_dislike_comment">최대 3개까지 선택할 수 있어요</string>
+
 </resources>

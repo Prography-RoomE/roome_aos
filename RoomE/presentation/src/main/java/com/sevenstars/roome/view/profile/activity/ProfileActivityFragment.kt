@@ -7,8 +7,8 @@ import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileActivitiyBinding
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
-import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
 import com.sevenstars.roome.view.profile.VerticalSpaceItemDecoration
+import com.sevenstars.roome.view.profile.dislike.ProfileDislikeFragment
 
 class ProfileActivityFragment: BaseFragment<FragmentProfileActivitiyBinding>(R.layout.fragment_profile_activitiy) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
@@ -20,7 +20,7 @@ class ProfileActivityFragment: BaseFragment<FragmentProfileActivitiyBinding>(R.l
         activityAdapter = ProfileActivityRvAdapter().apply {
             this.setItemClickListener(object : ProfileActivityRvAdapter.OnItemClickListener{
                 override fun onClick(isChecked: Boolean) {
-                    if(isChecked) (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileWelcomeFragment())
+                    if(isChecked) (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileDislikeFragment())
                 }
             })
         }
