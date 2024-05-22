@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sevenstars.domain.model.profile.info.ImportantFactors
-import com.sevenstars.domain.model.profile.info.Strengths
 import com.sevenstars.roome.databinding.ItemChipBinding
 
 class ProfileImportantRvAdapter: RecyclerView.Adapter<ProfileImportantRvAdapter.ImportantViewHolder>() {

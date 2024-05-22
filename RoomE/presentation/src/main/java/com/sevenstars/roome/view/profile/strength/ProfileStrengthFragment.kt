@@ -9,7 +9,6 @@ import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileStrengthBinding
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
-import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
 import com.sevenstars.roome.view.profile.SpaceItemDecoration
 import com.sevenstars.roome.view.profile.important.ProfileImportantFragment
 

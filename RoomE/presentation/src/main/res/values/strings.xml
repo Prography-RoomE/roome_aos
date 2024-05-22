@@ -66,4 +66,7 @@
     <string name="profile_important_title">테마 선택 시,\n어떤 요소를 중요하게\n생각하시나요?</string>
     <string name="profile_important_comment">최대 3개까지 선택할 수 있어요</string>
 
+    <!-- ============================================= Profile Create: Important HorrorTheme ============================================= -->
+    <string name="profile_horror_title">공포 테마에서\n어떤 포지션인가요?</string>
+
 </resources>
