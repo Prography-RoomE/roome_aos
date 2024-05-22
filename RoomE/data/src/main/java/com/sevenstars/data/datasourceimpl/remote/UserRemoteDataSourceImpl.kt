@@ -1,7 +1,9 @@
 package com.sevenstars.data.datasourceimpl.remote
 
 import com.sevenstars.data.datasource.remote.UserRemoteDataSource
+import com.sevenstars.data.mapper.user.TermsAgreementMapper
 import com.sevenstars.data.model.BaseResponse
+import com.sevenstars.data.model.user.RequestNickDTO
 import com.sevenstars.data.model.user.ResponseUserInfoDTO
 import com.sevenstars.data.service.UserService
 import com.sevenstars.data.utils.LoggerUtils
@@ -35,7 +37,7 @@ class UserRemoteDataSourceImpl @Inject constructor(
         nickname: String
     ): BaseResponse<ResponseBody> {
         return try {
-            val res = userService.validationNick(accessToken, nickname)
+            val res = userService.validationNick(accessToken, RequestNickDTO(nickname))
 
             if(res.isSuccessful){
                 val body = res.body()!!
@@ -55,7 +57,7 @@ class UserRemoteDataSourceImpl @Inject constructor(
         nickname: String
     ): BaseResponse<ResponseBody> {
         return try {
-            val res = userService.saveNick(accessToken, nickname)
+            val res = userService.saveNick(accessToken, RequestNickDTO(nickname))
 
             if(res.isSuccessful){
                 val body = res.body()!!
@@ -75,7 +77,7 @@ class UserRemoteDataSourceImpl @Inject constructor(
         options: Map<String, Boolean>
     ): BaseResponse<ResponseBody> {
         return try {
-            val res = userService.saveTermsAgreement(accessToken, options)
+            val res = userService.saveTermsAgreement(accessToken, TermsAgreementMapper.mapperToRequestDTO(options))
 
             if(res.isSuccessful){
                 val body = res.body()!!
