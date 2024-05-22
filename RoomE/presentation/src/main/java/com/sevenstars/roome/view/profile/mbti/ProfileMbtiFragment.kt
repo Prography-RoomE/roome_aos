@@ -6,7 +6,6 @@ import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileMbtiBinding
 import com.sevenstars.roome.view.profile.ProfileActivity
-import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
 import com.sevenstars.roome.view.profile.strength.ProfileStrengthFragment
 
 class ProfileMbtiFragment: BaseFragment<FragmentProfileMbtiBinding>(R.layout.fragment_profile_mbti) {

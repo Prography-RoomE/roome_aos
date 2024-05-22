@@ -1,20 +1,21 @@
-package com.sevenstars.roome.view.profile.strength
+package com.sevenstars.roome.view.profile.important
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.sevenstars.domain.model.profile.info.ImportantFactors
 import com.sevenstars.domain.model.profile.info.Strengths
 import com.sevenstars.roome.databinding.ItemChipBinding
 
-class ProfileStrengthRvAdapter: RecyclerView.Adapter<ProfileStrengthRvAdapter.StrengthViewHolder>() {
-    private var dataList = listOf<Strengths>()
-    var checked = ArrayDeque<Strengths>(2)
+class ProfileImportantRvAdapter: RecyclerView.Adapter<ProfileImportantRvAdapter.ImportantViewHolder>() {
+    private var dataList = listOf<ImportantFactors>()
+    var checked = ArrayDeque<ImportantFactors>(3)
 
-    inner class StrengthViewHolder(private val binding: ItemChipBinding) :
+    inner class ImportantViewHolder(private val binding: ItemChipBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: Strengths) {
+        fun bind(data: ImportantFactors) {
             binding.tbChipName.apply {
                 text = data.title
                 textOn = data.title
@@ -26,13 +27,13 @@ class ProfileStrengthRvAdapter: RecyclerView.Adapter<ProfileStrengthRvAdapter.St
             }
         }
 
-        private fun toggleCheckedState(data: Strengths) {
+        private fun toggleCheckedState(data: ImportantFactors) {
             val wasChecked = checked.contains(data)
             if (wasChecked) {
                 checked.remove(data)
                 binding.tbChipName.isChecked = false
             } else {
-                if (checked.size == 2) {
+                if (checked.size == 3) {
                     val firstChecked = checked.removeFirst()
                     notifyItemChanged(dataList.indexOf(firstChecked))
                 }
@@ -44,19 +45,19 @@ class ProfileStrengthRvAdapter: RecyclerView.Adapter<ProfileStrengthRvAdapter.St
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StrengthViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImportantViewHolder {
         val binding = ItemChipBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return StrengthViewHolder(binding)
+        return ImportantViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: StrengthViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImportantViewHolder, position: Int) {
         holder.bind(dataList[position])
     }
 
     override fun getItemCount(): Int = dataList.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(newList: List<Strengths>){
+    fun setData(newList: List<ImportantFactors>){
         dataList = newList
         notifyDataSetChanged()
     }

@@ -1,4 +1,4 @@
-package com.sevenstars.roome.view.profile.strength
+package com.sevenstars.roome.view.profile.important
 
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
@@ -6,26 +6,26 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
+import com.sevenstars.roome.databinding.FragmentProfileImportantFactorBinding
 import com.sevenstars.roome.databinding.FragmentProfileStrengthBinding
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
 import com.sevenstars.roome.view.profile.SpaceItemDecoration
-import com.sevenstars.roome.view.profile.important.ProfileImportantFragment
 
-class ProfileStrengthFragment: BaseFragment<FragmentProfileStrengthBinding>(R.layout.fragment_profile_strength) {
+class ProfileImportantFragment: BaseFragment<FragmentProfileImportantFactorBinding>(R.layout.fragment_profile_important_factor) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
-    private lateinit var strengthAdapter: ProfileStrengthRvAdapter
+    private lateinit var importantAdapter: ProfileImportantRvAdapter
 
 
     override fun initView() {
         (requireActivity() as ProfileActivity).setStep(4)
 
-        strengthAdapter = ProfileStrengthRvAdapter().apply {
-            this.setItemClickListener(object : ProfileStrengthRvAdapter.OnItemClickListener{
+        importantAdapter = ProfileImportantRvAdapter().apply {
+            this.setItemClickListener(object : ProfileImportantRvAdapter.OnItemClickListener{
                 override fun onClick() {
                     binding.btnNext.apply {
-                        if(strengthAdapter.checked.isNotEmpty()){
+                        if(importantAdapter.checked.isNotEmpty()){
                             backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.primary_primary)
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
                         } else {
@@ -37,22 +37,21 @@ class ProfileStrengthFragment: BaseFragment<FragmentProfileStrengthBinding>(R.la
             })
         }
 
-        binding.rvStrength.apply {
-            adapter = strengthAdapter
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            addItemDecoration(SpaceItemDecoration(requireContext(), 6))
+        binding.rvImportant.apply {
+            adapter = importantAdapter
+            layoutManager = GridLayoutManager(requireContext(), 1)
         }
 
-        strengthAdapter.setData(profileViewModel.profileData.strengths)
+        importantAdapter.setData(profileViewModel.profileData.importantFactors)
     }
 
     override fun initListener() {
         super.initListener()
 
         binding.btnNext.setOnClickListener {
-            LoggerUtils.info(strengthAdapter.checked.joinToString(", "))
+            LoggerUtils.info(importantAdapter.checked.joinToString(", "))
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
-                (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileImportantFragment())
+                (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileWelcomeFragment())
             }
         }
     }
