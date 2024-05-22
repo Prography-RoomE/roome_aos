@@ -1,4 +1,4 @@
-package com.sevenstars.roome.view.profile.horror
+package com.sevenstars.roome.view.profile.hint
 
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
@@ -6,37 +6,36 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
+import com.sevenstars.roome.databinding.FragmentProfileHintBinding
 import com.sevenstars.roome.databinding.FragmentProfileHorrorBinding
 import com.sevenstars.roome.databinding.FragmentProfileImportantFactorBinding
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
 import com.sevenstars.roome.view.profile.VerticalSpaceItemDecoration
-import com.sevenstars.roome.view.profile.hint.ProfileHintFragment
 
-class ProfileHorrorFragment: BaseFragment<FragmentProfileHorrorBinding>(R.layout.fragment_profile_horror) {
+class ProfileHintFragment: BaseFragment<FragmentProfileHintBinding>(R.layout.fragment_profile_hint) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
-    private lateinit var horrorAdapter: ProfileHorrorRvAdapter
-
+    private lateinit var hintAdapter: ProfileHintRvAdapter
 
     override fun initView() {
-        (requireActivity() as ProfileActivity).setStep(6)
+        (requireActivity() as ProfileActivity).setStep(7)
 
-        horrorAdapter = ProfileHorrorRvAdapter().apply {
-            this.setItemClickListener(object : ProfileHorrorRvAdapter.OnItemClickListener{
+        hintAdapter = ProfileHintRvAdapter().apply {
+            this.setItemClickListener(object : ProfileHintRvAdapter.OnItemClickListener{
                 override fun onClick(isChecked: Boolean) {
-                    if(isChecked) (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileHintFragment())
+                    if(isChecked) (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileWelcomeFragment())
                 }
             })
         }
 
-        binding.rvHorror.apply {
-            adapter = horrorAdapter
+        binding.rvHint.apply {
+            adapter = hintAdapter
             layoutManager = GridLayoutManager(requireContext(), 1)
             addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12))
         }
 
-        horrorAdapter.setData(profileViewModel.profileData.horrorThemePositions)
+        hintAdapter.setData(profileViewModel.profileData.hintUsagePreferences)
     }
 
     override fun initListener() {

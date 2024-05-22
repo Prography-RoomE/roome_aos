@@ -69,4 +69,7 @@
     <!-- ============================================= Profile Create: Important HorrorTheme ============================================= -->
     <string name="profile_horror_title">공포 테마에서\n어떤 포지션인가요?</string>
 
+    <!-- ============================================= Profile Create: Important Hint ============================================= -->
+    <string name="profile_hint_title">힌트 사용에 대해\n어떻게 생각하시나요?</string>
+
 </resources>
