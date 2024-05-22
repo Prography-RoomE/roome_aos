@@ -7,7 +7,7 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
-val properties = gradleLocalProperties(rootDir)
+val properties = gradleLocalProperties(rootDir, providers)
 
 android {
     namespace = "com.sevenstars.roome"
