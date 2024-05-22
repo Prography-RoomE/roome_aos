@@ -75,4 +75,7 @@
     <!-- ============================================= Profile Create: Device vs Lock ============================================= -->
     <string name="profile_device_title">장치와 자물쇠 중\n어떤 것을 더 선호하시나요?</string>
 
+    <!-- ============================================= Profile Create: Activity ============================================= -->
+    <string name="profile_activity_title">어느 정도의 활동성을\n선호하시나요?</string>
+
 </resources>

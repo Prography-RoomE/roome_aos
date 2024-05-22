@@ -1,17 +1,12 @@
 package com.sevenstars.roome.view.profile.hint
 
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileHintBinding
-import com.sevenstars.roome.databinding.FragmentProfileHorrorBinding
-import com.sevenstars.roome.databinding.FragmentProfileImportantFactorBinding
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
-import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
 import com.sevenstars.roome.view.profile.VerticalSpaceItemDecoration
 import com.sevenstars.roome.view.profile.device.ProfileDeviceFragment
 
