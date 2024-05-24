@@ -1,21 +1,39 @@
 package com.sevenstars.roome.view.profile
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.activityViewModels
+
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
+import com.sevenstars.roome.utils.ImageUtils
+import com.sevenstars.roome.utils.PermissionManager
 
 class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
-    private val profileViewModel: ProfileViewModel by activityViewModels()
+
+    private lateinit var permissionManager: PermissionManager
+    private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
+
+    private val REQUIRED_PERMISSIONS = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        arrayOf(Manifest.permission.READ_MEDIA_IMAGES)
+    } else {
+        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+    }
 
     override fun initView() {
         (requireActivity() as ProfileActivity).setToolbarVisibility(false)
+        permissionManager = PermissionManager(requireActivity() as ProfileActivity)
 
         Handler(Looper.getMainLooper()).postDelayed({
             binding.lottieProfile.pauseAnimation()
@@ -32,6 +50,18 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
             endColor = "#FFACB3",
             isRoundCorner = false
         )
+
+        permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val grantResults = permissions.values.map { if (it) PackageManager.PERMISSION_GRANTED else PackageManager.PERMISSION_DENIED }.toIntArray()
+            permissionManager.handlePermissionResult(
+                permissions.keys.toTypedArray(),
+                grantResults,
+                onPermissionsGranted = {
+                    ImageUtils.saveViewToGallery(requireContext(), binding.ivProfile)
+                },
+                onPermissionsDenied = {}
+            )
+        }
     }
 
     override fun initListener() {
@@ -49,6 +79,14 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
                 if(isChecked){
                     tgForward.isChecked = false
                     setAspectRatio("3:4")
+                }
+            }
+
+            btnSaveProfile.setOnClickListener {
+                if (permissionManager.checkPermissions(REQUIRED_PERMISSIONS)) {
+                    ImageUtils.saveViewToGallery(requireContext(), ivProfile)
+                } else {
+                    permissionManager.requestPermissions(permissionLauncher, REQUIRED_PERMISSIONS)
                 }
             }
         }
