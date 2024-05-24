@@ -22,7 +22,8 @@ class ProfileColorRvAdapter: RecyclerView.Adapter<ProfileColorRvAdapter.ColorVie
                 shape = data.shape,
                 orientation = data.direction,
                 startColor = data.startColor,
-                endColor = data.endColor
+                endColor = data.endColor,
+                isRoundCorner = true
             )
 
             binding.btnColor.setOnClickListener{

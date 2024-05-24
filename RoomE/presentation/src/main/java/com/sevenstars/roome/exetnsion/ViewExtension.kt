@@ -19,7 +19,8 @@ fun setColorBackground(
     shape: String,
     orientation: String,
     startColor: String,
-    endColor: String
+    endColor: String,
+    isRoundCorner: Boolean
 ) {
     val cornerRadius = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
@@ -31,7 +32,7 @@ fun setColorBackground(
         "solid" -> {
             val shapeDrawable = ShapeDrawable(RectShape())
             shapeDrawable.paint.color = Color.parseColor(startColor)
-            shapeDrawable.shape = RectShapeWithCorners(cornerRadius)
+            if(isRoundCorner) shapeDrawable.shape = RectShapeWithCorners(cornerRadius)
             view.background = shapeDrawable
         }
         "gradient" -> {
@@ -64,7 +65,7 @@ fun setColorBackground(
             }
 
             gradientDrawable.colors = intArrayOf(Color.parseColor(startColor), Color.parseColor(endColor))
-            gradientDrawable.cornerRadius = cornerRadius
+            if(isRoundCorner) gradientDrawable.cornerRadius = cornerRadius
 
             view.background = gradientDrawable
         }
