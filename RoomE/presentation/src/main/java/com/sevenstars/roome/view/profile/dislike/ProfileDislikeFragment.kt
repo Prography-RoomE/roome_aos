@@ -11,6 +11,7 @@ import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
 import com.sevenstars.roome.view.profile.SpaceItemDecoration
+import com.sevenstars.roome.view.profile.color.ProfileColorFragment
 
 class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layout.fragment_profile_dislike) {
     private val viewModel: ProfileViewModel by activityViewModels()
@@ -54,7 +55,7 @@ class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layo
         binding.btnNext.setOnClickListener {
             LoggerUtils.info(dislikeAdapter.checked.joinToString(", "))
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
-                (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileWelcomeFragment())
+                (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileColorFragment())
             }
         }
     }

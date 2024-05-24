@@ -47,7 +47,11 @@ object ProfileInfoMapper {
 
     private fun colorsMapper(item: List<ColorsDTO>): List<Colors> {
         return item.map {
-            Colors(it.id, it.title)
+            it.run {
+                Colors(
+                    direction, endColor, id, mode, shape, startColor, title
+                )
+            }
         }
     }
 
