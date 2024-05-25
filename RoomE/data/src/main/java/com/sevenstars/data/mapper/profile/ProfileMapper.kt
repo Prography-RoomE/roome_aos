@@ -39,7 +39,7 @@ object ProfileMapper {
                 isPlusEnabled = isPlusEnabled,
                 mbti = mbti,
                 preferredGenres = ProfileInfoMapper.genresMapper(this.preferredGenres),
-                state = ProfileState.entries.find { it.desc == this.state }?.step ?: 0,
+                state = ProfileState.entries.find { it.desc == this.state } ?: ProfileState.ROOM_COUNT,
                 themeDislikedFactors = ProfileInfoMapper.dislikedFactorsMapper(this.themeDislikedFactors),
                 themeImportantFactors = ProfileInfoMapper.importantFactorsMapper(this.themeImportantFactors),
                 userStrengths = ProfileInfoMapper.strengthsMapper(this.userStrengths)
@@ -47,31 +47,41 @@ object ProfileMapper {
         }
     }
 
-    private fun activityMapper(item: ActivitiesDTO): Activities{
+    private fun activityMapper(item: ActivitiesDTO?): Activities?{
+        if(item == null) return null
+
         return item.run {
             Activities(id, title, description)
         }
     }
 
-    private fun colorMapper(item: ColorsDTO): Colors{
+    private fun colorMapper(item: ColorsDTO?): Colors?{
+        if(item == null) return null
+
         return item.run {
             Colors(direction, endColor, id, mode, shape, startColor, title)
         }
     }
 
-    private fun hintUsagePreferenceMapper(item: HintUsagePreferencesDTO): HintUsagePreferences{
+    private fun hintUsagePreferenceMapper(item: HintUsagePreferencesDTO?): HintUsagePreferences?{
+        if(item == null) return null
+
         return item.run {
             HintUsagePreferences(id, title, description)
         }
     }
 
-    private fun deviceLockPreferenceMapper(item: DeviceLockPreferencesDTO): DeviceLockPreferences{
+    private fun deviceLockPreferenceMapper(item: DeviceLockPreferencesDTO?): DeviceLockPreferences?{
+        if(item == null) return null
+
         return item.run {
             DeviceLockPreferences(id, title)
         }
     }
 
-    private fun horrorThemePositionMapper(item: HorrorThemePositionsDTO): HorrorThemePositions{
+    private fun horrorThemePositionMapper(item: HorrorThemePositionsDTO?): HorrorThemePositions?{
+        if(item == null) return null
+
         return item.run {
             HorrorThemePositions(id, title, description)
         }
