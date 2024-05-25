@@ -3,7 +3,6 @@ package com.sevenstars.roome.view.profile.mbti
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import com.sevenstars.data.utils.LoggerUtils
-import com.sevenstars.domain.model.profile.mbti.MbtiEntity
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileMbtiBinding

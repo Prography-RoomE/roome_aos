@@ -9,10 +9,8 @@ import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileDislikeBinding
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
-import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
 import com.sevenstars.roome.view.profile.SpaceItemDecoration
 import com.sevenstars.roome.view.profile.color.ProfileColorFragment
-import okhttp3.internal.addHeaderLenient
 
 class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layout.fragment_profile_dislike) {
     private val profileViewModel: ProfileViewModel by activityViewModels()

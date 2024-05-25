@@ -9,7 +9,6 @@ import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileImportantFactorBinding
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
-import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
 import com.sevenstars.roome.view.profile.horror.ProfileHorrorFragment
 
 class ProfileImportantFragment: BaseFragment<FragmentProfileImportantFactorBinding>(R.layout.fragment_profile_important_factor) {

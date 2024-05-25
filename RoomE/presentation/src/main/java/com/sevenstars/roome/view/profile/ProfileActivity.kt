@@ -11,7 +11,6 @@ import com.sevenstars.roome.base.BaseActivity
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.databinding.ActivityProfileBinding
 import com.sevenstars.roome.utils.UiState
-import com.sevenstars.roome.view.profile.color.ProfileColorFragment
 import com.sevenstars.roome.view.profile.count.ProfileCountFragment
 import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
