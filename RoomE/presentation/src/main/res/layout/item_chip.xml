@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatToggleButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tb_chip_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp"
+
+    android:layout_marginBottom="12dp"
+    android:background="@drawable/shape_chip"
+
+    android:gravity="center"
+    tools:textOn="액션"
+    tools:textOff="액션"
+    style="@style/title2_bold"
+    android:textColor="@color/on_surface"/>

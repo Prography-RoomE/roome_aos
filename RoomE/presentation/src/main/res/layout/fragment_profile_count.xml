@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/surface">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+
+            android:text="@string/profile_count_title"
+            style="@style/headline2_bold"
+            android:textColor="@color/on_surface" />
+
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            android:layout_marginTop="12dp"
+
+            android:text="@string/profile_count_comment"
+            style="@style/body2_regular"
+            android:textColor="@color/on_surface_variant" />
+
+        <EditText
+            android:id="@+id/et_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintTop_toBottomOf="@id/tv_comment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="48dp"
+
+            tools:text="99999번"
+            style="@style/pretendard_bold"
+            android:textSize="48sp"
+            android:textColor="@color/on_surface"
+
+            android:hint="@string/profile_count_hint"
+            android:textColorHint="@color/on_surface_variant"
+
+            android:background="@null"
+            android:inputType="number"
+            tools:ignore="Autofill,LabelFor" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            android:background="@color/primary_primary"
+
+            android:text="@string/btn_next"
+            style="@style/title2_bold"
+            android:textColor="@color/surface" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

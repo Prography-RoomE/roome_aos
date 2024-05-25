@@ -7,7 +7,7 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
-val properties = gradleLocalProperties(rootDir)
+val properties = gradleLocalProperties(rootDir, providers)
 
 android {
     namespace = "com.sevenstars.roome"
@@ -87,4 +87,6 @@ dependencies {
     implementation("com.google.android.gms:play-services-auth:21.1.1")
 
     implementation("androidx.datastore:datastore-preferences:1.1.1")
+
+    implementation("com.airbnb.android:lottie:6.1.0")
 }

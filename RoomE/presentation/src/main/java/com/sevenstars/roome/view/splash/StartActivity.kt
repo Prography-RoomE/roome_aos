@@ -14,7 +14,7 @@ import com.sevenstars.domain.enums.Provider
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
-import com.sevenstars.roome.view.MainActivity
+import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.signIn.SignInActivity
 import com.sevenstars.roome.view.signup.SignUpActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +43,7 @@ class StartActivity: AppCompatActivity() {
 
     private fun moveActivity(p: Boolean){
         val destination = if(p) {
-            if(viewModel.isRegister) { MainActivity::class.java }
+            if(viewModel.isRegister) { ProfileActivity::class.java }
             else { SignUpActivity::class.java }
         } else {
             SignInActivity::class.java
