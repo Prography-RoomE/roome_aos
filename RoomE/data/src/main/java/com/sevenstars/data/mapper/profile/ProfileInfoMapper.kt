@@ -1,6 +1,6 @@
 package com.sevenstars.data.mapper.profile
 
-import com.sevenstars.data.model.profile.ResponseProfileInfoDTO
+import com.sevenstars.data.model.profile.info.ResponseProfileInfoDTO
 import com.sevenstars.data.model.profile.info.ActivitiesDTO
 import com.sevenstars.data.model.profile.info.ColorsDTO
 import com.sevenstars.data.model.profile.info.DeviceLockPreferencesDTO
@@ -55,19 +55,19 @@ object ProfileInfoMapper {
         }
     }
 
-    private fun genresMapper(item: List<GenresDTO>): List<Genres> {
+    fun genresMapper(item: List<GenresDTO>): List<Genres> {
         return item.map {
             Genres(it.id, it.title)
         }
     }
 
-    private fun strengthsMapper(item: List<StrengthsDTO>): List<Strengths> {
+    fun strengthsMapper(item: List<StrengthsDTO>): List<Strengths> {
         return item.map {
             Strengths(it.id, it.title)
         }
     }
 
-    private fun importantFactorsMapper(item: List<ImportantFactorsDTO>): List<ImportantFactors> {
+    fun importantFactorsMapper(item: List<ImportantFactorsDTO>): List<ImportantFactors> {
         return item.map {
             ImportantFactors(it.id, it.title)
         }
@@ -91,7 +91,7 @@ object ProfileInfoMapper {
         }
     }
 
-    private fun dislikedFactorsMapper(item: List<DislikedFactorsDTO>): List<DislikedFactors> {
+    fun dislikedFactorsMapper(item: List<DislikedFactorsDTO>): List<DislikedFactors> {
         return item.map {
             DislikedFactors(it.id, it.title)
         }

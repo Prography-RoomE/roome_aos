@@ -1,0 +1,79 @@
+package com.sevenstars.data.mapper.profile
+
+import com.sevenstars.data.model.profile.ResponseProfileDTO
+import com.sevenstars.data.model.profile.info.ResponseProfileInfoDTO
+import com.sevenstars.data.model.profile.info.ActivitiesDTO
+import com.sevenstars.data.model.profile.info.ColorsDTO
+import com.sevenstars.data.model.profile.info.DeviceLockPreferencesDTO
+import com.sevenstars.data.model.profile.info.DislikedFactorsDTO
+import com.sevenstars.data.model.profile.info.GenresDTO
+import com.sevenstars.data.model.profile.info.HintUsagePreferencesDTO
+import com.sevenstars.data.model.profile.info.HorrorThemePositionsDTO
+import com.sevenstars.data.model.profile.info.ImportantFactorsDTO
+import com.sevenstars.data.model.profile.info.StrengthsDTO
+import com.sevenstars.domain.enums.ProfileState
+import com.sevenstars.domain.model.profile.ProfileInfoEntity
+import com.sevenstars.domain.model.profile.SavedProfileData
+import com.sevenstars.domain.model.profile.info.Activities
+import com.sevenstars.domain.model.profile.info.Colors
+import com.sevenstars.domain.model.profile.info.DeviceLockPreferences
+import com.sevenstars.domain.model.profile.info.DislikedFactors
+import com.sevenstars.domain.model.profile.info.Genres
+import com.sevenstars.domain.model.profile.info.HintUsagePreferences
+import com.sevenstars.domain.model.profile.info.HorrorThemePositions
+import com.sevenstars.domain.model.profile.info.ImportantFactors
+import com.sevenstars.domain.model.profile.info.Strengths
+
+
+object ProfileMapper {
+    fun mapperToResponseEntity(item: ResponseProfileDTO): SavedProfileData {
+        return item.run {
+            SavedProfileData(
+                activity = activityMapper(this.activity),
+                color = colorMapper(this.color) ,
+                count = this.count ,
+                deviceLockPreference = deviceLockPreferenceMapper(this.deviceLockPreference) ,
+                hintUsagePreference = hintUsagePreferenceMapper(this.hintUsagePreference) ,
+                horrorThemePosition = horrorThemePositionMapper(this.horrorThemePosition) ,
+                id = id ,
+                isPlusEnabled = isPlusEnabled,
+                mbti = mbti,
+                preferredGenres = ProfileInfoMapper.genresMapper(this.preferredGenres),
+                state = ProfileState.entries.find { it.desc == this.state }?.step ?: 0,
+                themeDislikedFactors = ProfileInfoMapper.dislikedFactorsMapper(this.themeDislikedFactors),
+                themeImportantFactors = ProfileInfoMapper.importantFactorsMapper(this.themeImportantFactors),
+                userStrengths = ProfileInfoMapper.strengthsMapper(this.userStrengths)
+            )
+        }
+    }
+
+    private fun activityMapper(item: ActivitiesDTO): Activities{
+        return item.run {
+            Activities(id, title, description)
+        }
+    }
+
+    private fun colorMapper(item: ColorsDTO): Colors{
+        return item.run {
+            Colors(direction, endColor, id, mode, shape, startColor, title)
+        }
+    }
+
+    private fun hintUsagePreferenceMapper(item: HintUsagePreferencesDTO): HintUsagePreferences{
+        return item.run {
+            HintUsagePreferences(id, title, description)
+        }
+    }
+
+    private fun deviceLockPreferenceMapper(item: DeviceLockPreferencesDTO): DeviceLockPreferences{
+        return item.run {
+            DeviceLockPreferences(id, title)
+        }
+    }
+
+    private fun horrorThemePositionMapper(item: HorrorThemePositionsDTO): HorrorThemePositions{
+        return item.run {
+            HorrorThemePositions(id, title, description)
+        }
+    }
+}
