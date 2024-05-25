@@ -27,6 +27,10 @@ class ProfileWelcomeViewModel @Inject constructor(
     private val _uiState = MutableLiveData<UiState<Unit>>(UiState.Loading)
     val uiState: LiveData<UiState<Unit>> get() = _uiState
 
+    fun setLoadingState(){
+        _uiState.value = UiState.Loading
+    }
+
     fun deleteProfileData(){
         _uiState.value = UiState.Loading
 

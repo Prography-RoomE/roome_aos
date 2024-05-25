@@ -4,6 +4,7 @@ import com.sevenstars.domain.repository.ProfileRepository
 import com.sevenstars.domain.usecase.profile.DeleteProfileDataUseCase
 import com.sevenstars.domain.usecase.profile.GetProfileDataUseCase
 import com.sevenstars.domain.usecase.profile.GetProfileInfoUseCase
+import com.sevenstars.domain.usecase.profile.SaveRoomCountUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,5 +37,13 @@ object ProfileUseCaseModule {
         repository: ProfileRepository
     ): DeleteProfileDataUseCase {
         return DeleteProfileDataUseCase(repository = repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveRoomCountUseCase(
+        repository: ProfileRepository
+    ): SaveRoomCountUseCase {
+        return SaveRoomCountUseCase(repository = repository)
     }
 }

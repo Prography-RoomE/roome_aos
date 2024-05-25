@@ -61,7 +61,9 @@ class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcom
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
+                    profileViewModel.resetSelectedProfileData()
                     profileViewModel.updateProfileData()
+                    viewModel.setLoadingState()
                     navigateToStep(1)
                 }
             }
