@@ -1,13 +1,13 @@
-package com.sevenstars.roome.view.profile
+package com.sevenstars.roome.view.profile.generate
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintSet
@@ -19,8 +19,13 @@ import com.sevenstars.roome.databinding.FragmentProfileBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.ImageUtils
 import com.sevenstars.roome.utils.PermissionManager
+import com.sevenstars.roome.view.MainActivity
+import com.sevenstars.roome.view.profile.ProfileActivity
+import com.sevenstars.roome.view.profile.ProfileViewModel
 
 class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
+
+    private val profileViewModel: ProfileViewModel by activityViewModels()
 
     private lateinit var permissionManager: PermissionManager
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
@@ -41,15 +46,17 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
             binding.groupShow.visibility = View.VISIBLE
         }, 2000)
 
-        setColorBackground(
-            binding.ivProfile,
-            mode = "gradient",
-            shape = "linear",
-            orientation = "topLeftToBottomRight",
-            startColor = "#FF453C",
-            endColor = "#FFACB3",
-            isRoundCorner = false
-        )
+        profileViewModel.selectedProfileData.color?.run {
+            setColorBackground(
+                binding.ivProfile,
+                mode = mode,
+                shape = shape,
+                orientation = direction,
+                startColor = startColor,
+                endColor = endColor,
+                isRoundCorner = false
+            )
+        }
 
         permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             val grantResults = permissions.values.map { if (it) PackageManager.PERMISSION_GRANTED else PackageManager.PERMISSION_DENIED }.toIntArray()
@@ -88,6 +95,12 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
                 } else {
                     permissionManager.requestPermissions(permissionLauncher, REQUIRED_PERMISSIONS)
                 }
+            }
+
+            btnMoveProfile.setOnClickListener {
+                val intent = Intent(requireActivity(), MainActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
             }
         }
     }

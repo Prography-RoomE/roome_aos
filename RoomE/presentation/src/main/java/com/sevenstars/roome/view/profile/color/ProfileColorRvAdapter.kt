@@ -27,7 +27,7 @@ class ProfileColorRvAdapter: RecyclerView.Adapter<ProfileColorRvAdapter.ColorVie
             )
 
             binding.btnColor.setOnClickListener{
-                itemClickListener.onClick(true)
+                itemClickListener.onClick(true, data)
             }
         }
     }
@@ -50,7 +50,7 @@ class ProfileColorRvAdapter: RecyclerView.Adapter<ProfileColorRvAdapter.ColorVie
     }
 
     interface OnItemClickListener{
-        fun onClick(isChecked: Boolean)
+        fun onClick(isChecked: Boolean, data: Colors)
     }
 
     private lateinit var itemClickListener: OnItemClickListener
