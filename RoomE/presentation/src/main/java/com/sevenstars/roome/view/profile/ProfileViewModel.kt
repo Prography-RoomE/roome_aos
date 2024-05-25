@@ -27,7 +27,7 @@ class ProfileViewModel@Inject constructor(
         _profileState.value = UiState.Success(ProfileState.ONE)
     }
 
-    lateinit var profileData: ProfileInfoEntity
+    lateinit var profileDefaultData: ProfileInfoEntity
     private var _profileDataState = MutableLiveData<UiState<ProfileState>>(UiState.Loading)
     val profileDataState get() = _profileDataState
 
@@ -37,7 +37,7 @@ class ProfileViewModel@Inject constructor(
         viewModelScope.launch {
             getProfileInfoUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty())
                 .onSuccess {
-                    profileData = it
+                    profileDefaultData = it
                     LoggerUtils.info(it.colors.joinToString(","))
                     _profileDataState.value = UiState.Success(profileState)
                 }

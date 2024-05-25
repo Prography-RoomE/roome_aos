@@ -41,7 +41,7 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
             addItemDecoration(SpaceItemDecoration(requireContext(), 6))
         }
 
-        genresAdapter.setData(viewModel.profileData.genres)
+        genresAdapter.setData(viewModel.profileDefaultData.genres)
     }
 
     override fun observer() {

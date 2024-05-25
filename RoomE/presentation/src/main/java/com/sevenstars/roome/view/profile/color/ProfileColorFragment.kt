@@ -33,7 +33,7 @@ class ProfileColorFragment: BaseFragment<FragmentProfileColorBinding>(R.layout.f
             addItemDecoration(SpaceColorItemDecoration(requireContext()))
         }
 
-        colorAdapter.setData(profileViewModel.profileData.colors)
+        colorAdapter.setData(profileViewModel.profileDefaultData.colors)
     }
 
     override fun initListener() {

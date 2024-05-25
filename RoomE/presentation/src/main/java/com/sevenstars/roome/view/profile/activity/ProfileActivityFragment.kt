@@ -31,7 +31,7 @@ class ProfileActivityFragment: BaseFragment<FragmentProfileActivitiyBinding>(R.l
             addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12))
         }
 
-        activityAdapter.setData(profileViewModel.profileData.activities)
+        activityAdapter.setData(profileViewModel.profileDefaultData.activities)
     }
 
     override fun initListener() {

@@ -36,7 +36,7 @@ class ProfileHorrorFragment: BaseFragment<FragmentProfileHorrorBinding>(R.layout
             addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12))
         }
 
-        horrorAdapter.setData(profileViewModel.profileData.horrorThemePositions)
+        horrorAdapter.setData(profileViewModel.profileDefaultData.horrorThemePositions)
     }
 
     override fun initListener() {

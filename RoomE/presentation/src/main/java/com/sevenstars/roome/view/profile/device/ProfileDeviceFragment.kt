@@ -29,7 +29,7 @@ class ProfileDeviceFragment: BaseFragment<FragmentProfileDeviceBinding>(R.layout
             layoutManager = GridLayoutManager(requireContext(), 1)
         }
 
-        deviceAdapter.setData(profileViewModel.profileData.deviceLockPreferences)
+        deviceAdapter.setData(profileViewModel.profileDefaultData.deviceLockPreferences)
     }
 
     override fun initListener() {

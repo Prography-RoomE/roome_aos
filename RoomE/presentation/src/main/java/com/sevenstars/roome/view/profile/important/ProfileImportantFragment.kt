@@ -41,7 +41,7 @@ class ProfileImportantFragment: BaseFragment<FragmentProfileImportantFactorBindi
             layoutManager = GridLayoutManager(requireContext(), 1)
         }
 
-        importantAdapter.setData(profileViewModel.profileData.importantFactors)
+        importantAdapter.setData(profileViewModel.profileDefaultData.importantFactors)
     }
 
     override fun initListener() {

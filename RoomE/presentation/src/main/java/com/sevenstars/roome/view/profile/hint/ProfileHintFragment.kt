@@ -31,7 +31,7 @@ class ProfileHintFragment: BaseFragment<FragmentProfileHintBinding>(R.layout.fra
             addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12))
         }
 
-        hintAdapter.setData(profileViewModel.profileData.hintUsagePreferences)
+        hintAdapter.setData(profileViewModel.profileDefaultData.hintUsagePreferences)
     }
 
     override fun initListener() {

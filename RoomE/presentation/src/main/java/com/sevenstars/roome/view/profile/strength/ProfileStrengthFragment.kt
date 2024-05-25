@@ -42,7 +42,7 @@ class ProfileStrengthFragment: BaseFragment<FragmentProfileStrengthBinding>(R.la
             addItemDecoration(SpaceItemDecoration(requireContext(), 6))
         }
 
-        strengthAdapter.setData(profileViewModel.profileData.strengths)
+        strengthAdapter.setData(profileViewModel.profileDefaultData.strengths)
     }
 
     override fun initListener() {

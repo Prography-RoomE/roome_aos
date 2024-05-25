@@ -42,7 +42,7 @@ class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layo
             addItemDecoration(SpaceItemDecoration(requireContext(), 6))
         }
 
-        dislikeAdapter.setData(viewModel.profileData.dislikedFactors)
+        dislikeAdapter.setData(viewModel.profileDefaultData.dislikedFactors)
     }
 
     override fun observer() {
