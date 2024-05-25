@@ -1,6 +1,7 @@
 package com.sevenstars.roome.di
 
 import com.sevenstars.domain.repository.ProfileRepository
+import com.sevenstars.domain.usecase.profile.DeleteProfileDataUseCase
 import com.sevenstars.domain.usecase.profile.GetProfileDataUseCase
 import com.sevenstars.domain.usecase.profile.GetProfileInfoUseCase
 import dagger.Module
@@ -29,4 +30,11 @@ object ProfileUseCaseModule {
         return GetProfileDataUseCase(repository = repository)
     }
 
+    @Provides
+    @Singleton
+    fun provideDeleteProfileDataUseCase(
+        repository: ProfileRepository
+    ): DeleteProfileDataUseCase {
+        return DeleteProfileDataUseCase(repository = repository)
+    }
 }

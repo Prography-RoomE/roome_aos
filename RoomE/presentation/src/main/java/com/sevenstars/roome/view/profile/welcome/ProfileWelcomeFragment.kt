@@ -1,19 +1,18 @@
-package com.sevenstars.roome.view.profile
+package com.sevenstars.roome.view.profile.welcome
 
-import android.view.View
-import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.enums.ProfileState
-import com.sevenstars.domain.model.profile.SelectedProfileData
-import com.sevenstars.domain.model.profile.info.Genres
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentWelcomeBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.CustomDialog
+import com.sevenstars.roome.view.profile.ProfileActivity
+import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.activity.ProfileActivityFragment
 import com.sevenstars.roome.view.profile.color.ProfileColorFragment
 import com.sevenstars.roome.view.profile.count.ProfileCountFragment
@@ -24,9 +23,12 @@ import com.sevenstars.roome.view.profile.horror.ProfileHorrorFragment
 import com.sevenstars.roome.view.profile.important.ProfileImportantFragment
 import com.sevenstars.roome.view.profile.mbti.ProfileMbtiFragment
 import com.sevenstars.roome.view.profile.strength.ProfileStrengthFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcomeBinding>(R.layout.fragment_welcome) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
+    private val viewModel: ProfileWelcomeViewModel by viewModels()
 
     override fun initView() {
         (requireActivity() as ProfileActivity).setToolbarVisibility(false)
@@ -50,6 +52,20 @@ class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcom
                 }
             }
         }
+
+        viewModel.uiState.observe(viewLifecycleOwner){
+            when(it){
+                is UiState.Failure -> {
+                    LoggerUtils.error("새로하기 실패\n${it.message}")
+                    Toast.makeText(RoomeApplication.app, "새로하기 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+                }
+                is UiState.Loading -> {}
+                is UiState.Success -> {
+                    profileViewModel.updateProfileData()
+                    navigateToStep(1)
+                }
+            }
+        }
     }
 
     override fun initListener() {
@@ -61,7 +77,7 @@ class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcom
                 CustomDialog.getInstance(CustomDialog.DialogType.PROFILE_CONTINUE, null).apply {
                     setButtonClickListener(object: CustomDialog.OnButtonClickListener{
                         override fun onButton1Clicked() { // 새로 하기
-                            navigateToStep(1)
+                            viewModel.deleteProfileData()
                         }
 
                         override fun onButton2Clicked() { // 이어서 하기
