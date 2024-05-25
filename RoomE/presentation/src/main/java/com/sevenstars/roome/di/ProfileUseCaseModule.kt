@@ -4,6 +4,7 @@ import com.sevenstars.domain.repository.ProfileRepository
 import com.sevenstars.domain.usecase.profile.DeleteProfileDataUseCase
 import com.sevenstars.domain.usecase.profile.GetProfileDataUseCase
 import com.sevenstars.domain.usecase.profile.GetProfileInfoUseCase
+import com.sevenstars.domain.usecase.profile.SaveGenresUseCase
 import com.sevenstars.domain.usecase.profile.SaveMBTIUseCase
 import com.sevenstars.domain.usecase.profile.SaveRoomCountUseCase
 import dagger.Module
@@ -54,5 +55,13 @@ object ProfileUseCaseModule {
         repository: ProfileRepository
     ): SaveMBTIUseCase {
         return SaveMBTIUseCase(repository = repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveGenresUseCase(
+        repository: ProfileRepository
+    ): SaveGenresUseCase {
+        return SaveGenresUseCase(repository = repository)
     }
 }
