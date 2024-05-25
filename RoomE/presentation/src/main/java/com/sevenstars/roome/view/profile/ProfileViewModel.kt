@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.enums.ProfileState
 import com.sevenstars.domain.model.profile.ProfileInfoEntity
+import com.sevenstars.domain.model.profile.SelectedProfileData
 import com.sevenstars.domain.usecase.profile.GetProfileInfoUseCase
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
@@ -46,4 +47,8 @@ class ProfileViewModel@Inject constructor(
                 }
         }
     }
+
+    var selectedProfileData = SelectedProfileData(
+        0, listOf(), listOf(), listOf(), listOf(), null, null, null, null, listOf(), null
+    )
 }

@@ -4,7 +4,7 @@ import com.sevenstars.domain.model.profile.ProfileInfoEntity
 import com.sevenstars.domain.utils.RoomeResult
 
 interface ProfileRepository {
-    suspend fun getProfileInfo(
+    suspend fun getDefaultProfileData(
         accessToken: String
     ): RoomeResult<ProfileInfoEntity>
 }

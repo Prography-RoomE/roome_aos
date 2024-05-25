@@ -13,7 +13,7 @@ import com.sevenstars.roome.view.profile.SpaceItemDecoration
 import com.sevenstars.roome.view.profile.mbti.ProfileMbtiFragment
 
 class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout.fragment_profile_genres) {
-    private val viewModel: ProfileViewModel by activityViewModels()
+    private val profileViewModel: ProfileViewModel by activityViewModels()
     private lateinit var genresAdapter: ProfileGenresRvAdapter
 
     override fun initView() {
@@ -22,26 +22,20 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
         genresAdapter = ProfileGenresRvAdapter().apply {
             this.setItemClickListener(object : ProfileGenresRvAdapter.OnItemClickListener{
                 override fun onClick() {
-                    binding.btnNext.apply {
-                        if(genresAdapter.checked.isNotEmpty()){
-                            backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.primary_primary)
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
-                        } else {
-                            backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.btn_disabled)
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant))
-                        }
-                    }
+                    setNextBtn()
                 }
             })
         }
 
         binding.rvGenres.apply {
+            genresAdapter.checked.addAll(profileViewModel.selectedProfileData.genres)
+            setNextBtn()
             adapter = genresAdapter
             layoutManager = GridLayoutManager(requireContext(), 2)
             addItemDecoration(SpaceItemDecoration(requireContext(), 6))
         }
 
-        genresAdapter.setData(viewModel.profileDefaultData.genres)
+        genresAdapter.setData(profileViewModel.profileDefaultData.genres)
     }
 
     override fun observer() {
@@ -54,7 +48,20 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
         binding.btnNext.setOnClickListener {
             LoggerUtils.info(genresAdapter.checked.joinToString(", "))
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
+                profileViewModel.selectedProfileData.genres = genresAdapter.checked
                 (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileMbtiFragment())
+            }
+        }
+    }
+
+    private fun setNextBtn(){
+        binding.btnNext.apply {
+            if(genresAdapter.checked.isNotEmpty()){
+                backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.primary_primary)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
+            } else {
+                backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.btn_disabled)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant))
             }
         }
     }

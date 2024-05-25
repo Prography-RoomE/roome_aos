@@ -12,9 +12,10 @@ import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.ProfileWelcomeFragment
 import com.sevenstars.roome.view.profile.SpaceItemDecoration
 import com.sevenstars.roome.view.profile.color.ProfileColorFragment
+import okhttp3.internal.addHeaderLenient
 
 class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layout.fragment_profile_dislike) {
-    private val viewModel: ProfileViewModel by activityViewModels()
+    private val profileViewModel: ProfileViewModel by activityViewModels()
     private lateinit var dislikeAdapter: ProfileDislikeRvAdapter
 
     override fun initView() {
@@ -23,18 +24,14 @@ class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layo
         dislikeAdapter = ProfileDislikeRvAdapter().apply {
             this.setItemClickListener(object : ProfileDislikeRvAdapter.OnItemClickListener{
                 override fun onClick() {
-                    binding.btnNext.apply {
-                        if(dislikeAdapter.checked.isNotEmpty()){
-                            backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.primary_primary)
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
-                        } else {
-                            backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.btn_disabled)
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant))
-                        }
-                    }
+                    setNextBtn()
                 }
             })
+
+            checked.addAll(profileViewModel.selectedProfileData.dislike)
         }
+
+        setNextBtn()
 
         binding.rvDislike.apply {
             adapter = dislikeAdapter
@@ -42,7 +39,7 @@ class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layo
             addItemDecoration(SpaceItemDecoration(requireContext(), 6))
         }
 
-        dislikeAdapter.setData(viewModel.profileDefaultData.dislikedFactors)
+        dislikeAdapter.setData(profileViewModel.profileDefaultData.dislikedFactors)
     }
 
     override fun observer() {
@@ -55,9 +52,21 @@ class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layo
         binding.btnNext.setOnClickListener {
             LoggerUtils.info(dislikeAdapter.checked.joinToString(", "))
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
+                profileViewModel.selectedProfileData.dislike = dislikeAdapter.checked
                 (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileColorFragment())
             }
         }
     }
 
+    private fun setNextBtn(){
+        binding.btnNext.apply {
+            if(dislikeAdapter.checked.isNotEmpty()){
+                backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.primary_primary)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
+            } else {
+                backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.btn_disabled)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant))
+            }
+        }
+    }
 }

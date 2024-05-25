@@ -11,9 +11,9 @@ import javax.inject.Inject
 class ProfileRemoteDataSourceImpl @Inject constructor(
     private val profileService: ProfileService
 ): ProfileRemoteDataSource {
-    override suspend fun getProfileInfo(token: String): BaseResponse<ResponseProfileInfoDTO> {
+    override suspend fun getDefaultProfileData(token: String): BaseResponse<ResponseProfileInfoDTO> {
         return try {
-            val res = profileService.getProfileInfo(token)
+            val res = profileService.getDefaultProfileData(token)
 
             if (res.isSuccessful) {
                 val body = res.body()!!

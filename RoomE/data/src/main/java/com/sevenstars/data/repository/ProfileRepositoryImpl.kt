@@ -11,8 +11,8 @@ class ProfileRepositoryImpl @Inject constructor(
     private val profileRemoteDataSource: ProfileRemoteDataSource
 ): ProfileRepository {
 
-    override suspend fun getProfileInfo(accessToken: String): RoomeResult<ProfileInfoEntity> {
-        val res = profileRemoteDataSource.getProfileInfo(accessToken)
+    override suspend fun getDefaultProfileData(accessToken: String): RoomeResult<ProfileInfoEntity> {
+        val res = profileRemoteDataSource.getDefaultProfileData(accessToken)
 
         return if(res.code == 200){
             RoomeResult.Success(ProfileInfoMapper.mapperToResponseEntity(res.data!!))

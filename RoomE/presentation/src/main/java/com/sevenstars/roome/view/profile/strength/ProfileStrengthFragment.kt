@@ -23,18 +23,13 @@ class ProfileStrengthFragment: BaseFragment<FragmentProfileStrengthBinding>(R.la
         strengthAdapter = ProfileStrengthRvAdapter().apply {
             this.setItemClickListener(object : ProfileStrengthRvAdapter.OnItemClickListener{
                 override fun onClick() {
-                    binding.btnNext.apply {
-                        if(strengthAdapter.checked.isNotEmpty()){
-                            backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.primary_primary)
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
-                        } else {
-                            backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.btn_disabled)
-                            setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant))
-                        }
-                    }
+                    setNextBtn()
                 }
             })
+
+            checked.addAll(profileViewModel.selectedProfileData.strengths)
         }
+        setNextBtn()
 
         binding.rvStrength.apply {
             adapter = strengthAdapter
@@ -51,7 +46,20 @@ class ProfileStrengthFragment: BaseFragment<FragmentProfileStrengthBinding>(R.la
         binding.btnNext.setOnClickListener {
             LoggerUtils.info(strengthAdapter.checked.joinToString(", "))
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
+                profileViewModel.selectedProfileData.strengths = strengthAdapter.checked
                 (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileImportantFragment())
+            }
+        }
+    }
+
+    private fun setNextBtn(){
+        binding.btnNext.apply {
+            if(strengthAdapter.checked.isNotEmpty()){
+                backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.primary_primary)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
+            } else {
+                backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.btn_disabled)
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant))
             }
         }
     }

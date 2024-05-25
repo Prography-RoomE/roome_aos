@@ -69,7 +69,7 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
             "1" -> ProfileWelcomeFragment()
             "2" -> ProfileCountFragment()
             "3" -> ProfileWelcomeFragment()
-            else -> ProfileColorFragment()
+            else -> ProfileCountFragment()
         }
 
         supportFragmentManager.beginTransaction()

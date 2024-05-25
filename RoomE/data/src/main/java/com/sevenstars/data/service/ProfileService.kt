@@ -8,7 +8,7 @@ import retrofit2.http.Header
 
 interface ProfileService {
     @GET("/profiles/defaults")
-    suspend fun getProfileInfo(
+    suspend fun getDefaultProfileData(
         @Header("Authorization") accessToken: String
     ): Response<BaseResponse<ResponseProfileInfoDTO>>
 }
