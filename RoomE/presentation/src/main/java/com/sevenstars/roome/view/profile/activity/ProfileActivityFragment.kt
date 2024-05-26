@@ -1,17 +1,26 @@
 package com.sevenstars.roome.view.profile.activity
 
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.sevenstars.data.utils.LoggerUtils
+import com.sevenstars.domain.model.profile.info.Activities
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
+import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileActivitiyBinding
+import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.VerticalSpaceItemDecoration
 import com.sevenstars.roome.view.profile.dislike.ProfileDislikeFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileActivityFragment: BaseFragment<FragmentProfileActivitiyBinding>(R.layout.fragment_profile_activitiy) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
+    private val viewModel: ProfileActivityViewModel by viewModels()
     private lateinit var activityAdapter: ProfileActivityRvAdapter
 
     override fun initView() {
@@ -19,8 +28,8 @@ class ProfileActivityFragment: BaseFragment<FragmentProfileActivitiyBinding>(R.l
 
         activityAdapter = ProfileActivityRvAdapter().apply {
             this.setItemClickListener(object : ProfileActivityRvAdapter.OnItemClickListener{
-                override fun onClick(isChecked: Boolean) {
-                    if(isChecked) (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileDislikeFragment())
+                override fun onClick(isChecked: Boolean, data: Activities) {
+                    if(isChecked) viewModel.saveData(data.id)
                 }
             })
         }
@@ -34,8 +43,21 @@ class ProfileActivityFragment: BaseFragment<FragmentProfileActivitiyBinding>(R.l
         activityAdapter.setData(profileViewModel.profileDefaultData.activities)
     }
 
-    override fun initListener() {
-        super.initListener()
+    override fun observer() {
+        super.observer()
 
+        viewModel.uiState.observe(viewLifecycleOwner){
+            when(it){
+                is UiState.Failure -> {
+                    LoggerUtils.error("저장 실패\n${it.message}")
+                    Toast.makeText(RoomeApplication.app, "저장 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+                }
+                is UiState.Loading -> {}
+                is UiState.Success -> {
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileDislikeFragment())
+                    viewModel.setLoadingState()
+                }
+            }
+        }
     }
 }
