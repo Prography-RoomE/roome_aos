@@ -10,6 +10,7 @@ import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseActivity
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.base.RoomeApplication.Companion.userName
+import com.sevenstars.roome.custom.CustomToast
 import com.sevenstars.roome.databinding.ActivityProfileBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.welcome.ProfileWelcomeFragment
@@ -42,7 +43,7 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
             when(it){
                 is UiState.Failure -> {
                     LoggerUtils.error("프로필 데이터 조회 실패\n${it.message}")
-                    Toast.makeText(app, "프로필 데이터 조회 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+                    CustomToast.makeToast(this, "프로필 데이터 조회 실패\n${it.message}").show()
 
                     moveStart()
                 }
@@ -57,7 +58,7 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
             when(it){
                 is UiState.Failure -> {
                     LoggerUtils.error("프로필 생성에 필요한 데이터 조회 실패\n${it.message}")
-                    Toast.makeText(app, "프로필 생성에 필요한 데이터 조회 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+                    CustomToast.makeToast(this, "프로필 생성에 필요한 데이터 조회 실패\n${it.message}").show()
 
                     moveStart()
                 }

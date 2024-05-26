@@ -8,6 +8,7 @@ import android.os.Build
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
+import com.sevenstars.roome.custom.CustomToast
 import java.io.OutputStream
 
 object ImageUtils {
@@ -38,7 +39,8 @@ object ImageUtils {
                 contentValues.put(MediaStore.Images.Media.IS_PENDING, false)
                 contentResolver.update(uri, contentValues, null, null)
             }
-            Toast.makeText(context, "내 사진에 저장되었어요", Toast.LENGTH_SHORT).show() // todo 다이얼로그로 수정해야 함
+            CustomToast.makeToast(context, "내 사진에 저장되었어요").show()
+            // todo 다이얼로그로 수정해야 함
         }
     }
 

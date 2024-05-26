@@ -62,7 +62,7 @@ class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcom
             when(it){
                 is UiState.Failure -> {
                     LoggerUtils.error("프로필 데이터 조회 실패\n${it.message}")
-                    Toast.makeText(RoomeApplication.app, "프로필 데이터 조회 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+                    showToast("프로필 데이터 조회 실패\n${it.message}")
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
@@ -75,7 +75,7 @@ class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcom
             when(it){
                 is UiState.Failure -> {
                     LoggerUtils.error("새로하기 실패\n${it.message}")
-                    Toast.makeText(RoomeApplication.app, "새로하기 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+                    showToast("새로하기 실패\n${it.message}")
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
