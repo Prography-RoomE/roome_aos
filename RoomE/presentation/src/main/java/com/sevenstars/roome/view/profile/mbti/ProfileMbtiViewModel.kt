@@ -27,7 +27,7 @@ class ProfileMbtiViewModel @Inject constructor(
         _uiState.value = UiState.Loading
 
         viewModelScope.launch {
-            saveMBTIUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty(), mbti)
+            saveMBTIUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty(), mbti.ifEmpty { "NONE" })
                 .onSuccess {
                     _uiState.value = UiState.Success(Unit)
                 }.onFailure { code, msg ->

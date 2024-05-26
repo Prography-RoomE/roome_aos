@@ -44,7 +44,7 @@ class ProfileMbtiFragment: BaseFragment<FragmentProfileMbtiBinding>(R.layout.fra
         binding.btnNext.setOnClickListener {
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
                 viewModel.saveData(buildString {
-                    for(key in 1..4) append(mbtiAdatper.checkedItems[key])
+                    for(key in 1..4) append(mbtiAdatper.checkedItems[key] ?: "")
                 })
             }
         }
