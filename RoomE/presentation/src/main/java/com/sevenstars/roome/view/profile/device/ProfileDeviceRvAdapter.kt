@@ -20,7 +20,7 @@ class ProfileDeviceRvAdapter: RecyclerView.Adapter<ProfileDeviceRvAdapter.Device
                 textOff = data.title
 
                 setOnCheckedChangeListener { _, isChecked ->
-                    itemClickListener.onClick(isChecked)
+                    itemClickListener.onClick(isChecked, data)
                 }
             }
         }
@@ -44,7 +44,7 @@ class ProfileDeviceRvAdapter: RecyclerView.Adapter<ProfileDeviceRvAdapter.Device
     }
 
     interface OnItemClickListener{
-        fun onClick(isChecked: Boolean)
+        fun onClick(isChecked: Boolean, data: DeviceLockPreferences)
     }
 
     private lateinit var itemClickListener: OnItemClickListener
