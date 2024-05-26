@@ -7,6 +7,7 @@ import com.sevenstars.domain.usecase.profile.GetProfileInfoUseCase
 import com.sevenstars.domain.usecase.profile.SaveGenresUseCase
 import com.sevenstars.domain.usecase.profile.SaveMBTIUseCase
 import com.sevenstars.domain.usecase.profile.SaveRoomCountUseCase
+import com.sevenstars.domain.usecase.profile.SaveStrengthsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -63,5 +64,13 @@ object ProfileUseCaseModule {
         repository: ProfileRepository
     ): SaveGenresUseCase {
         return SaveGenresUseCase(repository = repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveStrengthsUseCase(
+        repository: ProfileRepository
+    ): SaveStrengthsUseCase {
+        return SaveStrengthsUseCase(repository = repository)
     }
 }

@@ -1,18 +1,21 @@
-package com.sevenstars.roome.view.profile.mbti
+package com.sevenstars.roome.view.profile.strength
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sevenstars.domain.usecase.profile.SaveMBTIUseCase
+import com.sevenstars.domain.usecase.profile.SaveGenresUseCase
+import com.sevenstars.domain.usecase.profile.SaveRoomCountUseCase
+import com.sevenstars.domain.usecase.profile.SaveStrengthsUseCase
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
+import com.sevenstars.roome.view.profile.genres.ProfileGenresViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileMbtiViewModel @Inject constructor(
-    private val saveMBTIUseCase: SaveMBTIUseCase
+class ProfileStrengthViewModel @Inject constructor(
+    private val saveStrengthsUseCase: SaveStrengthsUseCase
 ): ViewModel() {
 
     private var _uiState = MutableLiveData<UiState<Unit>>(UiState.Loading)
@@ -22,11 +25,11 @@ class ProfileMbtiViewModel @Inject constructor(
         _uiState.value = UiState.Loading
     }
 
-    fun saveData(mbti: String){
+    fun saveData(strengths: List<Int>){
         _uiState.value = UiState.Loading
 
         viewModelScope.launch {
-            saveMBTIUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty(), mbti.ifEmpty { "NONE" })
+            saveStrengthsUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty(), strengths)
                 .onSuccess {
                     _uiState.value = UiState.Success(Unit)
                 }.onFailure { code, msg ->
