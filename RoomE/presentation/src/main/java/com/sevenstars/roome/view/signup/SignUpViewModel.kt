@@ -73,7 +73,7 @@ class SignUpViewModel @Inject constructor(
         viewModelScope.launch {
             saveNickUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty(), validatedNick)
                 .onSuccess {
-                    _checkState.value = UiState.Success(Unit)
+                    _saveState.value = UiState.Success(Unit)
                 }.onFailure { code, message ->
                     _checkState.value = UiState.Failure(code, message)
                 }
