@@ -5,6 +5,7 @@ import com.sevenstars.domain.usecase.profile.DeleteProfileDataUseCase
 import com.sevenstars.domain.usecase.profile.GetProfileDataUseCase
 import com.sevenstars.domain.usecase.profile.GetProfileInfoUseCase
 import com.sevenstars.domain.usecase.profile.SaveActivityUseCase
+import com.sevenstars.domain.usecase.profile.SaveColorUseCase
 import com.sevenstars.domain.usecase.profile.SaveDeviceOrLockUseCase
 import com.sevenstars.domain.usecase.profile.SaveDislikeUseCase
 import com.sevenstars.domain.usecase.profile.SaveGenresUseCase
@@ -126,5 +127,13 @@ object ProfileUseCaseModule {
         repository: ProfileRepository
     ): SaveDislikeUseCase {
         return SaveDislikeUseCase(repository = repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveColorUseCase(
+        repository: ProfileRepository
+    ): SaveColorUseCase {
+        return SaveColorUseCase(repository = repository)
     }
 }
