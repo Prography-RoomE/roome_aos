@@ -7,15 +7,15 @@ import android.graphics.Canvas
 import android.os.Build
 import android.provider.MediaStore
 import android.view.View
-import android.widget.Toast
 import java.io.OutputStream
+import java.io.IOException
 
 object ImageUtils {
 
-    fun saveViewToGallery(context: Context, view: View) {
+    fun saveViewToGallery(context: Context, view: View): Boolean {
         val bitmap = getBitmapFromView(view)
-
         val contentResolver = context.contentResolver
+
         val contentValues = ContentValues().apply {
             put(MediaStore.Images.Media.DISPLAY_NAME, "view_image_${System.currentTimeMillis()}.png")
             put(MediaStore.Images.Media.MIME_TYPE, "image/png")
@@ -26,19 +26,28 @@ object ImageUtils {
         }
 
         val uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+        return if (uri != null) {
+            try {
+                val outputStream: OutputStream? = contentResolver.openOutputStream(uri)
+                outputStream?.use {
+                    if (!bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)) {
+                        throw IOException("Failed to save bitmap.")
+                    }
+                    it.flush()
+                }
 
-        if (uri != null) {
-            val outputStream: OutputStream? = contentResolver.openOutputStream(uri)
-            outputStream?.use {
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
-                it.flush()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    contentValues.clear()
+                    contentValues.put(MediaStore.Images.Media.IS_PENDING, false)
+                    contentResolver.update(uri, contentValues, null, null)
+                }
+                true
+            } catch (e: IOException) {
+                e.printStackTrace()
+                false
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                contentValues.clear()
-                contentValues.put(MediaStore.Images.Media.IS_PENDING, false)
-                contentResolver.update(uri, contentValues, null, null)
-            }
-            Toast.makeText(context, "내 사진에 저장되었어요", Toast.LENGTH_SHORT).show() // todo 다이얼로그로 수정해야 함
+        } else {
+            false
         }
     }
 

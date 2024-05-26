@@ -88,7 +88,7 @@ class ProfileMbtiFragment: BaseFragment<FragmentProfileMbtiBinding>(R.layout.fra
             when(it){
                 is UiState.Failure -> {
                     LoggerUtils.error("저장 실패\n${it.message}")
-                    Toast.makeText(RoomeApplication.app, "저장 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+                    showToast("저장 실패\n${it.message}")
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {

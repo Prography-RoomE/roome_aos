@@ -9,6 +9,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.sevenstars.roome.custom.CustomToast
 
 abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int): Fragment() {
     private var _binding : T? = null
@@ -44,5 +45,5 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
     protected open fun observer() {}
 
     protected fun showToast(msg: String) =
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+        CustomToast.makeToast(context, msg).show()
 }
