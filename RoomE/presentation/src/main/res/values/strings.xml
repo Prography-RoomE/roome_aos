@@ -80,7 +80,7 @@
 
     <!-- ============================================= Profile Create: Disliked Factors ============================================= -->
     <string name="profile_dislike_title">방탈출 할 때,\n어떤 요소를\n싫어하시나요?</string>
-    <string name="profile_dislike_comment">최대 3개까지 선택할 수 있어요</string>
+    <string name="profile_dislike_comment">최대 2개까지 선택할 수 있어요</string>
 
     <!-- ============================================= Profile Create: Color ============================================= -->
     <string name="profile_color_title">프로필 배경으로 쓰일\n색상을 골라주세요</string>

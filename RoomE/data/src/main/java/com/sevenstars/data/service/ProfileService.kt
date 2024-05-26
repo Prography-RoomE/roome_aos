@@ -43,7 +43,7 @@ interface ProfileService {
         @Body body: RequestSaveIdsDTO
     ): Response<BaseResponse<ResponseBody>>
 
-    @PUT("/profiles/theme-dislike-factors")
+    @PUT("/profiles/theme-disliked-factors")
     suspend fun saveUserDislikeFactors(
         @Header("Authorization") accessToken: String,
         @Body body: RequestSaveIdsDTO

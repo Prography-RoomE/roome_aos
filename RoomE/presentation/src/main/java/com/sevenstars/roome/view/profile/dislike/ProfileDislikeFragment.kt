@@ -1,19 +1,27 @@
 package com.sevenstars.roome.view.profile.dislike
 
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
+import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileDislikeBinding
+import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.SpaceItemDecoration
+import com.sevenstars.roome.view.profile.activity.ProfileActivityFragment
 import com.sevenstars.roome.view.profile.color.ProfileColorFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layout.fragment_profile_dislike) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
+    private val viewModel: ProfileDislikeViewModel by viewModels()
     private lateinit var dislikeAdapter: ProfileDislikeRvAdapter
 
     override fun initView() {
@@ -42,6 +50,21 @@ class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layo
 
     override fun observer() {
         super.observer()
+
+        viewModel.uiState.observe(viewLifecycleOwner){
+            when(it){
+                is UiState.Failure -> {
+                    LoggerUtils.error("저장 실패\n${it.message}")
+                    Toast.makeText(RoomeApplication.app, "저장 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+                }
+                is UiState.Loading -> {}
+                is UiState.Success -> {
+                    profileViewModel.selectedProfileData.dislike = dislikeAdapter.checked
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileColorFragment())
+                    viewModel.setLoadingState()
+                }
+            }
+        }
     }
 
     override fun initListener() {
@@ -50,8 +73,7 @@ class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layo
         binding.btnNext.setOnClickListener {
             LoggerUtils.info(dislikeAdapter.checked.joinToString(", "))
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
-                profileViewModel.selectedProfileData.dislike = dislikeAdapter.checked
-                (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileColorFragment())
+                viewModel.saveData(dislikeAdapter.checked.map { it.id })
             }
         }
     }
