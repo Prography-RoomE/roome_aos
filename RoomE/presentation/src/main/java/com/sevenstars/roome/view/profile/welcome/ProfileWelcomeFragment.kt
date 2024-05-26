@@ -1,6 +1,8 @@
 package com.sevenstars.roome.view.profile.welcome
 
+import android.content.Context
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.sevenstars.data.utils.LoggerUtils
@@ -8,6 +10,7 @@ import com.sevenstars.domain.enums.ProfileState
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.base.RoomeApplication
+import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.databinding.FragmentWelcomeBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.CustomDialog
@@ -30,11 +33,25 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcomeBinding>(R.layout.fragment_welcome) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
     private val viewModel: ProfileWelcomeViewModel by viewModels()
+    private lateinit var callback: OnBackPressedCallback
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() { /* Back Pressed 방지용 */}
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
 
     override fun initView() {
         (requireActivity() as ProfileActivity).setToolbarVisibility(false)
-        binding.tvTitle.text = getString(R.string.profile_welcome_title, "Roome")
-
+        binding.tvTitle.text = getString(R.string.profile_welcome_title, userName)
         profileViewModel.updateProfileData()
     }
 

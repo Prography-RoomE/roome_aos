@@ -11,6 +11,7 @@ import javax.inject.Inject
 class RoomeApplication: Application() {
     companion object {
         lateinit var app: RoomeApplication
+        lateinit var userName: String
     }
 
     @Inject

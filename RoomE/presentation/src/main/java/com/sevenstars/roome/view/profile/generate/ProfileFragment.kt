@@ -1,6 +1,7 @@
 package com.sevenstars.roome.view.profile.generate
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -8,10 +9,12 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
 
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
@@ -22,10 +25,12 @@ import com.sevenstars.roome.utils.PermissionManager
 import com.sevenstars.roome.view.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
+import com.sevenstars.roome.view.profile.welcome.ProfileWelcomeFragment
 
 class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
 
     private val profileViewModel: ProfileViewModel by activityViewModels()
+    private lateinit var callback: OnBackPressedCallback
 
     private lateinit var permissionManager: PermissionManager
     private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
@@ -34,6 +39,20 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
         arrayOf(Manifest.permission.READ_MEDIA_IMAGES)
     } else {
         arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() { /* Back Pressed 방지용 */}
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
     }
 
     override fun initView() {
@@ -102,6 +121,10 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
                 startActivity(intent)
                 requireActivity().finish()
             }
+
+            ibCancel.setOnClickListener {
+                navigateToProfileWelcomeFragment()
+            }
         }
     }
 
@@ -117,5 +140,13 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
         }
 
         constraintSet.applyTo(binding.clProfile)
+    }
+
+    private fun navigateToProfileWelcomeFragment() {
+        requireActivity().supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        requireActivity().supportFragmentManager.commit {
+            replace(R.id.fl_profile, ProfileWelcomeFragment(11))
+            addToBackStack(null)
+        }
     }
 }

@@ -6,19 +6,19 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.sevenstars.data.utils.LoggerUtils
-import com.sevenstars.domain.enums.ProfileState
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseActivity
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
+import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.databinding.ActivityProfileBinding
 import com.sevenstars.roome.utils.UiState
-import com.sevenstars.roome.view.MainActivity
 import com.sevenstars.roome.view.profile.welcome.ProfileWelcomeFragment
 import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.internal.userAgent
 
 @AndroidEntryPoint
 class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_profile) {
@@ -63,13 +63,15 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
-                    if(it.data.step == ProfileState.COMPLETE.step) {
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        replaceFragmentWithStack(ProfileWelcomeFragment(it.data.step))
-                    }
+                    // MVP - 메인페이지 없기 때문에 프로필 생성으로 이동
+//                    if(it.data.step == ProfileState.COMPLETE.step) {
+//                        val intent = Intent(this, MainActivity::class.java)
+//                        startActivity(intent)
+//                        finish()
+//                    } else {
+//                        replaceFragmentWithStack(ProfileWelcomeFragment(it.data.step))
+//                    }
+                    replaceFragmentWithStack(ProfileWelcomeFragment(it.data.step))
                 }
             }
         }

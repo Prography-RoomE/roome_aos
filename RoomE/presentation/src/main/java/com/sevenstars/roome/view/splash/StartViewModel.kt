@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.sevenstars.domain.enums.UserState
 import com.sevenstars.domain.usecase.user.GetUserInfoUseCase
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
+import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.utils.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +33,7 @@ class StartViewModel @Inject constructor(
 
             getUserInfoUseCase(accessToken)
                 .onSuccess {
+                    userName = it.nickname
                     isRegister = (it.state == UserState.REGISTRATION_COMPLETED)
                     _loginState.value = UiState.Success(Unit)
                 }.onFailure { code, message ->
