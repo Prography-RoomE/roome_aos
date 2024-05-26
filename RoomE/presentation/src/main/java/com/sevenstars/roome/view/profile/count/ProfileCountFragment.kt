@@ -25,7 +25,6 @@ class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.f
             setToolbarVisibility(true)
             setStep(1)
         }
-        LoggerUtils.info("TEST: Count")
         binding.etCount.setText(profileViewModel.selectedProfileData.count.toString())
     }
 

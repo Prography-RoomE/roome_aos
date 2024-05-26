@@ -19,6 +19,7 @@ import com.sevenstars.roome.view.profile.count.ProfileCountFragment
 import com.sevenstars.roome.view.profile.device.ProfileDeviceFragment
 import com.sevenstars.roome.view.profile.dislike.ProfileDislikeFragment
 import com.sevenstars.roome.view.profile.genres.ProfileGenresFragment
+import com.sevenstars.roome.view.profile.hint.ProfileHintFragment
 import com.sevenstars.roome.view.profile.horror.ProfileHorrorFragment
 import com.sevenstars.roome.view.profile.important.ProfileImportantFragment
 import com.sevenstars.roome.view.profile.mbti.ProfileMbtiFragment
@@ -107,10 +108,11 @@ class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcom
             4 -> ProfileStrengthFragment()
             5 -> ProfileImportantFragment()
             6 -> ProfileHorrorFragment()
-            7 -> ProfileDeviceFragment()
-            8 -> ProfileActivityFragment()
-            9 -> ProfileDislikeFragment()
-            10 -> ProfileColorFragment()
+            7 -> ProfileHintFragment()
+            8 -> ProfileDeviceFragment()
+            9 -> ProfileActivityFragment()
+            10 -> ProfileDislikeFragment()
+            11 -> ProfileColorFragment()
             else -> null
         }
 

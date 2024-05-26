@@ -26,7 +26,7 @@ class ProfileHintRvAdapter: RecyclerView.Adapter<ProfileHintRvAdapter.HintViewHo
                     textOff = null
 
                     setOnCheckedChangeListener { _, isChecked ->
-                        itemClickListener.onClick(isChecked)
+                        itemClickListener.onClick(isChecked, data)
                     }
                 }
             }
@@ -51,7 +51,7 @@ class ProfileHintRvAdapter: RecyclerView.Adapter<ProfileHintRvAdapter.HintViewHo
     }
 
     interface OnItemClickListener{
-        fun onClick(isChecked: Boolean)
+        fun onClick(isChecked: Boolean, data: HintUsagePreferences)
     }
 
     private lateinit var itemClickListener: OnItemClickListener
