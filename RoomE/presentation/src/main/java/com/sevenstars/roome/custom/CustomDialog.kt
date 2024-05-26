@@ -1,4 +1,4 @@
-package com.sevenstars.roome.view
+package com.sevenstars.roome.custom
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -17,7 +17,8 @@ class CustomDialog private constructor(
 ) : DialogFragment() {
 
     enum class DialogType {
-        PROFILE_CONTINUE
+        PROFILE_CONTINUE,
+        SAVE_PROFILE
     }
 
     companion object {
@@ -71,6 +72,7 @@ class CustomDialog private constructor(
 
         when (dialogType) {
             DialogType.PROFILE_CONTINUE -> setProfileContinue()
+            DialogType.SAVE_PROFILE -> setSaveProfile()
         }
 
         return binding.root
@@ -101,5 +103,17 @@ class CustomDialog private constructor(
             buttonClickListener?.onButton2Clicked()
             dismiss()
         }
+    }
+
+    private fun setSaveProfile() {
+        binding.tvDialogTitle.text = "저장 완료"
+        binding.tvDialogContent.text = "내 사진이 저장되었어요."
+        binding.btnDialog1.text = "확인"
+
+        binding.btnDialog1.setOnClickListener {
+            dismiss()
+        }
+
+        binding.btnDialog2.visibility = View.GONE
     }
 }

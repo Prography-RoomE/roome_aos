@@ -22,6 +22,7 @@ import com.sevenstars.roome.databinding.FragmentProfileBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.ImageUtils
 import com.sevenstars.roome.utils.PermissionManager
+import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.view.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
@@ -83,7 +84,7 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
                 permissions.keys.toTypedArray(),
                 grantResults,
                 onPermissionsGranted = {
-                    ImageUtils.saveViewToGallery(requireContext(), binding.ivProfile)
+                    if(ImageUtils.saveViewToGallery(requireContext(), binding.ivProfile)) showSaveSuccessDialog()
                 },
                 onPermissionsDenied = {}
             )
@@ -110,7 +111,7 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
 
             btnSaveProfile.setOnClickListener {
                 if (permissionManager.checkPermissions(REQUIRED_PERMISSIONS)) {
-                    ImageUtils.saveViewToGallery(requireContext(), ivProfile)
+                    if(ImageUtils.saveViewToGallery(requireContext(), ivProfile)) showSaveSuccessDialog()
                 } else {
                     permissionManager.requestPermissions(permissionLauncher, REQUIRED_PERMISSIONS)
                 }
@@ -148,5 +149,9 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding>(R.layout.fragment_pr
             replace(R.id.fl_profile, ProfileWelcomeFragment(11))
             addToBackStack(null)
         }
+    }
+
+    private fun showSaveSuccessDialog(){
+        CustomDialog.getInstance(CustomDialog.DialogType.SAVE_PROFILE, null).show(requireActivity().supportFragmentManager, "")
     }
 }
