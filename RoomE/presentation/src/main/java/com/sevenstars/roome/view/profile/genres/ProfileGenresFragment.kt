@@ -1,19 +1,26 @@
 package com.sevenstars.roome.view.profile.genres
 
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
+import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileGenresBinding
+import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.SpaceItemDecoration
 import com.sevenstars.roome.view.profile.mbti.ProfileMbtiFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout.fragment_profile_genres) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
+    private val viewModel: ProfileGenresViewModel by viewModels()
     private lateinit var genresAdapter: ProfileGenresRvAdapter
 
     override fun initView() {
@@ -40,6 +47,21 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
 
     override fun observer() {
         super.observer()
+
+        viewModel.uiState.observe(viewLifecycleOwner){
+            when(it){
+                is UiState.Failure -> {
+                    LoggerUtils.error("저장 실패\n${it.message}")
+                    Toast.makeText(RoomeApplication.app, "저장 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+                }
+                is UiState.Loading -> {}
+                is UiState.Success -> {
+                    profileViewModel.selectedProfileData.genres = genresAdapter.checked
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileMbtiFragment())
+                    viewModel.setLoadingState()
+                }
+            }
+        }
     }
 
     override fun initListener() {
@@ -48,8 +70,7 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
         binding.btnNext.setOnClickListener {
             LoggerUtils.info(genresAdapter.checked.joinToString(", "))
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
-                profileViewModel.selectedProfileData.genres = genresAdapter.checked
-                (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileMbtiFragment())
+                viewModel.saveData(genresAdapter.checked.map { it.id })
             }
         }
     }

@@ -24,7 +24,7 @@
     <string name="signup_tos_ad">광고 및 마케팅 수신에 동의 (선택)</string>
 
     <!-- ============================================= Profile Create: Welcome ============================================= -->
-    <string name="profile_welcome_title">{%s}님\n가입을 축하드려요!</string>
+    <string name="profile_welcome_title">%s님\n가입을 축하드려요!</string>
     <string name="profile_welcome_comment">방탈출 취향을 가득 담은\n특별한 프로필을 만들어 볼까요?</string>
     <string name="profile_welcome_btn_create">프로필 만들기</string>
     <string name="profile_welcome_btn_skip">건너뛰기</string>
@@ -64,7 +64,7 @@
 
     <!-- ============================================= Profile Create: Important Factors ============================================= -->
     <string name="profile_important_title">테마 선택 시,\n어떤 요소를 중요하게\n생각하시나요?</string>
-    <string name="profile_important_comment">최대 3개까지 선택할 수 있어요</string>
+    <string name="profile_important_comment">최대 2개까지 선택할 수 있어요</string>
 
     <!-- ============================================= Profile Create: Important HorrorTheme ============================================= -->
     <string name="profile_horror_title">공포 테마에서\n어떤 포지션인가요?</string>
@@ -80,7 +80,7 @@
 
     <!-- ============================================= Profile Create: Disliked Factors ============================================= -->
     <string name="profile_dislike_title">방탈출 할 때,\n어떤 요소를\n싫어하시나요?</string>
-    <string name="profile_dislike_comment">최대 3개까지 선택할 수 있어요</string>
+    <string name="profile_dislike_comment">최대 2개까지 선택할 수 있어요</string>
 
     <!-- ============================================= Profile Create: Color ============================================= -->
     <string name="profile_color_title">프로필 배경으로 쓰일\n색상을 골라주세요</string>

@@ -1,4 +1,4 @@
-package com.sevenstars.data.model.profile
+package com.sevenstars.data.model.profile.info
 
 import com.google.gson.annotations.SerializedName
 import com.sevenstars.data.model.profile.info.ActivitiesDTO

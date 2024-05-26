@@ -23,7 +23,7 @@ class ProfileActivityRvAdapter: RecyclerView.Adapter<ProfileActivityRvAdapter.Ac
                     textOff = null
 
                     setOnCheckedChangeListener { _, isChecked ->
-                        itemClickListener.onClick(isChecked)
+                        itemClickListener.onClick(isChecked, data)
                     }
                 }
             }
@@ -48,7 +48,7 @@ class ProfileActivityRvAdapter: RecyclerView.Adapter<ProfileActivityRvAdapter.Ac
     }
 
     interface OnItemClickListener{
-        fun onClick(isChecked: Boolean)
+        fun onClick(isChecked: Boolean, data: Activities)
     }
 
     private lateinit var itemClickListener: OnItemClickListener

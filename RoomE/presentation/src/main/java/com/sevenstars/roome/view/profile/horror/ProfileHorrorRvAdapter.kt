@@ -25,7 +25,7 @@ class ProfileHorrorRvAdapter: RecyclerView.Adapter<ProfileHorrorRvAdapter.Horror
                     textOff = null
 
                     setOnCheckedChangeListener { _, isChecked ->
-                        itemClickListener.onClick(isChecked)
+                        itemClickListener.onClick(isChecked, data)
                     }
                 }
             }
@@ -50,7 +50,7 @@ class ProfileHorrorRvAdapter: RecyclerView.Adapter<ProfileHorrorRvAdapter.Horror
     }
 
     interface OnItemClickListener{
-        fun onClick(isChecked: Boolean)
+        fun onClick(isChecked: Boolean, item: HorrorThemePositions)
     }
 
     private lateinit var itemClickListener: OnItemClickListener

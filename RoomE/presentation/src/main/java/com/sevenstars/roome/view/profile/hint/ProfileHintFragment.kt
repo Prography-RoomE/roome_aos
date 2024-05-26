@@ -1,17 +1,26 @@
 package com.sevenstars.roome.view.profile.hint
 
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.sevenstars.data.utils.LoggerUtils
+import com.sevenstars.domain.model.profile.info.HintUsagePreferences
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
+import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileHintBinding
+import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.VerticalSpaceItemDecoration
 import com.sevenstars.roome.view.profile.device.ProfileDeviceFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileHintFragment: BaseFragment<FragmentProfileHintBinding>(R.layout.fragment_profile_hint) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
+    private val viewModel: ProfileHintViewModel by viewModels()
     private lateinit var hintAdapter: ProfileHintRvAdapter
 
     override fun initView() {
@@ -19,8 +28,8 @@ class ProfileHintFragment: BaseFragment<FragmentProfileHintBinding>(R.layout.fra
 
         hintAdapter = ProfileHintRvAdapter().apply {
             this.setItemClickListener(object : ProfileHintRvAdapter.OnItemClickListener{
-                override fun onClick(isChecked: Boolean) {
-                    if(isChecked) (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileDeviceFragment())
+                override fun onClick(isChecked: Boolean, data: HintUsagePreferences) {
+                    if(isChecked) viewModel.saveData(data.id)
                 }
             })
         }
@@ -34,8 +43,21 @@ class ProfileHintFragment: BaseFragment<FragmentProfileHintBinding>(R.layout.fra
         hintAdapter.setData(profileViewModel.profileDefaultData.hintUsagePreferences)
     }
 
-    override fun initListener() {
-        super.initListener()
+    override fun observer() {
+        super.observer()
 
+        viewModel.uiState.observe(viewLifecycleOwner){
+            when(it){
+                is UiState.Failure -> {
+                    LoggerUtils.error("저장 실패\n${it.message}")
+                    Toast.makeText(RoomeApplication.app, "저장 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+                }
+                is UiState.Loading -> {}
+                is UiState.Success -> {
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileDeviceFragment())
+                    viewModel.setLoadingState()
+                }
+            }
+        }
     }
 }

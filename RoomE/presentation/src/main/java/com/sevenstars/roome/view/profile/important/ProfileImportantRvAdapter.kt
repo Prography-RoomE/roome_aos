@@ -9,7 +9,7 @@ import com.sevenstars.roome.databinding.ItemChipBinding
 
 class ProfileImportantRvAdapter: RecyclerView.Adapter<ProfileImportantRvAdapter.ImportantViewHolder>() {
     private var dataList = listOf<ImportantFactors>()
-    var checked = ArrayDeque<ImportantFactors>(3)
+    var checked = ArrayDeque<ImportantFactors>(2)
 
     inner class ImportantViewHolder(private val binding: ItemChipBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -32,7 +32,7 @@ class ProfileImportantRvAdapter: RecyclerView.Adapter<ProfileImportantRvAdapter.
                 checked.remove(data)
                 binding.tbChipName.isChecked = false
             } else {
-                if (checked.size == 3) {
+                if (checked.size == 2) {
                     val firstChecked = checked.removeFirst()
                     notifyItemChanged(dataList.indexOf(firstChecked))
                 }

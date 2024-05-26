@@ -9,14 +9,16 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseActivity
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
+import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.databinding.ActivityProfileBinding
 import com.sevenstars.roome.utils.UiState
-import com.sevenstars.roome.view.profile.count.ProfileCountFragment
+import com.sevenstars.roome.view.profile.welcome.ProfileWelcomeFragment
 import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.internal.userAgent
 
 @AndroidEntryPoint
 class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_profile) {
@@ -38,10 +40,15 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
     private fun observer(){
         viewModel.profileState.observe(this){
             when(it){
-                is UiState.Failure -> {}
+                is UiState.Failure -> {
+                    LoggerUtils.error("프로필 데이터 조회 실패\n${it.message}")
+                    Toast.makeText(app, "프로필 데이터 조회 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+
+                    moveStart()
+                }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
-                    viewModel.fetchData(it.data)
+                    viewModel.fetchDefaultData(it.data)
                 }
             }
         }
@@ -56,24 +63,18 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
-                    moveStep(it.data.name)
+                    // MVP - 메인페이지 없기 때문에 프로필 생성으로 이동
+//                    if(it.data.step == ProfileState.COMPLETE.step) {
+//                        val intent = Intent(this, MainActivity::class.java)
+//                        startActivity(intent)
+//                        finish()
+//                    } else {
+//                        replaceFragmentWithStack(ProfileWelcomeFragment(it.data.step))
+//                    }
+                    replaceFragmentWithStack(ProfileWelcomeFragment(it.data.step))
                 }
             }
         }
-    }
-
-    private fun moveStep(step: String){
-        LoggerUtils.debug(step)
-        val destination = when(step){
-            "1" -> ProfileWelcomeFragment()
-            "2" -> ProfileCountFragment()
-            "3" -> ProfileWelcomeFragment()
-            else -> ProfileCountFragment()
-        }
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_profile, destination)
-            .commit()
     }
 
     fun setToolbarVisibility(p: Boolean){

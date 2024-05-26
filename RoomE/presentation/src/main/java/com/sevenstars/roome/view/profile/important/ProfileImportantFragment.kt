@@ -1,18 +1,26 @@
 package com.sevenstars.roome.view.profile.important
 
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
+import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileImportantFactorBinding
+import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.horror.ProfileHorrorFragment
+import com.sevenstars.roome.view.profile.strength.ProfileStrengthFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileImportantFragment: BaseFragment<FragmentProfileImportantFactorBinding>(R.layout.fragment_profile_important_factor) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
+    private val viewModel: ProfileImportantViewModel by viewModels()
     private lateinit var importantAdapter: ProfileImportantRvAdapter
 
 
@@ -45,8 +53,7 @@ class ProfileImportantFragment: BaseFragment<FragmentProfileImportantFactorBindi
         binding.btnNext.setOnClickListener {
             LoggerUtils.info(importantAdapter.checked.joinToString(", "))
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
-                profileViewModel.selectedProfileData.important = importantAdapter.checked
-                (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileHorrorFragment())
+                viewModel.saveData(importantAdapter.checked.map { it.id })
             }
         }
     }
@@ -59,6 +66,25 @@ class ProfileImportantFragment: BaseFragment<FragmentProfileImportantFactorBindi
             } else {
                 backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.btn_disabled)
                 setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant))
+            }
+        }
+    }
+
+    override fun observer() {
+        super.observer()
+
+        viewModel.uiState.observe(viewLifecycleOwner){
+            when(it){
+                is UiState.Failure -> {
+                    LoggerUtils.error("저장 실패\n${it.message}")
+                    Toast.makeText(RoomeApplication.app, "저장 실패\n${it.message}", Toast.LENGTH_SHORT).show()
+                }
+                is UiState.Loading -> {}
+                is UiState.Success -> {
+                    profileViewModel.selectedProfileData.important = importantAdapter.checked
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileHorrorFragment())
+                    viewModel.setLoadingState()
+                }
             }
         }
     }

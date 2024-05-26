@@ -23,7 +23,7 @@
             android:layout_marginTop="64dp"
 
             android:gravity="center"
-            tools:text="{Roome}님\n가입을 축하드려요!"
+            tools:text="Roome님\n가입을 축하드려요!"
             style="@style/headline3_bold"
             android:textColor="@color/on_surface" />
 

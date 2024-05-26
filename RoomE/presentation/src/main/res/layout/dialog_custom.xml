@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="312dp"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/shape_radius_16"
+    android:backgroundTint="@color/surface"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
+
+        tools:text="다이얼로그 제목"
+        style="@style/title1_bold"
+        android:textColor="@color/on_surface"/>
+
+    <TextView
+        android:id="@+id/tv_dialog_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@id/tv_dialog_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+
+        tools:text="다이얼로그 제목"
+        style="@style/body2_regular"
+        android:textColor="@color/on_surface"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_dialog_1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_dialog_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_dialog_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginVertical="24dp"
+        android:layout_marginEnd="6dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_goneMarginEnd="18dp"
+
+        android:background="@drawable/shape_radius_12"
+        android:backgroundTint="@color/primary_primary"
+
+        tools:text="확인"
+        android:textColor="@color/surface"
+        style="@style/title2_bold"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_dialog_2"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+
+        app:layout_constraintStart_toEndOf="@id/btn_dialog_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_dialog_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginVertical="24dp"
+
+        android:background="@drawable/shape_radius_12"
+        android:backgroundTint="@color/primary_primary"
+
+        tools:text="취소"
+        android:textColor="@color/surface"
+        style="@style/title2_bold"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
