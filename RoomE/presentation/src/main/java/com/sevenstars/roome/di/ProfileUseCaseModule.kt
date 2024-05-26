@@ -5,6 +5,7 @@ import com.sevenstars.domain.usecase.profile.DeleteProfileDataUseCase
 import com.sevenstars.domain.usecase.profile.GetProfileDataUseCase
 import com.sevenstars.domain.usecase.profile.GetProfileInfoUseCase
 import com.sevenstars.domain.usecase.profile.SaveGenresUseCase
+import com.sevenstars.domain.usecase.profile.SaveHorrorUseCase
 import com.sevenstars.domain.usecase.profile.SaveImportantUseCase
 import com.sevenstars.domain.usecase.profile.SaveMBTIUseCase
 import com.sevenstars.domain.usecase.profile.SaveRoomCountUseCase
@@ -81,5 +82,13 @@ object ProfileUseCaseModule {
         repository: ProfileRepository
     ): SaveImportantUseCase {
         return SaveImportantUseCase(repository = repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveHorrorUseCase(
+        repository: ProfileRepository
+    ): SaveHorrorUseCase {
+        return SaveHorrorUseCase(repository = repository)
     }
 }
