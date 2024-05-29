@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.sevenstars.domain.model.profile.info.Genres
 import com.sevenstars.domain.model.profile.info.Strengths
 import com.sevenstars.roome.databinding.ItemChipBinding
 
@@ -19,7 +20,7 @@ class ProfileStrengthRvAdapter: RecyclerView.Adapter<ProfileStrengthRvAdapter.St
                 text = data.title
                 textOn = data.title
                 textOff = data.title
-                isChecked = checked.contains(data)
+                isChecked = checked.find{ it.id == data.id } != null
                 setOnClickListener {
                     toggleCheckedState(data)
                 }
@@ -27,20 +28,21 @@ class ProfileStrengthRvAdapter: RecyclerView.Adapter<ProfileStrengthRvAdapter.St
         }
 
         private fun toggleCheckedState(data: Strengths) {
-            val wasChecked = checked.contains(data)
+            val wasChecked = checked.find { it.id == data.id } != null
             if (wasChecked) {
-                checked.remove(data)
+                checked.remove(checked.find { it.id == data.id })
                 binding.tbChipName.isChecked = false
             } else {
-                if (checked.size == 2) {
-                    val firstChecked = checked.removeFirst()
-                    notifyItemChanged(dataList.indexOf(firstChecked))
+                if (checked.size != 2) {
+                    checked.add(data)
+                    binding.tbChipName.isChecked = true
+                } else {
+                    itemClickListener.onClick(isFull = true)
+                    binding.tbChipName.isChecked = false
                 }
-                checked.add(data)
-                binding.tbChipName.isChecked = true
             }
 
-            itemClickListener.onClick()
+            itemClickListener.onClick(isFull = false)
         }
     }
 
@@ -62,7 +64,7 @@ class ProfileStrengthRvAdapter: RecyclerView.Adapter<ProfileStrengthRvAdapter.St
     }
 
     interface OnItemClickListener{
-        fun onClick()
+        fun onClick(isFull: Boolean)
     }
 
     private lateinit var itemClickListener: OnItemClickListener
