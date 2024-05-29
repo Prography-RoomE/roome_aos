@@ -29,7 +29,8 @@ class ProfileImportantFragment: BaseFragment<FragmentProfileImportantFactorBindi
 
         importantAdapter = ProfileImportantRvAdapter().apply {
             this.setItemClickListener(object : ProfileImportantRvAdapter.OnItemClickListener{
-                override fun onClick() {
+                override fun onClick(isFull: Boolean) {
+                    if(isFull) showToast("최대 2개까지 선택할 수 있어요.")
                    setNextBtn()
                 }
             })
