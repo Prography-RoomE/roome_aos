@@ -15,6 +15,8 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
     private var _binding : T? = null
     protected val binding get() = _binding!!
 
+    private var currentToast: Toast? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -44,6 +46,9 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
 
     protected open fun observer() {}
 
-    protected fun showToast(msg: String) =
-        CustomToast.makeToast(context, msg).show()
+    protected fun showToast(msg: String) {
+        currentToast?.cancel()
+        currentToast = CustomToast.makeToast(context, msg)
+        currentToast?.show()
+    }
 }
