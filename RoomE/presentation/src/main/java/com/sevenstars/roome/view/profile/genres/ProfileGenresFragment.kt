@@ -28,7 +28,8 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
 
         genresAdapter = ProfileGenresRvAdapter().apply {
             this.setItemClickListener(object : ProfileGenresRvAdapter.OnItemClickListener{
-                override fun onClick() {
+                override fun onClick(isFull: Boolean) {
+                    if(isFull) showToast("최대 2개까지 선택할 수 있어요.")
                     setNextBtn()
                 }
             })
