@@ -18,7 +18,7 @@ android {
         minSdk = 29
         targetSdk = 33
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -89,4 +89,6 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.1.1")
 
     implementation("com.airbnb.android:lottie:6.1.0")
+
+    implementation("com.google.firebase:firebase-analytics:22.0.1")
 }
