@@ -1,5 +1,9 @@
 package com.sevenstars.roome.view.profile.count
 
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -19,20 +23,54 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.fragment_profile_count) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
     private val viewModel: ProfileCountViewModel by viewModels()
+    private lateinit var spinnerAdapter: CountSpinnerAdapter
 
     override fun initView() {
         (requireActivity() as ProfileActivity).apply {
             setToolbarVisibility(true)
             setStep(1)
         }
-        binding.etCount.setText(profileViewModel.selectedProfileData.count.toString())
+        setSpinner()
+        binding.etCount.setText("${profileViewModel.selectedProfileData.count}번")
     }
 
     override fun initListener() {
         super.initListener()
 
         binding.btnNext.setOnClickListener {
-            viewModel.saveData(binding.etCount.text.toString().toInt(), false)
+            viewModel.saveData(binding.etCount.text.toString().replace("번", "").toInt(), false)
+        }
+
+        binding.tgCountRange.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                binding.tgCountDirectly.isChecked = false
+                binding.etCount.visibility = View.GONE
+                binding.spinnerCount.visibility = View.VISIBLE
+            }
+        }
+
+        binding.tgCountDirectly.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                binding.tgCountRange.isChecked = false
+                binding.etCount.visibility = View.VISIBLE
+                binding.spinnerCount.visibility = View.GONE
+            }
+        }
+
+        binding.etCount.apply {
+            addTextChangedListener(object: TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun afterTextChanged(s: Editable?) {
+                    if (s != null && !s.toString().endsWith("번")) {
+                        binding.etCount.removeTextChangedListener(this)
+                        val text = s.toString().replace("번", "")
+                        binding.etCount.setText("${text}번")
+                        binding.etCount.setSelection(text.length)
+                        binding.etCount.addTextChangedListener(this)
+                    }
+                }
+            })
         }
     }
 
@@ -47,11 +85,17 @@ class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.f
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
-                    profileViewModel.selectedProfileData.count = binding.etCount.text.toString().toInt()
+                    profileViewModel.selectedProfileData.count = binding.etCount.text.toString().replace("번", "").toInt()
                     (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileGenresFragment())
                     viewModel.setLoadingState()
                 }
             }
         }
+    }
+
+    private fun setSpinner(){
+        spinnerAdapter = CountSpinnerAdapter(requireContext(), R.layout.item_spinner, resources.getStringArray(R.array.profile_count_options).toList())
+        binding.spinnerCount.dropDownVerticalOffset = 20
+        binding.spinnerCount.adapter = spinnerAdapter
     }
 }
