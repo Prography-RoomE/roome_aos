@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_genre_end_comment">좋아해요</string>
+    <string name="profile_strength_start_comment">강점은</string>
+    <string name="profile_strength_end_comment">입니다</string>
+    <string name="profile_important_end_comment">중요해요</string>
+    <string name="profile_dislike_end_comment">싫어요</string>
+    <string name="profile_copyright_mark">©Roome</string>
+</resources>
