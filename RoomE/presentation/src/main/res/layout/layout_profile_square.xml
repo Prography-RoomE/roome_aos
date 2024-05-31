@@ -177,7 +177,8 @@
             android:background="@drawable/chip_background_square"
             android:textColor="@color/surface"
             tools:text="😰 마지모탱"
-            style="@style/title3_bold"/>
+            style="@style/title3_bold"
+            android:layout_marginEnd="4dp"/>
 
         <TextView
             android:id="@+id/hint_usage"
@@ -186,8 +187,7 @@
             android:background="@drawable/chip_background_square"
             tools:text="힌트 사용 괜찮아요"
             style="@style/title3_bold"
-            android:textColor="@color/surface"
-            android:layout_marginStart="4dp" />
+            android:textColor="@color/surface" />
     </LinearLayout>
 
     <LinearLayout

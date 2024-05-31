@@ -197,6 +197,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
                 emptyViewRemove(important2)
 
                 position.text = data.horrorThemePosition?.title.orEmpty()
+                if(data.horrorThemePosition?.title == "잘 모르겠어요") position.visibility = View.GONE
                 hintUsage.text = data.hintUsagePreference?.title.orEmpty()
                 devicePreference.text = data.deviceLockPreference?.title.orEmpty()
                 activityPreference.text = data.activity?.title.orEmpty()
@@ -225,6 +226,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
                 emptyViewRemove(important2)
 
                 position.text = data.horrorThemePosition?.title.orEmpty()
+                if(data.horrorThemePosition?.title == "잘 모르겠어요") position.visibility = View.GONE
                 hintUsage.text = data.hintUsagePreference?.title.orEmpty()
                 devicePreference.text = data.deviceLockPreference?.title.orEmpty()
                 activityPreference.text = data.activity?.title.orEmpty()
