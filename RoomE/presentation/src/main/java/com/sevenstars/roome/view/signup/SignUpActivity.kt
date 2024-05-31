@@ -6,6 +6,7 @@ import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseActivity
 import com.sevenstars.roome.databinding.ActivitySignUpBinding
 import com.sevenstars.roome.view.MainActivity
+import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.signIn.SignInActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,8 +28,8 @@ class SignUpActivity: BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign
         finish()
     }
 
-    fun moveToMain(){
-        val intent = Intent(this, MainActivity::class.java)
+    fun moveToProfile(){
+        val intent = Intent(this, ProfileActivity::class.java)
         startActivity(intent)
         finish()
     }

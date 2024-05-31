@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
+import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.databinding.FragmentSignupNickBinding
 import com.sevenstars.roome.utils.UiState
 import java.util.regex.Pattern
@@ -28,7 +29,8 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
 
         binding.btnNext.setOnClickListener {
             if(it.alpha == 1f){
-                viewModel.saveTermsAgreement()
+//                viewModel.saveTermsAgreement()
+                viewModel.checkNick(binding.etNickname.text.toString())
             }
         }
 
@@ -44,9 +46,16 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
                     val length = p0.toString().length
 
                     binding.btnClear.visibility = if(length != 0) View.VISIBLE else View.GONE
-                    viewModel.resetCheckNick()
+                    binding.btnNext.apply {
+                        if(length >= 2) {
+                            setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_primary))
+                            alpha = 1f
+                        } else {
+                            setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.neutral10))
+                            alpha = 0.12f
+                        }
+                    }
 
-                    binding.btnNicknameCheck.alpha = if(binding.etNickname.text.length >= 2) 1f else 0.6f
                     binding.tvNickname.setTextColor(requireContext().getColor(R.color.on_surface))
                     binding.btnClear.setImageResource(R.drawable.ic_clear)
                     binding.tvNicknameFeedback.apply {
@@ -61,10 +70,6 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
                 if (source == "" || ps.matcher(source).matches()) return@InputFilter source
                 ""
             }, InputFilter.LengthFilter(8))
-        }
-
-        binding.btnNicknameCheck.setOnClickListener {
-            if(it.alpha == 1f) viewModel.checkNick(binding.etNickname.text.toString())
         }
     }
 
@@ -95,15 +100,16 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
                     }
                 }
                 is UiState.Success -> {
-                    binding.tvNicknameFeedback.apply {
-                        text = "사용 가능한 닉네임입니다."
-                        setTextColor(requireContext().getColor(R.color.success))
-                    }
+                    viewModel.saveTermsAgreement()
+//                    binding.tvNicknameFeedback.apply {
+//                        text = "사용 가능한 닉네임입니다."
+//                        setTextColor(requireContext().getColor(R.color.success))
+//                    }
 
-                    binding.btnNext.apply {
-                        setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_primary))
-                        alpha = 1f
-                    }
+//                    binding.btnNext.apply {
+//                        setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_primary))
+//                        alpha = 1f
+//                    }
                 }
             }
         }
@@ -117,7 +123,8 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
                 is UiState.Loading -> {}
                 is UiState.Success -> {
                     LoggerUtils.debug("회원가입 성공")
-                    (requireActivity() as SignUpActivity).moveToMain()
+                    userName = binding.etNickname.text.toString()
+                    (requireActivity() as SignUpActivity).moveToProfile()
                 }
             }
         }
