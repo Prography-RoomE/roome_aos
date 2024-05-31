@@ -7,6 +7,8 @@ import android.graphics.Canvas
 import android.os.Build
 import android.provider.MediaStore
 import android.view.View
+import java.io.File
+import java.io.FileOutputStream
 import java.io.OutputStream
 import java.io.IOException
 
@@ -17,7 +19,7 @@ object ImageUtils {
         val contentResolver = context.contentResolver
 
         val contentValues = ContentValues().apply {
-            put(MediaStore.Images.Media.DISPLAY_NAME, "view_image_${System.currentTimeMillis()}.png")
+            put(MediaStore.Images.Media.DISPLAY_NAME, "profile_image_${System.currentTimeMillis()}.png")
             put(MediaStore.Images.Media.MIME_TYPE, "image/png")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/")
@@ -56,5 +58,32 @@ object ImageUtils {
         val canvas = Canvas(bitmap)
         view.draw(canvas)
         return bitmap
+    }
+
+    fun captureViewToCache(context: Context, filename: String, view: View): File? {
+        val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+
+        return saveBitmapToCache(context, bitmap, filename)
+    }
+
+    private fun saveBitmapToCache(context: Context, bitmap: Bitmap, filename: String): File? {
+        var outputStream: OutputStream? = null
+        return try {
+            val cacheDir = File(context.cacheDir, "images")
+            if (!cacheDir.exists()) {
+                cacheDir.mkdirs()
+            }
+            val file = File(cacheDir, "$filename.png")
+            outputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+            file
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        } finally {
+            outputStream?.close()
+        }
     }
 }
