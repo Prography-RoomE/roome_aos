@@ -38,27 +38,102 @@
             style="@style/body2_regular"
             android:textColor="@color/on_surface_variant" />
 
-        <EditText
-            android:id="@+id/et_count"
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tg_count_range"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_comment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tg_count_directly"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="24dp"
+
+            android:background="@drawable/shape_chip"
+
+            android:checked="true"
+            android:textOn="범위 선택"
+            android:textOff="범위 선택"
+            android:text="범위 선택"
+            style="@style/title3_bold"
+            android:textColor="@color/on_surface" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tg_count_directly"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tg_count_range"
+            app:layout_constraintBottom_toBottomOf="@id/tg_count_range"
+            app:layout_constraintStart_toEndOf="@id/tg_count_range"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="24dp"
+
+            android:background="@drawable/shape_chip"
+
+            android:textOn="직접 입력"
+            android:textOff="직접 입력"
+            android:text="직접 입력"
+            style="@style/title3_bold"
+            android:textColor="@color/on_surface" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner_count"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+
+            app:layout_constraintTop_toBottomOf="@id/tg_count_range"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp"
+
+            style="@style/body1_regular"
+
+            android:background="@drawable/shape_radius_12_with_stroke"
+            android:popupBackground="@drawable/shape_popup"
+
+            android:overlapAnchor="false"
+            android:spinnerMode="dropdown"
+            tools:listitem="@layout/item_spinner"/>
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            app:layout_constraintTop_toBottomOf="@id/tv_comment"
+            app:layout_constraintTop_toTopOf="@id/spinner_count"
+            app:layout_constraintBottom_toBottomOf="@id/spinner_count"
+            app:layout_constraintEnd_toEndOf="@id/spinner_count"
+            android:layout_marginEnd="16dp"
+
+            android:src="@drawable/ic_toggle"
+            android:background="@color/transparent"
+            tools:ignore="ContentDescription" />
+
+
+        <EditText
+            android:id="@+id/et_count"
+            android:layout_width="0dp"
+            android:layout_height="88dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="48dp"
+            app:layout_constraintTop_toBottomOf="@id/tg_count_directly"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="24dp"
 
-            tools:text="99999번"
-            style="@style/pretendard_bold"
-            android:textSize="48sp"
-            android:textColor="@color/on_surface"
+            android:visibility="gone"
 
-            android:hint="@string/profile_count_hint"
-            android:textColorHint="@color/on_surface_variant"
-
-            android:background="@null"
+            android:background="@color/surface_container_low"
             android:inputType="number"
-            tools:ignore="Autofill,LabelFor" />
+            android:maxLength="6"
+
+            android:hint="0번"
+            style="@style/headline1_bold"
+            android:textColorHint="@color/on_surface"
+            android:textColor="@color/on_surface"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            tools:ignore="Autofill" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_next"

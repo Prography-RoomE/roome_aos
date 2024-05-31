@@ -33,6 +33,17 @@
     <string name="profile_count_title">현재까지 경험한 방 수를\n알려주세요</string>
     <string name="profile_count_comment">프로필 생성 후 마이페이지에서 수정할 수 있어요</string>
     <string name="profile_count_hint">000번</string>
+    <string-array name="profile_count_options">
+        <item>선택</item>
+        <item>0~30방</item>
+        <item>31~60방</item>
+        <item>61~99방</item>
+        <item>100~150방</item>
+        <item>151~200방</item>
+        <item>201~300방</item>
+        <item>301방 이상</item>
+    </string-array>
+
 
     <!-- ============================================= Profile Create: Genres ============================================= -->
     <string name="profile_genres_title">선호하는 방탈출 장르를\n알려주세요</string>
