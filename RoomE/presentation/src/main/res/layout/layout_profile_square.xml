@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_profile"
+    android:layout_width="360dp"
+    android:layout_height="360dp"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    tools:background="@color/black"
+    android:padding="24dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="RoomE"
+            android:textColor="@color/surface"
+            style="@style/title3_bold"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/experience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/chip_background_square_radius_8"
+            tools:text="99999"
+            android:textColor="@color/surface"
+            style="@style/title3_bold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:layout_toEndOf="@id/name"
+            android:layout_alignTop="@id/name"
+            android:layout_alignBottom="@id/name"
+            tools:ignore="RelativeOverlap" />
+
+        <TextView
+            android:id="@+id/mbti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="end"
+            android:background="@drawable/chip_background_square_radius_8"
+            tools:text="ENTP"
+            android:textColor="@color/surface"
+            style="@style/title3_bold"
+            android:gravity="center"
+            android:layout_alignParentEnd="true"
+            tools:ignore="RelativeOverlap" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="26dp">
+
+        <TextView
+            android:id="@+id/genre1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            android:textColor="@color/surface"
+            tools:text="🧩 어드벤처"
+            style="@style/title3_bold" />
+
+        <TextView
+            android:id="@+id/genre2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            tools:text="🫢 미스터리"
+            style="@style/title3_bold"
+            android:textColor="@color/surface"
+            android:layout_marginStart="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="좋아해요"
+            style="@style/label_medium"
+            android:textColor="@color/surface"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/surface"
+            android:text="@string/profile_strength_start_comment"
+            style="@style/label_medium"/>
+
+        <TextView
+            android:id="@+id/strength1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            tools:text="🔎 관찰력"
+            style="@style/title3_bold"
+            android:textColor="@color/surface"
+            android:layout_marginStart="4dp" />
+
+        <TextView
+            android:id="@+id/strength2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            tools:text="🤝 협업 능력"
+            style="@style/title3_bold"
+            android:textColor="@color/surface"
+            android:layout_marginStart="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_strength_end_comment"
+            style="@style/label_medium"
+            android:textColor="@color/surface"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/important1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            android:textColor="@color/surface"
+            tools:text="📊 논리적인 문제"
+            style="@style/title3_bold"/>
+
+        <TextView
+            android:id="@+id/important2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            tools:text="🎁 신선한 문제"
+            style="@style/title3_bold"
+            android:textColor="@color/surface"
+            android:layout_marginStart="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_important_end_comment"
+            style="@style/label_medium"
+            android:textColor="@color/surface"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            android:textColor="@color/surface"
+            tools:text="😰 마지모탱"
+            style="@style/title3_bold"/>
+
+        <TextView
+            android:id="@+id/hint_usage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            tools:text="힌트 사용 괜찮아요"
+            style="@style/title3_bold"
+            android:textColor="@color/surface"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/device_preference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            android:textColor="@color/surface"
+            tools:text="장치&amp;자물쇠 모두"
+            style="@style/title3_bold"/>
+
+        <TextView
+            android:id="@+id/activity_preference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            tools:text="활동성 최소"
+            style="@style/title3_bold"
+            android:textColor="@color/surface"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/dislike1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            android:textColor="@color/surface"
+            tools:text="노가다 문제"
+            style="@style/title3_bold"/>
+
+        <TextView
+            android:id="@+id/dislike2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/chip_background_square"
+            tools:text="이과형 문제"
+            style="@style/title3_bold"
+            android:textColor="@color/surface"
+            android:layout_marginStart="4dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_dislike_end_comment"
+            style="@style/label_medium"
+            android:textColor="@color/surface"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="14dp"
+        android:gravity="end">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile_copyright_mark"
+            style="@style/caption"
+            android:textColor="@color/surface" />
+    </LinearLayout>
+</LinearLayout>
