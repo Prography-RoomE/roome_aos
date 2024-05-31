@@ -75,9 +75,9 @@
 
             app:layout_constraintTop_toBottomOf="@id/tv_nickname"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_nickname_check"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginHorizontal="24dp"
             android:paddingHorizontal="16dp"
 
             android:background="@drawable/shape_edit_text"
@@ -101,28 +101,6 @@
             android:background="@color/transparent"
             android:visibility="gone"
             tools:ignore="ContentDescription" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_nickname_check"
-            android:layout_width="84dp"
-            android:layout_height="48dp"
-
-            app:layout_constraintTop_toTopOf="@id/et_nickname"
-            app:layout_constraintBottom_toBottomOf="@id/et_nickname"
-            app:layout_constraintStart_toEndOf="@id/et_nickname"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="12dp"
-
-            android:background="@drawable/shape_edit_text"
-            android:backgroundTint="@color/primary_primary"
-
-            android:text="@string/signup_nickname_check"
-            style="@style/title3_bold"
-            android:textColor="@color/surface"
-
-            android:alpha="0.6" />
-
 
         <TextView
             android:id="@+id/tv_nickname_feedback"
