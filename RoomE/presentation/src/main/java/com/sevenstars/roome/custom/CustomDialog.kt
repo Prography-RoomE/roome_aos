@@ -107,7 +107,7 @@ class CustomDialog private constructor(
 
     private fun setSaveProfile() {
         binding.tvDialogTitle.text = "저장 완료"
-        binding.tvDialogContent.text = "내 사진이 저장되었어요."
+        binding.tvDialogContent.text = "내 사진에 저장되었어요."
         binding.btnDialog1.text = "확인"
 
         binding.btnDialog1.setOnClickListener {

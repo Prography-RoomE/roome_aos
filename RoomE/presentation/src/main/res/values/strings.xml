@@ -10,7 +10,7 @@
 
     <!-- ============================================= SignUp ============================================= -->
     <string name="signup_comment">반가워요!\n닉네임을 입력해주세요</string>
-    <string name="signup_nickname_comment">가입 완료 후에는 수정할 수 없으니\n신중하게 입력해주세요</string>
+    <string name="signup_nickname_comment">가입 완료 후에도 수정할 수 있어요</string>
     <string name="signup_nickname">닉네임</string>
     <string name="signup_nickname_check">중복 체크</string>
     <string name="signup_nickname_default">2–8자리 한글, 영문, 숫자</string>
