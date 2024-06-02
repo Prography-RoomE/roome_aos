@@ -3,6 +3,7 @@ package com.sevenstars.data.datasource.remote
 import com.sevenstars.data.model.BaseResponse
 import com.sevenstars.data.model.profile.RequestMbtiDTO
 import com.sevenstars.data.model.profile.RequestRoomCountDTO
+import com.sevenstars.data.model.profile.RequestRoomCountRangeDTO
 import com.sevenstars.data.model.profile.RequestSaveIdsDTO
 import com.sevenstars.data.model.profile.ResponseProfileDTO
 import com.sevenstars.data.model.profile.info.RequestSaveIdDTO
@@ -37,6 +38,11 @@ interface ProfileRemoteDataSource {
     suspend fun saveUserRoomCount(
         accessToken: String,
         body: RequestRoomCountDTO
+    ): BaseResponse<Boolean>
+
+    suspend fun saveUserRoomCountRange(
+        accessToken: String,
+        body: RequestRoomCountRangeDTO
     ): BaseResponse<Boolean>
 
     suspend fun saveUserPreferredGenres(

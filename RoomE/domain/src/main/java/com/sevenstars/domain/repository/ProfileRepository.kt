@@ -38,6 +38,12 @@ interface ProfileRepository {
         isPlusEnabled: Boolean
     ): RoomeResult<Boolean>
 
+    suspend fun saveUserRoomCountRange(
+        accessToken: String,
+        minCount: Int,
+        maxCount: Int
+    ): RoomeResult<Boolean>
+
     suspend fun saveUserPreferredGenres(
         accessToken: String,
         body: List<Int>

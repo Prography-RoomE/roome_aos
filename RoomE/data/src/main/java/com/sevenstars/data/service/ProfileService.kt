@@ -3,6 +3,7 @@ package com.sevenstars.data.service
 import com.sevenstars.data.model.BaseResponse
 import com.sevenstars.data.model.profile.RequestMbtiDTO
 import com.sevenstars.data.model.profile.RequestRoomCountDTO
+import com.sevenstars.data.model.profile.RequestRoomCountRangeDTO
 import com.sevenstars.data.model.profile.RequestSaveIdsDTO
 import com.sevenstars.data.model.profile.ResponseProfileDTO
 import com.sevenstars.data.model.profile.info.RequestSaveIdDTO
@@ -53,6 +54,12 @@ interface ProfileService {
     suspend fun saveUserRoomCount(
         @Header("Authorization") accessToken: String,
         @Body body: RequestRoomCountDTO
+    ): Response<BaseResponse<ResponseBody>>
+
+    @PUT("/profiles/room-count-range")
+    suspend fun saveUserRoomCountRange(
+        @Header("Authorization") accessToken: String,
+        @Body body: RequestRoomCountRangeDTO
     ): Response<BaseResponse<ResponseBody>>
 
     @PUT("/profiles/preferred-genres")
