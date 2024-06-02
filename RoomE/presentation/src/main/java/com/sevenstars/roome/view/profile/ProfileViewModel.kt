@@ -23,12 +23,12 @@ class ProfileViewModel@Inject constructor(
     private val getProfileDataUseCase: GetProfileDataUseCase
 ): ViewModel() {
     var selectedProfileData = SelectedProfileData(
-        0, listOf(), listOf(), listOf(), listOf(), null, null, null, null, listOf(), null
+        0, null, listOf(), listOf(), listOf(), listOf(), null, null, null, null, listOf(), null
     )
 
     fun resetSelectedProfileData(){
         selectedProfileData = SelectedProfileData(
-            0, listOf(), listOf(), listOf(), listOf(), null, null, null, null, listOf(), null
+            0, null, listOf(), listOf(), listOf(), listOf(), null, null, null, null, listOf(), null
         )
     }
 
@@ -42,7 +42,13 @@ class ProfileViewModel@Inject constructor(
             getProfileDataUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty())
                 .onSuccess {
                     selectedProfileData.run {
-                        count = it.count
+
+                        try {
+                            count = it.count.toInt()
+                        } catch (e: Exception){
+                            countRange = it.count
+                        }
+
                         genres = it.preferredGenres
                         mbti = convertToListOfPairs(it.mbti)
                         strengths = it.userStrengths
@@ -111,7 +117,13 @@ class ProfileViewModel@Inject constructor(
             getProfileDataUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty())
                 .onSuccess {
                     selectedProfileData.run {
-                        count = it.count
+
+                        try {
+                            count = it.count.toInt()
+                        }catch (e: Exception){
+                            countRange = it.count
+                        }
+
                         genres = it.preferredGenres
                         mbti = convertToListOfPairs(it.mbti)
                         strengths = it.userStrengths

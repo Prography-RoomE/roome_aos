@@ -3,6 +3,7 @@ package com.sevenstars.data.mapper.profile
 import com.sevenstars.data.model.profile.info.ResponseProfileInfoDTO
 import com.sevenstars.data.model.profile.info.ActivitiesDTO
 import com.sevenstars.data.model.profile.info.ColorsDTO
+import com.sevenstars.data.model.profile.info.CountRangeDTO
 import com.sevenstars.data.model.profile.info.DeviceLockPreferencesDTO
 import com.sevenstars.data.model.profile.info.DislikedFactorsDTO
 import com.sevenstars.data.model.profile.info.GenresDTO
@@ -13,6 +14,7 @@ import com.sevenstars.data.model.profile.info.StrengthsDTO
 import com.sevenstars.domain.model.profile.ProfileInfoEntity
 import com.sevenstars.domain.model.profile.info.Activities
 import com.sevenstars.domain.model.profile.info.Colors
+import com.sevenstars.domain.model.profile.info.CountRange
 import com.sevenstars.domain.model.profile.info.DeviceLockPreferences
 import com.sevenstars.domain.model.profile.info.DislikedFactors
 import com.sevenstars.domain.model.profile.info.Genres
@@ -26,6 +28,7 @@ object ProfileInfoMapper {
     fun mapperToResponseEntity(item: ResponseProfileInfoDTO): ProfileInfoEntity {
         return item.run {
             ProfileInfoEntity(
+                roomCountRanges = roomCountRangeMapper(this.roomCountRanges),
                 activities = activitiesMapper(this.activities),
                 colors = colorsMapper(this.colors),
                 genres = genresMapper(this.genres),
@@ -36,6 +39,12 @@ object ProfileInfoMapper {
                 deviceLockPreferences = deviceLockPreferencesMapper(this.deviceLockPreferences),
                 dislikedFactors = dislikedFactorsMapper(this.dislikedFactors)
             )
+        }
+    }
+
+    private fun roomCountRangeMapper(item: List<CountRangeDTO>): List<CountRange> {
+        return item.map {
+            CountRange(it.id, it.maxCount, it.minCount, it.title)
         }
     }
 

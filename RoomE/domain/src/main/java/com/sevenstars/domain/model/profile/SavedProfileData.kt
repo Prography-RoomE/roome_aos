@@ -14,7 +14,7 @@ import com.sevenstars.domain.model.profile.info.Strengths
 data class SavedProfileData(
     val activity: Activities?,
     val color: Colors?,
-    val count: Int,
+    val count: String,
     val deviceLockPreference: DeviceLockPreferences?,
     val hintUsagePreference: HintUsagePreferences?,
     val horrorThemePosition: HorrorThemePositions?,

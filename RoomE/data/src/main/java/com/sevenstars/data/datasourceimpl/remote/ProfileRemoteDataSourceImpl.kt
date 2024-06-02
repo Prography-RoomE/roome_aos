@@ -4,6 +4,7 @@ import com.sevenstars.data.datasource.remote.ProfileRemoteDataSource
 import com.sevenstars.data.model.BaseResponse
 import com.sevenstars.data.model.profile.RequestMbtiDTO
 import com.sevenstars.data.model.profile.RequestRoomCountDTO
+import com.sevenstars.data.model.profile.RequestRoomCountRangeDTO
 import com.sevenstars.data.model.profile.RequestSaveIdsDTO
 import com.sevenstars.data.model.profile.ResponseProfileDTO
 import com.sevenstars.data.model.profile.info.RequestSaveIdDTO
@@ -157,6 +158,30 @@ class ProfileRemoteDataSourceImpl @Inject constructor(
     ): BaseResponse<Boolean> {
         return try {
             val res = profileService.saveUserRoomCount(accessToken, body)
+
+            if (res.isSuccessful) {
+                val resBody = res.body()!!
+                BaseResponse(code = resBody.code, message = resBody.message, data = true)
+            } else {
+                val errorBody = JSONObject(res.errorBody()?.string()!!)
+                BaseResponse(
+                    code = errorBody.getString("code").toInt(),
+                    message = errorBody.getString("message"),
+                    null
+                )
+            }
+        } catch (e: Exception) {
+            LoggerUtils.error(e.stackTraceToString())
+            BaseResponse(code = 0, message = e.message.toString(), null)
+        }
+    }
+
+    override suspend fun saveUserRoomCountRange(
+        accessToken: String,
+        body: RequestRoomCountRangeDTO
+    ): BaseResponse<Boolean> {
+        return try {
+            val res = profileService.saveUserRoomCountRange(accessToken, body)
 
             if (res.isSuccessful) {
                 val resBody = res.body()!!

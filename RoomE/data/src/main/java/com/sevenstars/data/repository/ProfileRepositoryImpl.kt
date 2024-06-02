@@ -5,6 +5,7 @@ import com.sevenstars.data.mapper.profile.ProfileInfoMapper
 import com.sevenstars.data.mapper.profile.ProfileMapper
 import com.sevenstars.data.model.profile.RequestMbtiDTO
 import com.sevenstars.data.model.profile.RequestRoomCountDTO
+import com.sevenstars.data.model.profile.RequestRoomCountRangeDTO
 import com.sevenstars.data.model.profile.RequestSaveIdsDTO
 import com.sevenstars.data.model.profile.info.RequestSaveIdDTO
 import com.sevenstars.domain.model.profile.ProfileInfoEntity
@@ -12,6 +13,7 @@ import com.sevenstars.domain.model.profile.SavedProfileData
 import com.sevenstars.domain.repository.ProfileRepository
 import com.sevenstars.domain.utils.RoomeResult
 import javax.inject.Inject
+import kotlin.math.max
 
 class ProfileRepositoryImpl @Inject constructor(
     private val profileRemoteDataSource: ProfileRemoteDataSource
@@ -92,6 +94,20 @@ class ProfileRepositoryImpl @Inject constructor(
         isPlusEnabled: Boolean
     ): RoomeResult<Boolean> {
         val res = profileRemoteDataSource.saveUserRoomCount(accessToken, RequestRoomCountDTO(count, isPlusEnabled))
+
+        return if(res.code == 200){
+            RoomeResult.Success(true)
+        } else {
+            RoomeResult.Failure(res.code, res.message)
+        }
+    }
+
+    override suspend fun saveUserRoomCountRange(
+        accessToken: String,
+        minCount: Int,
+        maxCount: Int
+    ): RoomeResult<Boolean> {
+        val res = profileRemoteDataSource.saveUserRoomCountRange(accessToken, RequestRoomCountRangeDTO(minCount, maxCount))
 
         return if(res.code == 200){
             RoomeResult.Success(true)

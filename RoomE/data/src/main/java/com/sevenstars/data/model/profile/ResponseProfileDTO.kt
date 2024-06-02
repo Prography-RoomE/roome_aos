@@ -14,7 +14,7 @@ import com.sevenstars.data.model.profile.info.StrengthsDTO
 data class ResponseProfileDTO(
     @SerializedName("activity") val activity: ActivitiesDTO,
     @SerializedName("color") val color: ColorsDTO,
-    @SerializedName("count") val count: Int,
+    @SerializedName("count") val count: String,
     @SerializedName("deviceLockPreference") val deviceLockPreference: DeviceLockPreferencesDTO,
     @SerializedName("hintUsagePreference") val hintUsagePreference: HintUsagePreferencesDTO,
     @SerializedName("horrorThemePosition") val horrorThemePosition: HorrorThemePositionsDTO,

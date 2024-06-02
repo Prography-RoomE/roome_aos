@@ -2,6 +2,7 @@ package com.sevenstars.domain.model.profile
 
 import com.sevenstars.domain.model.profile.info.Activities
 import com.sevenstars.domain.model.profile.info.Colors
+import com.sevenstars.domain.model.profile.info.CountRange
 import com.sevenstars.domain.model.profile.info.DeviceLockPreferences
 import com.sevenstars.domain.model.profile.info.DislikedFactors
 import com.sevenstars.domain.model.profile.info.Genres
@@ -11,6 +12,7 @@ import com.sevenstars.domain.model.profile.info.ImportantFactors
 import com.sevenstars.domain.model.profile.info.Strengths
 
 data class ProfileInfoEntity(
+    val roomCountRanges: List<CountRange>,
     val genres: List<Genres>,
     val strengths: List<Strengths>,
     val importantFactors: List<ImportantFactors>,
