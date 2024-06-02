@@ -1,13 +1,11 @@
 package com.sevenstars.roome.view.profile.mbti
 
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileMbtiBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -93,7 +91,7 @@ class ProfileMbtiFragment: BaseFragment<FragmentProfileMbtiBinding>(R.layout.fra
                 is UiState.Loading -> {}
                 is UiState.Success -> {
                     profileViewModel.selectedProfileData.mbti = if(mbtiAdatper.checkedItems.isEmpty()) null else mbtiAdatper.checkedItems.toList()
-                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileStrengthFragment())
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileStrengthFragment(), null)
                     viewModel.setLoadingState()
                 }
             }

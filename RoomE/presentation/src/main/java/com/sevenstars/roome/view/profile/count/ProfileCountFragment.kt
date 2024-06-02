@@ -3,15 +3,11 @@ package com.sevenstars.roome.view.profile.count
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileCountBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -90,7 +86,7 @@ class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.f
                 is UiState.Loading -> {}
                 is UiState.Success -> {
                     profileViewModel.selectedProfileData.count = binding.etCount.text.toString().replace("번", "").toInt()
-                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileGenresFragment())
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileGenresFragment(), null)
                     viewModel.setLoadingState()
                 }
             }

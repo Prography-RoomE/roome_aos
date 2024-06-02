@@ -72,9 +72,20 @@
             android:id="@+id/tb_profile"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:contentInsetStart="0dp"
 
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+
+            <ImageButton
+                android:id="@+id/ib_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="12dp"
+
+                android:src="@drawable/ic_arrow_back"
+                android:background="@color/transparent"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,16 +94,6 @@
                 android:text="프로필 이미지"
                 style="@style/title2_bold"
                 android:textColor="@color/on_surface"/>
-
-            <ImageButton
-                android:id="@+id/ib_cancel"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-
-                android:src="@drawable/ic_cancel"
-                android:background="@color/transparent"
-                android:layout_gravity="end"
-                tools:ignore="ContentDescription" />
         </Toolbar>
 
         <View
