@@ -38,10 +38,11 @@ class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.f
         super.initListener()
 
         binding.btnNext.setOnClickListener {
-            viewModel.saveData(binding.etCount.text.toString().replace("번", "").toInt(), false)
-//            if(binding.tgCountRange.isChecked){
-//
-//            }
+            if(binding.tgCountRange.isChecked){
+                viewModel.saveRangeCountData(spinnerAdapter.getItem(binding.spinnerCount.selectedItemPosition))
+            }else {
+                viewModel.saveCountData(binding.etCount.text.toString().replace("번", "").toInt(), false)
+            }
         }
 
         binding.tgCountRange.setOnCheckedChangeListener { _, isChecked ->
