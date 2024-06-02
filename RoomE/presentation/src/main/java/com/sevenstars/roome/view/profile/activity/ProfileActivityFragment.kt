@@ -1,6 +1,5 @@
 package com.sevenstars.roome.view.profile.activity
 
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -8,7 +7,6 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.info.Activities
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileActivitiyBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -54,7 +52,7 @@ class ProfileActivityFragment: BaseFragment<FragmentProfileActivitiyBinding>(R.l
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
-                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileDislikeFragment())
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileDislikeFragment(), null)
                     viewModel.setLoadingState()
                 }
             }

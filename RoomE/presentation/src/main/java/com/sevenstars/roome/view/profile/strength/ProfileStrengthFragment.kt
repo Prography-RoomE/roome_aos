@@ -1,6 +1,5 @@
 package com.sevenstars.roome.view.profile.strength
 
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -8,14 +7,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileStrengthBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.SpaceItemDecoration
 import com.sevenstars.roome.view.profile.important.ProfileImportantFragment
-import com.sevenstars.roome.view.profile.mbti.ProfileMbtiFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -84,7 +81,7 @@ class ProfileStrengthFragment: BaseFragment<FragmentProfileStrengthBinding>(R.la
                 is UiState.Loading -> {}
                 is UiState.Success -> {
                     profileViewModel.selectedProfileData.strengths = strengthAdapter.checked
-                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileImportantFragment())
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileImportantFragment(), null)
                     viewModel.setLoadingState()
                 }
             }

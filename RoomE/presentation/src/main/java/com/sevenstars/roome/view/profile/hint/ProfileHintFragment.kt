@@ -1,6 +1,5 @@
 package com.sevenstars.roome.view.profile.hint
 
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -8,7 +7,6 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.info.HintUsagePreferences
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileHintBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -54,7 +52,7 @@ class ProfileHintFragment: BaseFragment<FragmentProfileHintBinding>(R.layout.fra
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
-                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileDeviceFragment())
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileDeviceFragment(), null)
                     viewModel.setLoadingState()
                 }
             }

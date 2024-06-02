@@ -1,23 +1,17 @@
 package com.sevenstars.roome.view.profile.generate
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.util.DisplayMetrics
 import android.view.View
-import android.view.WindowManager
 import android.widget.TextView
 import android.widget.ToggleButton
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.constraintlayout.widget.ConstraintSet
-import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.SavedProfileData
@@ -33,14 +27,12 @@ import com.sevenstars.roome.utils.ImageUtils.captureViewToCache
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
-import com.sevenstars.roome.view.profile.welcome.ProfileWelcomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
     private val viewModel: ProfileGenerateViewModel by viewModels()
-    private lateinit var callback: OnBackPressedCallback
     private var squareProfileFile: File? = null
     private var verticalProfileFile: File? = null
     private lateinit var permissionManager: PermissionManager
@@ -49,17 +41,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
         arrayOf(Manifest.permission.READ_MEDIA_IMAGES)
     } else {
         arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        callback = createOnBackPressedCallback()
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        callback.remove()
     }
 
     override fun initView() {
@@ -80,12 +61,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             tgVertical.setOnCheckedChangeListener { _, isChecked -> handleToggleChange(isChecked, verticalProfileFile, tgVertical) }
             btnSaveProfile.setOnClickListener { handleSaveProfileClick() }
             btnMoveProfile.setOnClickListener { navigateToMainActivity() }
-            ibCancel.setOnClickListener { navigateToProfileWelcomeFragment() }
+            ibBack.setOnClickListener { backPressed() }
         }
-    }
-
-    private fun createOnBackPressedCallback() = object : OnBackPressedCallback(true) {
-        override fun handleOnBackPressed() { /* Prevent back press */ }
     }
 
     private fun handleUiState(uiState: UiState<SavedProfileData>) {
@@ -131,12 +108,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
         requireActivity().finish()
     }
 
-    private fun navigateToProfileWelcomeFragment() {
-        requireActivity().supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        requireActivity().supportFragmentManager.commit {
-            replace(R.id.fl_profile, ProfileWelcomeFragment(11))
-            addToBackStack(null)
-        }
+//    private fun navigateToProfileWelcomeFragment() {
+//        requireActivity().supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+//        requireActivity().supportFragmentManager.commit {
+//            replace(R.id.fl_profile, ProfileWelcomeFragment(11))
+//            addToBackStack(null)
+//        }
+//    }
+
+    private fun backPressed(){
+        requireActivity().supportFragmentManager.popBackStack()
     }
 
     private fun pauseLottie(data: SavedProfileData) {

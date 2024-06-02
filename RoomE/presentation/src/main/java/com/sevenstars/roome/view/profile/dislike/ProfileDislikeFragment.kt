@@ -1,6 +1,5 @@
 package com.sevenstars.roome.view.profile.dislike
 
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -8,13 +7,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileDislikeBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.SpaceItemDecoration
-import com.sevenstars.roome.view.profile.activity.ProfileActivityFragment
 import com.sevenstars.roome.view.profile.color.ProfileColorFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,7 +58,7 @@ class ProfileDislikeFragment: BaseFragment<FragmentProfileDislikeBinding>(R.layo
                 is UiState.Loading -> {}
                 is UiState.Success -> {
                     profileViewModel.selectedProfileData.dislike = dislikeAdapter.checked
-                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileColorFragment())
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileColorFragment(), null)
                     viewModel.setLoadingState()
                 }
             }

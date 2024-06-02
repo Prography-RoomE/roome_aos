@@ -1,6 +1,5 @@
 package com.sevenstars.roome.view.profile.horror
 
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -8,7 +7,6 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.info.HorrorThemePositions
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileHorrorBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -54,7 +52,7 @@ class ProfileHorrorFragment: BaseFragment<FragmentProfileHorrorBinding>(R.layout
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
-                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileHintFragment())
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileHintFragment(), null)
                     viewModel.setLoadingState()
                 }
             }

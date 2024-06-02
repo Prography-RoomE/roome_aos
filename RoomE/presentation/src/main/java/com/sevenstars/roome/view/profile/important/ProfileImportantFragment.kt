@@ -1,6 +1,5 @@
 package com.sevenstars.roome.view.profile.important
 
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -8,13 +7,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileImportantFactorBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.horror.ProfileHorrorFragment
-import com.sevenstars.roome.view.profile.strength.ProfileStrengthFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -83,7 +80,7 @@ class ProfileImportantFragment: BaseFragment<FragmentProfileImportantFactorBindi
                 is UiState.Loading -> {}
                 is UiState.Success -> {
                     profileViewModel.selectedProfileData.important = importantAdapter.checked
-                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileHorrorFragment())
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileHorrorFragment(), null)
                     viewModel.setLoadingState()
                 }
             }

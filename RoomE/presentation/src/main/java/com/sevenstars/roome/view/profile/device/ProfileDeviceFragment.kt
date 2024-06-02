@@ -1,6 +1,5 @@
 package com.sevenstars.roome.view.profile.device
 
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -8,7 +7,6 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.info.DeviceLockPreferences
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.FragmentProfileDeviceBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -52,7 +50,7 @@ class ProfileDeviceFragment: BaseFragment<FragmentProfileDeviceBinding>(R.layout
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
-                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileActivityFragment())
+                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileActivityFragment(), null)
                     viewModel.setLoadingState()
                 }
             }
