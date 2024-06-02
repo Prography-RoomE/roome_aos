@@ -99,7 +99,7 @@ class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcom
                         }
 
                         override fun onButton2Clicked() { // 이어서 하기
-                            navigateToStep(step)
+                            navigateToStep(step+1)
                         }
                     })
                 }.show(requireActivity().supportFragmentManager, "")
