@@ -39,6 +39,9 @@ class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.f
 
         binding.btnNext.setOnClickListener {
             viewModel.saveData(binding.etCount.text.toString().replace("번", "").toInt(), false)
+//            if(binding.tgCountRange.isChecked){
+//
+//            }
         }
 
         binding.tgCountRange.setOnCheckedChangeListener { _, isChecked ->
@@ -94,7 +97,7 @@ class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.f
     }
 
     private fun setSpinner(){
-        spinnerAdapter = CountSpinnerAdapter(requireContext(), R.layout.item_spinner, resources.getStringArray(R.array.profile_count_options).toList())
+        spinnerAdapter = CountSpinnerAdapter(requireContext(), R.layout.item_spinner, profileViewModel.profileDefaultData.roomCountRanges)
         binding.spinnerCount.dropDownVerticalOffset = 20
         binding.spinnerCount.adapter = spinnerAdapter
     }

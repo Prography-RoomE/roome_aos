@@ -12,6 +12,7 @@ import com.sevenstars.domain.model.profile.info.Strengths
 
 data class SelectedProfileData(
     var count: Int,
+    var countRange: String?,
     var genres: List<Genres>,
     var mbti: List<Pair<Int, String>>?,
     var strengths: List<Strengths>,

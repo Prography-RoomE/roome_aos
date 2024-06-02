@@ -7,24 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.annotation.LayoutRes
+import com.sevenstars.domain.model.profile.info.CountRange
 import com.sevenstars.roome.databinding.ItemSpinnerBinding
 
 class CountSpinnerAdapter(
     context: Context,
     @LayoutRes private val resId: Int,
-    private val values: List<String>
-): ArrayAdapter<String>(context, resId, values) {
+    private val values: List<CountRange>
+): ArrayAdapter<CountRange>(context, resId, values) {
 
     override fun getCount(): Int =values.size
 
-    override fun getItem(position: Int): String? = values[position]
+    override fun getItem(position: Int): CountRange = values[position]
 
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val binding = ItemSpinnerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         try {
-            binding.tvSpinnerItem.text = values[position]
+            binding.tvSpinnerItem.text = values[position].title
         } catch (e: Exception){
             e.printStackTrace()
         }
@@ -35,7 +36,7 @@ class CountSpinnerAdapter(
         val binding = ItemSpinnerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         try {
-            binding.tvSpinnerItem.text = values[position]
+            binding.tvSpinnerItem.text = values[position].title
         } catch (e: Exception){
             e.printStackTrace()
         }

@@ -12,6 +12,8 @@ import com.sevenstars.data.model.profile.info.ImportantFactorsDTO
 import com.sevenstars.data.model.profile.info.StrengthsDTO
 
 data class ResponseProfileInfoDTO(
+    @SerializedName("roomCountRanges")
+    val roomCountRanges: List<CountRangeDTO>,
     @SerializedName("genres")
     val genres: List<GenresDTO>,
     @SerializedName("strengths")
