@@ -75,7 +75,7 @@ object ProfileMapper {
         if(item == null) return null
 
         return item.run {
-            DeviceLockPreferences(id, title)
+            DeviceLockPreferences(id, title, description)
         }
     }
 

@@ -2,22 +2,31 @@ package com.sevenstars.roome.view.profile.device
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sevenstars.domain.model.profile.info.DeviceLockPreferences
+import com.sevenstars.roome.databinding.CustomToggleButtonBinding
 import com.sevenstars.roome.databinding.ItemChipBinding
 
 class ProfileDeviceRvAdapter: RecyclerView.Adapter<ProfileDeviceRvAdapter.DeviceViewHolder>() {
     private var dataList = listOf<DeviceLockPreferences>()
 
-    inner class DeviceViewHolder(private val binding: ItemChipBinding) :
+    inner class DeviceViewHolder(private val binding: CustomToggleButtonBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: DeviceLockPreferences) {
-            binding.tbChipName.apply {
-                text = data.title
-                textOn = data.title
-                textOff = data.title
+            binding.tvMbti.text = data.title
+
+            if(data.description.isNullOrEmpty()){
+                binding.tvMbtiDesc.visibility = View.GONE
+            }
+            binding.tvMbtiDesc.text = data.description
+
+            binding.toggleButton.apply {
+                text = null
+                textOn = null
+                textOff = null
 
                 setOnCheckedChangeListener { _, isChecked ->
                     itemClickListener.onClick(isChecked, data)
@@ -27,7 +36,7 @@ class ProfileDeviceRvAdapter: RecyclerView.Adapter<ProfileDeviceRvAdapter.Device
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {
-        val binding = ItemChipBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = CustomToggleButtonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DeviceViewHolder(binding)
     }
 

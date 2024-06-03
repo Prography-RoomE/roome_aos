@@ -46,6 +46,7 @@ class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.f
                 binding.tgCountDirectly.isChecked = false
                 binding.etCount.visibility = View.GONE
                 binding.spinnerCount.visibility = View.VISIBLE
+                binding.ivToggle.visibility = View.VISIBLE
             }
         }
 
@@ -54,6 +55,7 @@ class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.f
                 binding.tgCountRange.isChecked = false
                 binding.etCount.visibility = View.VISIBLE
                 binding.spinnerCount.visibility = View.GONE
+                binding.ivToggle.visibility = View.GONE
             }
         }
 

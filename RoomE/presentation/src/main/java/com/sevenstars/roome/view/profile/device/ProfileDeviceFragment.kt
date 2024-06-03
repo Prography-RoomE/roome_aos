@@ -11,6 +11,7 @@ import com.sevenstars.roome.databinding.FragmentProfileDeviceBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
+import com.sevenstars.roome.view.profile.VerticalSpaceItemDecoration
 import com.sevenstars.roome.view.profile.activity.ProfileActivityFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,6 +35,7 @@ class ProfileDeviceFragment: BaseFragment<FragmentProfileDeviceBinding>(R.layout
         binding.rvDevice.apply {
             adapter = deviceAdapter
             layoutManager = GridLayoutManager(requireContext(), 1)
+            addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12))
         }
 
         deviceAdapter.setData(profileViewModel.profileDefaultData.deviceLockPreferences)
