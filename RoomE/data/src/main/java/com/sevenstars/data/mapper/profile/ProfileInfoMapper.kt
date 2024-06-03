@@ -96,7 +96,7 @@ object ProfileInfoMapper {
 
     private fun deviceLockPreferencesMapper(item: List<DeviceLockPreferencesDTO>): List<DeviceLockPreferences> {
         return item.map {
-            DeviceLockPreferences(it.id, it.title)
+            DeviceLockPreferences(it.id, it.title, it.description)
         }
     }
 
