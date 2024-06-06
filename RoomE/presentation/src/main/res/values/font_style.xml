@@ -13,36 +13,36 @@
 
     <!-- Headline -->
     <style name="headline1_regular">
-        <item name="font">@font/pretendard_regular</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textSize">32sp</item>
         <item name="lineHeight">40sp</item>
     </style>
     <style name="headline1_bold">
-        <item name="font">@font/pretendard_bold</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">32sp</item>
         <item name="lineHeight">40sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="headline2_regular">
-        <item name="font">@font/pretendard_regular</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textSize">28sp</item>
         <item name="lineHeight">36sp</item>
     </style>
     <style name="headline2_bold">
-        <item name="font">@font/pretendard_bold</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">28sp</item>
         <item name="lineHeight">36sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="headline3_regular">
-        <item name="font">@font/pretendard_regular</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textSize">24sp</item>
         <item name="lineHeight">36sp</item>
     </style>
     <style name="headline3_bold">
-        <item name="font">@font/pretendard_bold</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">24sp</item>
         <item name="lineHeight">36sp</item>
         <item name="android:textStyle">bold</item>
@@ -50,19 +50,19 @@
 
     <!-- Title -->
     <style name="title1_bold">
-        <item name="font">@font/pretendard_bold</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">22sp</item>
         <item name="lineHeight">28sp</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="title2_bold">
-        <item name="font">@font/pretendard_bold</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">16sp</item>
         <item name="lineHeight">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="title3_bold">
-        <item name="font">@font/pretendard_bold</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">14sp</item>
         <item name="lineHeight">20sp</item>
         <item name="android:textStyle">bold</item>
@@ -70,29 +70,29 @@
 
     <!-- Body -->
     <style name="body1_regular">
-        <item name="font">@font/pretendard_regular</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textSize">16sp</item>
         <item name="lineHeight">24sp</item>
     </style>
     <style name="body2_regular">
-        <item name="font">@font/pretendard_regular</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textSize">14sp</item>
         <item name="lineHeight">20sp</item>
     </style>
     <style name="body3_regular">
-        <item name="font">@font/pretendard_regular</item>
+        <item name="fontFamily">@font/pretendard_regular</item>
         <item name="android:textSize">12sp</item>
         <item name="lineHeight">16sp</item>
     </style>
 
     <!-- Label -->
     <style name="label_medium">
-        <item name="font">@font/pretendard_medium</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="lineHeight">20sp</item>
     </style>
     <style name="label_bold">
-        <item name="font">@font/pretendard_bold</item>
+        <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">14sp</item>
         <item name="lineHeight">20sp</item>
         <item name="android:textStyle">bold</item>
@@ -100,7 +100,7 @@
 
     <!-- Caption -->
     <style name="caption">
-        <item name="font">@font/pretendard_medium</item>
+        <item name="fontFamily">@font/pretendard_medium</item>
         <item name="android:textSize">12sp</item>
         <item name="lineHeight">16sp</item>
     </style>

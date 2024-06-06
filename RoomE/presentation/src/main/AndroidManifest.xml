@@ -39,7 +39,9 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity android:name=".view.MainActivity"/>
-        <activity android:name=".view.profile.ProfileActivity"/>
+        <activity
+            android:name=".view.profile.ProfileActivity"
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
