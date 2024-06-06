@@ -2,7 +2,10 @@ package com.sevenstars.roome.view.splash
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.viewModels
+import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -49,9 +52,11 @@ class StartActivity: AppCompatActivity() {
             SignInActivity::class.java
         }
 
-        val intent = Intent(this, destination)
-        startActivity(intent)
-        finish()
+        Handler(Looper.getMainLooper()).postDelayed({
+            val intent = Intent(this, destination)
+            startActivity(intent)
+            finish()
+        }, 1000)
     }
 
     private fun observer() {
