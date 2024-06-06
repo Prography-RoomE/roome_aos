@@ -1,7 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.RoomE" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+
+        <!-- 상태바 -->
+        <item name="android:statusBarColor">@color/surface</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Splash Screen -->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/primary_primary</item>
+        <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">500</item>
+
+        <!-- Activity 전환 Animation 비활성화 -->
+        <item name="android:windowAnimationStyle">@null</item>
     </style>
+
+    <style name="Theme.RoomE" parent="Base.Theme.RoomE" />
 </resources>

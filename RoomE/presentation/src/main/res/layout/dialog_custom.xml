@@ -50,11 +50,11 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_goneMarginEnd="18dp"
 
-        android:background="@drawable/shape_radius_12"
-        android:backgroundTint="@color/primary_primary"
+        android:background="@drawable/shape_radius_12_with_stroke"
+        android:stateListAnimator="@null"
 
         tools:text="확인"
-        android:textColor="@color/surface"
+        android:textColor="@color/on_surface"
         style="@style/title2_bold"/>
 
     <androidx.appcompat.widget.AppCompatButton
