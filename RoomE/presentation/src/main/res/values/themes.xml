@@ -12,7 +12,14 @@
 
         <!-- Activity 전환 Animation 비활성화 -->
         <item name="android:windowAnimationStyle">@null</item>
+
+        <item name="android:buttonStyleToggle">@style/AppCompatToggleButtonStyle</item>
     </style>
 
     <style name="Theme.RoomE" parent="Base.Theme.RoomE" />
+
+    <style name="AppCompatToggleButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
 </resources>
