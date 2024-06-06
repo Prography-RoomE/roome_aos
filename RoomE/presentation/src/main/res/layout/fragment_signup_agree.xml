@@ -56,6 +56,7 @@
             android:background="@drawable/selector_circle_check_box"/>
 
         <TextView
+            android:id="@+id/tv_agree_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -82,6 +83,7 @@
             app:parentCheckBox="@id/cb_agree_all"/>
 
         <TextView
+            android:id="@+id/tv_agree_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -108,6 +110,7 @@
             app:parentCheckBox="@id/cb_agree_all"/>
 
         <TextView
+            android:id="@+id/tv_agree_service"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -147,6 +150,7 @@
             app:parentCheckBox="@id/cb_agree_all"/>
 
         <TextView
+            android:id="@+id/tv_agree_privacy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -186,6 +190,7 @@
             app:parentCheckBox="@id/cb_agree_all" />
 
         <TextView
+            android:id="@+id/tv_agree_ad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
