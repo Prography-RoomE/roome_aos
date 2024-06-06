@@ -1,9 +1,11 @@
 package com.sevenstars.roome.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -50,5 +52,20 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
         currentToast?.cancel()
         currentToast = CustomToast.makeToast(context, msg)
         currentToast?.show()
+    }
+
+    protected fun hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+
+    protected fun showKeyboardAndFocus(view: View) {
+        view.requestFocus()
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    private fun Context.hideKeyboard(view: View) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
