@@ -47,6 +47,10 @@ class ProfileMbtiFragment: BaseFragment<FragmentProfileMbtiBinding>(R.layout.fra
             }
         }
 
+        binding.tvOption.setOnClickListener {
+            binding.cbOption.isChecked = !binding.cbOption.isChecked
+        }
+
         binding.cbOption.setOnCheckedChangeListener { _, b ->
             LoggerUtils.debug(b.toString())
             if(b){

@@ -36,6 +36,12 @@ class SignupAgreeFragment: BaseFragment<FragmentSignupAgreeBinding>(R.layout.fra
             ibOpenService.setOnClickListener{openBrowser("Service")}
             ibOpenPrivacy.setOnClickListener{openBrowser("Privacy")}
             ibOpenAd.setOnClickListener{openBrowser("Ad")}
+
+            tvAgreeAll.setOnClickListener { cbAgreeAll.performClick() }
+            tvAgreeAge.setOnClickListener { cbAgreeAge.performClick() }
+            tvAgreePrivacy.setOnClickListener { cbAgreePrivacy.performClick() }
+            tvAgreeService.setOnClickListener { cbAgreeService.performClick() }
+            tvAgreeAd.setOnClickListener { cbAgreeAd.performClick() }
         }
 
         val checkedChangeListener = CompoundButton.OnCheckedChangeListener { _, _ ->
