@@ -14,9 +14,9 @@ class SignUpActivity: BaseActivity<ActivitySignUpBinding>(R.layout.activity_sign
     private val viewModel: SignUpViewModel by viewModels()
 
     override fun initView() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fl_signup, SignupAgreeFragment())
-            .commit()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fl_signup, SignupAgreeFragment())
+        fragmentTransaction.commit()
     }
 
     fun moveToSignIn(){
