@@ -55,7 +55,7 @@
 
         tools:text="확인"
         android:textColor="@color/on_surface"
-        style="@style/title2_bold"/>
+        style="@style/title3_bold"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_dialog_2"
@@ -75,6 +75,6 @@
 
         tools:text="취소"
         android:textColor="@color/surface"
-        style="@style/title2_bold"/>
+        style="@style/title3_bold"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

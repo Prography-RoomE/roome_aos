@@ -25,7 +25,7 @@
             android:id="@+id/group_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="btn_move_profile, btn_save_profile, tg_square, tg_vertical, iv_profile, tb_profile"
+            app:constraint_referenced_ids="btn_save_profile, tg_square, tg_vertical, iv_profile, tb_profile"
             android:visibility="gone"/>
 
         <androidx.constraintlayout.widget.Group
@@ -72,28 +72,29 @@
             android:id="@+id/tb_profile"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:contentInsetStart="0dp"
+            android:contentInsetStart="24dp"
 
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/title3_bold"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:text="프로필 이미지"
+                android:textColor="@color/on_surface" />
 
             <ImageButton
                 android:id="@+id/ib_back"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginStart="12dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="12dp"
 
-                android:src="@drawable/ic_arrow_back"
                 android:background="@color/transparent"
+                android:src="@drawable/ic_cancel"
                 tools:ignore="ContentDescription" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:text="프로필 이미지"
-                style="@style/title3_bold"
-                android:textColor="@color/on_surface"/>
         </Toolbar>
 
         <View
@@ -190,33 +191,17 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
 
-            app:layout_constraintBottom_toTopOf="@id/btn_move_profile"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="24dp"
+            android:layout_margin="24dp"
 
             android:background="@drawable/shape_radius_12"
             android:backgroundTint="@color/primary_primary"
 
-            android:text="저장하기"
+            android:text="이미지로 저장하기"
             style="@style/title3_bold"
             android:textColor="@color/surface"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_move_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:padding="12dp"
-
-            android:background="@color/transparent"
-            android:layout_marginBottom="24dp"
-
-            android:text="프로필 페이지로 이동"
-            style="@style/title3_bold"
-            android:textColor="@color/on_surface_variant"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

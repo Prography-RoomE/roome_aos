@@ -124,7 +124,7 @@
             android:background="@color/primary_primary"
 
             android:text="@string/btn_next"
-            style="@style/title2_bold"
+            style="@style/title3_bold"
             android:textColor="@color/surface"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -90,7 +90,7 @@
 
                 android:text="@string/btn_next"
                 android:textColor="@color/on_surface_variant"
-                style="@style/title2_bold"/>
+                style="@style/title3_bold"/>
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
