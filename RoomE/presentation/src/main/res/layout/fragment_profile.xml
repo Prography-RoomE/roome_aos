@@ -182,7 +182,7 @@
             android:text="3:4 세로형"
             android:textOn="3:4 세로형"
             android:textOff="3:4 세로형"
-            style="@style/title2_bold"
+            style="@style/title3_bold"
             android:textColor="@color/on_surface"/>
 
         <androidx.appcompat.widget.AppCompatButton

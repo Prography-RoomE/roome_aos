@@ -2,6 +2,7 @@ package com.sevenstars.roome.exetnsion
 
 import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
@@ -20,19 +21,37 @@ fun setColorBackground(
     orientation: String,
     startColor: String,
     endColor: String,
-    isRoundCorner: Boolean
+    isRoundCorner: Boolean,
+    radius: Float = 12f,
+    hasStroke: Boolean = false
 ) {
-    val cornerRadius = TypedValue.applyDimension(
+    val cornerRadius = if (isRoundCorner) {
+        TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            radius,
+            Resources.getSystem().displayMetrics
+        )
+    } else {
+        0f
+    }
+
+    val strokeWidth = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
-        12f,
+        2f,
         Resources.getSystem().displayMetrics
     )
+    val strokeColor = Color.BLACK
 
     when (mode) {
         "solid" -> {
             val shapeDrawable = ShapeDrawable(RectShape())
             shapeDrawable.paint.color = Color.parseColor(startColor)
-            if(isRoundCorner) shapeDrawable.shape = RectShapeWithCorners(cornerRadius)
+            if (isRoundCorner) shapeDrawable.shape = RectShapeWithCorners(cornerRadius)
+            if (hasStroke) {
+                shapeDrawable.paint.style = Paint.Style.STROKE
+                shapeDrawable.paint.strokeWidth = strokeWidth
+                shapeDrawable.paint.color = strokeColor
+            }
             view.background = shapeDrawable
         }
         "gradient" -> {
@@ -50,7 +69,7 @@ fun setColorBackground(
                 gradientDrawable.gradientRadius = 500f
                 gradientDrawable.shape = GradientDrawable.OVAL
             } else {
-                val setOrientation = when(orientation){
+                val setOrientation = when (orientation) {
                     "topLeftToBottomRight" -> GradientDrawable.Orientation.TL_BR
                     "topRightToBottomLeft" -> GradientDrawable.Orientation.TR_BL
                     "bottomLeftToTopRight" -> GradientDrawable.Orientation.BL_TR
@@ -65,7 +84,8 @@ fun setColorBackground(
             }
 
             gradientDrawable.colors = intArrayOf(Color.parseColor(startColor), Color.parseColor(endColor))
-            if(isRoundCorner) gradientDrawable.cornerRadius = cornerRadius
+            if (isRoundCorner) gradientDrawable.cornerRadius = cornerRadius
+            if (hasStroke) gradientDrawable.setStroke(strokeWidth.toInt(), strokeColor)
 
             view.background = gradientDrawable
         }
@@ -80,3 +100,4 @@ class RectShapeWithCorners(private val radius: Float) : RectShape() {
         canvas.drawRoundRect(rect, r, r, paint)
     }
 }
+
