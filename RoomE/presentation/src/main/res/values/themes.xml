@@ -18,8 +18,22 @@
 
     <style name="Theme.RoomE" parent="Base.Theme.RoomE" />
 
+    <!-- 토글 버튼 그림자 제거 -->
     <style name="AppCompatToggleButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:stateListAnimator">@null</item>
     </style>
+
+
+    <!-- Bottom Navigation Shift 효과 제거 -->
+    <style name="CustomBottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="itemIconSize">24dp</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.App.BottomNavigationView</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.App.BottomNavigationView</item>
+    </style>
+
+    <style name="TextAppearance.App.BottomNavigationView" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">12sp</item>
+    </style>
+
 
 </resources>

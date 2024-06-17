@@ -38,7 +38,7 @@
             android:name=".view.signup.SignUpActivity"
             android:windowSoftInputMode="adjustResize" />
 
-        <activity android:name=".view.MainActivity"/>
+        <activity android:name=".view.main.MainActivity"/>
         <activity
             android:name=".view.profile.ProfileActivity"
             android:windowSoftInputMode="adjustResize"/>

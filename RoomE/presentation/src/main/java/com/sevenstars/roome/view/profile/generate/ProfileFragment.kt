@@ -25,7 +25,7 @@ import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.ImageUtils.captureViewToCache
 import com.sevenstars.roome.utils.UiState
-import com.sevenstars.roome.view.MainActivity
+import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File

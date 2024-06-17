@@ -5,7 +5,6 @@ import androidx.activity.viewModels
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseActivity
 import com.sevenstars.roome.databinding.ActivitySignUpBinding
-import com.sevenstars.roome.view.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.signIn.SignInActivity
 import dagger.hilt.android.AndroidEntryPoint
