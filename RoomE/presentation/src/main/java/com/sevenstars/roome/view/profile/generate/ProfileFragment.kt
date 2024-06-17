@@ -25,7 +25,7 @@ import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.ImageUtils.captureViewToCache
 import com.sevenstars.roome.utils.UiState
-import com.sevenstars.roome.view.MainActivity
+import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -161,7 +161,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
         if(target == "square"){
             with(binding.icProfileSquare){
                 name.text = userName
-                experience.text = data.count.toString()
+                experience.text = data.count
                 mbti.text = if (data.mbti == "NONE") "" else data.mbti
                 emptyViewRemove(mbti)
 
@@ -190,7 +190,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
         } else {
             with(binding.icProfileVertical){
                 name.text = userName
-                experience.text = data.count.toString()
+                experience.text = data.count
                 mbti.text = if (data.mbti == "NONE") "" else data.mbti
                 emptyViewRemove(mbti)
 
