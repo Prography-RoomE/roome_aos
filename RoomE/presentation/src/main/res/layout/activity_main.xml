@@ -32,7 +32,6 @@
 
             app:layout_constraintBottom_toBottomOf="parent"
 
-            android:background="@drawable/shape_bottom_navi"
             app:menu="@menu/menu_bottom_navi"
             app:itemBackground="@null"
 
@@ -40,7 +39,11 @@
             app:labelVisibilityMode="labeled"
 
             app:itemTextColor="@color/selector_bottom_navi_color"
-            app:itemIconTint="@color/selector_bottom_navi_color" />
+            app:itemIconTint="@color/selector_bottom_navi_color"
+
+            android:background="@color/surface"
+            android:outlineSpotShadowColor="#4D000000"
+            android:elevation="0.33dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

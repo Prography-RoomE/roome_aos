@@ -1,5 +1,6 @@
 package com.sevenstars.roome.view.main
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseActivity
@@ -38,5 +39,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fc_main, fragment)
         fragmentTransaction.commit()
+    }
+
+    fun setBottomNaviVisibility(p: Boolean){
+        binding.bottomNavi.isVisible = p
     }
 }

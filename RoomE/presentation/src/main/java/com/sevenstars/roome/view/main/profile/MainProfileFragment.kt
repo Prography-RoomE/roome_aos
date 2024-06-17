@@ -2,23 +2,40 @@ package com.sevenstars.roome.view.main.profile
 
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.databinding.FragmentMainProfileBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.UiState
+import com.sevenstars.roome.view.main.MainActivity
+import com.sevenstars.roome.view.profile.generate.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fragment_main_profile) {
     private val viewModel: MainProfileViewModel by viewModels()
 
     override fun initView() {
+        (requireActivity() as MainActivity).setBottomNaviVisibility(true)
         binding.tvNick.text = userName
         viewModel.fetchData()
+    }
+
+    override fun initListener() {
+        super.initListener()
+
+        binding.btnShareKakao.setOnClickListener{
+
+        }
+
+        binding.btnProfileCard.setOnClickListener {
+            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fc_main, ProfileCardFragment())
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
     }
 
     override fun observer() {
