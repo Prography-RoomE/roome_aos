@@ -57,11 +57,17 @@
     </style>
     <style name="title2_bold">
         <item name="fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="lineHeight">26sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="title3_bold">
+        <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">16sp</item>
         <item name="lineHeight">24sp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <style name="title3_bold">
+    <style name="title4_bold">
         <item name="fontFamily">@font/pretendard_bold</item>
         <item name="android:textSize">14sp</item>
         <item name="lineHeight">20sp</item>

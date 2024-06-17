@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,6 +13,7 @@
         android:background="@color/surface">
         
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tb_main_profile"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             app:contentInsetStart="24dp"
@@ -25,6 +27,97 @@
                 style="@style/headline2_bold"
                 android:textColor="@color/on_surface"/>
         </androidx.appcompat.widget.Toolbar>
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_main_profile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tb_main_profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="12dp"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="12dp"
+
+            android:background="@drawable/shape_radius_12"
+            android:backgroundTint="@color/primary_primary">
+
+            <TextView
+                android:id="@+id/tv_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                tools:text="닉네임"
+                style="@style/title3_bold"
+                android:textColor="@color/surface"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider_1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_nick"
+                android:layout_marginVertical="16dp"
+
+                app:dividerColor="#FF6673"
+                android:alpha="0.7"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_profile_card"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                app:layout_constraintTop_toBottomOf="@id/divider_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_share_kakao"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="12dp"
+
+                android:background="@color/transparent"
+                android:text="프로필 카드"
+                style="@style/title4_bold"
+                android:textColor="@color/surface"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_share_kakao"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                app:layout_constraintTop_toTopOf="@id/btn_profile_card"
+                app:layout_constraintBottom_toBottomOf="@id/btn_profile_card"
+                app:layout_constraintStart_toEndOf="@id/btn_profile_card"
+                app:layout_constraintEnd_toEndOf="parent"
+
+                android:background="@color/transparent"
+                android:text="카카오로 공유"
+                style="@style/title4_bold"
+                android:textColor="@color/surface"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <GridLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/cl_main_profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="18dp"
+            android:layout_marginTop="24dp"
+            android:columnCount="2">
+
+            <!-- 아이템 예시 -->
+            <include layout="@layout/item_main_profile_chip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1" />
+
+            <include layout="@layout/item_main_profile_chip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"/>
+        </GridLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

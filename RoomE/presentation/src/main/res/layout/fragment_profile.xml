@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
 
                 android:text="프로필 이미지"
-                style="@style/title2_bold"
+                style="@style/title3_bold"
                 android:textColor="@color/on_surface"/>
         </Toolbar>
 
@@ -161,7 +161,7 @@
             android:text="1:1 정방형"
             android:textOn="1:1 정방형"
             android:textOff="1:1 정방형"
-            style="@style/title2_bold"
+            style="@style/title3_bold"
             android:textColor="@color/on_surface"/>
 
         <androidx.appcompat.widget.AppCompatToggleButton
@@ -199,7 +199,7 @@
             android:backgroundTint="@color/primary_primary"
 
             android:text="저장하기"
-            style="@style/title2_bold"
+            style="@style/title3_bold"
             android:textColor="@color/surface"/>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -216,7 +216,7 @@
             android:layout_marginBottom="24dp"
 
             android:text="프로필 페이지로 이동"
-            style="@style/title2_bold"
+            style="@style/title3_bold"
             android:textColor="@color/on_surface_variant"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

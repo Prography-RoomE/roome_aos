@@ -70,7 +70,7 @@
 
             android:text="@string/profile_welcome_btn_create"
             android:textColor="@color/surface"
-            style="@style/title2_bold" />
+            style="@style/title3_bold" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
