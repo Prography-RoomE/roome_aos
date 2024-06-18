@@ -32,7 +32,7 @@ class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fra
 
         binding.btnProfileCard.setOnClickListener {
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fc_main, ProfileCardFragment())
+            fragmentTransaction.replace(R.id.fl_main, ProfileCardFragment())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

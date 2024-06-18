@@ -37,7 +37,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun replaceFragment(fragment: Fragment){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fc_main, fragment)
+        fragmentTransaction.replace(R.id.fl_main, fragment)
         fragmentTransaction.commit()
     }
 
