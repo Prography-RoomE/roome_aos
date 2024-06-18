@@ -23,17 +23,19 @@
 
     <TextView
         android:id="@+id/tv_dialog_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        app:layout_constraintTop_toBottomOf="@id/tv_dialog_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-
-        tools:text="다이얼로그 제목"
         style="@style/body2_regular"
-        android:textColor="@color/on_surface"/>
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/gray30"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_dialog_title"
+        tools:text="다이얼로그 제목" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_dialog_1"
