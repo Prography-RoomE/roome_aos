@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             tools:text="RoomE"
             android:textColor="@color/surface"
-            style="@style/title3_bold"
+            style="@style/title4_bold"
             android:textSize="16sp" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:background="@drawable/chip_background_square_radius_8"
             tools:text="99999"
             android:textColor="@color/surface"
-            style="@style/title3_bold"
+            style="@style/title4_bold"
             android:gravity="center"
             android:includeFontPadding="false"
             android:layout_toEndOf="@id/name"
@@ -48,7 +48,7 @@
             android:background="@drawable/chip_background_square_radius_8"
             tools:text="ENTP"
             android:textColor="@color/surface"
-            style="@style/title3_bold"
+            style="@style/title4_bold"
             android:gravity="center"
             android:layout_alignParentEnd="true"
             tools:ignore="RelativeOverlap" />
@@ -67,7 +67,7 @@
             android:background="@drawable/chip_background_square"
             android:textColor="@color/surface"
             tools:text="🧩 어드벤처"
-            style="@style/title3_bold" />
+            style="@style/title4_bold" />
 
         <TextView
             android:id="@+id/genre2"
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/chip_background_square"
             tools:text="🫢 미스터리"
-            style="@style/title3_bold"
+            style="@style/title4_bold"
             android:textColor="@color/surface"
             android:layout_marginStart="4dp" />
 
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/chip_background_square"
             tools:text="🔎 관찰력"
-            style="@style/title3_bold"
+            style="@style/title4_bold"
             android:textColor="@color/surface"
             android:layout_marginStart="4dp" />
 
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/chip_background_square"
             tools:text="🤝 협업 능력"
-            style="@style/title3_bold"
+            style="@style/title4_bold"
             android:textColor="@color/surface"
             android:layout_marginStart="4dp" />
 
@@ -143,7 +143,7 @@
             android:background="@drawable/chip_background_square"
             android:textColor="@color/surface"
             tools:text="📊 논리적인 문제"
-            style="@style/title3_bold"/>
+            style="@style/title4_bold"/>
 
         <TextView
             android:id="@+id/important2"
@@ -151,7 +151,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/chip_background_square"
             tools:text="🎁 신선한 문제"
-            style="@style/title3_bold"
+            style="@style/title4_bold"
             android:textColor="@color/surface"
             android:layout_marginStart="4dp" />
 
@@ -177,7 +177,7 @@
             android:background="@drawable/chip_background_square"
             android:textColor="@color/surface"
             tools:text="😰 마지모탱"
-            style="@style/title3_bold"
+            style="@style/title4_bold"
             android:layout_marginEnd="4dp"/>
 
         <TextView
@@ -186,7 +186,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/chip_background_square"
             tools:text="힌트 사용 괜찮아요"
-            style="@style/title3_bold"
+            style="@style/title4_bold"
             android:textColor="@color/surface" />
     </LinearLayout>
 
@@ -203,7 +203,7 @@
             android:background="@drawable/chip_background_square"
             android:textColor="@color/surface"
             tools:text="장치&amp;자물쇠 모두"
-            style="@style/title3_bold"/>
+            style="@style/title4_bold"/>
 
         <TextView
             android:id="@+id/activity_preference"
@@ -211,7 +211,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/chip_background_square"
             tools:text="활동성 최소"
-            style="@style/title3_bold"
+            style="@style/title4_bold"
             android:textColor="@color/surface"
             android:layout_marginStart="4dp" />
     </LinearLayout>
@@ -229,7 +229,7 @@
             android:background="@drawable/chip_background_square"
             android:textColor="@color/surface"
             tools:text="노가다 문제"
-            style="@style/title3_bold"/>
+            style="@style/title4_bold"/>
 
         <TextView
             android:id="@+id/dislike2"
@@ -237,7 +237,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/chip_background_square"
             tools:text="이과형 문제"
-            style="@style/title3_bold"
+            style="@style/title4_bold"
             android:textColor="@color/surface"
             android:layout_marginStart="4dp" />
 

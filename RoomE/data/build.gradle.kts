@@ -51,7 +51,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
     implementation("com.jakewharton.timber:timber:5.0.1")
-    implementation("com.github.orhanobut:logger:master-SNAPSHOT")
+    implementation("com.orhanobut:logger:2.2.0")
 
     implementation("com.kakao.sdk:v2-user:2.20.1")
     implementation("com.google.android.gms:play-services-auth:21.1.1")

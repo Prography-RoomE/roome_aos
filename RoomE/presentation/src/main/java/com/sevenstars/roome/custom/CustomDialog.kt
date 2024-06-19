@@ -20,7 +20,9 @@ class CustomDialog private constructor(
 
     enum class DialogType {
         PROFILE_CONTINUE,
-        SAVE_PROFILE
+        SAVE_PROFILE,
+        SIGN_OUT,
+        UNLINK
     }
 
     companion object {
@@ -75,6 +77,8 @@ class CustomDialog private constructor(
         when (dialogType) {
             DialogType.PROFILE_CONTINUE -> setProfileContinue()
             DialogType.SAVE_PROFILE -> setSaveProfile()
+            DialogType.SIGN_OUT -> setSignOut()
+            DialogType.UNLINK -> setUnlink()
         }
 
         return binding.root
@@ -119,5 +123,37 @@ class CustomDialog private constructor(
         }
 
         binding.btnDialog2.visibility = View.GONE
+    }
+
+    private fun setSignOut() {
+        binding.tvDialogTitle.text = "로그아웃"
+        binding.tvDialogContent.text = "정말 로그아웃하시겠어요?"
+        binding.btnDialog1.text = "취소"
+        binding.btnDialog2.text = "로그아웃"
+
+        binding.btnDialog1.setOnClickListener {
+            dismiss()
+        }
+
+        binding.btnDialog2.setOnClickListener {
+            buttonClickListener?.onButton2Clicked()
+            dismiss()
+        }
+    }
+
+    private fun setUnlink() {
+        binding.tvDialogTitle.text = "정말로 탈퇴하시겠어요?"
+        binding.tvDialogContent.text = "지금까지 작성한 정보가 모두 삭제되고,\n복구할 수 없어요."
+        binding.btnDialog1.text = "취소"
+        binding.btnDialog2.text = "탈퇴"
+
+        binding.btnDialog1.setOnClickListener {
+            dismiss()
+        }
+
+        binding.btnDialog2.setOnClickListener {
+            buttonClickListener?.onButton2Clicked()
+            dismiss()
+        }
     }
 }

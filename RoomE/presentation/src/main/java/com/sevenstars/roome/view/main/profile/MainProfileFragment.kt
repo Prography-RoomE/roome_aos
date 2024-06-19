@@ -9,7 +9,6 @@ import com.sevenstars.roome.databinding.FragmentMainProfileBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
-import com.sevenstars.roome.view.profile.generate.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -32,7 +31,7 @@ class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fra
 
         binding.btnProfileCard.setOnClickListener {
             val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fc_main, ProfileCardFragment())
+            fragmentTransaction.replace(R.id.fl_main, ProfileCardFragment())
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

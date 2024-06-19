@@ -56,4 +56,26 @@ class KakaoAuthService @Inject constructor(
             }
         }
     }
+
+    fun signOut(signOutListener: ((Throwable?) -> Unit)? = null) {
+        client.logout { error ->
+            if (error != null) {
+                LoggerUtils.error("로그아웃 실패. SDK에서 토큰 삭제됨 $error")
+            } else {
+                LoggerUtils.info("로그아웃 성공. SDK에서 토큰 삭제됨")
+            }
+            signOutListener?.invoke(error)
+        }
+    }
+
+    fun withdraw(withdrawListener: ((Throwable?) -> Unit)? = null) {
+        client.unlink { error ->
+            if (error != null) {
+                LoggerUtils.error("회원탈퇴 실패 $error")
+            } else {
+                LoggerUtils.info("회원탈퇴 성공")
+            }
+            withdrawListener?.invoke(error)
+        }
+    }
 }

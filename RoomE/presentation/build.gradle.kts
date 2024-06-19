@@ -77,7 +77,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
     implementation("com.jakewharton.timber:timber:5.0.1")
-    implementation("com.github.orhanobut:logger:master-SNAPSHOT")
+    implementation("com.orhanobut:logger:2.2.0")
 
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     implementation("androidx.activity:activity-ktx:1.9.0")
