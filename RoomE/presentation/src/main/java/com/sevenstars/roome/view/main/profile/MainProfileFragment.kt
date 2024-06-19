@@ -9,7 +9,6 @@ import com.sevenstars.roome.databinding.FragmentMainProfileBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
-import com.sevenstars.roome.view.profile.generate.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 

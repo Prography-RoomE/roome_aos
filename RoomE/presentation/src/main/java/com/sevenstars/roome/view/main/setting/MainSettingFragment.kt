@@ -6,11 +6,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.sevenstars.data.service.auth.KakaoAuthService
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.enums.Provider
+import com.sevenstars.roome.BuildConfig
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.databinding.FragmentMainSettingBinding
+import com.sevenstars.roome.utils.Constants.PRIVACY_POLICY
+import com.sevenstars.roome.utils.Constants.TERMS_OF_SERVICE
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.splash.StartActivity
@@ -32,16 +35,17 @@ class MainSettingFragment: BaseFragment<FragmentMainSettingBinding>(R.layout.fra
 
     override fun initView() {
         (requireActivity() as MainActivity).setBottomNaviVisibility(true)
+        binding.tvCurrentVersion.text = "앱 버전 ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
     }
 
     override fun initListener() {
         super.initListener()
 
-        binding.tvTos.setOnClickListener { moveWebView("서비스 이용약관", "https://chief-collarbone-3ba.notion.site/faf7c25d73ed45a094177f8904868286?pvs=4") }
-        binding.ibTos.setOnClickListener { moveWebView("서비스 이용약관", "https://chief-collarbone-3ba.notion.site/faf7c25d73ed45a094177f8904868286?pvs=4") }
+        binding.tvTos.setOnClickListener { moveWebView("서비스 이용약관", TERMS_OF_SERVICE) }
+        binding.ibTos.setOnClickListener { moveWebView("서비스 이용약관", TERMS_OF_SERVICE) }
 
-        binding.tvPrivacy.setOnClickListener { moveWebView("개인정보처리방침", "https://chief-collarbone-3ba.notion.site/faf7c25d73ed45a094177f8904868286?pvs=4") }
-        binding.ibPrivacy.setOnClickListener { moveWebView("개인정보처리방침", "https://chief-collarbone-3ba.notion.site/faf7c25d73ed45a094177f8904868286?pvs=4") }
+        binding.tvPrivacy.setOnClickListener { moveWebView("개인정보처리방침", PRIVACY_POLICY) }
+        binding.ibPrivacy.setOnClickListener { moveWebView("개인정보처리방침", PRIVACY_POLICY) }
 
         binding.tvUpdate.setOnClickListener {  }
         binding.ibUpdate.setOnClickListener {  }

@@ -20,12 +20,13 @@ class SignUpViewModel @Inject constructor(
     private val saveNickUseCase: SaveNickUseCase
 ): ViewModel() {
 
-
     // 회원가입 요청 상태
     private val _saveState = MutableLiveData<UiState<Unit>>(UiState.Loading)
     val saveState: LiveData<UiState<Unit>> get() = _saveState
 
     var isMarketingAgree = false
+    var updateAgreementTitle = ""
+
     var validatedNick = ""
 
     // 닉네임 유효성 체크 상태

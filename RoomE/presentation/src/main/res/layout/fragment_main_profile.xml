@@ -146,19 +146,13 @@
                     android:layout_columnWeight="1" />
 
                 <include layout="@layout/item_main_profile_chip"
-                    android:id="@+id/chip_profile_dislike_factor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1" />
-
-                <include layout="@layout/item_main_profile_chip"
                     android:id="@+id/chip_profile_horror"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1" />
 
                 <include layout="@layout/item_main_profile_chip"
-                    android:id="@+id/chip_profile_activity"
+                    android:id="@+id/chip_profile_hint"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1" />
@@ -170,13 +164,19 @@
                     android:layout_columnWeight="1" />
 
                 <include layout="@layout/item_main_profile_chip"
-                    android:id="@+id/chip_profile_color"
+                    android:id="@+id/chip_profile_activity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1" />
 
                 <include layout="@layout/item_main_profile_chip"
-                    android:id="@+id/chip_profile_hint"
+                    android:id="@+id/chip_profile_dislike_factor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1" />
+
+                <include layout="@layout/item_main_profile_chip"
+                    android:id="@+id/chip_profile_color"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1" />
