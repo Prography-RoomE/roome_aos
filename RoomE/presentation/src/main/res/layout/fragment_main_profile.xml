@@ -179,7 +179,8 @@
                     android:id="@+id/chip_profile_color"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1" />
+                    android:layout_columnWeight="1"
+                    android:layout_marginBottom="12dp"/>
             </GridLayout>
         </ScrollView>
 

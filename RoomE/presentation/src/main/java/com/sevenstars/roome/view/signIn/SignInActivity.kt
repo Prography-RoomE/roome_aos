@@ -13,6 +13,7 @@ import com.sevenstars.data.service.auth.KakaoAuthService
 import com.sevenstars.roome.databinding.ActivitySignInBinding
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.enums.Provider
+import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.custom.CustomToast
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.splash.StartActivity
@@ -48,7 +49,17 @@ class SignInActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         observer()
+        initListener()
+        showUnlinkDialog()
+    }
 
+    private fun showUnlinkDialog(){
+        if(intent.hasExtra("isUnlink")){
+            CustomDialog.getInstance(CustomDialog.DialogType.UNLINK_SUCCESS, null).show(supportFragmentManager, "")
+        }
+    }
+
+    private fun initListener(){
         binding.btnKakaoLogin.setOnClickListener {
             kakaoAuthService.signInKakao(viewModel::signIn)
         }

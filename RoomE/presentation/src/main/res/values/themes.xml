@@ -22,8 +22,7 @@
     <style name="AppCompatToggleButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:stateListAnimator">@null</item>
     </style>
-
-
+    
     <!-- Bottom Navigation Shift 효과 제거 -->
     <style name="CustomBottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="itemIconSize">24dp</item>
@@ -35,5 +34,10 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-
+    <style name="OpinionEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/transparent</item> <!-- focus false 경우 밑줄 부분 -->
+        <item name="colorControlActivated">@color/primary_primary</item>
+        <item name="android:textCursorDrawable">@drawable/shape_cursor</item> <!-- cursor color -->
+        <item name="android:textColorHighlight">@color/gray90</item> <!-- text selection -->
+    </style>
 </resources>

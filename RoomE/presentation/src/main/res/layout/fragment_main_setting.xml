@@ -36,7 +36,7 @@
             app:layout_constraintTop_toBottomOf="@id/tb_main_setting"
             android:background="@color/surface"
 
-            android:text="약관 및 개인정보 처리 동의"
+            android:text="서비스 이용약관"
             style="@style/body1_regular"
             android:textColor="@color/on_surface"
             android:gravity="center_vertical"
@@ -62,7 +62,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_tos"
             android:background="@color/surface"
 
-            android:text="개인정보 처리방침"
+            android:text="개인정보처리방침"
             style="@style/body1_regular"
             android:textColor="@color/on_surface"
             android:gravity="center_vertical"
@@ -200,7 +200,8 @@
             style="@style/body3_regular"
             android:textColor="@color/on_surface_variant"
             android:gravity="center_vertical"
-            android:paddingHorizontal="24dp"/>
+            android:paddingHorizontal="24dp"
+            android:visibility="gone"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

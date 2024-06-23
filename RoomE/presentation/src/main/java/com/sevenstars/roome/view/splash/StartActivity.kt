@@ -54,6 +54,11 @@ class StartActivity: AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, destination)
+
+            if(getIntent().hasExtra("isUnlink")){
+                intent.putExtra("isUnlink", true)
+            }
+
             startActivity(intent)
             finish()
         }, 1000)
