@@ -50,7 +50,7 @@ object ProfileInfoMapper {
 
     private fun activitiesMapper(item: List<ActivitiesDTO>): List<Activities> {
         return item.map {
-            Activities(it.id, it.title, it.description)
+            Activities(it.id, it.title, it.description, it.text)
         }
     }
 
@@ -66,43 +66,43 @@ object ProfileInfoMapper {
 
     fun genresMapper(item: List<GenresDTO>): List<Genres> {
         return item.map {
-            Genres(it.id, it.title)
+            Genres(it.id, it.title, it.text)
         }
     }
 
     fun strengthsMapper(item: List<StrengthsDTO>): List<Strengths> {
         return item.map {
-            Strengths(it.id, it.title)
+            Strengths(it.id, it.title, it.text)
         }
     }
 
     fun importantFactorsMapper(item: List<ImportantFactorsDTO>): List<ImportantFactors> {
         return item.map {
-            ImportantFactors(it.id, it.title)
+            ImportantFactors(it.id, it.title, it.text)
         }
     }
 
     private fun horrorThemeMapper(item: List<HorrorThemePositionsDTO>): List<HorrorThemePositions> {
         return item.map {
-            HorrorThemePositions(it.id, it.title, it.description)
+            HorrorThemePositions(it.id, it.title, it.description, it.text)
         }
     }
 
     private fun hintUsagePreferencesMapper(item: List<HintUsagePreferencesDTO>): List<HintUsagePreferences> {
         return item.map {
-            HintUsagePreferences(it.id, it.title, it.description)
+            HintUsagePreferences(it.id, it.title, it.description, it.text)
         }
     }
 
     private fun deviceLockPreferencesMapper(item: List<DeviceLockPreferencesDTO>): List<DeviceLockPreferences> {
         return item.map {
-            DeviceLockPreferences(it.id, it.title, it.description)
+            DeviceLockPreferences(it.id, it.title, it.description, it.text)
         }
     }
 
     fun dislikedFactorsMapper(item: List<DislikedFactorsDTO>): List<DislikedFactors> {
         return item.map {
-            DislikedFactors(it.id, it.title)
+            DislikedFactors(it.id, it.title, it.text)
         }
     }
 }

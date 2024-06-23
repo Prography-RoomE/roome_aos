@@ -51,7 +51,7 @@ object ProfileMapper {
         if(item == null) return null
 
         return item.run {
-            Activities(id, title, description)
+            Activities(id, title, description, text)
         }
     }
 
@@ -67,7 +67,7 @@ object ProfileMapper {
         if(item == null) return null
 
         return item.run {
-            HintUsagePreferences(id, title, description)
+            HintUsagePreferences(id, title, description, text)
         }
     }
 
@@ -75,7 +75,7 @@ object ProfileMapper {
         if(item == null) return null
 
         return item.run {
-            DeviceLockPreferences(id, title, description)
+            DeviceLockPreferences(id, title, description, text)
         }
     }
 
@@ -83,7 +83,7 @@ object ProfileMapper {
         if(item == null) return null
 
         return item.run {
-            HorrorThemePositions(id, title, description)
+            HorrorThemePositions(id, title, description, text)
         }
     }
 }
