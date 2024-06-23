@@ -3,12 +3,9 @@ package com.sevenstars.roome.view.profile.strength
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sevenstars.domain.usecase.profile.SaveGenresUseCase
-import com.sevenstars.domain.usecase.profile.SaveRoomCountUseCase
 import com.sevenstars.domain.usecase.profile.SaveStrengthsUseCase
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
-import com.sevenstars.roome.view.profile.genres.ProfileGenresViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

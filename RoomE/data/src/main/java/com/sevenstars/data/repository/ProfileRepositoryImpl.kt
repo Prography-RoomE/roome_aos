@@ -13,7 +13,6 @@ import com.sevenstars.domain.model.profile.SavedProfileData
 import com.sevenstars.domain.repository.ProfileRepository
 import com.sevenstars.domain.utils.RoomeResult
 import javax.inject.Inject
-import kotlin.math.max
 
 class ProfileRepositoryImpl @Inject constructor(
     private val profileRemoteDataSource: ProfileRemoteDataSource

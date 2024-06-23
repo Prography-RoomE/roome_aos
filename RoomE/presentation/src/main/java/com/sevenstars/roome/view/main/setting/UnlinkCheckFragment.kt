@@ -15,8 +15,6 @@ import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.custom.IndentLeadingMarginSpan
 import com.sevenstars.roome.databinding.FragmentUnlinkCheckBinding
-import com.sevenstars.roome.databinding.FragmentUnlinkOpinionBinding
-import com.sevenstars.roome.databinding.FragmentUnlinkReasonBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint

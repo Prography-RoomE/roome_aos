@@ -1,6 +1,5 @@
 package com.sevenstars.data.mapper.profile
 
-import com.sevenstars.data.model.profile.info.ResponseProfileInfoDTO
 import com.sevenstars.data.model.profile.info.ActivitiesDTO
 import com.sevenstars.data.model.profile.info.ColorsDTO
 import com.sevenstars.data.model.profile.info.CountRangeDTO
@@ -10,6 +9,7 @@ import com.sevenstars.data.model.profile.info.GenresDTO
 import com.sevenstars.data.model.profile.info.HintUsagePreferencesDTO
 import com.sevenstars.data.model.profile.info.HorrorThemePositionsDTO
 import com.sevenstars.data.model.profile.info.ImportantFactorsDTO
+import com.sevenstars.data.model.profile.info.ResponseProfileInfoDTO
 import com.sevenstars.data.model.profile.info.StrengthsDTO
 import com.sevenstars.domain.model.profile.ProfileInfoEntity
 import com.sevenstars.domain.model.profile.info.Activities

@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sevenstars.domain.usecase.profile.SaveImportantUseCase
-import com.sevenstars.domain.usecase.profile.SaveMBTIUseCase
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel

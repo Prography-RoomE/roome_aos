@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.internal.userAgent
 
 @AndroidEntryPoint
 class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_profile) {

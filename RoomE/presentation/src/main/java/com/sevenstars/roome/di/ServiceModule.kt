@@ -1,8 +1,8 @@
 package com.sevenstars.roome.di
 
 import com.sevenstars.data.service.ProfileService
-import com.sevenstars.data.service.auth.AuthService
 import com.sevenstars.data.service.UserService
+import com.sevenstars.data.service.auth.AuthService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

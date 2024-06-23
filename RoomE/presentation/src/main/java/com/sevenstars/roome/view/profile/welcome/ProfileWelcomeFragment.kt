@@ -9,9 +9,9 @@ import com.sevenstars.domain.enums.ProfileState
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.base.RoomeApplication.Companion.userName
+import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.databinding.FragmentWelcomeBinding
 import com.sevenstars.roome.utils.UiState
-import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.activity.ProfileActivityFragment

@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sevenstars.domain.model.profile.info.HorrorThemePositions
-import com.sevenstars.domain.model.profile.info.ImportantFactors
 import com.sevenstars.roome.databinding.CustomToggleButtonBinding
-import com.sevenstars.roome.databinding.ItemChipBinding
 
 class ProfileHorrorRvAdapter: RecyclerView.Adapter<ProfileHorrorRvAdapter.HorrorViewHolder>() {
     private var dataList = listOf<HorrorThemePositions>()

@@ -1,14 +1,8 @@
 package com.sevenstars.roome.view.main.setting
 
-import android.content.Context
-import android.graphics.Rect
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.sevenstars.data.utils.LoggerUtils

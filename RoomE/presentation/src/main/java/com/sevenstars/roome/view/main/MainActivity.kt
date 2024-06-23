@@ -7,7 +7,6 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseActivity
 import com.sevenstars.roome.base.RoomeApplication
-import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.databinding.ActivityMainBinding
 import com.sevenstars.roome.view.main.profile.MainProfileFragment
 import com.sevenstars.roome.view.main.setting.MainSettingFragment

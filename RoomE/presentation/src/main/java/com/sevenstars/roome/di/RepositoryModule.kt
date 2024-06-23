@@ -1,8 +1,8 @@
 package com.sevenstars.roome.di
 
-import com.sevenstars.data.repository.UserRepositoryImpl
 import com.sevenstars.data.repository.AuthRepositoryImpl
 import com.sevenstars.data.repository.ProfileRepositoryImpl
+import com.sevenstars.data.repository.UserRepositoryImpl
 import com.sevenstars.domain.repository.ProfileRepository
 import com.sevenstars.domain.repository.UserRepository
 import com.sevenstars.domain.repository.auth.AuthRepository

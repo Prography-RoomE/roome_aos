@@ -9,8 +9,8 @@ import android.provider.MediaStore
 import android.view.View
 import java.io.File
 import java.io.FileOutputStream
-import java.io.OutputStream
 import java.io.IOException
+import java.io.OutputStream
 
 object ImageUtils {
 

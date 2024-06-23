@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sevenstars.domain.model.profile.info.DeviceLockPreferences
 import com.sevenstars.roome.databinding.CustomToggleButtonBinding
-import com.sevenstars.roome.databinding.ItemChipBinding
 
 class ProfileDeviceRvAdapter: RecyclerView.Adapter<ProfileDeviceRvAdapter.DeviceViewHolder>() {
     private var dataList = listOf<DeviceLockPreferences>()

@@ -1,15 +1,6 @@
 package com.sevenstars.data.model.profile.info
 
 import com.google.gson.annotations.SerializedName
-import com.sevenstars.data.model.profile.info.ActivitiesDTO
-import com.sevenstars.data.model.profile.info.ColorsDTO
-import com.sevenstars.data.model.profile.info.DeviceLockPreferencesDTO
-import com.sevenstars.data.model.profile.info.DislikedFactorsDTO
-import com.sevenstars.data.model.profile.info.GenresDTO
-import com.sevenstars.data.model.profile.info.HintUsagePreferencesDTO
-import com.sevenstars.data.model.profile.info.HorrorThemePositionsDTO
-import com.sevenstars.data.model.profile.info.ImportantFactorsDTO
-import com.sevenstars.data.model.profile.info.StrengthsDTO
 
 data class ResponseProfileInfoDTO(
     @SerializedName("roomCountRanges")
