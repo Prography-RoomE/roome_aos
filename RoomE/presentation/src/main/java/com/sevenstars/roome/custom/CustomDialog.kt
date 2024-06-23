@@ -22,7 +22,8 @@ class CustomDialog private constructor(
         PROFILE_CONTINUE,
         SAVE_PROFILE,
         SIGN_OUT,
-        UNLINK
+        UNLINK,
+        UNLINK_SUCCESS
     }
 
     companion object {
@@ -79,6 +80,7 @@ class CustomDialog private constructor(
             DialogType.SAVE_PROFILE -> setSaveProfile()
             DialogType.SIGN_OUT -> setSignOut()
             DialogType.UNLINK -> setUnlink()
+            DialogType.UNLINK_SUCCESS -> setUnlinkSuccess()
         }
 
         return binding.root
@@ -155,5 +157,19 @@ class CustomDialog private constructor(
             buttonClickListener?.onButton2Clicked()
             dismiss()
         }
+    }
+
+    private fun setUnlinkSuccess(){
+        binding.tvDialogTitle.text = "탈퇴 완료"
+        binding.tvDialogContent.text = "탈퇴 처리가 성공적으로 완료되었습니다."
+        binding.btnDialog1.text = "확인"
+        binding.btnDialog1.backgroundTintList = AppCompatResources.getColorStateList(requireContext(), R.color.primary_primary)
+        binding.btnDialog1.setTextColor(requireContext().getColor(R.color.surface))
+
+        binding.btnDialog1.setOnClickListener {
+            dismiss()
+        }
+
+        binding.btnDialog2.visibility = View.GONE
     }
 }
