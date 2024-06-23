@@ -1,6 +1,5 @@
 package com.sevenstars.roome.view.main.setting
 
-import android.content.Intent
 import androidx.fragment.app.viewModels
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.sevenstars.data.service.auth.KakaoAuthService
@@ -16,7 +15,6 @@ import com.sevenstars.roome.utils.Constants.PRIVACY_POLICY
 import com.sevenstars.roome.utils.Constants.TERMS_OF_SERVICE
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
-import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -82,20 +80,10 @@ class MainSettingFragment: BaseFragment<FragmentMainSettingBinding>(R.layout.fra
     }
 
     private fun unlink(){
-        CustomDialog.getInstance(CustomDialog.DialogType.UNLINK, null).apply {
-            setButtonClickListener(object: CustomDialog.OnButtonClickListener{
-                override fun onButton1Clicked() { }
-                override fun onButton2Clicked() {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        val provider = app.userPreferences.getLoginProvider().getOrNull().orEmpty()
-                        launch(Dispatchers.Main){
-                            if(provider == Provider.KAKAO.provider) unlinkKakao()
-                            else unlinkGoogle()
-                        }
-                    }
-                }
-            })
-        }.show(requireActivity().supportFragmentManager, "Unlink")
+        val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fl_main, UnlinkReasonFragment())
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 
     private fun signOutKakao(){
@@ -120,29 +108,6 @@ class MainSettingFragment: BaseFragment<FragmentMainSettingBinding>(R.layout.fra
             }
     }
 
-    private fun unlinkKakao(){
-        kakaoAuthService.withdraw { error ->
-            if (error != null) {
-                showToast("카카오 회원탈퇴 실패: ${error.message}")
-            } else {
-                LoggerUtils.info("카카오 회원탈퇴 성공")
-                viewModel.unlink()
-            }
-        }
-    }
-
-    private fun unlinkGoogle(){
-        googleSignInClient.revokeAccess()
-            .addOnCompleteListener(requireActivity()){
-                LoggerUtils.info("구글 회원탈퇴 성공")
-                viewModel.unlink()
-            }
-            .addOnFailureListener{
-                showToast("구글 회원탈퇴 실패: ${it.message}")
-            }
-
-    }
-
     override fun observer() {
         super.observer()
 
@@ -153,43 +118,9 @@ class MainSettingFragment: BaseFragment<FragmentMainSettingBinding>(R.layout.fra
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
-                    removeData()
+                    (requireActivity() as MainActivity).removeData()
                 }
             }
         }
-
-        viewModel.unlinkState.observe(viewLifecycleOwner){
-            when(it){
-                is UiState.Failure -> {
-                    showToast("회원탈퇴 실패: ${it.message}")
-                }
-                is UiState.Loading -> {}
-                is UiState.Success -> {
-                    removeData()
-                }
-            }
-        }
-    }
-
-    private fun removeData(){
-        CoroutineScope(Dispatchers.IO).launch {
-            app.userPreferences.clearData()
-                .onSuccess {
-                    launch(Dispatchers.Main){
-                        restartApplication()
-                    }
-                }.onFailure { _ ->
-                    launch(Dispatchers.Main){
-                        showToast("데이터 삭제 실패")
-                    }
-                }
-        }
-    }
-
-    private fun restartApplication() {
-        val intent = Intent(requireContext(), StartActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        startActivity(intent)
-        requireActivity().finish()
     }
 }

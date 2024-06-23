@@ -6,7 +6,6 @@ import androidx.fragment.app.activityViewModels
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentSignupAgreeBinding
-import com.sevenstars.roome.utils.Constants
 import com.sevenstars.roome.utils.Constants.PRIVACY_POLICY
 import com.sevenstars.roome.utils.Constants.TERMS_OF_SERVICE
 import com.sevenstars.roome.view.main.setting.WebViewFragment

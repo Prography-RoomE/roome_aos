@@ -1,28 +1,18 @@
 package com.sevenstars.data.mapper.profile
 
 import com.sevenstars.data.model.profile.ResponseProfileDTO
-import com.sevenstars.data.model.profile.info.ResponseProfileInfoDTO
 import com.sevenstars.data.model.profile.info.ActivitiesDTO
 import com.sevenstars.data.model.profile.info.ColorsDTO
 import com.sevenstars.data.model.profile.info.DeviceLockPreferencesDTO
-import com.sevenstars.data.model.profile.info.DislikedFactorsDTO
-import com.sevenstars.data.model.profile.info.GenresDTO
 import com.sevenstars.data.model.profile.info.HintUsagePreferencesDTO
 import com.sevenstars.data.model.profile.info.HorrorThemePositionsDTO
-import com.sevenstars.data.model.profile.info.ImportantFactorsDTO
-import com.sevenstars.data.model.profile.info.StrengthsDTO
 import com.sevenstars.domain.enums.ProfileState
-import com.sevenstars.domain.model.profile.ProfileInfoEntity
 import com.sevenstars.domain.model.profile.SavedProfileData
 import com.sevenstars.domain.model.profile.info.Activities
 import com.sevenstars.domain.model.profile.info.Colors
 import com.sevenstars.domain.model.profile.info.DeviceLockPreferences
-import com.sevenstars.domain.model.profile.info.DislikedFactors
-import com.sevenstars.domain.model.profile.info.Genres
 import com.sevenstars.domain.model.profile.info.HintUsagePreferences
 import com.sevenstars.domain.model.profile.info.HorrorThemePositions
-import com.sevenstars.domain.model.profile.info.ImportantFactors
-import com.sevenstars.domain.model.profile.info.Strengths
 
 
 object ProfileMapper {
@@ -51,7 +41,7 @@ object ProfileMapper {
         if(item == null) return null
 
         return item.run {
-            Activities(id, title, description)
+            Activities(id, title, description, text)
         }
     }
 
@@ -67,7 +57,7 @@ object ProfileMapper {
         if(item == null) return null
 
         return item.run {
-            HintUsagePreferences(id, title, description)
+            HintUsagePreferences(id, title, description, text)
         }
     }
 
@@ -75,7 +65,7 @@ object ProfileMapper {
         if(item == null) return null
 
         return item.run {
-            DeviceLockPreferences(id, title, description)
+            DeviceLockPreferences(id, title, description, text)
         }
     }
 
@@ -83,7 +73,7 @@ object ProfileMapper {
         if(item == null) return null
 
         return item.run {
-            HorrorThemePositions(id, title, description)
+            HorrorThemePositions(id, title, description, text)
         }
     }
 }

@@ -2,7 +2,6 @@ package com.sevenstars.roome.view.signIn
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +9,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.sevenstars.data.service.auth.KakaoAuthService
-import com.sevenstars.roome.databinding.ActivitySignInBinding
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.enums.Provider
+import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.custom.CustomToast
+import com.sevenstars.roome.databinding.ActivitySignInBinding
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +48,17 @@ class SignInActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         observer()
+        initListener()
+        showUnlinkDialog()
+    }
 
+    private fun showUnlinkDialog(){
+        if(intent.hasExtra("isUnlink")){
+            CustomDialog.getInstance(CustomDialog.DialogType.UNLINK_SUCCESS, null).show(supportFragmentManager, "")
+        }
+    }
+
+    private fun initListener(){
         binding.btnKakaoLogin.setOnClickListener {
             kakaoAuthService.signInKakao(viewModel::signIn)
         }

@@ -1,10 +1,12 @@
 package com.sevenstars.roome.base
 
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
@@ -33,6 +35,7 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
         initListener()
         observer()
         afterViewCreated()
+        setupKeyboardListener()
     }
 
     override fun onDestroyView() {
@@ -47,6 +50,8 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
     protected open fun initListener() {}
 
     protected open fun observer() {}
+
+    protected open fun onKeyboardVisibilityChanged(isVisible: Boolean) {}
 
     protected fun showToast(msg: String) {
         currentToast?.cancel()
@@ -67,5 +72,24 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
     private fun Context.hideKeyboard(view: View) {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun setupKeyboardListener() {
+        val rootView = view?.rootView
+        rootView?.viewTreeObserver?.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            private val rect = Rect()
+
+            override fun onGlobalLayout() {
+                rootView.getWindowVisibleDisplayFrame(rect)
+                val screenHeight = rootView.height
+                val keypadHeight = screenHeight - rect.bottom
+
+                if (keypadHeight > screenHeight * 0.15) {
+                    onKeyboardVisibilityChanged(true)
+                } else {
+                    onKeyboardVisibilityChanged(false)
+                }
+            }
+        })
     }
 }

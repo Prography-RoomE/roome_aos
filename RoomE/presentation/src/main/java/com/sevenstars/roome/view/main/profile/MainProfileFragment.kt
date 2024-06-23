@@ -61,8 +61,8 @@ class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fra
             binding.chipProfileGenres.apply {
                 groupContextType2.visibility = View.VISIBLE
                 tvChipTitle.text = "선호 장르"
-                tvChipContext1.text = it[0].title
-                if(it.size == 2) tvChipContext2.text = it[1].title
+                tvChipContext1.text = it[0].text
+                if(it.size == 2) tvChipContext2.text = it[1].text
             }
         }
 
@@ -78,8 +78,8 @@ class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fra
             binding.chipProfileStrength.apply {
                 groupContextType2.visibility = View.VISIBLE
                 tvChipTitle.text = "강점"
-                tvChipContext1.text = it[0].title
-                if(it.size == 2) tvChipContext2.text = it[1].title
+                tvChipContext1.text = it[0].text
+                if(it.size == 2) tvChipContext2.text = it[1].text
             }
         }
 
@@ -87,8 +87,8 @@ class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fra
             binding.chipProfileImportantFactor.apply {
                 groupContextType2.visibility = View.VISIBLE
                 tvChipTitle.text = "테마 중요 요소"
-                tvChipContext1.text = it[0].title
-                if(it.size == 2) tvChipContext2.text = it[1].title
+                tvChipContext1.text = it[0].text
+                if(it.size == 2) tvChipContext2.text = it[1].text
             }
         }
 
@@ -96,7 +96,7 @@ class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fra
             binding.chipProfileHorror.apply {
                 groupContextType2.visibility = View.VISIBLE
                 tvChipTitle.text = "공포테마 포지션"
-                tvChipContext1.text = it.title
+                tvChipContext1.text = it.text
             }
         }
 
@@ -104,7 +104,7 @@ class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fra
             binding.chipProfileHint.apply {
                 groupContextType2.visibility = View.VISIBLE
                 tvChipTitle.text = "힌트 선호도"
-                tvChipContext1.text = it.title
+                tvChipContext1.text = it.text
             }
         }
 
@@ -112,7 +112,7 @@ class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fra
             binding.chipProfileDevice.apply {
                 groupContextType2.visibility = View.VISIBLE
                 tvChipTitle.text = "장치/자물쇠 선호도"
-                tvChipContext1.text = it.title
+                tvChipContext1.text = it.text
             }
         }
 
@@ -120,7 +120,7 @@ class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fra
             binding.chipProfileActivity.apply {
                 groupContextType2.visibility = View.VISIBLE
                 tvChipTitle.text = "활동성 선호도"
-                tvChipContext1.text = it.title
+                tvChipContext1.text = it.text
             }
         }
 
@@ -128,8 +128,8 @@ class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fra
             binding.chipProfileDislikeFactor.apply {
                 groupContextType2.visibility = View.VISIBLE
                 tvChipTitle.text = "싫어하는 요소"
-                tvChipContext1.text = it[0].title
-                if(it.size == 2) tvChipContext2.text = it[1].title
+                tvChipContext1.text = it[0].text
+                if(it.size == 2) tvChipContext2.text = it[1].text
             }
         }
 

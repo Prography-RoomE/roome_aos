@@ -1,13 +1,21 @@
 package com.sevenstars.roome.view.main
 
+import android.content.Intent
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseActivity
+import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.databinding.ActivityMainBinding
 import com.sevenstars.roome.view.main.profile.MainProfileFragment
 import com.sevenstars.roome.view.main.setting.MainSettingFragment
+import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -43,5 +51,28 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     fun setBottomNaviVisibility(p: Boolean){
         binding.bottomNavi.isVisible = p
+    }
+
+    fun removeData(){
+        CoroutineScope(Dispatchers.IO).launch {
+            RoomeApplication.app.userPreferences.clearData()
+                .onSuccess {
+                    launch(Dispatchers.Main){
+                        restartApplication()
+                    }
+                }.onFailure { _ ->
+                    launch(Dispatchers.Main){
+                        LoggerUtils.error("데이터 삭제 실패")
+                    }
+                }
+        }
+    }
+
+    private fun restartApplication() {
+        val intent = Intent(this, StartActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        intent.putExtra("isUnlink", true)
+        startActivity(intent)
+        finish()
     }
 }
