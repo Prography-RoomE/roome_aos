@@ -37,9 +37,9 @@ class KakaoShareManager(
     private fun shareCustomTemplate(imageUrl: String) {
         val templateArgs = mapOf(
             "TYPE" to "profile",
-            "VALUE" to userName,
+            "VALUE" to userName!!,
             "PROFILE_IMAGE" to imageUrl,
-            "NICK" to userName
+            "NICK" to userName!!
         )
 
         ShareClient.instance.shareCustom(

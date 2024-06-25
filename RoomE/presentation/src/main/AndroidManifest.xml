@@ -58,6 +58,8 @@
             android:name=".view.profile.ProfileActivity"
             android:windowSoftInputMode="adjustResize"/>
 
+        <activity android:name=".view.deeplink.DeepLinkActivity"/>
+
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
