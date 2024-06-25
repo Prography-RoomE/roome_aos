@@ -26,7 +26,9 @@ class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fra
         super.initListener()
 
         binding.btnShareKakao.setOnClickListener{
-
+            requireActivity().supportFragmentManager.beginTransaction()
+                .add(R.id.fl_main, SquareProfileCardGenerate())
+                .commit()
         }
 
         binding.btnProfileCard.setOnClickListener {

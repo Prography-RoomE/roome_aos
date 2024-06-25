@@ -4,15 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sevenstars.domain.model.profile.info.Activities
-import com.sevenstars.domain.model.profile.info.Colors
-import com.sevenstars.domain.model.profile.info.DeviceLockPreferences
-import com.sevenstars.domain.model.profile.info.DislikedFactors
-import com.sevenstars.domain.model.profile.info.Genres
-import com.sevenstars.domain.model.profile.info.HintUsagePreferences
-import com.sevenstars.domain.model.profile.info.HorrorThemePositions
-import com.sevenstars.domain.model.profile.info.ImportantFactors
-import com.sevenstars.domain.model.profile.info.Strengths
+import com.sevenstars.domain.model.profile.SavedProfileData
+import com.sevenstars.domain.model.profile.info.*
 import com.sevenstars.domain.usecase.profile.GetProfileDataUseCase
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
@@ -21,39 +14,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainProfileViewModel@Inject constructor(
+class MainProfileViewModel @Inject constructor(
     private val getProfileDataUseCase: GetProfileDataUseCase
-): ViewModel() {
+) : ViewModel() {
 
-    private var _uiState = MutableLiveData<UiState<Unit>>(UiState.Loading)
+    private val _uiState = MutableLiveData<UiState<Unit>>(UiState.Loading)
     val uiState: LiveData<UiState<Unit>> get() = _uiState
-
-    fun fetchData(){
-        _uiState.value = UiState.Loading
-
-        viewModelScope.launch {
-            getProfileDataUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty())
-                .onSuccess {
-//                    UiState.Success(Unit)
-                    with(it){
-                        _mbti.value = if(mbti == "NONE") "-" else mbti
-                        _count.value = count
-                        _preferredGenres.value = preferredGenres
-                        _userStrengths.value = userStrengths
-                        _themeImportantFactors.value = themeImportantFactors
-                        _horrorThemePosition.value = horrorThemePosition!!
-                        _hintUsagePreference.value = hintUsagePreference!!
-                        _deviceLockPreference.value = deviceLockPreference!!
-                        _activity.value = activity!!
-                        _themeDislikedFactors.value = themeDislikedFactors
-                        _color.value = color!!
-                    }
-                }
-                .onFailure { code, msg ->
-                    UiState.Failure(code, msg)
-                }
-        }
-    }
 
     private val _count = MutableLiveData<String>()
     val count: LiveData<String> get() = _count
@@ -87,4 +53,33 @@ class MainProfileViewModel@Inject constructor(
 
     private val _color = MutableLiveData<Colors>()
     val color: LiveData<Colors> get() = _color
+
+    fun fetchData() {
+        _uiState.value = UiState.Loading
+
+        viewModelScope.launch {
+            getProfileDataUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty())
+                .onSuccess { data ->
+                    updateProfileData(data)
+                    _uiState.value = UiState.Success(Unit)
+                }
+                .onFailure { code, msg ->
+                    _uiState.value = UiState.Failure(code, msg)
+                }
+        }
+    }
+
+    private fun updateProfileData(data: SavedProfileData) {
+        _mbti.value = if (data.mbti == "NONE") "-" else data.mbti
+        _count.value = data.count
+        _preferredGenres.value = data.preferredGenres
+        _userStrengths.value = data.userStrengths
+        _themeImportantFactors.value = data.themeImportantFactors
+        _horrorThemePosition.value = data.horrorThemePosition!!
+        _hintUsagePreference.value = data.hintUsagePreference!!
+        _deviceLockPreference.value = data.deviceLockPreference!!
+        _activity.value = data.activity!!
+        _themeDislikedFactors.value = data.themeDislikedFactors
+        _color.value = data.color!!
+    }
 }
