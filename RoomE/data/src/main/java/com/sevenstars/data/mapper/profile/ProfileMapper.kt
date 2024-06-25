@@ -25,7 +25,7 @@ object ProfileMapper {
                 deviceLockPreference = deviceLockPreferenceMapper(this.deviceLockPreference) ,
                 hintUsagePreference = hintUsagePreferenceMapper(this.hintUsagePreference) ,
                 horrorThemePosition = horrorThemePositionMapper(this.horrorThemePosition) ,
-                id = id ,
+                nickname = nickname ,
                 isPlusEnabled = isPlusEnabled,
                 mbti = mbti,
                 preferredGenres = ProfileInfoMapper.genresMapper(this.preferredGenres),

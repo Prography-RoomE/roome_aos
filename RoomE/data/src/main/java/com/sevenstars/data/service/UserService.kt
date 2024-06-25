@@ -1,6 +1,7 @@
 package com.sevenstars.data.service
 
 import com.sevenstars.data.model.BaseResponse
+import com.sevenstars.data.model.profile.ResponseProfileDTO
 import com.sevenstars.data.model.user.RequestNickDTO
 import com.sevenstars.data.model.user.RequestTermsDTO
 import com.sevenstars.data.model.user.ResponseUserInfoDTO
@@ -11,6 +12,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Query
 
 interface UserService {
     @GET("/users")
@@ -35,4 +37,9 @@ interface UserService {
         @Header("Authorization") accessToken: String,
         @Body options: RequestTermsDTO
     ): Response<BaseResponse<ResponseBody>>
+
+    @GET("/users/profile")
+    suspend fun getUserProfile(
+        @Query("nickname") nickname: String
+    ): Response<BaseResponse<ResponseProfileDTO>>
 }

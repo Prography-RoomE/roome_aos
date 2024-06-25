@@ -1,41 +1,51 @@
-package com.sevenstars.roome.view.main.profile
+package com.sevenstars.roome.view.deeplink
 
+import android.content.Intent
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.sevenstars.domain.model.profile.info.Colors
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.base.RoomeApplication.Companion.userName
+import com.sevenstars.roome.databinding.FragmentDeelinkProfileBinding
 import com.sevenstars.roome.databinding.FragmentMainProfileBinding
 import com.sevenstars.roome.databinding.ItemMainProfileChipBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
+import com.sevenstars.roome.view.main.profile.MainProfileViewModel
+import com.sevenstars.roome.view.main.profile.ProfileCardFragment
+import com.sevenstars.roome.view.signIn.SignInActivity
+import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fragment_main_profile) {
-    private val viewModel: MainProfileViewModel by viewModels()
+class DeepLinkProfileFragment(private val nickname: String) : BaseFragment<FragmentDeelinkProfileBinding>(R.layout.fragment_deelink_profile) {
+    private val viewModel: DeepLinkProfileViewModel by viewModels()
 
     override fun initView() {
-        (requireActivity() as MainActivity).setBottomNaviVisibility(true)
-        viewModel.fetchData()
+        viewModel.fetchData(nickname)
+        binding.btnMove.text = if(nickname == (userName ?: "")) "내 프로필로 이동" else "나만의 프로필 만들기"
     }
 
     override fun initListener() {
         super.initListener()
         binding.apply {
-            btnShareKakao.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .add(R.id.fl_main, SquareProfileCardGenerate())
-                    .commit()
+            btnProfileCard.setOnClickListener {
+                (requireActivity() as DeepLinkActivity).replaceFragment(DeepLinkProfileCardFragment(nickname), true)
             }
 
-            btnProfileCard.setOnClickListener {
-                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.fl_main, ProfileCardFragment())
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+            btnMove.setOnClickListener {
+                if(nickname == userName){
+                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    intent.putExtra("type", "profile")
+                    startActivity(intent)
+                } else {
+                    val intent = Intent(requireActivity(), SignInActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
             }
         }
     }

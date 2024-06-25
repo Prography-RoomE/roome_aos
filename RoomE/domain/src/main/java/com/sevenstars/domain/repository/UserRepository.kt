@@ -1,6 +1,7 @@
 package com.sevenstars.domain.repository
 
 import com.sevenstars.domain.model.BaseEntity
+import com.sevenstars.domain.model.profile.SavedProfileData
 import com.sevenstars.domain.model.user.ResponseUserInfoEntity
 import com.sevenstars.domain.utils.RoomeResult
 
@@ -16,4 +17,7 @@ interface UserRepository {
 
     suspend fun saveTermsAgreement(accessToken: String, options: Map<String, Boolean>
     ): RoomeResult<BaseEntity>
+
+    suspend fun getUserProfile(nickname: String
+    ): RoomeResult<SavedProfileData>
 }

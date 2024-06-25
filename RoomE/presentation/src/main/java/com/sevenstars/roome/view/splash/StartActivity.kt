@@ -1,6 +1,7 @@
 package com.sevenstars.roome.view.splash
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -16,12 +17,14 @@ import com.sevenstars.domain.enums.Provider
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
+import com.sevenstars.roome.view.deeplink.DeepLinkActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.signIn.SignInActivity
 import com.sevenstars.roome.view.signup.SignUpActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -40,78 +43,104 @@ class StartActivity: AppCompatActivity() {
 
         viewModel.doValidation()
 
-        observer()
+        observeLoginState()
     }
 
-    private fun moveActivity(p: Boolean){
-        val destination = if(p) {
-            if(viewModel.isRegister) { ProfileActivity::class.java }
-            else { SignUpActivity::class.java }
-        } else {
-            SignInActivity::class.java
-        }
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this, destination)
-
-            if(getIntent().hasExtra("isUnlink")){
-                intent.putExtra("isUnlink", true)
-            }
-
-            startActivity(intent)
-            finish()
-        }, 1000)
-    }
-
-    private fun observer() {
-        viewModel.loginState.observe(this){
-            when(it){
+    private fun observeLoginState() {
+        viewModel.loginState.observe(this) { state ->
+            when (state) {
                 is UiState.Failure -> {
-                    LoggerUtils.error("유효성 검사 실패: ${it.message}")
+                    LoggerUtils.error("유효성 검사 실패: ${state.message}")
                     moveActivity(false)
                 }
-                is UiState.Loading -> {}
+                is UiState.Loading -> {
+                    // Loading 상태 처리
+                }
                 is UiState.Success -> {
-                    when(runBlocking(Dispatchers.IO) { app.userPreferences.getLoginProvider().getOrNull().orEmpty() }){
-                        Provider.KAKAO.provider -> isValidKakaoToken()
-                        Provider.GOOGLE.provider -> isValidGoogleToken()
-                        else -> moveActivity(false)
-                    }
+                    handleLoginSuccess()
                 }
             }
         }
     }
 
-    private fun isValidKakaoToken(){
+    private fun handleLoginSuccess() {
+        GlobalScope.launch(Dispatchers.IO) {
+            when (app.userPreferences.getLoginProvider().getOrElse { "" }) {
+                Provider.KAKAO.provider -> checkKakaoToken()
+                Provider.GOOGLE.provider -> checkGoogleToken()
+                else -> moveActivity(false)
+            }
+        }
+    }
+
+    private fun checkKakaoToken() {
         if (!AuthApiClient.instance.hasToken()) {
             LoggerUtils.error("카카오 토큰 유효성 검사: 토큰 없음")
             moveActivity(false)
+            return
         }
 
-        UserApiClient.instance.accessTokenInfo { _, error ->
-            if (error != null) {
-                LoggerUtils.error("카카오 토큰 유효성 검사: \n${error.stackTraceToString()}")
+        UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
+            if (error != null || tokenInfo == null) {
+                LoggerUtils.error("카카오 토큰 유효성 검사 실패: ${error?.stackTraceToString()}")
                 moveActivity(false)
             } else {
-                LoggerUtils.debug("카카오 토큰 유효성 검사: 성공")
+                LoggerUtils.debug("카카오 토큰 유효성 검사 성공")
                 moveActivity(true)
             }
         }
     }
 
-    private fun isValidGoogleToken(){
+    private fun checkGoogleToken() {
         val account = GoogleSignIn.getLastSignedInAccount(this)
-        if(account == null){
+        if (account == null) {
             LoggerUtils.error("구글 토큰 유효성 검사: 토큰 없음")
             moveActivity(false)
+            return
         }
 
-        if(account != null && !account.isExpired){
-            LoggerUtils.debug("구글 토큰 유효성 검사: 성공 <${account.displayName}>")
-            moveActivity(true)
-        } else {
-            LoggerUtils.error("구글 토큰 유효성 검사: 실패")
+        if (account.isExpired) {
+            LoggerUtils.error("구글 토큰 유효성 검사 실패")
             moveActivity(false)
+        } else {
+            LoggerUtils.debug("구글 토큰 유효성 검사 성공 <${account.displayName}>")
+            moveActivity(true)
         }
+    }
+
+    private fun moveActivity(isValid: Boolean) {
+        val destination = if (isValid) {
+            if (viewModel.isRegister) ProfileActivity::class.java else SignUpActivity::class.java
+        } else {
+            SignInActivity::class.java
+        }
+
+        val intent = createIntent(destination)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
+
+    private fun createIntent(destination: Class<*>) : Intent {
+        val intent = Intent(this, destination)
+
+        val action: String? = this.intent.action
+        val data: Uri? = this.intent.data
+
+        if (action == Intent.ACTION_VIEW) {
+            val type = data?.getQueryParameter("type")
+
+            if (!type.isNullOrEmpty()) {
+                intent.setClass(this, DeepLinkActivity::class.java)
+                intent.putExtra("type", type)
+                intent.putExtra("value", data.getQueryParameter("value"))
+            }
+        }
+
+        if (intent.hasExtra("isUnlink")) {
+            intent.putExtra("isUnlink", true)
+        }
+
+        return intent
     }
 }

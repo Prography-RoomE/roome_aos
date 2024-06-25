@@ -1,4 +1,4 @@
-package com.sevenstars.roome.view.main.profile
+package com.sevenstars.roome.view.deeplink
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -18,6 +18,7 @@ import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.custom.CustomDialog
+import com.sevenstars.roome.databinding.FragmentDeeplinkProfileCardBinding
 import com.sevenstars.roome.databinding.FragmentProfileCardBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.ImageUtils
@@ -29,22 +30,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
 @AndroidEntryPoint
-class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fragment_profile_card) {
-    private val viewModel: ProfileCardViewModel by viewModels()
+class DeepLinkProfileCardFragment(private val nickname: String) : BaseFragment<FragmentDeeplinkProfileCardBinding>(R.layout.fragment_deeplink_profile_card) {
+    private val viewModel: DeepLinkProfileViewModel by viewModels()
     private var squareProfileFile: File? = null
     private var verticalProfileFile: File? = null
-    private lateinit var permissionManager: PermissionManager
-    private lateinit var permissionLauncher: ActivityResultLauncher<Array<String>>
-    private val requiredPermissions = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        arrayOf(Manifest.permission.READ_MEDIA_IMAGES)
-    } else {
-        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-    }
 
     override fun initView() {
-        (requireActivity() as MainActivity).setBottomNaviVisibility(false)
-        viewModel.fetchSaveData()
-        setPermissionLauncher()
+        viewModel.fetchData(nickname)
     }
 
     override fun observer() {
@@ -57,7 +49,6 @@ class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fr
         with(binding) {
             tgSquare.setOnCheckedChangeListener { _, isChecked -> handleToggleChange(isChecked, squareProfileFile, tgSquare) }
             tgVertical.setOnCheckedChangeListener { _, isChecked -> handleToggleChange(isChecked, verticalProfileFile, tgVertical) }
-            btnSaveProfile.setOnClickListener { handleSaveProfileClick() }
             ibBack.setOnClickListener { backPressed() }
         }
     }
@@ -92,14 +83,6 @@ class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fr
         }
     }
 
-    private fun handleSaveProfileClick() {
-        if (permissionManager.checkPermissions(requiredPermissions)) {
-            if (ImageUtils.saveViewToGallery(requireContext(), binding.ivProfile)) showSaveSuccessDialog()
-        } else {
-            permissionManager.requestPermissions(permissionLauncher, requiredPermissions)
-        }
-    }
-
     private fun backPressed(){
         requireActivity().supportFragmentManager.popBackStack()
     }
@@ -111,7 +94,7 @@ class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fr
         }
         binding.icProfileSquare.llProfile.viewTreeObserver.addOnGlobalLayoutListener {
             if (squareProfileFile == null) {
-                squareProfileFile = captureViewToCache(requireContext(), "${userName}'s Square Profile", binding.icProfileSquare.root)
+                squareProfileFile = captureViewToCache(requireContext(), "Temp's Square Profile", binding.icProfileSquare.root)
                 handleProfileFileCreation(squareProfileFile, binding.icProfileSquare.root)
             }
         }
@@ -124,7 +107,7 @@ class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fr
         }
         binding.icProfileVertical.llProfile.viewTreeObserver.addOnGlobalLayoutListener {
             if (verticalProfileFile == null) {
-                verticalProfileFile = captureViewToCache(requireContext(), "${userName}'s Vertical Profile", binding.icProfileVertical.root)
+                verticalProfileFile = captureViewToCache(requireContext(), "Temp's Vertical Profile", binding.icProfileVertical.root)
                 handleProfileFileCreation(verticalProfileFile, binding.icProfileVertical.root)
             }
         }
@@ -216,22 +199,5 @@ class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fr
             LoggerUtils.error("Profile creation failed")
             showToast("프로필 생성 중 문제가 발생했습니다\n재실행 해주세요")
         }
-    }
-
-    private fun setPermissionLauncher() {
-        permissionManager = PermissionManager(requireActivity() as MainActivity)
-        permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            val grantResults = permissions.values.map { if (it) PackageManager.PERMISSION_GRANTED else PackageManager.PERMISSION_DENIED }.toIntArray()
-            permissionManager.handlePermissionResult(
-                permissions.keys.toTypedArray(),
-                grantResults,
-                onPermissionsGranted = { if (ImageUtils.saveViewToGallery(requireContext(), binding.ivProfile)) showSaveSuccessDialog() },
-                onPermissionsDenied = {}
-            )
-        }
-    }
-
-    private fun showSaveSuccessDialog() {
-        CustomDialog.getInstance(CustomDialog.DialogType.SAVE_PROFILE, null).show(requireActivity().supportFragmentManager, "")
     }
 }

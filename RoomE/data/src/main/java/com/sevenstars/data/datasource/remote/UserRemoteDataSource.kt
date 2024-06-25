@@ -1,6 +1,7 @@
 package com.sevenstars.data.datasource.remote
 
 import com.sevenstars.data.model.BaseResponse
+import com.sevenstars.data.model.profile.ResponseProfileDTO
 import com.sevenstars.data.model.user.ResponseUserInfoDTO
 import okhttp3.ResponseBody
 
@@ -15,4 +16,7 @@ interface UserRemoteDataSource {
 
     suspend fun saveTermsAgreement(accessToken: String, options: Map<String, Boolean>
     ): BaseResponse<ResponseBody>
+
+    suspend fun getUserProfile(nickname: String
+    ): BaseResponse<ResponseProfileDTO>
 }

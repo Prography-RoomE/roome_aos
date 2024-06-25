@@ -2,6 +2,7 @@ package com.sevenstars.roome.di
 
 import com.sevenstars.domain.repository.UserRepository
 import com.sevenstars.domain.usecase.user.GetUserInfoUseCase
+import com.sevenstars.domain.usecase.user.GetUserProfileDataUseCase
 import com.sevenstars.domain.usecase.user.SaveNickUseCase
 import com.sevenstars.domain.usecase.user.SaveTermsAgreementUseCase
 import com.sevenstars.domain.usecase.user.ValidationNickUseCase
@@ -45,5 +46,13 @@ object UserUseCaseModule {
         repository: UserRepository
     ): SaveTermsAgreementUseCase {
         return SaveTermsAgreementUseCase(repository = repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetUserProfileDataUseCase(
+        repository: UserRepository
+    ): GetUserProfileDataUseCase {
+        return GetUserProfileDataUseCase(repository = repository)
     }
 }
