@@ -32,10 +32,7 @@ class DeepLinkProfileFragment(private val nickname: String) : BaseFragment<Fragm
         super.initListener()
         binding.apply {
             btnProfileCard.setOnClickListener {
-                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.fl_main, ProfileCardFragment())
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                (requireActivity() as DeepLinkActivity).replaceFragment(DeepLinkProfileCardFragment(nickname), true)
             }
 
             btnMove.setOnClickListener {
