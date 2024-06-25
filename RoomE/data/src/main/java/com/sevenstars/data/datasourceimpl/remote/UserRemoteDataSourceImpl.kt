@@ -3,6 +3,7 @@ package com.sevenstars.data.datasourceimpl.remote
 import com.sevenstars.data.datasource.remote.UserRemoteDataSource
 import com.sevenstars.data.mapper.user.TermsAgreementMapper
 import com.sevenstars.data.model.BaseResponse
+import com.sevenstars.data.model.profile.ResponseProfileDTO
 import com.sevenstars.data.model.user.RequestNickDTO
 import com.sevenstars.data.model.user.ResponseUserInfoDTO
 import com.sevenstars.data.service.UserService
@@ -87,6 +88,27 @@ class UserRemoteDataSourceImpl @Inject constructor(
                 BaseResponse(code = errorBody.getString("code").toInt(), message = errorBody.getString("message"), null)
             }
         } catch (e: Exception){
+            LoggerUtils.error(e.stackTraceToString())
+            BaseResponse(code = 0, message = e.message.toString(), null)
+        }
+    }
+
+    override suspend fun getUserProfile(nickname: String): BaseResponse<ResponseProfileDTO> {
+        return try {
+            val res = userService.getUserProfile(nickname)
+
+            if (res.isSuccessful) {
+                val body = res.body()!!
+                BaseResponse(code = body.code, message = body.message, data = body.data)
+            } else {
+                val errorBody = JSONObject(res.errorBody()?.string()!!)
+                BaseResponse(
+                    code = errorBody.getString("code").toInt(),
+                    message = errorBody.getString("message"),
+                    null
+                )
+            }
+        } catch (e: Exception) {
             LoggerUtils.error(e.stackTraceToString())
             BaseResponse(code = 0, message = e.message.toString(), null)
         }
