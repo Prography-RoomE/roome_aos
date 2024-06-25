@@ -18,7 +18,7 @@ data class SavedProfileData(
     val deviceLockPreference: DeviceLockPreferences?,
     val hintUsagePreference: HintUsagePreferences?,
     val horrorThemePosition: HorrorThemePositions?,
-    val id: Int,
+    val nickname: String,
     val isPlusEnabled: Boolean,
     val mbti: String,
     val preferredGenres: List<Genres>,

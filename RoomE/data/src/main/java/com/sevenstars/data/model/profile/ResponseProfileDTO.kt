@@ -18,7 +18,7 @@ data class ResponseProfileDTO(
     @SerializedName("deviceLockPreference") val deviceLockPreference: DeviceLockPreferencesDTO,
     @SerializedName("hintUsagePreference") val hintUsagePreference: HintUsagePreferencesDTO,
     @SerializedName("horrorThemePosition") val horrorThemePosition: HorrorThemePositionsDTO,
-    @SerializedName("id") val id: Int,
+    @SerializedName("nickname") val nickname: String,
     @SerializedName("isPlusEnabled") val isPlusEnabled: Boolean,
     @SerializedName("mbti") val mbti: String,
     @SerializedName("preferredGenres") val preferredGenres: List<GenresDTO>,

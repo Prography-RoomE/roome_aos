@@ -2,155 +2,102 @@ package com.sevenstars.roome.view.main.profile
 
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.sevenstars.domain.model.profile.info.Colors
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.databinding.FragmentMainProfileBinding
+import com.sevenstars.roome.databinding.ItemMainProfileChipBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class MainProfileFragment: BaseFragment<FragmentMainProfileBinding>(R.layout.fragment_main_profile) {
+class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fragment_main_profile) {
     private val viewModel: MainProfileViewModel by viewModels()
 
     override fun initView() {
         (requireActivity() as MainActivity).setBottomNaviVisibility(true)
-        binding.tvNick.text = userName
         viewModel.fetchData()
     }
 
     override fun initListener() {
         super.initListener()
+        binding.apply {
+            btnShareKakao.setOnClickListener {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .add(R.id.fl_main, SquareProfileCardGenerate())
+                    .commit()
+            }
 
-        binding.btnShareKakao.setOnClickListener{
-            requireActivity().supportFragmentManager.beginTransaction()
-                .add(R.id.fl_main, SquareProfileCardGenerate())
-                .commit()
-        }
-
-        binding.btnProfileCard.setOnClickListener {
-            val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fl_main, ProfileCardFragment())
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
+            btnProfileCard.setOnClickListener {
+                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.fl_main, ProfileCardFragment())
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
+            }
         }
     }
 
     override fun observer() {
         super.observer()
-        with(viewModel){
-            uiState.observe(viewLifecycleOwner){
-                when(it){
+        with(viewModel) {
+            uiState.observe(viewLifecycleOwner) { state ->
+                when (state) {
                     is UiState.Failure -> {}
                     is UiState.Loading -> {}
-                    is UiState.Success -> {}
+                    is UiState.Success -> {
+                        binding.tvNick.text = nickname
+                        updateChip(binding.chipProfileCount, "방탈출 횟수", state.data.count)
+                        updateChip(binding.chipProfileGenres, "선호 장르", state.data.preferredGenres.map { it.text!! })
+                        updateChip(binding.chipProfileMBTI, "MBTI", state.data.mbti)
+                        updateChip(binding.chipProfileStrength, "강점", state.data.userStrengths.map { it.text!! })
+                        updateChip(binding.chipProfileImportantFactor, "테마 중요 요소", state.data.themeImportantFactors.map { it.text!! })
+                        updateChip(binding.chipProfileHorror, "공포테마 포지션", listOf(state.data.horrorThemePosition!!.text!!))
+                        updateChip(binding.chipProfileHint, "힌트 선호도", listOf(state.data.hintUsagePreference!!.text!!))
+                        updateChip(binding.chipProfileDevice, "장치/자물쇠 선호도", listOf(state.data.deviceLockPreference!!.text!!))
+                        updateChip(binding.chipProfileActivity, "활동성 선호도", listOf(state.data.activity!!.text!!))
+                        updateChip(binding.chipProfileDislikeFactor, "싫어하는 요소", state.data.themeDislikedFactors.map { it.text!! })
+                        updateColorChip(state.data.color!!)
+                    }
                 }
             }
         }
+    }
 
-        viewModel.count.observe(viewLifecycleOwner){
-            binding.chipProfileCount.apply {
-                groupContextType1.visibility = View.VISIBLE
-                tvChipTitle.text = "방탈출 횟수"
-                tvChipContext.text = it
-            }
+    private fun updateColorChip(color: Colors){
+        binding.chipProfileColor.apply {
+            groupContextType3.visibility = View.VISIBLE
+            tvChipTitle.text = "프로필 색상"
+            setColorBackground(
+                view = ivProfileColor,
+                mode = color.mode,
+                shape = color.shape,
+                orientation = color.direction,
+                startColor = color.startColor,
+                endColor = color.endColor,
+                isRoundCorner = true,
+                radius = 360f,
+                hasStroke = true
+            )
         }
+    }
 
-        viewModel.preferredGenres.observe(viewLifecycleOwner){
-            binding.chipProfileGenres.apply {
-                groupContextType2.visibility = View.VISIBLE
-                tvChipTitle.text = "선호 장르"
-                tvChipContext1.text = it[0].text
-                if(it.size == 2) tvChipContext2.text = it[1].text
-            }
+    private fun updateChip(chip: ItemMainProfileChipBinding, title: String, text: String) {
+        chip.apply {
+            groupContextType1.visibility = View.VISIBLE
+            tvChipTitle.text = title
+            tvChipContext.text = text
         }
+    }
 
-        viewModel.mbti.observe(viewLifecycleOwner){
-            binding.chipProfileMBTI.apply {
-                groupContextType1.visibility = View.VISIBLE
-                tvChipTitle.text = "MBTI"
-                tvChipContext.text = it
-            }
-        }
-
-        viewModel.userStrengths.observe(viewLifecycleOwner){
-            binding.chipProfileStrength.apply {
-                groupContextType2.visibility = View.VISIBLE
-                tvChipTitle.text = "강점"
-                tvChipContext1.text = it[0].text
-                if(it.size == 2) tvChipContext2.text = it[1].text
-            }
-        }
-
-        viewModel.themeImportantFactors.observe(viewLifecycleOwner){
-            binding.chipProfileImportantFactor.apply {
-                groupContextType2.visibility = View.VISIBLE
-                tvChipTitle.text = "테마 중요 요소"
-                tvChipContext1.text = it[0].text
-                if(it.size == 2) tvChipContext2.text = it[1].text
-            }
-        }
-
-        viewModel.horrorThemePosition.observe(viewLifecycleOwner){
-            binding.chipProfileHorror.apply {
-                groupContextType2.visibility = View.VISIBLE
-                tvChipTitle.text = "공포테마 포지션"
-                tvChipContext1.text = it.text
-            }
-        }
-
-        viewModel.hintUsagePreference.observe(viewLifecycleOwner){
-            binding.chipProfileHint.apply {
-                groupContextType2.visibility = View.VISIBLE
-                tvChipTitle.text = "힌트 선호도"
-                tvChipContext1.text = it.text
-            }
-        }
-
-        viewModel.deviceLockPreference.observe(viewLifecycleOwner){
-            binding.chipProfileDevice.apply {
-                groupContextType2.visibility = View.VISIBLE
-                tvChipTitle.text = "장치/자물쇠 선호도"
-                tvChipContext1.text = it.text
-            }
-        }
-
-        viewModel.activity.observe(viewLifecycleOwner){
-            binding.chipProfileActivity.apply {
-                groupContextType2.visibility = View.VISIBLE
-                tvChipTitle.text = "활동성 선호도"
-                tvChipContext1.text = it.text
-            }
-        }
-
-        viewModel.themeDislikedFactors.observe(viewLifecycleOwner){
-            binding.chipProfileDislikeFactor.apply {
-                groupContextType2.visibility = View.VISIBLE
-                tvChipTitle.text = "싫어하는 요소"
-                tvChipContext1.text = it[0].text
-                if(it.size == 2) tvChipContext2.text = it[1].text
-            }
-        }
-
-        viewModel.color.observe(viewLifecycleOwner){
-            binding.chipProfileColor.apply {
-                groupContextType3.visibility = View.VISIBLE
-                tvChipTitle.text = "프로필 색상"
-                setColorBackground(
-                    view = ivProfileColor,
-                    mode = it.mode,
-                    shape = it.shape,
-                    orientation = it.direction,
-                    startColor = it.startColor,
-                    endColor = it.endColor,
-                    isRoundCorner = true,
-                    radius = 360f,
-                    hasStroke = true
-                )
-            }
+    private fun updateChip(chip: ItemMainProfileChipBinding, title: String, texts: List<String>) {
+        chip.apply {
+            groupContextType2.visibility = View.VISIBLE
+            tvChipTitle.text = title
+            tvChipContext1.text = texts[0]
+            if (texts.size > 1) tvChipContext2.text = texts[1]
         }
     }
 }
