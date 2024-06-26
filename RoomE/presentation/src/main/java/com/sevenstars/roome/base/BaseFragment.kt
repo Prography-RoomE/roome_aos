@@ -1,8 +1,10 @@
 package com.sevenstars.roome.base
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +14,10 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import com.sevenstars.data.utils.LoggerUtils
+import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.custom.CustomToast
 
 abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int): Fragment() {
@@ -20,6 +25,7 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
     protected val binding get() = _binding!!
 
     private var currentToast: Toast? = null
+    private lateinit var noConnectionDialog: DialogFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -91,5 +97,29 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
                 }
             }
         })
+    }
+
+    fun showNoConnectionDialog(containerId: Int?, fragment: Fragment? = null, isReplace: Boolean = true){
+        CustomDialog.getInstance(CustomDialog.DialogType.NO_CONNECTION, null).apply {
+            LoggerUtils.info(this@BaseFragment.requireActivity().localClassName)
+            setButtonClickListener(object : CustomDialog.OnButtonClickListener{
+                override fun onButton1Clicked() { // 다시 시도
+
+                    if(isReplace){
+                        requireActivity().supportFragmentManager.beginTransaction().replace(containerId!!, fragment ?: this@BaseFragment).commit()
+                    } else {
+                        requireActivity().supportFragmentManager.beginTransaction().detach(fragment ?: this@BaseFragment).commit()
+                        requireActivity().supportFragmentManager.beginTransaction().attach(fragment ?: this@BaseFragment).commit()
+                    }
+                    dismiss()
+                }
+
+                override fun onButton2Clicked() { // 설정 페이지
+                    showToast("test")
+                    val intent = Intent(Settings.ACTION_WIRELESS_SETTINGS)
+                    startActivity(intent)
+                }
+            })
+        }.show(requireActivity().supportFragmentManager, "no_connection_dialog")
     }
 }

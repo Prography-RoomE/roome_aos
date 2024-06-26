@@ -70,6 +70,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             is UiState.Failure -> {
                 LoggerUtils.error("Profile data fetch failed\n${uiState.message}")
                 showToast("An error occurred while creating the profile. Please restart the app.")
+                if(uiState.code == 0) showNoConnectionDialog(R.id.fl_profile)
             }
             is UiState.Loading -> { /* Show loading */ }
             is UiState.Success -> {

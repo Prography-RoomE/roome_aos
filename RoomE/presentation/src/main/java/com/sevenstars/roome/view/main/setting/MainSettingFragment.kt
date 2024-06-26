@@ -114,6 +114,7 @@ class MainSettingFragment: BaseFragment<FragmentMainSettingBinding>(R.layout.fra
         viewModel.signOutState.observe(viewLifecycleOwner){
             when(it){
                 is UiState.Failure -> {
+                   showNoConnectionDialog(R.id.fl_main, isReplace = false)
                     showToast("로그아웃 실패: ${it.message}")
                 }
                 is UiState.Loading -> {}

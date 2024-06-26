@@ -3,6 +3,7 @@ package com.sevenstars.roome.di
 import android.app.Application
 import android.content.Context
 import com.google.gson.GsonBuilder
+import com.sevenstars.data.interceptor.NoConnectionInterceptor
 import com.sevenstars.data.interceptor.TokenAuthInterceptor
 import com.sevenstars.data.repository.UserPreferencesRepositoryImpl
 import com.sevenstars.roome.BuildConfig
@@ -16,6 +17,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -32,10 +34,15 @@ object AppModule {
     @Provides
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
+        noConnectionInterceptor: NoConnectionInterceptor,
         tokenAuthInterceptor: TokenAuthInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(noConnectionInterceptor)
             .addInterceptor(tokenAuthInterceptor)
             .build()
     }
@@ -65,5 +72,11 @@ object AppModule {
         application = app,
         baseUrl = BuildConfig.BASE_URL,
         userPreferencesRepositoryImpl = userPreferencesRepositoryImpl
+    )
+
+    @Provides
+    @Singleton
+    fun provideNoConnectionInterceptor(): NoConnectionInterceptor = NoConnectionInterceptor(
+        context = app
     )
 }

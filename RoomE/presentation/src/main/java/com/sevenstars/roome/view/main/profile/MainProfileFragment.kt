@@ -44,7 +44,9 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
         with(viewModel) {
             uiState.observe(viewLifecycleOwner) { state ->
                 when (state) {
-                    is UiState.Failure -> {}
+                    is UiState.Failure -> {
+                        if(state.code == 0) showNoConnectionDialog(R.id.fl_main, this@MainProfileFragment, isReplace = false)
+                    }
                     is UiState.Loading -> {}
                     is UiState.Success -> {
                         binding.tvNick.text = nickname

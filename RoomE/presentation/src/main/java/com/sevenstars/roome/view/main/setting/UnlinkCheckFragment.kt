@@ -67,6 +67,7 @@ class UnlinkCheckFragment: BaseFragment<FragmentUnlinkCheckBinding>(R.layout.fra
             when(it){
                 is UiState.Failure -> {
                     showToast("회원탈퇴 실패: ${it.message}")
+                    showNoConnectionDialog(R.id.fl_main, isReplace = false)
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {

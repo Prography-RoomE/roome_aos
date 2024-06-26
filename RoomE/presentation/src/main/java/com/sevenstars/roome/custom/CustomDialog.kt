@@ -23,7 +23,8 @@ class CustomDialog private constructor(
         SAVE_PROFILE,
         SIGN_OUT,
         UNLINK,
-        UNLINK_SUCCESS
+        UNLINK_SUCCESS,
+        NO_CONNECTION
     }
 
     companion object {
@@ -81,6 +82,7 @@ class CustomDialog private constructor(
             DialogType.SIGN_OUT -> setSignOut()
             DialogType.UNLINK -> setUnlink()
             DialogType.UNLINK_SUCCESS -> setUnlinkSuccess()
+            DialogType.NO_CONNECTION -> setNoConnection()
         }
 
         return binding.root
@@ -171,5 +173,20 @@ class CustomDialog private constructor(
         }
 
         binding.btnDialog2.visibility = View.GONE
+    }
+
+    private fun setNoConnection(){
+        binding.tvDialogTitle.text = "인터넷에 연결할 수 없어요"
+        binding.tvDialogContent.text = "다시 시도하거나 네트워크 설정을 확인해주세요."
+        binding.btnDialog1.text = "다시 시도"
+        binding.btnDialog2.text = "설정"
+
+        binding.btnDialog1.setOnClickListener {
+            buttonClickListener?.onButton1Clicked()
+        }
+
+        binding.btnDialog2.setOnClickListener {
+            buttonClickListener?.onButton2Clicked()
+        }
     }
 }
