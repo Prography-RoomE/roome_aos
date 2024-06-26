@@ -51,7 +51,9 @@ class DeepLinkProfileFragment(private val nickname: String) : BaseFragment<Fragm
         with(viewModel) {
             uiState.observe(viewLifecycleOwner) { state ->
                 when (state) {
-                    is UiState.Failure -> {}
+                    is UiState.Failure -> {
+                        if(state.code == 0) showNoConnectionDialog(R.id.fl_deeplink, isReplace = false)
+                    }
                     is UiState.Loading -> {}
                     is UiState.Success -> {
                         binding.tvNick.text = nickname

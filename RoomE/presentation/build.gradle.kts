@@ -85,7 +85,7 @@ dependencies {
 
     implementation("com.kakao.sdk:v2-user:2.20.1")
     implementation("com.kakao.sdk:v2-share:2.19.0")
-    implementation("com.google.android.gms:play-services-auth:21.1.1")
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
 
     implementation("androidx.datastore:datastore-preferences:1.1.1")
 

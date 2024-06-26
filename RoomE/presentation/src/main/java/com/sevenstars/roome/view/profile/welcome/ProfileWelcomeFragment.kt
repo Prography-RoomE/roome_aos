@@ -61,6 +61,7 @@ class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcom
                 is UiState.Failure -> {
                     LoggerUtils.error("프로필 데이터 조회 실패\n${it.message}")
                     showToast("프로필 데이터 조회 실패\n${it.message}")
+                    if(it.code == 0) showNoConnectionDialog(R.id.fl_profile)
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
@@ -74,6 +75,7 @@ class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcom
                 is UiState.Failure -> {
                     LoggerUtils.error("새로하기 실패\n${it.message}")
                     showToast("새로하기 실패\n${it.message}")
+                    if(it.code == 0) showNoConnectionDialog(R.id.fl_profile)
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {

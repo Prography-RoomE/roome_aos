@@ -49,6 +49,7 @@ class ProfileHorrorFragment: BaseFragment<FragmentProfileHorrorBinding>(R.layout
                 is UiState.Failure -> {
                     LoggerUtils.error("저장 실패\n${it.message}")
                     showToast("저장 실패\n${it.message}")
+                    if(it.code == 0) showNoConnectionDialog(R.id.fl_profile)
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {

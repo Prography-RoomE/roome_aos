@@ -33,15 +33,16 @@ class SquareProfileCardGenerate : BaseFragment<GenerateProfileCardBinding>(R.lay
 
     private fun handleUiState(uiState: UiState<SavedProfileData>) {
         when (uiState) {
-            is UiState.Failure -> handleFailure(uiState.message)
+            is UiState.Failure -> handleFailure(uiState.code ?: 1, uiState.message)
             is UiState.Loading -> { /* Loading */}
             is UiState.Success -> handleSuccess(uiState.data)
         }
     }
 
-    private fun handleFailure(message: String) {
+    private fun handleFailure(code: Int, message: String) {
         LoggerUtils.error("Profile data fetch failed\n$message")
         showToast("An error occurred while creating the profile.")
+        if(code == 0) showNoConnectionDialog(R.id.fl_main, isReplace = false)
     }
 
     private fun handleSuccess(data: SavedProfileData) {

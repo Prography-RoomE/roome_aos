@@ -80,6 +80,7 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
             when(it){
                 is UiState.Failure -> {
                     LoggerUtils.error(it.message)
+                    if(it.code == 0) showNoConnectionDialog(R.id.fl_signup)
 
                     binding.tvNickname.setTextColor(requireContext().getColor(R.color.error))
                     binding.btnClear.setImageResource(R.drawable.ic_error)

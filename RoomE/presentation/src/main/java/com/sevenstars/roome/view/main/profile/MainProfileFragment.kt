@@ -2,6 +2,7 @@ package com.sevenstars.roome.view.main.profile
 
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.info.Colors
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
@@ -44,7 +45,9 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
         with(viewModel) {
             uiState.observe(viewLifecycleOwner) { state ->
                 when (state) {
-                    is UiState.Failure -> {}
+                    is UiState.Failure -> {
+                        if(state.code == 0) showNoConnectionDialog(R.id.fl_main, this@MainProfileFragment, isReplace = false)
+                    }
                     is UiState.Loading -> {}
                     is UiState.Success -> {
                         binding.tvNick.text = nickname
