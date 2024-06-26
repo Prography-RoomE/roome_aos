@@ -3,7 +3,6 @@ package com.sevenstars.roome.di
 import android.app.Application
 import android.content.Context
 import com.google.gson.GsonBuilder
-import com.sevenstars.data.datasource.remote.AuthRemoteDataSource
 import com.sevenstars.data.interceptor.TokenAuthInterceptor
 import com.sevenstars.data.repository.UserPreferencesRepositoryImpl
 import com.sevenstars.roome.BuildConfig

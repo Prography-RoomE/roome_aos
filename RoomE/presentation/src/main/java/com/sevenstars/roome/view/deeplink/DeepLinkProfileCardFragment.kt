@@ -1,31 +1,19 @@
 package com.sevenstars.roome.view.deeplink
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
-import android.os.Build
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.widget.TextView
 import android.widget.ToggleButton
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.SavedProfileData
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.base.RoomeApplication.Companion.userName
-import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.databinding.FragmentDeeplinkProfileCardBinding
-import com.sevenstars.roome.databinding.FragmentProfileCardBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
-import com.sevenstars.roome.utils.ImageUtils
 import com.sevenstars.roome.utils.ImageUtils.captureViewToCache
-import com.sevenstars.roome.utils.PermissionManager
 import com.sevenstars.roome.utils.UiState
-import com.sevenstars.roome.view.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
