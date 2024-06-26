@@ -2,7 +2,6 @@ package com.sevenstars.roome.view.main.profile
 
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.info.Colors
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment

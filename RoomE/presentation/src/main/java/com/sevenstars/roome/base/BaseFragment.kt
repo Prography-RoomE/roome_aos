@@ -5,8 +5,6 @@ import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.provider.Settings
-import android.provider.Settings.ACTION_NETWORK_OPERATOR_SETTINGS
-import android.provider.Settings.ACTION_SETTINGS
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
