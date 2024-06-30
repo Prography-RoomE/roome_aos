@@ -51,7 +51,7 @@ class ProfileMbtiGvAdapter : BaseAdapter() {
             textOff = null
             isChecked = checkedItems[data.type] == data.name
 
-            isEnabled = !disabledState
+//            isEnabled = !disabledState
 
             setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {

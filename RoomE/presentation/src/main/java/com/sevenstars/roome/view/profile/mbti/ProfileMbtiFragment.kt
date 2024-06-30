@@ -26,6 +26,7 @@ class ProfileMbtiFragment: BaseFragment<FragmentProfileMbtiBinding>(R.layout.fra
             this.setItemClickListener(object : ProfileMbtiGvAdapter.OnItemClickListener{
                 override fun onClick() {
                     setNextBtn()
+                    if(mbtiAdatper.checkedItems.isNotEmpty()) binding.cbOption.isChecked = false
                 }
             })
         }
