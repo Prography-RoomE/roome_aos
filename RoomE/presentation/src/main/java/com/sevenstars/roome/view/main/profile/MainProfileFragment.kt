@@ -52,7 +52,7 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
                         binding.tvNick.text = nickname
                         updateChip(binding.chipProfileCount, "방탈출 횟수", state.data.count)
                         updateChip(binding.chipProfileGenres, "선호 장르", state.data.preferredGenres.map { it.text!! })
-                        updateChip(binding.chipProfileMBTI, "MBTI", state.data.mbti)
+                        updateChip(binding.chipProfileMBTI, "MBTI", if(state.data.mbti == "NONE") "-" else state.data.mbti)
                         updateChip(binding.chipProfileStrength, "강점", state.data.userStrengths.map { it.text!! })
                         updateChip(binding.chipProfileImportantFactor, "테마 중요 요소", state.data.themeImportantFactors.map { it.text!! })
                         updateChip(binding.chipProfileHorror, "공포테마 포지션", listOf(state.data.horrorThemePosition!!.text!!))
