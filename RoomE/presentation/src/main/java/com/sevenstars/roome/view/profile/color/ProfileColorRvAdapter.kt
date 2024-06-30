@@ -1,6 +1,7 @@
 package com.sevenstars.roome.view.profile.color
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +24,10 @@ class ProfileColorRvAdapter: RecyclerView.Adapter<ProfileColorRvAdapter.ColorVie
                 orientation = data.direction,
                 startColor = data.startColor,
                 endColor = data.endColor,
-                isRoundCorner = true
+                isRoundCorner = true,
+                hasStroke = true,
+                strokeValue = 8f,
+                strokeColor = "#52FFFFFF"
             )
 
             binding.btnColor.setOnClickListener{

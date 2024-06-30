@@ -1,9 +1,12 @@
 package com.sevenstars.roome.view.main.profile
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
+import android.provider.Settings
 import android.view.View
 import android.widget.TextView
 import android.widget.ToggleButton
@@ -225,7 +228,20 @@ class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fr
                 permissions.keys.toTypedArray(),
                 grantResults,
                 onPermissionsGranted = { if (ImageUtils.saveViewToGallery(requireContext(), binding.ivProfile)) showSaveSuccessDialog() },
-                onPermissionsDenied = {}
+                onPermissionsDenied = {
+                    CustomDialog.getInstance(CustomDialog.DialogType.DENIED_PERMISSION, null).apply {
+                        setButtonClickListener(object : CustomDialog.OnButtonClickListener{
+                            override fun onButton1Clicked() {}
+                            override fun onButton2Clicked() {
+                                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                    data = Uri.fromParts("package", requireActivity().packageName, null)
+                                }
+                                requireActivity().startActivity(intent)
+                                dismiss()
+                            }
+                        })
+                    }.show(requireActivity().supportFragmentManager, "")
+                }
             )
         }
     }

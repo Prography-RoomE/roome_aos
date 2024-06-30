@@ -22,9 +22,9 @@ class SignupAgreeFragment : BaseFragment<FragmentSignupAgreeBinding>(R.layout.fr
 
     private fun setAgreementChecked() {
         when (viewModel.updateAgreementTitle) {
-            "서비스 이용약관" -> binding.cbAgreeService.performClick()
-            "개인정보처리방침" -> binding.cbAgreePrivacy.performClick()
-            "광고성 정보 수신 및 마케팅 활용" -> binding.cbAgreeAd.performClick()
+            "서비스 이용약관" -> if(!binding.cbAgreeService.isChecked) binding.cbAgreeService.performClick()
+            "개인정보처리방침" -> if(!binding.cbAgreePrivacy.isChecked) binding.cbAgreePrivacy.performClick()
+            "광고성 정보 수신 및 마케팅 활용" -> if(!binding.cbAgreeService.isChecked) binding.cbAgreeAd.performClick()
         }
         viewModel.updateAgreementTitle = ""
     }

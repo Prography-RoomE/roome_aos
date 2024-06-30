@@ -108,6 +108,8 @@
         app:layout_constraintEnd_toEndOf="@id/btn_chip"
         android:layout_margin="16dp"
 
+        android:outlineProvider="none"
+
         android:translationZ="10dp"
         tools:ignore="ContentDescription" />
 

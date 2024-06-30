@@ -3,6 +3,9 @@ package com.sevenstars.roome.view.deeplink
 import android.content.Intent
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.sevenstars.data.utils.LoggerUtils
+import com.sevenstars.domain.enums.ProfileState
+import com.sevenstars.domain.enums.UserState
 import com.sevenstars.domain.model.profile.info.Colors
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
@@ -12,6 +15,7 @@ import com.sevenstars.roome.databinding.ItemMainProfileChipBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
+import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.signIn.SignInActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +25,7 @@ class DeepLinkProfileFragment(private val nickname: String) : BaseFragment<Fragm
 
     override fun initView() {
         viewModel.fetchData(nickname)
-        binding.btnMove.text = if(nickname == (userName ?: "")) "내 프로필로 이동" else "나만의 프로필 만들기"
+        viewModel.doCheckProfileComplete()
     }
 
     override fun initListener() {
@@ -32,7 +36,7 @@ class DeepLinkProfileFragment(private val nickname: String) : BaseFragment<Fragm
             }
 
             btnMove.setOnClickListener {
-                if(nickname == userName){
+                if(binding.btnMove.text == "내 프로필로 이동"){
                     val intent = Intent(requireActivity(), MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     intent.putExtra("type", "profile")
@@ -53,6 +57,7 @@ class DeepLinkProfileFragment(private val nickname: String) : BaseFragment<Fragm
                 when (state) {
                     is UiState.Failure -> {
                         if(state.code == 0) showNoConnectionDialog(R.id.fl_deeplink, isReplace = false)
+                        binding.btnMove.text = "나만의 프로필 만들기"
                     }
                     is UiState.Loading -> {}
                     is UiState.Success -> {
@@ -69,6 +74,21 @@ class DeepLinkProfileFragment(private val nickname: String) : BaseFragment<Fragm
                         updateChip(binding.chipProfileDislikeFactor, "싫어하는 요소", state.data.themeDislikedFactors.map { it.text!! })
                         updateColorChip(state.data.color!!)
                     }
+                }
+            }
+        }
+
+        viewModel.profileState.observe(this) { state ->
+            when (state) {
+                is UiState.Failure -> {
+                    LoggerUtils.error("유효성 검사 실패: ${state.message}")
+                    binding.btnMove.text = "나만의 프로필 만들기"
+                }
+                is UiState.Loading -> {
+                    // Loading 상태 처리
+                }
+                is UiState.Success -> {
+                    binding.btnMove.text = if(state.data.state == ProfileState.COMPLETE) "내 프로필로 이동" else "나만의 프로필 만들기"
                 }
             }
         }

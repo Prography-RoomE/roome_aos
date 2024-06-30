@@ -1,16 +1,19 @@
 package com.sevenstars.roome.view.profile
 
 import android.content.Intent
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.sevenstars.data.utils.LoggerUtils
+import com.sevenstars.domain.enums.ProfileState
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseActivity
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.custom.CustomToast
 import com.sevenstars.roome.databinding.ActivityProfileBinding
 import com.sevenstars.roome.utils.UiState
+import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.welcome.ProfileWelcomeFragment
 import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +26,7 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
     private val viewModel: ProfileViewModel by viewModels()
 
     override fun initView() {
+        visibilityToolbar(false)
         observer()
         viewModel.fetchSaveData()
     }
@@ -61,15 +65,13 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
-                    // MVP - 메인페이지 없기 때문에 프로필 생성으로 이동
-//                    if(it.data.step == ProfileState.COMPLETE.step) {
-//                        val intent = Intent(this, MainActivity::class.java)
-//                        startActivity(intent)
-//                        finish()
-//                    } else {
-//                        replaceFragmentWithStack(ProfileWelcomeFragment(it.data.step))
-//                    }
-                    replaceFragmentWithStack(ProfileWelcomeFragment(it.data.step), null)
+                    if(it.data.step == ProfileState.COMPLETE.step) {
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        replaceFragmentWithStack(ProfileWelcomeFragment(it.data.step), null)
+                    }
                 }
             }
         }
@@ -99,5 +101,9 @@ class ProfileActivity: BaseActivity<ActivityProfileBinding>(R.layout.activity_pr
         val intent = Intent(this, StartActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    private fun visibilityToolbar(p: Boolean){
+        binding.tbProfile.clProfileTb.visibility = if(p) View.VISIBLE else View.GONE
     }
 }

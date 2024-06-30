@@ -8,14 +8,14 @@
 
     <ImageView
         android:id="@+id/tv_logo"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
+        android:layout_width="201dp"
+        android:layout_height="86dp"
         android:src="@drawable/illus_roome_logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_bias="0.25"
         tools:ignore="ContentDescription" />
 
     <Button
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_logo"
         app:layout_constraintVertical_chainStyle="packed"
         android:layout_marginBottom="12dp"
-        app:layout_constraintVertical_bias="0.6"
+        app:layout_constraintVertical_bias="0.7"
         android:stateListAnimator="@null"/>
 
     <ImageView

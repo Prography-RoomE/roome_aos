@@ -35,7 +35,7 @@
             app:menu="@menu/menu_bottom_navi"
             app:itemBackground="@null"
 
-            style="@style/CustomBottomNavigationView"
+            android:theme="@style/CustomBottomNavigationView"
             app:labelVisibilityMode="labeled"
 
             app:itemTextColor="@color/selector_bottom_navi_color"

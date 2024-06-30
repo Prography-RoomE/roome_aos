@@ -9,6 +9,7 @@ import android.provider.Settings
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.sevenstars.roome.custom.CustomDialog
 
 class PermissionManager(private val activity: Activity) {
 
@@ -34,47 +35,11 @@ class PermissionManager(private val activity: Activity) {
                 ActivityCompat.shouldShowRequestPermissionRationale(activity, it)
             }
             if (showRationale) {
-                showRationaleDialog(launcher, permissionsToRequest)
+                launcher.launch(permissions)
             } else {
                 launcher.launch(permissionsToRequest)
             }
         }
-    }
-
-    private fun showRationaleDialog(
-        launcher: ActivityResultLauncher<Array<String>>,
-        permissions: Array<String>
-    ) {
-        AlertDialog.Builder(activity)
-            .setTitle("권한이 필요합니다")
-            .setMessage("해당 기능을 사용하기 위해 권한이 필요합니다\n부여해주세요")
-            .setPositiveButton("승인") { dialog, _ ->
-                dialog.dismiss()
-                launcher.launch(permissions)
-            }
-            .setNegativeButton("취소") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .create()
-            .show()
-    }
-
-    private fun showSettingsDialog() {
-        AlertDialog.Builder(activity)
-            .setTitle("권한이 필요합니다")
-            .setMessage("일부 권한을 거부했습니다\n설정에서 허용해주세요")
-            .setPositiveButton("설정으로 이동") { dialog, _ ->
-                dialog.dismiss()
-                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                    data = Uri.fromParts("package", activity.packageName, null)
-                }
-                activity.startActivity(intent)
-            }
-            .setNegativeButton("취소") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .create()
-            .show()
     }
 
     fun handlePermissionResult(
@@ -91,7 +56,6 @@ class PermissionManager(private val activity: Activity) {
             onPermissionsGranted()
         } else {
             onPermissionsDenied()
-            showSettingsDialog()
         }
     }
 }
