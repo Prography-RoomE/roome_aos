@@ -28,6 +28,7 @@ class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.f
         }
         setSpinner()
         binding.etCount.setText("${profileViewModel.selectedProfileData.count}번")
+        binding.etCount.setSelection(binding.etCount.length()-1)
     }
 
     override fun initListener() {
@@ -62,20 +63,31 @@ class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.f
         }
 
         binding.etCount.apply {
-            addTextChangedListener(object: TextWatcher {
+            setOnClickListener {
+                if(binding.etCount.text.isNotEmpty()) binding.etCount.setSelection(binding.etCount.text.length - 1)
+            }
+            addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
                 override fun afterTextChanged(s: Editable?) {
-                    if (s != null && !s.toString().endsWith("번")) {
+                    if (s != null) {
                         binding.etCount.removeTextChangedListener(this)
+
                         val text = s.toString().replace("번", "")
-                        binding.etCount.setText("${text}번")
-                        binding.etCount.setSelection(text.length)
+                        if (text.isNotEmpty()) {
+                            binding.etCount.setText("${text.toInt()}번")
+                            binding.etCount.setSelection(binding.etCount.text.length - 1)
+                        }
+
                         binding.etCount.addTextChangedListener(this)
                     }
                 }
             })
         }
+
+
     }
 
     override fun observer() {

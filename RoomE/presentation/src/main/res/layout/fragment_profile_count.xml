@@ -129,6 +129,7 @@
             android:maxLength="6"
 
             android:hint="0번"
+            android:theme="@style/OpinionEditTextStyle"
             style="@style/headline1_bold"
             android:textColorHint="@color/on_surface"
             android:textColor="@color/on_surface"
