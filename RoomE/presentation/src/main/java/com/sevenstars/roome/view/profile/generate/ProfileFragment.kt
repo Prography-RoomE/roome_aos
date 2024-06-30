@@ -4,9 +4,11 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings
 import android.view.View
 import android.widget.TextView
 import android.widget.ToggleButton
@@ -108,14 +110,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
         startActivity(intent)
         requireActivity().finish()
     }
-
-//    private fun navigateToProfileWelcomeFragment() {
-//        requireActivity().supportFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
-//        requireActivity().supportFragmentManager.commit {
-//            replace(R.id.fl_profile, ProfileWelcomeFragment(11))
-//            addToBackStack(null)
-//        }
-//    }
 
     private fun backPressed(){
         requireActivity().supportFragmentManager.popBackStack()
@@ -258,7 +252,20 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
                 permissions.keys.toTypedArray(),
                 grantResults,
                 onPermissionsGranted = { if (ImageUtils.saveViewToGallery(requireContext(), binding.ivProfile)) showSaveSuccessDialog() },
-                onPermissionsDenied = {}
+                onPermissionsDenied = {
+                    CustomDialog.getInstance(CustomDialog.DialogType.DENIED_PERMISSION, null).apply {
+                        setButtonClickListener(object : CustomDialog.OnButtonClickListener{
+                            override fun onButton1Clicked() {}
+                            override fun onButton2Clicked() {
+                                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                    data = Uri.fromParts("package", requireActivity().packageName, null)
+                                }
+                                requireActivity().startActivity(intent)
+                                dismiss()
+                            }
+                        })
+                    }.show(requireActivity().supportFragmentManager, "")
+                }
             )
         }
     }
