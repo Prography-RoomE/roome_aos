@@ -27,6 +27,23 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
     private var currentToast: Toast? = null
     private lateinit var noConnectionDialog: DialogFragment
 
+    private val keyboardListener = object : ViewTreeObserver.OnGlobalLayoutListener {
+        private val rect = Rect()
+
+        override fun onGlobalLayout() {
+            val rootView = view?.rootView ?: return
+            rootView.getWindowVisibleDisplayFrame(rect)
+            val screenHeight = rootView.height
+            val keypadHeight = screenHeight - rect.bottom
+
+            if (keypadHeight > screenHeight * 0.15) {
+                onKeyboardVisibilityChanged(true)
+            } else {
+                onKeyboardVisibilityChanged(false)
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -45,6 +62,7 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
     }
 
     override fun onDestroyView() {
+        view?.rootView?.viewTreeObserver?.removeOnGlobalLayoutListener(keyboardListener)
         _binding = null
         super.onDestroyView()
     }
@@ -81,22 +99,7 @@ abstract class BaseFragment<T : ViewDataBinding>(@LayoutRes val layoutId : Int):
     }
 
     private fun setupKeyboardListener() {
-        val rootView = view?.rootView
-        rootView?.viewTreeObserver?.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            private val rect = Rect()
-
-            override fun onGlobalLayout() {
-                rootView.getWindowVisibleDisplayFrame(rect)
-                val screenHeight = rootView.height
-                val keypadHeight = screenHeight - rect.bottom
-
-                if (keypadHeight > screenHeight * 0.15) {
-                    onKeyboardVisibilityChanged(true)
-                } else {
-                    onKeyboardVisibilityChanged(false)
-                }
-            }
-        })
+        view?.rootView?.viewTreeObserver?.addOnGlobalLayoutListener(keyboardListener)
     }
 
     fun showNoConnectionDialog(containerId: Int?, fragment: Fragment? = null, isReplace: Boolean = true){
