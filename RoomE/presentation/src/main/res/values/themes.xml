@@ -22,12 +22,17 @@
     <style name="AppCompatToggleButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:stateListAnimator">@null</item>
     </style>
-    
-    <!-- Bottom Navigation Shift 효과 제거 -->
+
     <style name="CustomBottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <!-- Bottom Navigation Shift 효과 제거 -->
         <item name="itemIconSize">24dp</item>
         <item name="itemTextAppearanceActive">@style/TextAppearance.App.BottomNavigationView</item>
         <item name="itemTextAppearanceInactive">@style/TextAppearance.App.BottomNavigationView</item>
+
+        <!-- font 적용 -->
+        <item name="fontFamily">@font/pretendard_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:minHeight">0dp</item>
     </style>
 
     <style name="TextAppearance.App.BottomNavigationView" parent="TextAppearance.AppCompat.Caption">
