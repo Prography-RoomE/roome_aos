@@ -18,7 +18,9 @@ import java.util.regex.Pattern
 class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragment_signup_nick) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
-    override fun initView() {}
+    override fun initView() {
+        showKeyboardAndFocus(binding.etNickname)
+    }
 
     override fun initListener() {
         super.initListener()

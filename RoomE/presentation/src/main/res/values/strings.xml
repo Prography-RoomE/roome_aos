@@ -18,7 +18,7 @@
     <string name="signup_nickname_duplication">중복된 닉네임이에요</string>
 
     <string name="signup_tos_title">서비스 이용약관</string>
-    <string name="signup_tos_all">모두 동의 (선택 정보 포함)</string>
+    <string name="signup_tos_all">모두 동의</string>
     <string name="signup_tos_age">만 14세 이상입니다. (필수)</string>
     <string name="signup_tos_service">서비스 이용약관에 동의 (필수)</string>
     <string name="signup_tos_privacy">개인정보 수집 및 이용에 동의 (필수)</string>
