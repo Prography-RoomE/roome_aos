@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.annotation.LayoutRes
-import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.info.CountRange
 import com.sevenstars.roome.databinding.ItemSpinnerBinding
 

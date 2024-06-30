@@ -15,13 +15,6 @@
         tools:context=".view.profile.ProfileActivity">
 
         <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_show"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="btn_save_profile, tg_square, tg_vertical, iv_profile, tb_profile"
-            android:visibility="visible"/>
-
-        <androidx.constraintlayout.widget.Group
             android:id="@+id/group_base_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,7 +1,6 @@
 package com.sevenstars.roome.view.profile.color
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

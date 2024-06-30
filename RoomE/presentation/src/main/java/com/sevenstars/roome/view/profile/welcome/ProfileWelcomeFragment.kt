@@ -1,7 +1,6 @@
 package com.sevenstars.roome.view.profile.welcome
 
 import android.content.Context
-import android.content.Intent
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -13,7 +12,6 @@ import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.databinding.FragmentWelcomeBinding
 import com.sevenstars.roome.utils.UiState
-import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.activity.ProfileActivityFragment

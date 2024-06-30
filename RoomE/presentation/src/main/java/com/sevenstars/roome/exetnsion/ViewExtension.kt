@@ -2,9 +2,7 @@ package com.sevenstars.roome.exetnsion
 
 import android.content.res.Resources
 import android.graphics.Color
-import android.graphics.Paint
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import android.util.TypedValue
 import android.view.View
