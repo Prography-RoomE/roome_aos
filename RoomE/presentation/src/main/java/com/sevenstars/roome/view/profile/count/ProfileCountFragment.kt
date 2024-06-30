@@ -79,6 +79,9 @@ class ProfileCountFragment: BaseFragment<FragmentProfileCountBinding>(R.layout.f
                         if (text.isNotEmpty()) {
                             binding.etCount.setText("${text.toInt()}번")
                             binding.etCount.setSelection(binding.etCount.text.length - 1)
+                        } else {
+                            binding.etCount.setText("0번")
+                            binding.etCount.setSelection(binding.etCount.text.length - 1)
                         }
 
                         binding.etCount.addTextChangedListener(this)
