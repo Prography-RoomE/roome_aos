@@ -44,15 +44,11 @@ fun setColorBackground(
 
     when (mode) {
         "solid" -> {
-            val shapeDrawable = ShapeDrawable(RectShape())
-            shapeDrawable.paint.color = Color.parseColor(startColor)
-            if (isRoundCorner) shapeDrawable.shape = RectShapeWithCorners(cornerRadius)
-            if (hasStroke) {
-                shapeDrawable.paint.style = Paint.Style.STROKE
-                shapeDrawable.paint.strokeWidth = strokeWidth
-                shapeDrawable.paint.color = strokeColor
-            }
-            view.background = shapeDrawable
+            val gradientDrawable = GradientDrawable()
+            gradientDrawable.setColor(Color.parseColor(startColor))
+            if (isRoundCorner) gradientDrawable.cornerRadius = cornerRadius
+            if (hasStroke) gradientDrawable.setStroke(strokeWidth.toInt(), strokeColor)
+            view.background = gradientDrawable
         }
         "gradient" -> {
             val gradientDrawable = GradientDrawable()
