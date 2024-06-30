@@ -198,7 +198,7 @@
             android:background="@drawable/shape_radius_12"
             android:backgroundTint="@color/primary_primary"
 
-            android:text="저장하기"
+            android:text="이미지 저장하기"
             style="@style/title3_bold"
             android:textColor="@color/surface"/>
 
