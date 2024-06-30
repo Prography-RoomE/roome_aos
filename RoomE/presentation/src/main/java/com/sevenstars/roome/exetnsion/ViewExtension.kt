@@ -23,7 +23,9 @@ fun setColorBackground(
     endColor: String,
     isRoundCorner: Boolean,
     radius: Float = 12f,
-    hasStroke: Boolean = false
+    hasStroke: Boolean = false,
+    strokeValue: Float = 2f,
+    strokeColor: String = "#000000"
 ) {
     val cornerRadius = if (isRoundCorner) {
         TypedValue.applyDimension(
@@ -37,17 +39,16 @@ fun setColorBackground(
 
     val strokeWidth = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
-        2f,
+        strokeValue,
         Resources.getSystem().displayMetrics
     )
-    val strokeColor = Color.BLACK
 
     when (mode) {
         "solid" -> {
             val gradientDrawable = GradientDrawable()
             gradientDrawable.setColor(Color.parseColor(startColor))
             if (isRoundCorner) gradientDrawable.cornerRadius = cornerRadius
-            if (hasStroke) gradientDrawable.setStroke(strokeWidth.toInt(), strokeColor)
+            if (hasStroke) gradientDrawable.setStroke(strokeWidth.toInt(), Color.parseColor(strokeColor))
             view.background = gradientDrawable
         }
         "gradient" -> {
@@ -81,7 +82,7 @@ fun setColorBackground(
 
             gradientDrawable.colors = intArrayOf(Color.parseColor(startColor), Color.parseColor(endColor))
             if (isRoundCorner) gradientDrawable.cornerRadius = cornerRadius
-            if (hasStroke) gradientDrawable.setStroke(strokeWidth.toInt(), strokeColor)
+            if (hasStroke) gradientDrawable.setStroke(strokeWidth.toInt(), Color.parseColor(strokeColor))
 
             view.background = gradientDrawable
         }
