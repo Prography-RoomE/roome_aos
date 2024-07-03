@@ -10,6 +10,7 @@ import com.sevenstars.roome.databinding.ItemMainProfileChipBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
+import com.sevenstars.roome.view.main.profile.edit.UserProfileEditFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,15 +27,16 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
         binding.apply {
             btnShareKakao.setOnClickListener {
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .add(R.id.fl_main, SquareProfileCardGenerate())
+                    .add(R.id.fl_main, SquareProfileCardGenerate(viewModel.nickname))
                     .commit()
             }
 
             btnProfileCard.setOnClickListener {
-                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.fl_main, ProfileCardFragment())
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                (requireActivity() as MainActivity).replaceFragment(ProfileCardFragment(viewModel.nickname), true)
+            }
+
+            ibEdit.setOnClickListener {
+                (requireActivity() as MainActivity).replaceFragment(UserProfileEditFragment(viewModel.nickname), true)
             }
         }
     }

@@ -7,7 +7,6 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.SavedProfileData
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.databinding.GenerateProfileCardBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.ImageUtils.captureViewToCache
@@ -17,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
 @AndroidEntryPoint
-class SquareProfileCardGenerate : BaseFragment<GenerateProfileCardBinding>(R.layout.generate_profile_card) {
+class SquareProfileCardGenerate(private val nickname: String) : BaseFragment<GenerateProfileCardBinding>(R.layout.generate_profile_card) {
     private val viewModel: ProfileCardViewModel by viewModels()
     private var squareProfileFile: File? = null
 
@@ -63,7 +62,7 @@ class SquareProfileCardGenerate : BaseFragment<GenerateProfileCardBinding>(R.lay
 
     private fun createProfileFileIfNeeded() {
         if (squareProfileFile == null) {
-            squareProfileFile = captureViewToCache(requireContext(), "${userName}'s Shared Profile", binding.icProfileSquare.root)
+            squareProfileFile = captureViewToCache(requireContext(), "${nickname}'s Shared Profile", binding.icProfileSquare.root)
                 .also {
                     KakaoShareManager(requireContext()).doProfileShare(it!!)
                     requireActivity().supportFragmentManager.beginTransaction().remove(this@SquareProfileCardGenerate).commit()
@@ -73,7 +72,7 @@ class SquareProfileCardGenerate : BaseFragment<GenerateProfileCardBinding>(R.lay
 
     private fun bindProfileData(data: SavedProfileData) {
         with(binding.icProfileSquare) {
-            name.text = userName
+            name.text = nickname
             experience.text = data.count
             mbti.text = if (data.mbti == "NONE") "" else data.mbti
             emptyViewRemove(mbti)
