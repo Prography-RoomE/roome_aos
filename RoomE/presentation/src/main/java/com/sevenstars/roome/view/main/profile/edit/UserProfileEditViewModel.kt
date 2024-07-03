@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sevenstars.domain.usecase.user.DeleteUserImageUseCase
+import com.sevenstars.domain.usecase.user.PostUserImageUseCase
 import com.sevenstars.domain.usecase.user.SaveNickUseCase
 import com.sevenstars.domain.usecase.user.ValidationNickUseCase
 import com.sevenstars.roome.base.RoomeApplication
@@ -15,7 +17,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserProfileEditViewModel @Inject constructor(
-    private val saveNickUseCase: SaveNickUseCase
+    private val saveNickUseCase: SaveNickUseCase,
+    private val postUserImageUseCase: PostUserImageUseCase,
+    private val deleteUserImageUseCase: DeleteUserImageUseCase
 ): ViewModel() {
 
     private val _saveState = MutableLiveData<UiState<Unit>>(UiState.Loading)
@@ -33,6 +37,40 @@ class UserProfileEditViewModel @Inject constructor(
                     _checkState.value = UiState.Success(Unit)
                 }.onFailure { code, message ->
                     _checkState.value = UiState.Failure(code, message)
+                }
+        }
+    }
+
+    private var _postState = MutableLiveData<UiState<String>>(UiState.Loading)
+    val postState get() = _postState
+
+    private var _deleteState = MutableLiveData<UiState<Unit>>(UiState.Loading)
+    val deleteState get() = _deleteState
+
+    fun postUserImage(realPath: String){
+        _postState.value = UiState.Loading
+
+        viewModelScope.launch {
+            postUserImageUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty(), realPath)
+                .onSuccess {
+                    _postState.value = UiState.Success(it)
+                }
+                .onFailure { code, message ->
+                    _postState.value = UiState.Failure(code, message)
+                }
+        }
+    }
+
+    fun deleteUserImage(){
+        _deleteState.value = UiState.Loading
+
+        viewModelScope.launch {
+            deleteUserImageUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty())
+                .onSuccess {
+                    _deleteState.value = UiState.Success(Unit)
+                }
+                .onFailure { code, message ->
+                    _deleteState.value = UiState.Failure(code, message)
                 }
         }
     }

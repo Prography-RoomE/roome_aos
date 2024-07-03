@@ -4,7 +4,6 @@ import com.sevenstars.domain.model.BaseEntity
 import com.sevenstars.domain.model.profile.SavedProfileData
 import com.sevenstars.domain.model.user.ResponseUserInfoEntity
 import com.sevenstars.domain.utils.RoomeResult
-import com.sun.jndi.toolkit.url.Uri
 
 interface UserRepository {
     suspend fun getUserInfo(accessToken: String

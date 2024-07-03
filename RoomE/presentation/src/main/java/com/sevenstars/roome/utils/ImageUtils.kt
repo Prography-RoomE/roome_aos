@@ -4,15 +4,36 @@ import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.view.View
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
 
 object ImageUtils {
+    fun getRealPathFromURI(context: Context, uri: Uri): String {
+        var path = ""
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = context.contentResolver.query(uri, projection, null, null, null)
+        if (cursor != null) {
+            cursor.moveToFirst()
+            val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            path = cursor.getString(columnIndex)
+            cursor.close()
+        }
+        return path
+    }
+
+    fun getImageUri(context: Context, bitmap: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
+        return Uri.parse(path)
+    }
 
     fun saveViewToGallery(context: Context, view: View): Boolean {
         val bitmap = getBitmapFromView(view)

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="268dp"
+    android:orientation="vertical"
+    android:background="@drawable/shape_rounded_bottom_sheet">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_take_picture"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/transparent"
+
+        android:text="사진 촬영"
+        style="@style/title3_bold"
+        android:textColor="@color/on_surface"
+        android:gravity="center"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/transparent"
+
+        android:text="앨범에서 사진 선택"
+        style="@style/title3_bold"
+        android:textColor="@color/on_surface"
+        android:gravity="center"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_default"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/transparent"
+
+        android:text="기본 이미지 사용"
+        style="@style/title3_bold"
+        android:textColor="@color/on_surface"
+        android:gravity="center"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/transparent"
+
+        android:text="취소"
+        style="@style/title3_bold"
+        android:textColor="@color/error"
+        android:gravity="center"/>
+
+</LinearLayout>
