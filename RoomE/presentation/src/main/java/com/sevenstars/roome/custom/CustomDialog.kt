@@ -25,7 +25,8 @@ class CustomDialog private constructor(
         UNLINK,
         UNLINK_SUCCESS,
         NO_CONNECTION,
-        DENIED_PERMISSION
+        DENIED_PERMISSION,
+        PROFILE_EDIT
     }
 
     companion object {
@@ -85,6 +86,7 @@ class CustomDialog private constructor(
             DialogType.UNLINK_SUCCESS -> setUnlinkSuccess()
             DialogType.NO_CONNECTION -> setNoConnection()
             DialogType.DENIED_PERMISSION -> setDeniedPermission()
+            DialogType.PROFILE_EDIT -> setProfileEdit()
         }
 
         return binding.root
@@ -197,6 +199,21 @@ class CustomDialog private constructor(
         binding.tvDialogContent.text = "사진 권한을 허용해야\n이미지를 저장할 수 있어요."
         binding.btnDialog1.text = "취소"
         binding.btnDialog2.text = "확인"
+
+        binding.btnDialog1.setOnClickListener {
+            dismiss()
+        }
+
+        binding.btnDialog2.setOnClickListener {
+            buttonClickListener?.onButton2Clicked()
+        }
+    }
+
+    private fun setProfileEdit(){
+        binding.tvDialogTitle.text = "변경사항이 있어요"
+        binding.tvDialogContent.text = "변경사항을 저장하지 않고 나가시겠어요?"
+        binding.btnDialog1.text = "취소"
+        binding.btnDialog2.text = "나가기"
 
         binding.btnDialog1.setOnClickListener {
             dismiss()
