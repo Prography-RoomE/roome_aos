@@ -12,6 +12,7 @@ import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.main.profile.edit.UserProfileEditFragment
+import com.sevenstars.roome.view.profile.count.ProfileCountFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +21,7 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
 
     override fun initView() {
         (requireActivity() as MainActivity).setBottomNaviVisibility(true)
+        (requireActivity() as MainActivity).setToolbarVisibility(false)
         viewModel.fetchData()
         viewModel.fetchUserInfo()
     }
@@ -40,6 +42,18 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
             ibEdit.setOnClickListener {
                 (requireActivity() as MainActivity).replaceFragment(UserProfileEditFragment(viewModel.nickname, viewModel.imageUrl), true)
             }
+
+            chipProfileCount.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileCountFragment(binding.chipProfileCount.tvChipContext.text.toString()), true)}
+            chipProfileGenres.btnChip.setOnClickListener{}
+            chipProfileMBTI.btnChip.setOnClickListener{}
+            chipProfileStrength.btnChip.setOnClickListener{}
+            chipProfileImportantFactor.btnChip.setOnClickListener{}
+            chipProfileHorror.btnChip.setOnClickListener{}
+            chipProfileHint.btnChip.setOnClickListener{}
+            chipProfileDevice.btnChip.setOnClickListener{}
+            chipProfileActivity.btnChip.setOnClickListener{}
+            chipProfileDislikeFactor.btnChip.setOnClickListener{}
+            chipProfileColor.btnChip.setOnClickListener{}
         }
     }
 

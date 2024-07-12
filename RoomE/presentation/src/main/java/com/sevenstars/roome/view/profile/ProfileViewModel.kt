@@ -97,7 +97,6 @@ class ProfileViewModel@Inject constructor(
             getProfileInfoUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty())
                 .onSuccess {
                     profileDefaultData = it
-                    LoggerUtils.info(it.colors.joinToString(","))
                     _profileDataState.value = UiState.Success(profileState)
                 }
                 .onFailure { code, msg ->

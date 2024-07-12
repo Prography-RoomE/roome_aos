@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.annotation.LayoutRes
+import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.info.CountRange
 import com.sevenstars.roome.databinding.ItemSpinnerBinding
 
@@ -14,9 +15,9 @@ class CountSpinnerAdapter(
     context: Context,
     @LayoutRes private val resId: Int,
     val values: List<CountRange>
-): ArrayAdapter<CountRange>(context, resId, values) {
+) : ArrayAdapter<CountRange>(context, resId, values) {
 
-    override fun getCount(): Int =values.size
+    override fun getCount(): Int = values.size
 
     override fun getItem(position: Int): CountRange = values[position]
 
@@ -26,7 +27,7 @@ class CountSpinnerAdapter(
 
         try {
             binding.tvSpinnerItem.text = values[position].title
-        } catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         return binding.root
@@ -37,9 +38,22 @@ class CountSpinnerAdapter(
 
         try {
             binding.tvSpinnerItem.text = values[position].title
-        } catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         return binding.root
+    }
+
+    fun selectItemContaining(countTitle: String): Int {
+        if (countTitle == "기타") return 0
+
+        for ((index, item) in values.withIndex()) {
+            if (item.title == "${countTitle}번") {
+                return index
+            } else if (item.title == "301번 이상" && countTitle == "301~"){
+                return index
+            }
+        }
+        return -1
     }
 }
