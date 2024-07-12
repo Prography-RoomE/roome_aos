@@ -83,6 +83,27 @@ class ProfileMbtiGvAdapter : BaseAdapter() {
         notifyDataSetChanged()
     }
 
+    fun setCheckedItems(mbti: String) {
+        if(mbti == "-") {
+            mbtiDisabled()
+            return
+        }
+
+        val mbtiList = mbti.toList()
+
+        checkedItems.clear()
+
+        for (char in mbtiList) {
+            val matchedItem = items.find { it.name.startsWith(char.toString(), ignoreCase = true) }
+            matchedItem?.let {
+                checkedItems[it.type] = it.name
+            }
+        }
+
+        notifyDataSetChanged()
+    }
+
+
     interface OnItemClickListener{
         fun onClick()
     }

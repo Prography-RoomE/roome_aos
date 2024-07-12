@@ -54,11 +54,12 @@ class ProfileCountFragment(
         }
         profileViewModel.fetchDefaultData(ProfileState.COMPLETE)
         setupNextButtonForMainActivity()
+        binding.tvComment.visibility = View.GONE
     }
 
     private fun setupNextButtonForMainActivity() {
         binding.btnNext.apply {
-            setText(R.string.btn_check)
+            setText(R.string.btn_save)
             backgroundTintList = AppCompatResources.getColorStateList(requireContext(), R.color.primary_primary)
             setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
         }
@@ -183,7 +184,6 @@ class ProfileCountFragment(
                 LoggerUtils.error("저장 실패\n${uiState.message}")
                 showToast("저장 실패\n${uiState.message}")
                 if (uiState.code == 0) showNoConnectionDialog(R.id.fl_profile)
-                viewModel.setLoadingState()
             }
             is UiState.Loading -> {}
             is UiState.Success -> {
@@ -194,7 +194,6 @@ class ProfileCountFragment(
     }
 
     private fun handleSuccessState() {
-        LoggerUtils.info("handle")
         if (isProfileActivity()) {
             profileViewModel.selectedProfileData.count = binding.etCount.text.toString().replace("번", "").toInt()
             (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileGenresFragment(), null)
