@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.sevenstars.domain.model.profile.info.Genres
 import com.sevenstars.domain.model.profile.info.Strengths
 import com.sevenstars.roome.databinding.ItemChipBinding
 
@@ -59,6 +60,11 @@ class ProfileStrengthRvAdapter: RecyclerView.Adapter<ProfileStrengthRvAdapter.St
     @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: List<Strengths>){
         dataList = newList
+        notifyDataSetChanged()
+    }
+
+    fun setChecked(strengths: List<Strengths>){
+        checked.addAll(strengths)
         notifyDataSetChanged()
     }
 
