@@ -1,9 +1,11 @@
 package com.sevenstars.roome.view.main.profile.edit
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.usecase.user.DeleteUserImageUseCase
 import com.sevenstars.domain.usecase.user.PostUserImageUseCase
 import com.sevenstars.domain.usecase.user.SaveNickUseCase
@@ -22,8 +24,7 @@ class UserProfileEditViewModel @Inject constructor(
     private val deleteUserImageUseCase: DeleteUserImageUseCase
 ): ViewModel() {
 
-    private val _saveState = MutableLiveData<UiState<Unit>>(UiState.Loading)
-    val saveState: LiveData<UiState<Unit>> get() = _saveState
+    var updateImage: String? = null
 
     private val _checkState = MutableLiveData<UiState<Unit>>(UiState.Loading)
     val checkState: LiveData<UiState<Unit>> get() = _checkState
