@@ -13,6 +13,7 @@ import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.main.profile.edit.UserProfileEditFragment
 import com.sevenstars.roome.view.profile.count.ProfileCountFragment
+import com.sevenstars.roome.view.profile.genres.ProfileGenresFragment
 import com.sevenstars.roome.view.profile.mbti.ProfileMbtiFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -44,9 +45,9 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
                 (requireActivity() as MainActivity).replaceFragment(UserProfileEditFragment(viewModel.nickname, viewModel.imageUrl), true)
             }
 
-            chipProfileCount.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileCountFragment(binding.chipProfileCount.tvChipContext.text.toString()), true)}
-            chipProfileGenres.btnChip.setOnClickListener{  }
-            chipProfileMBTI.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileMbtiFragment(binding.chipProfileMBTI.tvChipContext.text.toString()), true) }
+            chipProfileCount.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileCountFragment(viewModel.savedProfileData.count), true)}
+            chipProfileGenres.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileGenresFragment(viewModel.savedProfileData.preferredGenres), true) }
+            chipProfileMBTI.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileMbtiFragment(viewModel.savedProfileData.mbti), true) }
             chipProfileStrength.btnChip.setOnClickListener{}
             chipProfileImportantFactor.btnChip.setOnClickListener{}
             chipProfileHorror.btnChip.setOnClickListener{}

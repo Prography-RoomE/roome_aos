@@ -25,6 +25,7 @@ class MainProfileViewModel @Inject constructor(
 
     lateinit var nickname: String
     lateinit var imageUrl: String
+    lateinit var savedProfileData: SavedProfileData
 
     fun fetchData() {
         _uiState.value = UiState.Loading
@@ -33,6 +34,7 @@ class MainProfileViewModel @Inject constructor(
             getProfileDataUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty())
                 .onSuccess { data ->
                     nickname = data.nickname
+                    savedProfileData = data
                     _uiState.value = UiState.Success(data)
                 }
                 .onFailure { code, msg ->
