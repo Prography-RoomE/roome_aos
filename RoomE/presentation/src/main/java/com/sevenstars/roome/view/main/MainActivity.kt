@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun initView() {
-        replaceFragment(MainProfileFragment())
+        replaceFragment(MainProfileFragment(), false)
         setBottomNavi()
     }
 
@@ -29,11 +29,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.bottomNavi.setOnItemSelectedListener { item ->
             when(item.itemId){
                 R.id.navi_item_profile -> {
-                    replaceFragment(MainProfileFragment())
+                    replaceFragment(MainProfileFragment(), false)
                     return@setOnItemSelectedListener true
                 }
                 R.id.navi_item_setting -> {
-                    replaceFragment(MainSettingFragment())
+                    replaceFragment(MainSettingFragment(), false)
                     return@setOnItemSelectedListener true
                 }
                 else -> return@setOnItemSelectedListener false
@@ -43,9 +43,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.bottomNavi.setOnItemReselectedListener {  } // 재요청 방지용
     }
 
-    private fun replaceFragment(fragment: Fragment){
+    fun replaceFragment(fragment: Fragment, addToBackStack: Boolean){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fl_main, fragment)
+        if(addToBackStack) fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
 

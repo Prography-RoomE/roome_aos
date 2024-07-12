@@ -2,6 +2,7 @@ package com.sevenstars.roome.view.main.profile
 
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
 import com.sevenstars.domain.model.profile.info.Colors
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
@@ -10,6 +11,7 @@ import com.sevenstars.roome.databinding.ItemMainProfileChipBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
+import com.sevenstars.roome.view.main.profile.edit.UserProfileEditFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +21,7 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
     override fun initView() {
         (requireActivity() as MainActivity).setBottomNaviVisibility(true)
         viewModel.fetchData()
+        viewModel.fetchUserInfo()
     }
 
     override fun initListener() {
@@ -26,15 +29,16 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
         binding.apply {
             btnShareKakao.setOnClickListener {
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .add(R.id.fl_main, SquareProfileCardGenerate())
+                    .add(R.id.fl_main, SquareProfileCardGenerate(viewModel.nickname))
                     .commit()
             }
 
             btnProfileCard.setOnClickListener {
-                val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.fl_main, ProfileCardFragment())
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+                (requireActivity() as MainActivity).replaceFragment(ProfileCardFragment(viewModel.nickname), true)
+            }
+
+            ibEdit.setOnClickListener {
+                (requireActivity() as MainActivity).replaceFragment(UserProfileEditFragment(viewModel.nickname, viewModel.imageUrl), true)
             }
         }
     }
@@ -42,6 +46,25 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
     override fun observer() {
         super.observer()
         with(viewModel) {
+            userState.observe(viewLifecycleOwner){
+                when(it){
+                    is UiState.Failure -> {
+                        if(it.code == 0) showNoConnectionDialog(R.id.fl_main, this@MainProfileFragment, isReplace = false)
+                        showToast("내 정보 조회 실패")
+                    }
+                    is UiState.Loading -> {}
+                    is UiState.Success -> {
+                        binding.tvNick.text = it.data.nickname
+                        if(it.data.imageUrl.isNotEmpty()){
+                            Glide.with(requireContext())
+                                .load(it.data.imageUrl)
+                                .optionalCircleCrop()
+                                .into(binding.ivUserProfile)
+                        }
+                    }
+                }
+            }
+
             uiState.observe(viewLifecycleOwner) { state ->
                 when (state) {
                     is UiState.Failure -> {
@@ -49,7 +72,6 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
                     }
                     is UiState.Loading -> {}
                     is UiState.Success -> {
-                        binding.tvNick.text = nickname
                         updateChip(binding.chipProfileCount, "방탈출 횟수", state.data.count)
                         updateChip(binding.chipProfileGenres, "선호 장르", state.data.preferredGenres.map { it.text!! })
                         updateChip(binding.chipProfileMBTI, "MBTI", if(state.data.mbti == "NONE") "-" else state.data.mbti)

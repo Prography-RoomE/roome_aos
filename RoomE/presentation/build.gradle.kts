@@ -92,4 +92,5 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.1.0")
 
     implementation("com.google.firebase:firebase-analytics:22.0.1")
+    implementation("com.github.bumptech.glide:glide:4.12.0")
 }

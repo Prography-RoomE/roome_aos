@@ -67,4 +67,27 @@ class UserRepositoryImpl @Inject constructor(
             RoomeResult.Failure(res.code, res.message)
         }
     }
+
+    override suspend fun postProfileImage(
+        accessToken: String,
+        realPath: String
+    ): RoomeResult<String> {
+        val res = userRemoteDataSource.postProfileImage(accessToken, realPath)
+
+        return if(res.code == 200){
+            RoomeResult.Success(res.data!!.imageUrl)
+        } else {
+            RoomeResult.Failure(res.code, res.message)
+        }
+    }
+
+    override suspend fun deleteProfileImage(accessToken: String): RoomeResult<Boolean> {
+        val res = userRemoteDataSource.deleteProfileImage(accessToken)
+
+        return if(res.code == 200){
+            RoomeResult.Success(true)
+        } else {
+            RoomeResult.Failure(res.code, res.message)
+        }
+    }
 }

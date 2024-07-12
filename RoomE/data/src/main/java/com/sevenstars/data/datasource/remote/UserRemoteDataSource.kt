@@ -1,8 +1,11 @@
 package com.sevenstars.data.datasource.remote
 
+import android.net.Uri
 import com.sevenstars.data.model.BaseResponse
 import com.sevenstars.data.model.profile.ResponseProfileDTO
+import com.sevenstars.data.model.user.ResponsePostImageDTO
 import com.sevenstars.data.model.user.ResponseUserInfoDTO
+import com.sevenstars.domain.utils.RoomeResult
 import okhttp3.ResponseBody
 
 interface UserRemoteDataSource {
@@ -19,4 +22,13 @@ interface UserRemoteDataSource {
 
     suspend fun getUserProfile(nickname: String
     ): BaseResponse<ResponseProfileDTO>
+
+    suspend fun postProfileImage(
+        accessToken: String,
+        realPath: String
+    ): BaseResponse<ResponsePostImageDTO>
+
+    suspend fun deleteProfileImage(
+        accessToken: String
+    ): BaseResponse<ResponseBody>
 }

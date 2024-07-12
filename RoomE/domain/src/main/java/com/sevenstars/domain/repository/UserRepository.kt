@@ -20,4 +20,13 @@ interface UserRepository {
 
     suspend fun getUserProfile(nickname: String
     ): RoomeResult<SavedProfileData>
+
+    suspend fun postProfileImage(
+        accessToken: String,
+        realPath: String
+    ): RoomeResult<String>
+
+    suspend fun deleteProfileImage(
+        accessToken: String
+    ): RoomeResult<Boolean>
 }

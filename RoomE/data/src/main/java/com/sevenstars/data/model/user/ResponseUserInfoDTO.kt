@@ -8,5 +8,7 @@ data class ResponseUserInfoDTO(
     @SerializedName("email")
     val email: String,
     @SerializedName("nickname")
-    val nickname: String
+    val nickname: String,
+    @SerializedName("imageUrl")
+    val imageUrl: String
 )

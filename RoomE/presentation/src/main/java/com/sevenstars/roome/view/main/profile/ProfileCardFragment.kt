@@ -30,7 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
 @AndroidEntryPoint
-class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fragment_profile_card) {
+class ProfileCardFragment(private val nickname: String) : BaseFragment<FragmentProfileCardBinding>(R.layout.fragment_profile_card) {
     private val viewModel: ProfileCardViewModel by viewModels()
     private var squareProfileFile: File? = null
     private var verticalProfileFile: File? = null
@@ -113,7 +113,7 @@ class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fr
         }
         binding.icProfileSquare.llProfile.viewTreeObserver.addOnGlobalLayoutListener {
             if (squareProfileFile == null) {
-                squareProfileFile = captureViewToCache(requireContext(), "${userName}'s Square Profile", binding.icProfileSquare.root)
+                squareProfileFile = captureViewToCache(requireContext(), "${nickname}'s Square Profile", binding.icProfileSquare.root)
                 handleProfileFileCreation(squareProfileFile, binding.icProfileSquare.root)
             }
         }
@@ -126,7 +126,7 @@ class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fr
         }
         binding.icProfileVertical.llProfile.viewTreeObserver.addOnGlobalLayoutListener {
             if (verticalProfileFile == null) {
-                verticalProfileFile = captureViewToCache(requireContext(), "${userName}'s Vertical Profile", binding.icProfileVertical.root)
+                verticalProfileFile = captureViewToCache(requireContext(), "${nickname}'s Vertical Profile", binding.icProfileVertical.root)
                 handleProfileFileCreation(verticalProfileFile, binding.icProfileVertical.root)
             }
         }
@@ -135,7 +135,7 @@ class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fr
     private fun bindProfileData(data: SavedProfileData, target: String) {
         if(target == "square"){
             with(binding.icProfileSquare){
-                name.text = userName
+                name.text = nickname
                 experience.text = data.count
                 mbti.text = if (data.mbti == "NONE") "" else data.mbti
                 emptyViewRemove(mbti)
@@ -164,7 +164,7 @@ class ProfileCardFragment : BaseFragment<FragmentProfileCardBinding>(R.layout.fr
             }
         } else {
             with(binding.icProfileVertical){
-                name.text = userName
+                name.text = nickname
                 experience.text = data.count
                 mbti.text = if (data.mbti == "NONE") "" else data.mbti
                 emptyViewRemove(mbti)
