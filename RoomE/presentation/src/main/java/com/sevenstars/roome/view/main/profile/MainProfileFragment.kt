@@ -15,6 +15,7 @@ import com.sevenstars.roome.view.main.profile.edit.UserProfileEditFragment
 import com.sevenstars.roome.view.profile.activity.ProfileActivityFragment
 import com.sevenstars.roome.view.profile.count.ProfileCountFragment
 import com.sevenstars.roome.view.profile.device.ProfileDeviceFragment
+import com.sevenstars.roome.view.profile.dislike.ProfileDislikeFragment
 import com.sevenstars.roome.view.profile.genres.ProfileGenresFragment
 import com.sevenstars.roome.view.profile.hint.ProfileHintFragment
 import com.sevenstars.roome.view.profile.horror.ProfileHorrorFragment
@@ -60,7 +61,7 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
             chipProfileHint.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileHintFragment(viewModel.savedProfileData.hintUsagePreference), true) }
             chipProfileDevice.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileDeviceFragment(viewModel.savedProfileData.deviceLockPreference), true) }
             chipProfileActivity.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileActivityFragment(viewModel.savedProfileData.activity), true) }
-            chipProfileDislikeFactor.btnChip.setOnClickListener{}
+            chipProfileDislikeFactor.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileDislikeFragment(viewModel.savedProfileData.themeDislikedFactors), true) }
             chipProfileColor.btnChip.setOnClickListener{}
         }
     }
