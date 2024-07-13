@@ -36,6 +36,30 @@
             android:layout_marginTop="24dp"
             tools:listitem="@layout/custom_toggle_button"/>
 
+        <FrameLayout
+            android:id="@+id/fl_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
+            android:background="@drawable/shape_gradient_background"
+            android:padding="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            android:visibility="visible">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+
+                android:background="@drawable/shape_radius_12"
+                android:backgroundTint="@color/primary_primary"
+
+                android:text="@string/btn_save"
+                android:textColor="@color/surface"
+                style="@style/title3_bold"/>
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

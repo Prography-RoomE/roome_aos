@@ -35,7 +35,7 @@ class ProfileDeviceFragment: BaseFragment<FragmentProfileDeviceBinding>(R.layout
         binding.rvDevice.apply {
             adapter = deviceAdapter
             layoutManager = GridLayoutManager(requireContext(), 1)
-            addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12))
+            addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12, false))
         }
 
         deviceAdapter.setData(profileViewModel.profileDefaultData.deviceLockPreferences)

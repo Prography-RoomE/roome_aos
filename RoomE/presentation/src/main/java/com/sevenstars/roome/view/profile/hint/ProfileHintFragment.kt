@@ -35,7 +35,7 @@ class ProfileHintFragment: BaseFragment<FragmentProfileHintBinding>(R.layout.fra
         binding.rvHint.apply {
             adapter = hintAdapter
             layoutManager = GridLayoutManager(requireContext(), 1)
-            addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12))
+            addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12, false))
         }
 
         hintAdapter.setData(profileViewModel.profileDefaultData.hintUsagePreferences)

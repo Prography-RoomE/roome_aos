@@ -35,7 +35,7 @@ class ProfileActivityFragment: BaseFragment<FragmentProfileActivitiyBinding>(R.l
         binding.rvActivity.apply {
             adapter = activityAdapter
             layoutManager = GridLayoutManager(requireContext(), 1)
-            addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12))
+            addItemDecoration(VerticalSpaceItemDecoration(requireContext(), 12, false))
         }
 
         activityAdapter.setData(profileViewModel.profileDefaultData.activities)
