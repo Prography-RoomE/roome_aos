@@ -49,7 +49,7 @@ class ProfileHorrorFragment(
             setToolbarVisibility(true)
             setStep(6)
         }
-        horrorAdapter.checkedItem(profileViewModel.selectedProfileData.horror!!)
+        if(profileViewModel.selectedProfileData.horror != null) horrorAdapter.checkedItem(profileViewModel.selectedProfileData.horror!!)
         setHorrorRv()
     }
 

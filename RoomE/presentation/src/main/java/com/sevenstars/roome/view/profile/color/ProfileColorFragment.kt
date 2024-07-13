@@ -58,7 +58,7 @@ class ProfileColorFragment(
             setToolbarVisibility(true)
             setStep(11)
         }
-        colorAdapter.checkedItem(profileViewModel.selectedProfileData.color!!)
+        if(profileViewModel.selectedProfileData.color != null) colorAdapter.checkedItem(profileViewModel.selectedProfileData.color!!)
         setColorRv()
     }
 

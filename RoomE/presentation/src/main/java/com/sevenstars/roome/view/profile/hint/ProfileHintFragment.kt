@@ -48,7 +48,7 @@ class ProfileHintFragment(
             setToolbarVisibility(true)
             setStep(7)
         }
-        hintAdapter.checkedItem(profileViewModel.selectedProfileData.hint!!)
+        if(profileViewModel.selectedProfileData.hint != null) hintAdapter.checkedItem(profileViewModel.selectedProfileData.hint!!)
         setHintRv()
     }
 

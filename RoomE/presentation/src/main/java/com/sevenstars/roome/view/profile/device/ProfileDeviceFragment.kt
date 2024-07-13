@@ -48,7 +48,7 @@ class ProfileDeviceFragment(
             setToolbarVisibility(true)
             setStep(8)
         }
-        deviceAdapter.checkedItem(profileViewModel.selectedProfileData.deviceOrLock!!)
+        if(profileViewModel.selectedProfileData.deviceOrLock != null) deviceAdapter.checkedItem(profileViewModel.selectedProfileData.deviceOrLock!!)
         setDeviceLockRv()
     }
 

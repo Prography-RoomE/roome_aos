@@ -48,7 +48,7 @@ class ProfileActivityFragment(
             setToolbarVisibility(true)
             setStep(9)
         }
-        activityAdapter.checkedItem(profileViewModel.selectedProfileData.activity!!)
+        if(profileViewModel.selectedProfileData.activity != null) activityAdapter.checkedItem(profileViewModel.selectedProfileData.activity!!)
         setActivityRv()
     }
 
