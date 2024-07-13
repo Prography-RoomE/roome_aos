@@ -93,7 +93,8 @@ class ProfileCountFragment(
         if (binding.tgCountRange.isChecked && (binding.spinnerCount.selectedItem as CountRange).title != "기타") {
             viewModel.saveRangeCountData(spinnerAdapter.getItem(binding.spinnerCount.selectedItemPosition))
         } else {
-            viewModel.saveCountData(binding.etCount.text.toString().replace("번", "").toInt(), false)
+            val count = binding.etCount.text.toString().replace("번", "")
+            viewModel.saveCountData(if(count.isEmpty()) 0 else count.toInt(), false)
         }
     }
 
@@ -195,7 +196,8 @@ class ProfileCountFragment(
 
     private fun handleSuccessState() {
         if (isProfileActivity()) {
-            profileViewModel.selectedProfileData.count = binding.etCount.text.toString().replace("번", "").toInt()
+            val count = binding.etCount.text.toString().replace("번", "")
+            profileViewModel.selectedProfileData.count = if(count.isEmpty()) 0 else count.toInt()
             (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileGenresFragment(), null)
         } else {
             requireActivity().supportFragmentManager.popBackStack()
