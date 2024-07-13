@@ -123,7 +123,6 @@ class ProfileGenresFragment(
         super.initListener()
 
         binding.btnNext.setOnClickListener {
-            LoggerUtils.info(genresAdapter.checked.joinToString(", "))
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
                 viewModel.saveData(genresAdapter.checked.map { it.id })
             }

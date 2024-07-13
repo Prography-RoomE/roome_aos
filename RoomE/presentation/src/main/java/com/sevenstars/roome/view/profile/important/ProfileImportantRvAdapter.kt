@@ -57,6 +57,12 @@ class ProfileImportantRvAdapter: RecyclerView.Adapter<ProfileImportantRvAdapter.
     override fun getItemCount(): Int = dataList.size
 
     @SuppressLint("NotifyDataSetChanged")
+    fun setCheckedItem(importantFactors: List<ImportantFactors>){
+        checked.addAll(importantFactors)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: List<ImportantFactors>){
         dataList = newList
         notifyDataSetChanged()

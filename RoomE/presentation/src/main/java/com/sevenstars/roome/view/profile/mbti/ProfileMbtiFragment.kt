@@ -82,7 +82,6 @@ class ProfileMbtiFragment(
         }
 
         binding.cbOption.setOnCheckedChangeListener { _, b ->
-            LoggerUtils.debug(b.toString())
             if(b){
                 mbtiAdapter.mbtiDisabled()
 
