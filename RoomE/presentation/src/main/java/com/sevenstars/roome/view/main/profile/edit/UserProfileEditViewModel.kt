@@ -1,16 +1,12 @@
 package com.sevenstars.roome.view.main.profile.edit
 
-import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.usecase.user.DeleteUserImageUseCase
 import com.sevenstars.domain.usecase.user.PostUserImageUseCase
 import com.sevenstars.domain.usecase.user.SaveNickUseCase
-import com.sevenstars.domain.usecase.user.ValidationNickUseCase
-import com.sevenstars.roome.base.RoomeApplication
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.utils.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel

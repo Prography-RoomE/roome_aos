@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.info.HorrorThemePositions
 import com.sevenstars.roome.databinding.CustomToggleButtonBinding
 

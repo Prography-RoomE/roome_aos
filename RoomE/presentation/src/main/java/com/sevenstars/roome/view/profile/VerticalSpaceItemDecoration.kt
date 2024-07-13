@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.Visibility
 
 class VerticalSpaceItemDecoration(
     context: Context,

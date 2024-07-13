@@ -18,7 +18,6 @@ import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.SpaceItemDecoration
 import com.sevenstars.roome.view.profile.important.ProfileImportantFragment
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.internal.addHeaderLenient
 
 @AndroidEntryPoint
 class ProfileStrengthFragment(

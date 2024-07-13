@@ -6,12 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.sevenstars.roome.R
-import com.sevenstars.roome.custom.CustomToast
 import com.sevenstars.roome.databinding.BottomSheetDialogUserProfileBinding
-import com.sevenstars.roome.utils.UiState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

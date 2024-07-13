@@ -1,13 +1,11 @@
 package com.sevenstars.roome.view.profile.device
 
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothClass.Device
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sevenstars.domain.model.profile.info.DeviceLockPreferences
-import com.sevenstars.domain.model.profile.info.HintUsagePreferences
 import com.sevenstars.roome.databinding.CustomToggleButtonBinding
 
 class ProfileDeviceRvAdapter: RecyclerView.Adapter<ProfileDeviceRvAdapter.DeviceViewHolder>() {

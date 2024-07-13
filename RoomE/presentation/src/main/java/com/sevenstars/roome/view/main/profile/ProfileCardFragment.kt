@@ -17,7 +17,6 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.model.profile.SavedProfileData
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
-import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.databinding.FragmentProfileCardBinding
 import com.sevenstars.roome.exetnsion.setColorBackground

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sevenstars.domain.model.profile.info.HintUsagePreferences
-import com.sevenstars.domain.model.profile.info.HorrorThemePositions
 import com.sevenstars.roome.databinding.CustomToggleButtonBinding
 
 class ProfileHintRvAdapter: RecyclerView.Adapter<ProfileHintRvAdapter.HintViewHolder>() {

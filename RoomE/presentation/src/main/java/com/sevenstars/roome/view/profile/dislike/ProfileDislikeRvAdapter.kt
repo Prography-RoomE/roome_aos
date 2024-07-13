@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sevenstars.domain.model.profile.info.DislikedFactors
-import com.sevenstars.domain.model.profile.info.Genres
 import com.sevenstars.roome.databinding.ItemChipBinding
 
 class ProfileDislikeRvAdapter: RecyclerView.Adapter<ProfileDislikeRvAdapter.DislikeViewHolder>() {

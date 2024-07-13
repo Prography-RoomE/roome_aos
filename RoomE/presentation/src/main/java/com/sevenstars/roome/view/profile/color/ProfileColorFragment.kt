@@ -15,7 +15,6 @@ import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
-import com.sevenstars.roome.view.profile.VerticalSpaceItemDecoration
 import com.sevenstars.roome.view.profile.generate.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
 

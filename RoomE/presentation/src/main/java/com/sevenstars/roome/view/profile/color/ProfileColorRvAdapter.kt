@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sevenstars.domain.model.profile.info.Colors
-import com.sevenstars.domain.model.profile.info.HintUsagePreferences
 import com.sevenstars.roome.databinding.ItemColorChipBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
 

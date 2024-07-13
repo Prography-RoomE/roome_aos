@@ -3,7 +3,6 @@ package com.sevenstars.roome.exetnsion
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.shapes.RectShape
 import android.util.TypedValue
 import android.view.View
 
