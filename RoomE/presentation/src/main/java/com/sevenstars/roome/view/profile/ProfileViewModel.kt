@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.enums.ProfileState
 import com.sevenstars.domain.model.profile.ProfileInfoEntity
 import com.sevenstars.domain.model.profile.SelectedProfileData
@@ -97,7 +96,6 @@ class ProfileViewModel@Inject constructor(
             getProfileInfoUseCase.invoke(app.userPreferences.getAccessToken().getOrNull().orEmpty())
                 .onSuccess {
                     profileDefaultData = it
-                    LoggerUtils.info(it.colors.joinToString(","))
                     _profileDataState.value = UiState.Success(profileState)
                 }
                 .onFailure { code, msg ->

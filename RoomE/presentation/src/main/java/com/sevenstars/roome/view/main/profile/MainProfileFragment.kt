@@ -12,6 +12,17 @@ import com.sevenstars.roome.exetnsion.setColorBackground
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.main.profile.edit.UserProfileEditFragment
+import com.sevenstars.roome.view.profile.activity.ProfileActivityFragment
+import com.sevenstars.roome.view.profile.color.ProfileColorFragment
+import com.sevenstars.roome.view.profile.count.ProfileCountFragment
+import com.sevenstars.roome.view.profile.device.ProfileDeviceFragment
+import com.sevenstars.roome.view.profile.dislike.ProfileDislikeFragment
+import com.sevenstars.roome.view.profile.genres.ProfileGenresFragment
+import com.sevenstars.roome.view.profile.hint.ProfileHintFragment
+import com.sevenstars.roome.view.profile.horror.ProfileHorrorFragment
+import com.sevenstars.roome.view.profile.important.ProfileImportantFragment
+import com.sevenstars.roome.view.profile.mbti.ProfileMbtiFragment
+import com.sevenstars.roome.view.profile.strength.ProfileStrengthFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +31,7 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
 
     override fun initView() {
         (requireActivity() as MainActivity).setBottomNaviVisibility(true)
+        (requireActivity() as MainActivity).setToolbarVisibility(false)
         viewModel.fetchData()
         viewModel.fetchUserInfo()
     }
@@ -40,6 +52,18 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
             ibEdit.setOnClickListener {
                 (requireActivity() as MainActivity).replaceFragment(UserProfileEditFragment(viewModel.nickname, viewModel.imageUrl), true)
             }
+
+            chipProfileCount.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileCountFragment(viewModel.savedProfileData.count), true)}
+            chipProfileGenres.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileGenresFragment(viewModel.savedProfileData.preferredGenres), true) }
+            chipProfileMBTI.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileMbtiFragment(viewModel.savedProfileData.mbti), true) }
+            chipProfileStrength.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileStrengthFragment(viewModel.savedProfileData.userStrengths), true) }
+            chipProfileImportantFactor.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileImportantFragment(viewModel.savedProfileData.themeImportantFactors), true) }
+            chipProfileHorror.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileHorrorFragment(viewModel.savedProfileData.horrorThemePosition), true) }
+            chipProfileHint.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileHintFragment(viewModel.savedProfileData.hintUsagePreference), true) }
+            chipProfileDevice.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileDeviceFragment(viewModel.savedProfileData.deviceLockPreference), true) }
+            chipProfileActivity.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileActivityFragment(viewModel.savedProfileData.activity), true) }
+            chipProfileDislikeFactor.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileDislikeFragment(viewModel.savedProfileData.themeDislikedFactors), true) }
+            chipProfileColor.btnChip.setOnClickListener{ (requireActivity() as MainActivity).replaceFragment(ProfileColorFragment(viewModel.savedProfileData.color), true) }
         }
     }
 
@@ -72,7 +96,7 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
                     }
                     is UiState.Loading -> {}
                     is UiState.Success -> {
-                        updateChip(binding.chipProfileCount, "방탈출 횟수", state.data.count)
+                        updateChip(binding.chipProfileCount, "방탈출 횟수", convertCountString(state.data.count))
                         updateChip(binding.chipProfileGenres, "선호 장르", state.data.preferredGenres.map { it.text!! })
                         updateChip(binding.chipProfileMBTI, "MBTI", if(state.data.mbti == "NONE") "-" else state.data.mbti)
                         updateChip(binding.chipProfileStrength, "강점", state.data.userStrengths.map { it.text!! })
@@ -87,6 +111,16 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
                 }
             }
         }
+    }
+
+    private fun convertCountString(count: String): String {
+        val list = listOf("~", "이상")
+
+        if (list.any { count.contains(it) }) {
+            return count
+        }
+
+        return count.reversed().chunked(3).joinToString(",").reversed()
     }
 
     private fun updateColorChip(color: Colors){

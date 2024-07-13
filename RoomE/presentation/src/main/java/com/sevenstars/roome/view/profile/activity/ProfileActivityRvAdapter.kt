@@ -9,6 +9,7 @@ import com.sevenstars.roome.databinding.CustomToggleButtonBinding
 
 class ProfileActivityRvAdapter: RecyclerView.Adapter<ProfileActivityRvAdapter.ActivityViewHolder>() {
     private var dataList = listOf<Activities>()
+    var checked: Activities? = null
 
     inner class ActivityViewHolder(private val binding: CustomToggleButtonBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -22,11 +23,23 @@ class ProfileActivityRvAdapter: RecyclerView.Adapter<ProfileActivityRvAdapter.Ac
                     textOn = null
                     textOff = null
 
-                    setOnCheckedChangeListener { _, isChecked ->
-                        itemClickListener.onClick(isChecked, data)
-                    }
+                    isChecked = (checked?.id == data.id)
+                    setOnClickListener { toggleCheckedState(data) }
                 }
             }
+        }
+
+        private fun toggleCheckedState(data: Activities){
+            val wasChecked = (checked?.id == data.id)
+            if (wasChecked) {
+                checked = null
+                binding.toggleButton.isChecked = false
+            } else {
+                checked = data
+                binding.toggleButton.isChecked = true
+            }
+            itemClickListener.onClick(isFull = checked != null)
+            notifyDataSetChanged()
         }
     }
 
@@ -47,8 +60,13 @@ class ProfileActivityRvAdapter: RecyclerView.Adapter<ProfileActivityRvAdapter.Ac
         notifyDataSetChanged()
     }
 
+    fun checkedItem(activities: Activities){
+        checked = activities
+        notifyDataSetChanged()
+    }
+
     interface OnItemClickListener{
-        fun onClick(isChecked: Boolean, data: Activities)
+        fun onClick(isFull: Boolean)
     }
 
     private lateinit var itemClickListener: OnItemClickListener

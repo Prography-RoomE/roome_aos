@@ -23,8 +23,6 @@ import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.databinding.FragmentUserProfileEditBinding
-import com.sevenstars.roome.utils.Constants.CAMERA_REQUEST_CODE
-import com.sevenstars.roome.utils.Constants.GALLERY_REQUEST_CODE
 import com.sevenstars.roome.utils.ImageUtils
 import com.sevenstars.roome.utils.PermissionManager
 import com.sevenstars.roome.utils.UiState

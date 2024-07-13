@@ -9,6 +9,7 @@ import com.sevenstars.roome.databinding.CustomToggleButtonBinding
 
 class ProfileHorrorRvAdapter: RecyclerView.Adapter<ProfileHorrorRvAdapter.HorrorViewHolder>() {
     private var dataList = listOf<HorrorThemePositions>()
+    var checked: HorrorThemePositions? = null
 
     inner class HorrorViewHolder(private val binding: CustomToggleButtonBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -22,11 +23,23 @@ class ProfileHorrorRvAdapter: RecyclerView.Adapter<ProfileHorrorRvAdapter.Horror
                     textOn = null
                     textOff = null
 
-                    setOnCheckedChangeListener { _, isChecked ->
-                        itemClickListener.onClick(isChecked, data)
-                    }
+                    isChecked = (checked?.id == data.id)
+                    setOnClickListener { toggleCheckedState(data) }
                 }
             }
+        }
+
+        private fun toggleCheckedState(data: HorrorThemePositions){
+            val wasChecked = (checked?.id == data.id)
+            if (wasChecked) {
+                checked = null
+                binding.toggleButton.isChecked = false
+            } else {
+                checked = data
+                binding.toggleButton.isChecked = true
+            }
+            itemClickListener.onClick(isFull = checked != null)
+            notifyDataSetChanged()
         }
     }
 
@@ -47,8 +60,13 @@ class ProfileHorrorRvAdapter: RecyclerView.Adapter<ProfileHorrorRvAdapter.Horror
         notifyDataSetChanged()
     }
 
+    fun checkedItem(horrorThemePositions: HorrorThemePositions){
+        checked = horrorThemePositions
+        notifyDataSetChanged()
+    }
+
     interface OnItemClickListener{
-        fun onClick(isChecked: Boolean, item: HorrorThemePositions)
+        fun onClick(isFull: Boolean)
     }
 
     private lateinit var itemClickListener: OnItemClickListener

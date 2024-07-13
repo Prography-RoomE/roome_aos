@@ -9,7 +9,7 @@ import com.sevenstars.roome.databinding.ItemChipBinding
 
 class ProfileDislikeRvAdapter: RecyclerView.Adapter<ProfileDislikeRvAdapter.DislikeViewHolder>() {
     private var dataList = listOf<DislikedFactors>()
-    var checked = mutableListOf<DislikedFactors>()
+    var checked = ArrayDeque<DislikedFactors>(2)
 
     inner class DislikeViewHolder(private val binding: ItemChipBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -59,6 +59,11 @@ class ProfileDislikeRvAdapter: RecyclerView.Adapter<ProfileDislikeRvAdapter.Disl
     @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: List<DislikedFactors>){
         dataList = newList
+        notifyDataSetChanged()
+    }
+
+    fun setChecked(dislikedFactors: List<DislikedFactors>){
+        checked.addAll(dislikedFactors)
         notifyDataSetChanged()
     }
 

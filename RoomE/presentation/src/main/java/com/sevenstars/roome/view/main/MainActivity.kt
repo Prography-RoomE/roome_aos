@@ -25,6 +25,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setBottomNavi()
     }
 
+    override fun initListener() {
+        super.initListener()
+
+        binding.btnCancel.setOnClickListener {
+            supportFragmentManager.popBackStack()
+        }
+    }
+
     private fun setBottomNavi(){
         binding.bottomNavi.setOnItemSelectedListener { item ->
             when(item.itemId){
@@ -75,5 +83,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         intent.putExtra("isUnlink", true)
         startActivity(intent)
         finish()
+    }
+
+    fun setToolbarVisibility(p: Boolean){
+        binding.tbMain.isVisible = p
     }
 }

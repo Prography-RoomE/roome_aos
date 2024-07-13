@@ -62,6 +62,11 @@ class ProfileGenresRvAdapter: RecyclerView.Adapter<ProfileGenresRvAdapter.Genres
         notifyDataSetChanged()
     }
 
+    fun setChecked(genres: List<Genres>){
+        checked.addAll(genres)
+        notifyDataSetChanged()
+    }
+
     interface OnItemClickListener{
         fun onClick(isFull: Boolean)
     }

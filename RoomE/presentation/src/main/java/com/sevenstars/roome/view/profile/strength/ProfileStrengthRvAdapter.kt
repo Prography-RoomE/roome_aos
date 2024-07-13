@@ -62,6 +62,11 @@ class ProfileStrengthRvAdapter: RecyclerView.Adapter<ProfileStrengthRvAdapter.St
         notifyDataSetChanged()
     }
 
+    fun setChecked(strengths: List<Strengths>){
+        checked.addAll(strengths)
+        notifyDataSetChanged()
+    }
+
     interface OnItemClickListener{
         fun onClick(isFull: Boolean)
     }

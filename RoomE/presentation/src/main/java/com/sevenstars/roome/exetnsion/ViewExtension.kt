@@ -3,7 +3,6 @@ package com.sevenstars.roome.exetnsion
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.shapes.RectShape
 import android.util.TypedValue
 import android.view.View
 
@@ -85,14 +84,6 @@ fun setColorBackground(
             view.background = gradientDrawable
         }
         else -> throw IllegalArgumentException("Unsupported mode: $mode")
-    }
-}
-
-class RectShapeWithCorners(private val radius: Float) : RectShape() {
-    override fun draw(canvas: android.graphics.Canvas, paint: android.graphics.Paint) {
-        val rect = rect()
-        val r = radius
-        canvas.drawRoundRect(rect, r, r, paint)
     }
 }
 

@@ -1,14 +1,18 @@
 package com.sevenstars.roome.view.profile.genres
 
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sevenstars.data.utils.LoggerUtils
+import com.sevenstars.domain.enums.ProfileState
+import com.sevenstars.domain.model.profile.info.Genres
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileGenresBinding
 import com.sevenstars.roome.utils.UiState
+import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
 import com.sevenstars.roome.view.profile.SpaceItemDecoration
@@ -16,14 +20,16 @@ import com.sevenstars.roome.view.profile.mbti.ProfileMbtiFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout.fragment_profile_genres) {
+class ProfileGenresFragment(
+    private val genres: List<Genres>? = null
+): BaseFragment<FragmentProfileGenresBinding>(R.layout.fragment_profile_genres) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
     private val viewModel: ProfileGenresViewModel by viewModels()
     private lateinit var genresAdapter: ProfileGenresRvAdapter
 
-    override fun initView() {
-        (requireActivity() as ProfileActivity).setStep(2)
+    private fun isProfileActivity() = requireActivity().localClassName == "view.profile.ProfileActivity"
 
+    override fun initView() {
         genresAdapter = ProfileGenresRvAdapter().apply {
             this.setItemClickListener(object : ProfileGenresRvAdapter.OnItemClickListener{
                 override fun onClick(isFull: Boolean) {
@@ -33,9 +39,37 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
             })
         }
 
+        if(isProfileActivity()) setupProfileActivity()
+        else setupMainActivity()
+    }
+
+    private fun setupProfileActivity() {
+        (requireActivity() as ProfileActivity).apply {
+            setToolbarVisibility(true)
+            setStep(2)
+        }
+        genresAdapter.checked.addAll(profileViewModel.selectedProfileData.genres)
+        setGenreRv()
+        setNextBtn()
+    }
+
+    private fun setupMainActivity() {
+        (requireActivity() as MainActivity).apply {
+            setBottomNaviVisibility(false)
+            setToolbarVisibility(true)
+        }
+        profileViewModel.fetchDefaultData(ProfileState.COMPLETE)
+
+        binding.btnNext.apply {
+            setText(R.string.btn_save)
+            backgroundTintList = AppCompatResources.getColorStateList(requireContext(), R.color.primary_primary)
+            setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
+        }
+        genresAdapter.setChecked(genres!!)
+    }
+
+    private fun setGenreRv(){
         binding.rvGenres.apply {
-            genresAdapter.checked.addAll(profileViewModel.selectedProfileData.genres)
-            setNextBtn()
             adapter = genresAdapter
             layoutManager = GridLayoutManager(requireContext(), 2)
             addItemDecoration(SpaceItemDecoration(requireContext(), 6))
@@ -43,6 +77,8 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
 
         genresAdapter.setData(profileViewModel.profileDefaultData.genres)
     }
+
+
 
     override fun observer() {
         super.observer()
@@ -56,9 +92,28 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
-                    profileViewModel.selectedProfileData.genres = genresAdapter.checked
-                    (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileMbtiFragment(), null)
+                    if(isProfileActivity()){
+                        profileViewModel.selectedProfileData.genres = genresAdapter.checked
+                        (requireActivity() as ProfileActivity).replaceFragmentWithStack(ProfileMbtiFragment(), null)
+                    } else {
+                        requireActivity().supportFragmentManager.popBackStack()
+                    }
                     viewModel.setLoadingState()
+                }
+            }
+        }
+
+        if (requireActivity().localClassName == "view.main.MainActivity") {
+            profileViewModel.profileDataState.observe(this) {
+                when (it) {
+                    is UiState.Failure -> {
+                        LoggerUtils.error("프로필 생성에 필요한 데이터 조회 실패\n${it.message}")
+                        showToast("프로필 생성에 필요한 데이터 조회 실패")
+                    }
+                    is UiState.Loading -> {}
+                    is UiState.Success -> {
+                        setGenreRv()
+                    }
                 }
             }
         }
@@ -68,7 +123,6 @@ class ProfileGenresFragment: BaseFragment<FragmentProfileGenresBinding>(R.layout
         super.initListener()
 
         binding.btnNext.setOnClickListener {
-            LoggerUtils.info(genresAdapter.checked.joinToString(", "))
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
                 viewModel.saveData(genresAdapter.checked.map { it.id })
             }
