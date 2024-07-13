@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sevenstars.domain.model.profile.info.HintUsagePreferences
+import com.sevenstars.domain.model.profile.info.HorrorThemePositions
 import com.sevenstars.roome.databinding.CustomToggleButtonBinding
 
 class ProfileHintRvAdapter: RecyclerView.Adapter<ProfileHintRvAdapter.HintViewHolder>() {
     private var dataList = listOf<HintUsagePreferences>()
+    var checked: HintUsagePreferences? = null
 
     inner class HintViewHolder(private val binding: CustomToggleButtonBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -22,11 +24,23 @@ class ProfileHintRvAdapter: RecyclerView.Adapter<ProfileHintRvAdapter.HintViewHo
                     textOn = null
                     textOff = null
 
-                    setOnCheckedChangeListener { _, isChecked ->
-                        itemClickListener.onClick(isChecked, data)
-                    }
+                    isChecked = (checked?.id == data.id)
+                    setOnClickListener { toggleCheckedState(data) }
                 }
             }
+        }
+
+        private fun toggleCheckedState(data: HintUsagePreferences){
+            val wasChecked = (checked?.id == data.id)
+            if (wasChecked) {
+                checked = null
+                binding.toggleButton.isChecked = false
+            } else {
+                checked = data
+                binding.toggleButton.isChecked = true
+            }
+            itemClickListener.onClick(isFull = checked != null)
+            notifyDataSetChanged()
         }
     }
 
@@ -47,8 +61,13 @@ class ProfileHintRvAdapter: RecyclerView.Adapter<ProfileHintRvAdapter.HintViewHo
         notifyDataSetChanged()
     }
 
+    fun checkedItem(hintUsagePreferences: HintUsagePreferences){
+        checked = hintUsagePreferences
+        notifyDataSetChanged()
+    }
+
     interface OnItemClickListener{
-        fun onClick(isChecked: Boolean, data: HintUsagePreferences)
+        fun onClick(isFull: Boolean)
     }
 
     private lateinit var itemClickListener: OnItemClickListener

@@ -60,6 +60,7 @@ class ProfileHorrorFragment(
         }
         profileViewModel.fetchDefaultData(ProfileState.COMPLETE)
         binding.flSaveBtn.visibility = View.VISIBLE
+        horrorAdapter.checkedItem(horrorThemePositions!!)
     }
 
     private fun setHorrorRv(){
@@ -128,7 +129,6 @@ class ProfileHorrorFragment(
                     is UiState.Loading -> {}
                     is UiState.Success -> {
                         setHorrorRv()
-                        horrorAdapter.checkedItem(horrorThemePositions!!)
                     }
                 }
             }
