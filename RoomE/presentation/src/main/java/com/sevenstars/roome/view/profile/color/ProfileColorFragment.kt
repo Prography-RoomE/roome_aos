@@ -32,12 +32,6 @@ class ProfileColorFragment(
     override fun initView() {
         colorAdapter = ProfileColorRvAdapter().apply {
             this.setItemClickListener(object : ProfileColorRvAdapter.OnItemClickListener{
-                //                override fun onClick(isChecked: Boolean, data: Colors) {
-//                    if(isChecked) {
-//                        profileViewModel.selectedProfileData.color = data
-//                        viewModel.saveData(data.id)
-//                    }
-//                }
                 override fun onClick(isFull: Boolean) {
                     if(isFull && isProfileActivity()) {
                         profileViewModel.selectedProfileData.color = colorAdapter.checked

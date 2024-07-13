@@ -96,7 +96,7 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
                     }
                     is UiState.Loading -> {}
                     is UiState.Success -> {
-                        updateChip(binding.chipProfileCount, "방탈출 횟수", state.data.count)
+                        updateChip(binding.chipProfileCount, "방탈출 횟수", convertCountString(state.data.count))
                         updateChip(binding.chipProfileGenres, "선호 장르", state.data.preferredGenres.map { it.text!! })
                         updateChip(binding.chipProfileMBTI, "MBTI", if(state.data.mbti == "NONE") "-" else state.data.mbti)
                         updateChip(binding.chipProfileStrength, "강점", state.data.userStrengths.map { it.text!! })
@@ -111,6 +111,16 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
                 }
             }
         }
+    }
+
+    private fun convertCountString(count: String): String {
+        val list = listOf("~", "이상")
+
+        if (list.any { count.contains(it) }) {
+            return count
+        }
+
+        return count.reversed().chunked(3).joinToString(",").reversed()
     }
 
     private fun updateColorChip(color: Colors){
