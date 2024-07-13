@@ -88,11 +88,3 @@ fun setColorBackground(
     }
 }
 
-class RectShapeWithCorners(private val radius: Float) : RectShape() {
-    override fun draw(canvas: android.graphics.Canvas, paint: android.graphics.Paint) {
-        val rect = rect()
-        val r = radius
-        canvas.drawRoundRect(rect, r, r, paint)
-    }
-}
-
