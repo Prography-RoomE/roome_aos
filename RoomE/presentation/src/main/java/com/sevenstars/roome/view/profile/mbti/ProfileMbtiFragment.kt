@@ -8,6 +8,7 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileMbtiBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -27,6 +28,8 @@ class ProfileMbtiFragment(
 
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("mbti")
+
         mbtiAdapter = ProfileMbtiGvAdapter().apply {
             this.setItemClickListener(object : ProfileMbtiGvAdapter.OnItemClickListener{
                 override fun onClick() {
@@ -70,6 +73,7 @@ class ProfileMbtiFragment(
 
         binding.btnNext.setOnClickListener {
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
+                AnalyticsHelper.logButtonClick("mbti_next")
                 viewModel.saveData(buildString {
                     for(key in 1..4) append(mbtiAdapter.checkedItems[key] ?: "")
                 })

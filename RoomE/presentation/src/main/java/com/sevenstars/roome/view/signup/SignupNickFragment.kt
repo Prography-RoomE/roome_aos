@@ -11,6 +11,7 @@ import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.databinding.FragmentSignupNickBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import java.util.regex.Pattern
 
@@ -20,6 +21,7 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
 
     override fun initView() {
         showKeyboardAndFocus(binding.etNickname)
+        AnalyticsHelper.logScreenView("nickname")
     }
 
     override fun initListener() {
@@ -120,12 +122,14 @@ class SignupNickFragment: BaseFragment<FragmentSignupNickBinding>(R.layout.fragm
         viewModel.saveState.observe(viewLifecycleOwner){
             when(it){
                 is UiState.Failure -> {
+                    AnalyticsHelper.logEvent("input_nickname_fail")
                     LoggerUtils.error(it.message)
                     showToast(it.message)
                 }
                 is UiState.Loading -> {}
                 is UiState.Success -> {
                     LoggerUtils.debug("회원가입 성공")
+                    AnalyticsHelper.logEvent("input_nickname_success")
                     userName = binding.etNickname.text.toString()
                     (requireActivity() as SignUpActivity).moveToProfile()
                 }

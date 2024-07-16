@@ -15,6 +15,7 @@ import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.custom.IndentLeadingMarginSpan
 import com.sevenstars.roome.databinding.FragmentUnlinkCheckBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +35,8 @@ class UnlinkCheckFragment: BaseFragment<FragmentUnlinkCheckBinding>(R.layout.fra
     lateinit var googleSignInClient: GoogleSignInClient
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("exit_confirm")
+
         binding.tbUnlink.btnNext.visibility = View.GONE
         setIndentTextView()
     }
@@ -84,10 +87,14 @@ class UnlinkCheckFragment: BaseFragment<FragmentUnlinkCheckBinding>(R.layout.fra
     }
 
     private fun unlink(){
+        AnalyticsHelper.logButtonClick("exit_confirm")
+
         CustomDialog.getInstance(CustomDialog.DialogType.UNLINK, null).apply {
             setButtonClickListener(object: CustomDialog.OnButtonClickListener{
                 override fun onButton1Clicked() { }
                 override fun onButton2Clicked() {
+                    AnalyticsHelper.logButtonClick("exit_final")
+
                     CoroutineScope(Dispatchers.IO).launch {
                         val provider = app.userPreferences.getLoginProvider().getOrNull().orEmpty()
                         launch(Dispatchers.Main){

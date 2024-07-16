@@ -9,6 +9,7 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentWebviewBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.signup.SignUpViewModel
 
@@ -30,7 +31,8 @@ class WebViewFragment(
         requireActivity().onBackPressedDispatcher.addCallback(this. onBackPressedCallback)
         visibilityNavi()
 
-        LoggerUtils.info("WebView!")
+        if(title == "서비스 이용약관") AnalyticsHelper.logScreenView("terms")
+        else if(title == "개인정보처리방침") AnalyticsHelper.logScreenView("info")
 
         binding.tvWebViewTitle.text = title
         binding.btnAgree.isVisible = agreeBtnVisibility
@@ -42,6 +44,9 @@ class WebViewFragment(
         super.initListener()
 
         binding.btnAgree.setOnClickListener {
+            if(title == "서비스 이용약관") AnalyticsHelper.logButtonClick("terms_agree")
+            else if(title == "개인정보처리방침") AnalyticsHelper.logButtonClick("info_agree")
+
             viewModel.updateAgreementTitle = title
             requireActivity().supportFragmentManager.popBackStack()
         }

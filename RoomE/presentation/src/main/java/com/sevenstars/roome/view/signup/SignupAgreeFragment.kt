@@ -6,6 +6,7 @@ import androidx.fragment.app.activityViewModels
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentSignupAgreeBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.Constants.PRIVACY_POLICY
 import com.sevenstars.roome.utils.Constants.TERMS_OF_SERVICE
 import com.sevenstars.roome.view.main.setting.WebViewFragment
@@ -13,7 +14,9 @@ import com.sevenstars.roome.view.main.setting.WebViewFragment
 class SignupAgreeFragment : BaseFragment<FragmentSignupAgreeBinding>(R.layout.fragment_signup_agree) {
     private val viewModel: SignUpViewModel by activityViewModels()
 
-    override fun initView() {}
+    override fun initView() {
+        AnalyticsHelper.logScreenView("sign_up_terms")
+    }
 
     override fun onResume() {
         super.onResume()
@@ -38,7 +41,10 @@ class SignupAgreeFragment : BaseFragment<FragmentSignupAgreeBinding>(R.layout.fr
     private fun setupClickListener() {
         binding.apply {
             btnBack.setOnClickListener { navigateToSignIn() }
-            btnNext.setOnClickListener { navigateToSignupNick() }
+            btnNext.setOnClickListener {
+                AnalyticsHelper.logButtonClick("terms_next")
+                navigateToSignupNick()
+            }
 
             ibOpenService.setOnClickListener { moveWebView("서비스 이용약관", TERMS_OF_SERVICE) }
             ibOpenPrivacy.setOnClickListener { moveWebView("개인정보처리방침", PRIVACY_POLICY) }

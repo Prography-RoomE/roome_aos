@@ -11,6 +11,7 @@ import com.sevenstars.domain.model.profile.info.ImportantFactors
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileImportantFactorBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -29,6 +30,8 @@ class ProfileImportantFragment(
     private fun isProfileActivity() = requireActivity().localClassName == "view.profile.ProfileActivity"
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("important_factor")
+
         importantAdapter = ProfileImportantRvAdapter().apply {
             this.setItemClickListener(object : ProfileImportantRvAdapter.OnItemClickListener{
                 override fun onClick(isFull: Boolean) {
@@ -80,6 +83,7 @@ class ProfileImportantFragment(
 
         binding.btnNext.setOnClickListener {
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
+                AnalyticsHelper.logButtonClick("important_factor_next")
                 viewModel.saveData(importantAdapter.checked.map { it.id })
             }
         }

@@ -11,6 +11,7 @@ import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.databinding.FragmentWelcomeBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.profile.ProfileViewModel
@@ -51,6 +52,8 @@ class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcom
         (requireActivity() as ProfileActivity).setToolbarVisibility(false)
         binding.tvTitle.text = getString(R.string.profile_welcome_title, userName)
         profileViewModel.updateProfileData()
+
+        AnalyticsHelper.logScreenView("make_profile")
     }
 
     override fun observer() {
@@ -92,6 +95,7 @@ class ProfileWelcomeFragment(private var step: Int): BaseFragment<FragmentWelcom
         super.initListener()
 
         binding.btnCreate.setOnClickListener {
+            AnalyticsHelper.logButtonClick("make_profile")
             if(step == ProfileState.ROOM_COUNT.step) navigateToStep(1)
             else {
                 CustomDialog.getInstance(CustomDialog.DialogType.PROFILE_CONTINUE, null).apply {

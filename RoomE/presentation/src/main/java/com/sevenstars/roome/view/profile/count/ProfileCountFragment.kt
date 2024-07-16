@@ -14,6 +14,7 @@ import com.sevenstars.domain.model.profile.info.CountRange
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileCountBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -30,6 +31,7 @@ class ProfileCountFragment(
     private lateinit var spinnerAdapter: CountSpinnerAdapter
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("number")
         if (isProfileActivity()) {
             setupProfileActivity()
         } else {
@@ -195,6 +197,8 @@ class ProfileCountFragment(
     }
 
     private fun handleSuccessState() {
+        AnalyticsHelper.logButtonClick("number_next")
+
         if (isProfileActivity()) {
             val count = binding.etCount.text.toString().replace("번", "")
             profileViewModel.selectedProfileData.count = if(count.isEmpty()) 0 else count.toInt()

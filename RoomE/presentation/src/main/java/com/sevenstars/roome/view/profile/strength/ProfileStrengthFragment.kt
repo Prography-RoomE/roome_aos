@@ -11,6 +11,7 @@ import com.sevenstars.domain.model.profile.info.Strengths
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileStrengthBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -30,6 +31,8 @@ class ProfileStrengthFragment(
     private fun isProfileActivity() = requireActivity().localClassName == "view.profile.ProfileActivity"
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("strength")
+
         strengthAdapter = ProfileStrengthRvAdapter().apply {
             this.setItemClickListener(object : ProfileStrengthRvAdapter.OnItemClickListener{
                 override fun onClick(isFull: Boolean) {
@@ -82,8 +85,8 @@ class ProfileStrengthFragment(
         super.initListener()
 
         binding.btnNext.setOnClickListener {
-            LoggerUtils.info(strengthAdapter.checked.joinToString(", "))
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
+                AnalyticsHelper.logButtonClick("strength_next")
                 viewModel.saveData(strengthAdapter.checked.map { it.id })
             }
         }

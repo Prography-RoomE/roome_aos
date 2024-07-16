@@ -168,11 +168,9 @@ class UserProfileEditFragment(
     }
 
     private fun handleImageUpdate() {
-        if (viewModel.updateImage!!.isEmpty()) {
-            viewModel.deleteUserImage()
-        } else {
-            viewModel.postUserImage(viewModel.updateImage!!)
-        }
+        if(viewModel.updateImage == null) requireActivity().supportFragmentManager.popBackStack()
+        else if (viewModel.updateImage!!.isEmpty()) viewModel.deleteUserImage()
+        else viewModel.postUserImage(viewModel.updateImage!!)
     }
 
     private fun setupClearButtonListener() {

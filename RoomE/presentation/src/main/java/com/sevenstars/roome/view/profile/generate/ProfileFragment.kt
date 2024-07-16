@@ -23,6 +23,7 @@ import com.sevenstars.roome.base.RoomeApplication.Companion.userName
 import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.databinding.FragmentProfileBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.ImageUtils
 import com.sevenstars.roome.utils.ImageUtils.captureViewToCache
 import com.sevenstars.roome.utils.PermissionManager
@@ -106,6 +107,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
     }
 
     private fun navigateToMainActivity() {
+        AnalyticsHelper.logButtonClick("move_to_profile_page")
         val intent = Intent(requireActivity(), MainActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
@@ -272,5 +274,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
 
     private fun showSaveSuccessDialog() {
         CustomDialog.getInstance(CustomDialog.DialogType.SAVE_PROFILE, null).show(requireActivity().supportFragmentManager, "")
+        AnalyticsHelper.logButtonClick("save")
     }
 }

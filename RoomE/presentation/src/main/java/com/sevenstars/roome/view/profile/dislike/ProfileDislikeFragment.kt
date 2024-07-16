@@ -11,6 +11,7 @@ import com.sevenstars.domain.model.profile.info.DislikedFactors
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileDislikeBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -30,6 +31,8 @@ class ProfileDislikeFragment(
     private fun isProfileActivity() = requireActivity().localClassName == "view.profile.ProfileActivity"
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("dislike")
+
         dislikeAdapter = ProfileDislikeRvAdapter().apply {
             this.setItemClickListener(object : ProfileDislikeRvAdapter.OnItemClickListener{
                 override fun onClick(isFull: Boolean) {
@@ -121,6 +124,7 @@ class ProfileDislikeFragment(
 
         binding.btnNext.setOnClickListener {
             if(binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
+                AnalyticsHelper.logButtonClick("dislike_factor")
                 viewModel.saveData(dislikeAdapter.checked.map { it.id })
             }
         }
