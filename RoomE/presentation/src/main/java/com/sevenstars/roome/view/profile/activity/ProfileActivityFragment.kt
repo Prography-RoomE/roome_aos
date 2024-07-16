@@ -11,6 +11,7 @@ import com.sevenstars.domain.model.profile.info.Activities
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileActivitiyBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -30,6 +31,8 @@ class ProfileActivityFragment(
     private fun isProfileActivity() = requireActivity().localClassName == "view.profile.ProfileActivity"
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("activity")
+
         activityAdapter = ProfileActivityRvAdapter().apply {
             this.setItemClickListener(object : ProfileActivityRvAdapter.OnItemClickListener{
                 override fun onClick(isFull: Boolean) {

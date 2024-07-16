@@ -11,6 +11,7 @@ import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
 import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.databinding.FragmentMainSettingBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.Constants.PRIVACY_POLICY
 import com.sevenstars.roome.utils.Constants.TERMS_OF_SERVICE
 import com.sevenstars.roome.utils.UiState
@@ -32,6 +33,7 @@ class MainSettingFragment: BaseFragment<FragmentMainSettingBinding>(R.layout.fra
     lateinit var googleSignInClient: GoogleSignInClient
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("setting")
         (requireActivity() as MainActivity).setBottomNaviVisibility(true)
         binding.tvCurrentVersion.text = "앱 버전 ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
     }
@@ -80,6 +82,8 @@ class MainSettingFragment: BaseFragment<FragmentMainSettingBinding>(R.layout.fra
     }
 
     private fun unlink(){
+        AnalyticsHelper.logButtonClick("exit")
+
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fl_main, UnlinkReasonFragment())
         fragmentTransaction.addToBackStack(null)

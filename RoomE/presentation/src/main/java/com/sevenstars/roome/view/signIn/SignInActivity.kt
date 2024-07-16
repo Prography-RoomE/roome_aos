@@ -14,6 +14,7 @@ import com.sevenstars.domain.enums.Provider
 import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.custom.CustomToast
 import com.sevenstars.roome.databinding.ActivitySignInBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.splash.StartActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +51,8 @@ class SignInActivity: AppCompatActivity() {
         observer()
         initListener()
         showUnlinkDialog()
+
+        AnalyticsHelper.logScreenView("sign_in")
     }
 
     private fun showUnlinkDialog(){
@@ -60,10 +63,14 @@ class SignInActivity: AppCompatActivity() {
 
     private fun initListener(){
         binding.btnKakaoLogin.setOnClickListener {
+            AnalyticsHelper.logButtonClick("sign_up_kakao")
+
             kakaoAuthService.signInKakao(viewModel::signIn)
         }
 
         binding.btnGoogleLogin.setOnClickListener {
+            AnalyticsHelper.logButtonClick("sign_up_google")
+
             val signInIntent = googleSignInClient.signInIntent
             googleAuthLauncher.launch(signInIntent)
         }

@@ -11,6 +11,7 @@ import com.sevenstars.domain.model.profile.info.HorrorThemePositions
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileHorrorBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -30,6 +31,8 @@ class ProfileHorrorFragment(
     private fun isProfileActivity() = requireActivity().localClassName == "view.profile.ProfileActivity"
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("position")
+
         horrorAdapter = ProfileHorrorRvAdapter().apply {
             this.setItemClickListener(object : ProfileHorrorRvAdapter.OnItemClickListener{
                 override fun onClick(isFull: Boolean) {

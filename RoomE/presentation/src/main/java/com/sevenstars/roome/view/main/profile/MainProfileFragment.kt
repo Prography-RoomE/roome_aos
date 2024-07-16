@@ -9,6 +9,7 @@ import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentMainProfileBinding
 import com.sevenstars.roome.databinding.ItemMainProfileChipBinding
 import com.sevenstars.roome.exetnsion.setColorBackground
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.main.profile.edit.UserProfileEditFragment
@@ -30,6 +31,8 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
     private val viewModel: MainProfileViewModel by viewModels()
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("my_profile")
+
         (requireActivity() as MainActivity).setBottomNaviVisibility(true)
         (requireActivity() as MainActivity).setToolbarVisibility(false)
         viewModel.fetchData()
@@ -40,12 +43,14 @@ class MainProfileFragment : BaseFragment<FragmentMainProfileBinding>(R.layout.fr
         super.initListener()
         binding.apply {
             btnShareKakao.setOnClickListener {
+                AnalyticsHelper.logButtonClick("share_kakao")
                 requireActivity().supportFragmentManager.beginTransaction()
                     .add(R.id.fl_main, SquareProfileCardGenerate(viewModel.nickname))
                     .commit()
             }
 
             btnProfileCard.setOnClickListener {
+                AnalyticsHelper.logButtonClick("profile_card")
                 (requireActivity() as MainActivity).replaceFragment(ProfileCardFragment(viewModel.nickname), true)
             }
 

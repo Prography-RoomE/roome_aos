@@ -11,6 +11,7 @@ import com.sevenstars.domain.model.profile.info.HintUsagePreferences
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileHintBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -30,6 +31,8 @@ class ProfileHintFragment(
     private fun isProfileActivity() = requireActivity().localClassName == "view.profile.ProfileActivity"
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("hint")
+
         hintAdapter = ProfileHintRvAdapter().apply {
             this.setItemClickListener(object : ProfileHintRvAdapter.OnItemClickListener{
                 override fun onClick(isFull: Boolean) {

@@ -11,6 +11,7 @@ import com.sevenstars.domain.model.profile.info.Colors
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentProfileColorBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.utils.UiState
 import com.sevenstars.roome.view.main.MainActivity
 import com.sevenstars.roome.view.profile.ProfileActivity
@@ -29,6 +30,8 @@ class ProfileColorFragment(
     private fun isProfileActivity() = requireActivity().localClassName == "view.profile.ProfileActivity"
 
     override fun initView() {
+        AnalyticsHelper.logScreenView("background")
+
         colorAdapter = ProfileColorRvAdapter().apply {
             this.setItemClickListener(object : ProfileColorRvAdapter.OnItemClickListener{
                 override fun onClick(isFull: Boolean) {

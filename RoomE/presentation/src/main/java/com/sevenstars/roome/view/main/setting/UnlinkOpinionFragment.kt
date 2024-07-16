@@ -9,6 +9,7 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentUnlinkOpinionBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 
 class UnlinkOpinionFragment: BaseFragment<FragmentUnlinkOpinionBinding>(R.layout.fragment_unlink_opinion) {
 
@@ -23,12 +24,11 @@ class UnlinkOpinionFragment: BaseFragment<FragmentUnlinkOpinionBinding>(R.layout
             }
         }
 
-//        binding.etUnlinkOpinion.setOnFocusChangeListener { _, hasFocus ->
-//            if(hasFocus){
-//                binding.btnCheck.visibility = View.VISIBLE
-//                binding.btnNextStep.visibility = View.GONE
-//            }
-//        }
+        binding.btnCheck.setOnClickListener {
+            if(binding.btnCheck.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
+                moveNext()
+            }
+        }
 
         binding.btnCheck.setOnClickListener {
             hideKeyboard()
@@ -43,12 +43,18 @@ class UnlinkOpinionFragment: BaseFragment<FragmentUnlinkOpinionBinding>(R.layout
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
                 override fun afterTextChanged(s: Editable?) {
                     if(s.isNullOrEmpty()){
+                        binding.btnCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.on_surface_a12))
+                        binding.btnCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant))
                         binding.btnNextStep.backgroundTintList = AppCompatResources.getColorStateList(requireContext(), R.color.on_surface_a12)
                         binding.btnNextStep.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant))
                     } else {
+                        binding.btnCheck.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.primary_primary))
+                        binding.btnCheck.setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
                         binding.btnNextStep.backgroundTintList = AppCompatResources.getColorStateList(requireContext(), R.color.primary_primary)
                         binding.btnNextStep.setTextColor(ContextCompat.getColor(requireContext(), R.color.surface))
                     }
+
+                    binding.tvTextCount.text = "${s?.length ?: ""}/3000"
                 }
             })
         }
@@ -60,6 +66,8 @@ class UnlinkOpinionFragment: BaseFragment<FragmentUnlinkOpinionBinding>(R.layout
     }
 
     private fun moveNext(){
+        AnalyticsHelper.logButtonClick("exit_reason_confirm")
+
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fl_main, UnlinkCheckFragment())
         fragmentTransaction.addToBackStack(null)

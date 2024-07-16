@@ -4,10 +4,12 @@ import androidx.fragment.app.Fragment
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.BaseFragment
 import com.sevenstars.roome.databinding.FragmentUnlinkReasonBinding
+import com.sevenstars.roome.utils.AnalyticsHelper
 import com.sevenstars.roome.view.main.MainActivity
 
 class UnlinkReasonFragment: BaseFragment<FragmentUnlinkReasonBinding>(R.layout.fragment_unlink_reason) {
     override fun initView() {
+        AnalyticsHelper.logScreenView("exit_reason")
         (requireActivity() as MainActivity).setBottomNaviVisibility(false)
     }
 
