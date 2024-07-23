@@ -95,4 +95,5 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics:22.0.2")
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
+    implementation("com.google.android.play:app-update-ktx:2.0.1")
 }
