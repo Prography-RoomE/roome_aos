@@ -12,7 +12,9 @@ interface AuthRepository {
     suspend fun unlink(
         accessToken: String,
         provider: String,
-        code: String?
+        code: String?,
+        reason: String,
+        content: String
     ): RoomeResult<Boolean>
 
     suspend fun signOut(

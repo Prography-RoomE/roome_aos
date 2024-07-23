@@ -6,4 +6,5 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.9.0" apply false
     id("com.google.dagger.hilt.android") version "2.50" apply false
     id("com.google.gms.google-services") version "4.4.2" apply false
+    id("com.vanniktech.dependency.graph.generator") version "0.7.0"
 }

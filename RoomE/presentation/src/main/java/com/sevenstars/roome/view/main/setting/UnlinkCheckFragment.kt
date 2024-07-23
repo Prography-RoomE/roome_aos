@@ -25,7 +25,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class UnlinkCheckFragment: BaseFragment<FragmentUnlinkCheckBinding>(R.layout.fragment_unlink_check) {
+class UnlinkCheckFragment(
+    private val reason: String,
+    private val content: String? = null
+): BaseFragment<FragmentUnlinkCheckBinding>(R.layout.fragment_unlink_check) {
     private val viewModel: UnlinkCheckViewModel by viewModels()
 
     @Inject
@@ -113,7 +116,7 @@ class UnlinkCheckFragment: BaseFragment<FragmentUnlinkCheckBinding>(R.layout.fra
                 showToast("카카오 회원탈퇴 실패: ${error.message}")
             } else {
                 LoggerUtils.info("카카오 회원탈퇴 성공")
-                viewModel.unlink()
+                viewModel.unlink(reason, content)
             }
         }
     }
@@ -122,7 +125,7 @@ class UnlinkCheckFragment: BaseFragment<FragmentUnlinkCheckBinding>(R.layout.fra
         googleSignInClient.revokeAccess()
             .addOnCompleteListener(requireActivity()){
                 LoggerUtils.info("구글 회원탈퇴 성공")
-                viewModel.unlink()
+                viewModel.unlink(reason, content)
             }
             .addOnFailureListener{
                 showToast("구글 회원탈퇴 실패: ${it.message}")

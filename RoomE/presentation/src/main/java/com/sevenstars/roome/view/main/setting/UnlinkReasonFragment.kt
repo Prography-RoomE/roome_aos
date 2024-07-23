@@ -18,13 +18,13 @@ class UnlinkReasonFragment: BaseFragment<FragmentUnlinkReasonBinding>(R.layout.f
 
         binding.apply {
             tbUnlink.btnBack.setOnClickListener { requireActivity().supportFragmentManager.popBackStack() }
-            tbUnlink.btnNext.setOnClickListener { moveFragment(UnlinkCheckFragment()) }
+            tbUnlink.btnNext.setOnClickListener { moveFragment(UnlinkCheckFragment("")) }
 
-            tvReason1.setOnClickListener { moveFragment(UnlinkCheckFragment()) }
-            tvReason2.setOnClickListener { moveFragment(UnlinkCheckFragment()) }
-            tvReason3.setOnClickListener { moveFragment(UnlinkCheckFragment()) }
-            tvReason4.setOnClickListener { moveFragment(UnlinkCheckFragment()) }
-            tvReason5.setOnClickListener { moveFragment(UnlinkCheckFragment()) }
+            tvReason1.setOnClickListener { moveFragment(UnlinkCheckFragment(binding.tvReason1.text.toString())) }
+            tvReason2.setOnClickListener { moveFragment(UnlinkCheckFragment(binding.tvReason2.text.toString())) }
+            tvReason3.setOnClickListener { moveFragment(UnlinkCheckFragment(binding.tvReason3.text.toString())) }
+            tvReason4.setOnClickListener { moveFragment(UnlinkCheckFragment(binding.tvReason4.text.toString())) }
+            tvReason5.setOnClickListener { moveFragment(UnlinkCheckFragment(binding.tvReason5.text.toString())) }
             tvReason6.setOnClickListener { moveFragment(UnlinkOpinionFragment()) }
         }
     }

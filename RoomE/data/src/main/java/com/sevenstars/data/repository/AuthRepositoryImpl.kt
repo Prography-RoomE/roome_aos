@@ -27,9 +27,11 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun unlink(
         accessToken: String,
         provider: String,
-        code: String?
+        code: String?,
+        reason: String,
+        content: String
     ): RoomeResult<Boolean> {
-        val res = authRemoteDataSource.unlink(accessToken, RequestUnlinkDTO(provider, code))
+        val res = authRemoteDataSource.unlink(accessToken, RequestUnlinkDTO(provider, code, reason, content))
 
         return if(res.code == 200){
             RoomeResult.Success(true)

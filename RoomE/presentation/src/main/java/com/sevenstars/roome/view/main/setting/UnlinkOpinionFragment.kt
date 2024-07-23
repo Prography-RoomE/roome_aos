@@ -69,7 +69,7 @@ class UnlinkOpinionFragment: BaseFragment<FragmentUnlinkOpinionBinding>(R.layout
         AnalyticsHelper.logButtonClick("exit_reason_confirm")
 
         val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fl_main, UnlinkCheckFragment())
+        fragmentTransaction.replace(R.id.fl_main, UnlinkCheckFragment("기타", binding.etUnlinkOpinion.text.toString()))
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
@@ -85,7 +85,7 @@ class UnlinkOpinionFragment: BaseFragment<FragmentUnlinkOpinionBinding>(R.layout
                 binding.btnCheck.visibility = View.GONE
                 binding.btnNextStep.visibility = View.VISIBLE
             } catch (e: NullPointerException){
-                LoggerUtils.error(e.message.toString()) // 임시 방편
+                LoggerUtils.error(e.message.toString())
             }
         }
     }

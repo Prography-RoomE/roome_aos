@@ -24,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProfileCountFragment(
-    private val roomCount: String = "기타"
+    private val roomCount: String = "선택"
 ) : BaseFragment<FragmentProfileCountBinding>(R.layout.fragment_profile_count) {
     private val profileViewModel: ProfileViewModel by activityViewModels()
     private val viewModel: ProfileCountViewModel by viewModels()
@@ -92,11 +92,16 @@ class ProfileCountFragment(
     }
 
     private fun saveCountData() {
-        if (binding.tgCountRange.isChecked && (binding.spinnerCount.selectedItem as CountRange).title != "기타") {
-            viewModel.saveRangeCountData(spinnerAdapter.getItem(binding.spinnerCount.selectedItemPosition))
-        } else {
-            val count = binding.etCount.text.toString().replace("번", "")
-            viewModel.saveCountData(if(count.isEmpty()) 0 else count.toInt(), false)
+        if(
+            binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface) &&
+            binding.btnNextDirect.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface))
+        {
+            if (binding.tgCountRange.isChecked && (binding.spinnerCount.selectedItem as CountRange).title != "선택") {
+                viewModel.saveRangeCountData(spinnerAdapter.getItem(binding.spinnerCount.selectedItemPosition))
+            } else {
+                val count = binding.etCount.text.toString().replace("번", "")
+                viewModel.saveCountData(if(count.isEmpty()) 0 else count.toInt(), false)
+            }
         }
     }
 
@@ -223,7 +228,7 @@ class ProfileCountFragment(
 
     private fun setSpinner() {
         val countRanges = profileViewModel.profileDefaultData.roomCountRanges.toMutableList().apply {
-            add(0, CountRange(0, 0, 0, "기타"))
+            add(0, CountRange(0, 0, 0, "선택"))
         }
         spinnerAdapter = CountSpinnerAdapter(requireContext(), R.layout.item_spinner, countRanges)
         binding.spinnerCount.dropDownVerticalOffset = 20
@@ -274,7 +279,7 @@ class ProfileCountFragment(
 
     private fun setRoomCount() {
         val roomCountRanges = profileViewModel.profileDefaultData.roomCountRanges
-        if (roomCountRanges.any { it.title.contains("~") || it.title.contains("이상") || it.title.contains("기타") }) {
+        if (roomCountRanges.any { it.title.contains("~") || it.title.contains("이상") || it.title.contains("선택") }) {
             val index = spinnerAdapter.selectItemContaining(roomCount)
             if (index == -1) {
                 binding.tgCountDirectly.performClick()
