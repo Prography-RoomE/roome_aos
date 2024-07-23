@@ -63,7 +63,7 @@ class TokenAuthInterceptor @Inject constructor(
 
                     val refreshRequest = runBlocking {
                         Request.Builder()
-                            .url("${baseUrl}/token")
+                            .url("${baseUrl}/auth/token")
                             .post(requestBody)
                             .build()
                     }
