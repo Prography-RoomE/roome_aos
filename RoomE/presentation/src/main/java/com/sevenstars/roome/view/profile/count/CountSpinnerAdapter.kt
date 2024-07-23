@@ -44,7 +44,7 @@ class CountSpinnerAdapter(
     }
 
     fun selectItemContaining(countTitle: String): Int {
-        if (countTitle == "기타") return 0
+        if (countTitle == "선택") return 0
 
         for ((index, item) in values.withIndex()) {
             if (item.title == "${countTitle}번") {

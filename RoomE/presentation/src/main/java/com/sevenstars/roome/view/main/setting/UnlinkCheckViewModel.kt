@@ -17,14 +17,16 @@ class UnlinkCheckViewModel @Inject constructor(
     private var _unlinkState = MutableLiveData<UiState<Unit>>(UiState.Loading)
     val unlinkState get() = _unlinkState
 
-    fun unlink(){
+    fun unlink(reason: String, content: String? = null){
         _unlinkState.value = UiState.Loading
 
         viewModelScope.launch {
             unlinkUseCase.invoke(
                 RoomeApplication.app.userPreferences.getAccessToken().getOrNull().orEmpty(),
                 RoomeApplication.app.userPreferences.getLoginProvider().getOrNull().orEmpty(),
-                null
+                null,
+                reason,
+                content
             )
                 .onSuccess {
                     _unlinkState.value = UiState.Success(Unit)
