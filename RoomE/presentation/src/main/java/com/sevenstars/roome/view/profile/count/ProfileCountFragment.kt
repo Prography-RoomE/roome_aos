@@ -80,28 +80,27 @@ class ProfileCountFragment(
         super.initListener()
 
         binding.btnNext.setOnClickListener {
-            saveCountData()
+            saveCountData("btnNext")
         }
 
         binding.btnNextDirect.setOnClickListener {
-            saveCountData()
+            saveCountData("btnNextDirect")
         }
 
         setupToggleButtons()
         setupEditText()
     }
 
-    private fun saveCountData() {
-        if(
-            binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface) &&
-            binding.btnNextDirect.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface))
-        {
-            if (binding.tgCountRange.isChecked && (binding.spinnerCount.selectedItem as CountRange).title != "선택") {
+    private fun saveCountData(btnName: String) {
+        if(btnName == "btnNext" && binding.btnNext.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
+            if ((binding.spinnerCount.selectedItem as CountRange).title != "선택") {
                 viewModel.saveRangeCountData(spinnerAdapter.getItem(binding.spinnerCount.selectedItemPosition))
-            } else {
-                val count = binding.etCount.text.toString().replace("번", "")
-                viewModel.saveCountData(if(count.isEmpty()) 0 else count.toInt(), false)
+                binding.etCount.setText("0번")
             }
+        } else if (btnName == "btnNextDirect" && binding.btnNextDirect.currentTextColor == ContextCompat.getColor(requireContext(), R.color.surface)){
+            val count = binding.etCount.text.toString().replace("번", "")
+            viewModel.saveCountData(if(count.isEmpty()) 0 else count.toInt(), false)
+            binding.spinnerCount.setSelection(0)
         }
     }
 
