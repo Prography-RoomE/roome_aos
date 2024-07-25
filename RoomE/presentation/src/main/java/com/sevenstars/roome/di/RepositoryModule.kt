@@ -1,8 +1,10 @@
 package com.sevenstars.roome.di
 
 import com.sevenstars.data.repository.AuthRepositoryImpl
+import com.sevenstars.data.repository.CommonRepositoryImpl
 import com.sevenstars.data.repository.ProfileRepositoryImpl
 import com.sevenstars.data.repository.UserRepositoryImpl
+import com.sevenstars.domain.repository.CommonRepository
 import com.sevenstars.domain.repository.ProfileRepository
 import com.sevenstars.domain.repository.UserRepository
 import com.sevenstars.domain.repository.auth.AuthRepository
@@ -26,4 +28,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindsProfileRepository(profileRepositoryImpl: ProfileRepositoryImpl): ProfileRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindsCommonRepository(commonRepositoryImpl: CommonRepositoryImpl): CommonRepository
 }

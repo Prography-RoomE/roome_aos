@@ -14,8 +14,11 @@ import com.sevenstars.data.utils.LoggerUtils
 import com.sevenstars.domain.enums.Provider
 import com.sevenstars.roome.R
 import com.sevenstars.roome.base.RoomeApplication.Companion.app
+import com.sevenstars.roome.custom.CustomDialog
 import com.sevenstars.roome.utils.UiState
+import com.sevenstars.roome.utils.UpdateCheckManager
 import com.sevenstars.roome.view.deeplink.DeepLinkActivity
+import com.sevenstars.roome.view.main.profile.edit.UserProfileBottomSheetDialog
 import com.sevenstars.roome.view.profile.ProfileActivity
 import com.sevenstars.roome.view.signIn.SignInActivity
 import com.sevenstars.roome.view.signup.SignUpActivity
@@ -24,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class StartActivity: AppCompatActivity() {
@@ -38,13 +42,12 @@ class StartActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
+        observer()
 
-        viewModel.doValidation()
-
-        observeLoginState()
+        viewModel.checkForceUpdate()
     }
 
-    private fun observeLoginState() {
+    private fun observer() {
         viewModel.loginState.observe(this) { state ->
             when (state) {
                 is UiState.Failure -> {
@@ -56,6 +59,35 @@ class StartActivity: AppCompatActivity() {
                 }
                 is UiState.Success -> {
                     handleLoginSuccess()
+                }
+            }
+        }
+
+        viewModel.checkState.observe(this) { state ->
+            when (state) {
+                is UiState.Failure -> {
+                    LoggerUtils.error("강제 업데이트 버전 체크 실패: ${state.message}")
+
+                    // 앱 종료
+                    finishAffinity()
+                    System.runFinalization()
+                    exitProcess(0)
+                }
+                is UiState.Loading -> {
+                    // Loading 상태 처리
+                }
+                is UiState.Success -> {
+                    if(state.data) {
+                        CustomDialog.getInstance(CustomDialog.DialogType.FORCE_UPDATE, null).apply {
+                            setButtonClickListener(object : CustomDialog.OnButtonClickListener {
+                                override fun onButton1Clicked() {
+                                    UpdateCheckManager(this@StartActivity).promptUpdate()
+                                }
+                                override fun onButton2Clicked() {}
+                            })
+                        }.show(supportFragmentManager, "")
+                    }
+                    else viewModel.doValidation()
                 }
             }
         }

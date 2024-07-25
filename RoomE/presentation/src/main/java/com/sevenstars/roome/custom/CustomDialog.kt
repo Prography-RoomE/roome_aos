@@ -26,7 +26,8 @@ class CustomDialog private constructor(
         UNLINK_SUCCESS,
         NO_CONNECTION,
         DENIED_PERMISSION,
-        PROFILE_EDIT
+        PROFILE_EDIT,
+        FORCE_UPDATE
     }
 
     companion object {
@@ -87,6 +88,7 @@ class CustomDialog private constructor(
             DialogType.NO_CONNECTION -> setNoConnection()
             DialogType.DENIED_PERMISSION -> setDeniedPermission()
             DialogType.PROFILE_EDIT -> setProfileEdit()
+            DialogType.FORCE_UPDATE -> setForceUpdate()
         }
 
         return binding.root
@@ -222,5 +224,19 @@ class CustomDialog private constructor(
         binding.btnDialog2.setOnClickListener {
             buttonClickListener?.onButton2Clicked()
         }
+    }
+
+    private fun setForceUpdate(){
+        binding.tvDialogTitle.text = "앱 업데이트가 필요해요"
+        binding.tvDialogContent.text = "안정적인 서비스 사용을 위해\n최신 버전으로 업데이트해 주세요."
+        binding.btnDialog1.text = "업데이트"
+        binding.btnDialog1.backgroundTintList = AppCompatResources.getColorStateList(requireContext(), R.color.primary_primary)
+        binding.btnDialog1.setTextColor(requireContext().getColor(R.color.surface))
+
+        binding.btnDialog1.setOnClickListener {
+            buttonClickListener?.onButton1Clicked()
+        }
+
+        binding.btnDialog2.visibility = View.GONE
     }
 }
