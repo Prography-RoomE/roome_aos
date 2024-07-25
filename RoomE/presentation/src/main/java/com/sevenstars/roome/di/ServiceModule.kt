@@ -1,5 +1,6 @@
 package com.sevenstars.roome.di
 
+import com.sevenstars.data.service.CommonService
 import com.sevenstars.data.service.ProfileService
 import com.sevenstars.data.service.UserService
 import com.sevenstars.data.service.auth.AuthService
@@ -27,4 +28,9 @@ object ServiceModule {
     @Singleton
     fun providesProfileService(retrofit: Retrofit): ProfileService =
         retrofit.create(ProfileService::class.java)
+
+    @Provides
+    @Singleton
+    fun providesCommonService(retrofit: Retrofit): CommonService =
+        retrofit.create(CommonService::class.java)
 }
